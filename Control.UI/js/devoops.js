@@ -13,7 +13,7 @@
 function LoadCalendarScript(callback){
 	function LoadFullCalendarScript(){
 		if(!$.fn.fullCalendar){
-			$.getScript('plugins/fullcalendar/fullcalendar.js', callback);
+			$.getScript('/plugins/fullcalendar/fullcalendar.js', callback);
 		}
 		else {
 			if (callback && typeof(callback) === "function") {
@@ -22,7 +22,7 @@ function LoadCalendarScript(callback){
 		}
 	}
 	if (!$.fn.moment){
-		$.getScript('plugins/moment/moment.min.js', LoadFullCalendarScript);
+		$.getScript('/plugins/moment/moment.min.js', LoadFullCalendarScript);
 	}
 	else {
 		LoadFullCalendarScript();
@@ -48,7 +48,7 @@ function LoadOpenLayersScript(callback){
 //
 function LoadTimePickerScript(callback){
 	if (!$.fn.timepicker){
-		$.getScript('plugins/jquery-ui-timepicker-addon/jquery-ui-timepicker-addon.min.js', callback);
+		$.getScript('/plugins/jquery-ui-timepicker-addon/jquery-ui-timepicker-addon.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -61,8 +61,9 @@ function LoadTimePickerScript(callback){
 //  homepage: https://github.com/nghuuphuoc/bootstrapvalidator
 //
 function LoadBootstrapValidatorScript(callback){
-	if (!$.fn.bootstrapValidator){
-		$.getScript('plugins/bootstrapvalidator/bootstrapValidator.min.js', callback);
+    if (!$.fn.bootstrapValidator) {
+
+        $.getScript('/plugins/bootstrapvalidator/bootstrapValidator.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -75,8 +76,9 @@ function LoadBootstrapValidatorScript(callback){
 //  homepage: https://github.com/ivaynberg/select2  v3.4.5  license - GPL2
 //
 function LoadSelect2Script(callback){
-	if (!$.fn.select2){
-		$.getScript('plugins/select2/select2.min.js', callback);
+    if (!$.fn.select2) {
+
+		$.getScript('/plugins/select2/select2.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -90,10 +92,10 @@ function LoadSelect2Script(callback){
 //
 function LoadDataTablesScripts(callback){
 	function LoadDatatables(){
-		$.getScript('plugins/datatables/jquery.dataTables.js', function(){
-			$.getScript('plugins/datatables/ZeroClipboard.js', function(){
-				$.getScript('plugins/datatables/TableTools.js', function(){
-					$.getScript('plugins/datatables/dataTables.bootstrap.js', callback);
+	    $.getScript('/plugins/datatables/jquery.dataTables.js', function () {
+	        $.getScript('/plugins/datatables/ZeroClipboard.js', function () {
+	            $.getScript('/plugins/datatables/TableTools.js', function () {
+					$.getScript('/plugins/datatables/dataTables.bootstrap.js', callback);
 				});
 			});
 		});
@@ -113,7 +115,7 @@ function LoadDataTablesScripts(callback){
 //
 function LoadFineUploader(callback){
 	if (!$.fn.fineuploader){
-		$.getScript('plugins/fineuploader/jquery.fineuploader-4.3.1.min.js', callback);
+		$.getScript('/plugins/fineuploader/jquery.fineuploader-4.3.1.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -128,11 +130,11 @@ function LoadFineUploader(callback){
 //
 function LoadXChartScript(callback){
 	function LoadXChart(){
-		$.getScript('plugins/xcharts/xcharts.min.js', callback);
+		$.getScript('/plugins/xcharts/xcharts.min.js', callback);
 	}
 	function LoadD3Script(){
 		if (!$.fn.d3){
-			$.getScript('plugins/d3/d3.v3.min.js', LoadXChart)
+			$.getScript('/plugins/d3/d3.v3.min.js', LoadXChart)
 		}
 		else {
 			LoadXChart();
@@ -153,13 +155,13 @@ function LoadXChartScript(callback){
 //
 function LoadFlotScripts(callback){
 	function LoadFlotScript(){
-		$.getScript('plugins/flot/jquery.flot.js', LoadFlotResizeScript);
+		$.getScript('/plugins/flot/jquery.flot.js', LoadFlotResizeScript);
 	}
 	function LoadFlotResizeScript(){
-		$.getScript('plugins/flot/jquery.flot.resize.js', LoadFlotTimeScript);
+		$.getScript('/plugins/flot/jquery.flot.resize.js', LoadFlotTimeScript);
 	}
 	function LoadFlotTimeScript(){
-		$.getScript('plugins/flot/jquery.flot.time.js', callback);
+		$.getScript('/plugins/flot/jquery.flot.time.js', callback);
 	}
 	if (!$.fn.flot){
 		LoadFlotScript();
@@ -178,7 +180,7 @@ function LoadFlotScripts(callback){
 function LoadMorrisScripts(callback){
 	function LoadMorrisScript(){
 		if(!$.fn.Morris){
-			$.getScript('plugins/morris/morris.min.js', callback);
+			$.getScript('/plugins/morris/morris.min.js', callback);
 		}
 		else {
 			if (callback && typeof(callback) === "function") {
@@ -187,7 +189,7 @@ function LoadMorrisScripts(callback){
 		}
 	}
 	if (!$.fn.raphael){
-		$.getScript('plugins/raphael/raphael-min.js', LoadMorrisScript);
+		$.getScript('/plugins/raphael/raphael-min.js', LoadMorrisScript);
 	}
 	else {
 		LoadMorrisScript();
@@ -199,7 +201,7 @@ function LoadMorrisScripts(callback){
 //
 function LoadFancyboxScript(callback){
 	if (!$.fn.fancybox){
-		$.getScript('plugins/fancybox/jquery.fancybox.js', callback);
+		$.getScript('/plugins/fancybox/jquery.fancybox.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -213,7 +215,7 @@ function LoadFancyboxScript(callback){
 //
 function LoadKnobScripts(callback){
 	if(!$.fn.knob){
-		$.getScript('plugins/jQuery-Knob/jquery.knob.js', callback);
+		$.getScript('/plugins/jQuery-Knob/jquery.knob.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -227,7 +229,7 @@ function LoadKnobScripts(callback){
 //
 function LoadSparkLineScript(callback){
 	if(!$.fn.sparkline){
-		$.getScript('plugins/sparkline/jquery.sparkline.min.js', callback);
+		$.getScript('/plugins/sparkline/jquery.sparkline.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {
@@ -1568,7 +1570,9 @@ function TestTable1(){
 		"sPaginationType": "bootstrap",
 		"oLanguage": {
 			"sSearch": "",
-			"sLengthMenu": '_MENU_'
+			"sLengthMenu": '_MENU_',
+			"scrollY": 200,
+			"scrollX": 200
 		}
 	});
 }
@@ -1621,7 +1625,7 @@ function TestTable3(){
 			"sLengthMenu": '_MENU_'
 		},
 		"oTableTools": {
-			"sSwfPath": "plugins/datatables/copy_csv_xls_pdf.swf",
+			"sSwfPath": "/plugins/datatables/copy_csv_xls_pdf.swf",
 			"aButtons": [
 				"copy",
 				"print",
@@ -2300,7 +2304,7 @@ $(document).ready(function () {
 	});
 	var ajax_url = location.hash.replace(/^#/, '');
 	if (ajax_url.length < 1) {
-		ajax_url = 'ajax/dashboard.html';
+		ajax_url = '/ajax/dashboard.html';
 	}
 	LoadAjaxContent(ajax_url);
 	$('.main-menu').on('click', 'a', function (e) {

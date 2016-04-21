@@ -101,12 +101,37 @@ namespace Control.UI.Controllers
         }
         #endregion
 
+        #region VENDEDORES
+        public ActionResult Vendedores(string nomeVendedor)
+        {
+            context = new DALContext();
+            List<Vendor> retorno = new List<Vendor>();
+            try
+            {
+                if (string.IsNullOrEmpty(nomeVendedor))
+                {
+                    retorno = context.Vendors.All().ToList();
+                }
+                else
+                {
+                    retorno = context.Vendors.All().Where(p => p.Name.ToUpper().Contains(nomeVendedor.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-//<li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>
-//<li>@Html.ActionLink("Fornecedores", "Fornecedores", "Cadastro")</li>
-//<li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>
-//<li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
-//<li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
-//<li>@Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>
+            return View(retorno);
+        }
+        #endregion
+
+
+        //<li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>
+        //<li>@Html.ActionLink("Fornecedores", "Fornecedores", "Cadastro")</li>
+        //<li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>
+        //<li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
+        //<li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
+        //<li>@Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>
     }
 }

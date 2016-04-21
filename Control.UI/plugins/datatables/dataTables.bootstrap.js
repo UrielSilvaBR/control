@@ -43,12 +43,20 @@ $.extend( $.fn.dataTableExt.oPagination, {
 				}
 			};
 
+			//$(nPaging).append(
+			//	'<ul class="pagination">'+
+			//		'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
+			//		'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
+			//	'</ul>'
+			//);
+
 			$(nPaging).append(
-				'<ul class="pagination">'+
-					'<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
-					'<li class="next disabled"><a href="#">'+oLang.sNext+' &rarr; </a></li>'+
+				'<ul class="pagination">' +
+					'<li class="prev disabled"><a href="#">&larr; Anterior</a></li>' +
+					'<li class="next disabled"><a href="#">Proximo &rarr; </a></li>' +
 				'</ul>'
 			);
+
 			var els = $('a', nPaging);
 			$(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
 			$(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
