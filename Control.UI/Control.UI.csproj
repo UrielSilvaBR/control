@@ -251,6 +251,7 @@
     <Content Include="Views\Account\LoggedUserPartial.cshtml" />
     <Content Include="Views\Cadastro\Clientes.cshtml" />
     <Content Include="Views\Cadastro\ClientesEdit.cshtml" />
+    <Content Include="Views\Cadastro\ClientesFiltro.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -48,6 +48,11 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
+        public ActionResult FiltrarCliente(string FiltroCliente)
+        {
+            return RedirectToAction("Clientes");
+        }
+
         public ActionResult ClientesSave(Customer model)
         {
             context = new DALContext();
