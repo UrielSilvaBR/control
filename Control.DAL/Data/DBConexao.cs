@@ -71,7 +71,11 @@ namespace Control.DAL.Data
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=200.169.101.76; initial catalog=CPEDIDOS;";
                     break;
 
+                case 7:
 
+                    //Conexão de Natanael Silva - Desenvolvimento
+                    strConn = @"Server=tcp:ckl86ymzyx.database.windows.net,1433;Database=NFS_control;User ID=meiabandeirada@ckl86ymzyx;Password=j0t@qu3st;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+                    break;
             }
 
             //Pooling

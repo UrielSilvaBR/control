@@ -70,6 +70,7 @@
     <Compile Include="Entities\Roles.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\Storage.cs" />
+    <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TypeUnit.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\User.cs" />

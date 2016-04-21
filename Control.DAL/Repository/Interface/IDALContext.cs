@@ -27,6 +27,7 @@ namespace Control.DAL
         //IRepository<User> Users { get; }
         //IRepository<UserRoles> UsersRoles { get; }
         IRepository<Vendor> Vendors { get; }
-        
+        IRepository<Transaction> Transactions { get; }
+
     }
 }

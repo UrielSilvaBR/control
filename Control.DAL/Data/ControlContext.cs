@@ -59,7 +59,8 @@ namespace Control.DAL.Data
             modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-
+            modelBuilder.Entity<Transaction>().ToTable("Transaction");
+            
             //modelBuilder.Entity<Contact>();
             //modelBuilder.Entity<Country>();
             //modelBuilder.Entity<Customer>();
@@ -75,7 +76,9 @@ namespace Control.DAL.Data
             //modelBuilder.Entity<Vendor>();
         }
 
-        
+        public System.Data.Entity.DbSet<Control.Model.Entities.Transaction> Transactions { get; set; }
+
+
 
         //public DbSet<User> Users { get; set; }
     }

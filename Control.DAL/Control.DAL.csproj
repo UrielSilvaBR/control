@@ -106,6 +106,7 @@
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\StockRepository.cs" />
     <Compile Include="Repository\StorageRepository.cs" />
+    <Compile Include="Repository\TransactionRepository.cs" />
     <Compile Include="Repository\TypeUnitRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Repository\VendorRepository.cs" />

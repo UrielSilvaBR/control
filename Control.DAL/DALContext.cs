@@ -26,6 +26,7 @@ namespace Control.DAL
         private IRepository<TypeUnit> _typesUnities;
         private IRepository<Unit> _unities;
         private IRepository<Vendor> _vendors;
+        private IRepository<Transaction> _transactions;
 
         public DALContext()
         {
@@ -162,6 +163,17 @@ namespace Control.DAL
             }
         }
 
+
+        public IRepository<Transaction> Transactions
+        {
+            get
+            {
+                if (_transactions == null)
+                    _transactions = new TransactionRepository(dbContext);
+                return _transactions;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -215,6 +227,9 @@ namespace Control.DAL
 
             if (_vendors != null)
                 _vendors.Dispose();
+
+            if (_transactions != null)
+                _transactions.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();
