@@ -10,5 +10,12 @@ namespace Control.UI.Tests
         public void TestMethod1()
         {
         }
+
+        [TestMethod]
+        public void AddUser()
+        {
+            
+
+        }
     }
 }

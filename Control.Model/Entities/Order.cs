@@ -28,8 +28,8 @@ namespace Control.Model.Entities
         //Campos Nota Fiscal
         public int InvoiceNumber { get; set; }
         public int InvoiceStatus { get; set; }
-        
-        //Forgein Keys
+
+        ////Forgein Keys
         public int? CustomerID { get; set; }
         [ForeignKey("CustomerID")]
         public virtual Customer CustomerOrder { get; set; }
