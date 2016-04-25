@@ -631,6 +631,7 @@
     </Compile>
     <Compile Include="Models\ClienteViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\UserPartialViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
