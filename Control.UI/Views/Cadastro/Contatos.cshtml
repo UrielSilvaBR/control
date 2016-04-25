@@ -1,14 +1,15 @@
 ﻿@using Control.Model.Entities
-@model IEnumerable<Vendor>
+@model IEnumerable<Contact>
 
 @{
-    ViewBag.Title = "Vendedores";
+    ViewBag.Title = "Contatos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Cadastros</a></li>
-            <li><a href="#">Vendedores</a></li>
+            <li><a href="#">Contatos</a></li>
             @*<li><a href="#">Edição</a></li>*@
         </ol>
     </div>
@@ -184,19 +185,56 @@
 </div>
 <!--    -->
 
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CustomerID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PercentCommission)
+            @Html.DisplayNameFor(model => model.VendorID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayNameFor(model => model.ContatName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContatRoleName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressDistrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdate)
         </th>
         <th></th>
     </tr>
@@ -204,13 +242,49 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.CustomerID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PercentCommission)
+            @Html.DisplayFor(modelItem => item.VendorID)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Active)
+            @Html.DisplayFor(modelItem => item.ContatName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContatRoleName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressDistrict)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

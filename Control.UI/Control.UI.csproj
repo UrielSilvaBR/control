@@ -659,6 +659,9 @@
     <Content Include="Views\Cadastro\Vendedores.cshtml" />
     <Content Include="Views\Cadastro\VendedoresEdit.cshtml" />
     <Content Include="Views\Financeiro\ExtratoBancario.cshtml" />
+    <Content Include="Views\Cadastro\Fornecedores.cshtml" />
+    <Content Include="Views\Cadastro\Produtos.cshtml" />
+    <Content Include="Views\Cadastro\Contatos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

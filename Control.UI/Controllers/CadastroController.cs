@@ -101,6 +101,31 @@ namespace Control.UI.Controllers
         }
         #endregion
 
+        #region CONTATOS
+        public ActionResult Contatos(string nomeContato)
+        {
+            context = new DALContext();
+            List<Contact> retorno = new List<Contact>();
+            try
+            {
+                if (string.IsNullOrEmpty(nomeContato))
+                {
+                    retorno = context.Contacts.All().ToList();
+                }
+                else
+                {
+                    retorno = context.Contacts.All().Where(p => p.ContatName.ToUpper().Contains(nomeContato.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
+        #endregion
+
         #region VENDEDORES
         public ActionResult Vendedores(string nomeVendedor)
         {
@@ -124,6 +149,59 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+        #endregion
+
+        #region FORNECEDORES
+        public ActionResult Fornecedores(string nomeFornecedor)
+        {
+            context = new DALContext();
+            List<Provider> retorno = new List<Provider>();
+            try
+            {
+                if (string.IsNullOrEmpty(nomeFornecedor))
+                {
+                    retorno = context.Providers.All().ToList();
+                }
+                else
+                {
+                    retorno = context.Providers.All().Where(p => p.CompanyName.ToUpper().Contains(nomeFornecedor.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
+        #endregion
+
+        #region PRODUTOS
+        public ActionResult Produtos(string nomeProduto)
+        {
+            context = new DALContext();
+            List<Product> retorno = new List<Product>();
+            try
+            {
+                if (string.IsNullOrEmpty(nomeProduto))
+                {
+                    retorno = context.Products.All().ToList();
+                }
+                else
+                {
+                    retorno = context.Products.All().Where(p => p.Name.ToUpper().Contains(nomeProduto.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
+        #endregion
+
+        #region CFOP
         #endregion
 
 

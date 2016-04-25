@@ -19,6 +19,7 @@ namespace Control.Model.Entities
         public int CustomerID { get; set; }
         public int? VendorID { get; set; }
         public string ContatName { get; set; }
+        public string ContatRoleName { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }

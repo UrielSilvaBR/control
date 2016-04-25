@@ -34,5 +34,6 @@ namespace Control.Model.Entities
         public int CommercialPolicy { get; set; }
         public DateTime RegisterDate { get; set; }
         public DateTime LastUpdate { get; set; }
+        
     }
 }

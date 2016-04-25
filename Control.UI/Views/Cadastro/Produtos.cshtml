@@ -1,18 +1,19 @@
 ﻿@using Control.Model.Entities
-@model IEnumerable<Vendor>
+@model IEnumerable<Product>
 
 @{
-    ViewBag.Title = "Vendedores";
+    ViewBag.Title = "Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Cadastros</a></li>
-            <li><a href="#">Vendedores</a></li>
+            <li><a href="#">Produtos</a></li>
             @*<li><a href="#">Edição</a></li>*@
         </ol>
     </div>
-</div>
+</div>>
 
 <!--Teste-->
 <div class="row">
@@ -190,13 +191,52 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ProductUnit.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PercentCommission)
+            @Html.DisplayNameFor(model => model.Brand)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lenght)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AliqICMS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinimumStockAlert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CombinedProduct)
         </th>
         <th></th>
     </tr>
@@ -204,13 +244,52 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.ProductUnit.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCode)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PercentCommission)
+            @Html.DisplayFor(modelItem => item.Brand)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Active)
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lenght)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AliqICMS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinimumStockAlert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CombinedProduct)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -244,7 +323,6 @@ function MakeSelect2(){
 $(document).ready(function() {
 	// Load Datatables and run plugin on tables
     LoadDataTablesScripts(AllTables);
-
 
 	// Add Drag-n-Drop feature
 	WinMove();

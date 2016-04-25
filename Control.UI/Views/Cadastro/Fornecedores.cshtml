@@ -1,14 +1,15 @@
 ﻿@using Control.Model.Entities
-@model IEnumerable<Vendor>
+@model IEnumerable<Provider>
 
 @{
-    ViewBag.Title = "Vendedores";
+    ViewBag.Title = "Fornecedores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Cadastros</a></li>
-            <li><a href="#">Vendedores</a></li>
+            <li><a href="#">Fornecedores</a></li>
             @*<li><a href="#">Edição</a></li>*@
         </ol>
     </div>
@@ -41,21 +42,35 @@
                         <thead>
                             <tr>
                                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                
                                 <th>
-                                    Cliente
+                                    Código
+                                </th>
+                                <th>
+                                    Empresa
                                 </th>
                                 <th>
                                     Apelido
+                                </th>
+                                @*<th>
+                                    @Html.DisplayNameFor(model => model.VendorID)
+                                </th>*@
+                                
+                                <th>
+                                    Fone
+                                </th>                                
+                                <th>
+                                    Email
                                 </th>
                                 <th>
                                     Endereço
                                 </th>
                                 @*<th>
-                                        Número
-                                    </th>*@
+                                    @Html.DisplayNameFor(model => model.AddressNumber)
+                                </th>
                                 <th>
                                     Bairro
-                                </th>
+                                </th>*@
                                 <th>
                                     Cidade
                                 </th>
@@ -63,38 +78,15 @@
                                     Estado
                                 </th>
                                 <th>
-                                    Cep
+                                    CEP
                                 </th>
-                                @*<th>
-                                        DDD
-                                    </th>*@
+                                <th>Documento</th>
                                 <th>
-                                    Telefone
+                                    Registro
                                 </th>
-                                @*<th>
-                                        Fax
-                                    </th>*@
                                 <th>
-                                    Email
+                                    Atualizacao
                                 </th>
-                                @*<th>
-                                        Site
-                                    </th>*@
-                                <th>
-                                    CPF/CNPJ
-                                </th>
-                                @*<th>
-                                        @Html.DisplayNameFor(model => model.Discount)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.CommercialPolicy)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.RegisterDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.LastUpdate)
-                                    </th>*@
 
                             </tr>
                         </thead>
@@ -105,30 +97,35 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
-                                                <a href='@Url.Action("ClientesEdit", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("FornecedorEdit", "Cadastro", new { FornecedorID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("ClienteDelete", "Cadastro", new { ClientID = item.Id })'>
-                                                    <i class="fa fa-times-circle" style="color:red"></i>
+                                                <a href='@Url.Action("FornecedorDelete", "Cadastro", new { FornecedorID = item.Id })'>
+                                                    <i class="fa fa-times-circle" style="color:#B31212"></i>
 
                                                 </a>
                                             </h4>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.CompanyName)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ShortName)
+                                        </td>                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.PhoneCode) - @Html.DisplayFor(modelItem => item.Phone)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.AddressStreet)  - @Html.DisplayFor(modelItem => item.AddressNumber)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.AddressNumber)
-                                            </td>*@
+                                            @Html.DisplayFor(modelItem => item.Email)
+                                        </td>   
+
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.AddressDistrict)
-                                        </td>
+                                            @Html.DisplayFor(modelItem => item.AddressStreet) , @Html.DisplayFor(modelItem => item.AddressNumber) - @Html.DisplayFor(modelItem => item.AddressDistrict)
+                                        </td>                                        
+                                        
                                         <td>
                                             @Html.DisplayFor(modelItem => item.AddressCity)
                                         </td>
@@ -138,38 +135,15 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ZipCode)
                                         </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.PhoneCode)
-                                            </td>*@
-                                        <td>
-                                            (@Html.DisplayFor(modelItem => item.PhoneCode))
-                                            @Html.DisplayFor(modelItem => item.Phone)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.PhoneFax)
-                                            </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.Website)
-                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Document)
                                         </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.Discount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CommercialPolicy)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.RegisterDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.LastUpdate)
-                                            </td>*@
-
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.RegisterDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LastUpdate)
+                                        </td>
                                     </tr>
                                 }
                             }
@@ -190,13 +164,58 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CompanyName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PercentCommission)
+            @Html.DisplayNameFor(model => model.ShortName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Active)
+            @Html.DisplayNameFor(model => model.AddressStreet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressDistrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AddressState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneFax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Website)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Document)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommercialPolicy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegisterDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastUpdate)
         </th>
         <th></th>
     </tr>
@@ -204,13 +223,58 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.CompanyName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PercentCommission)
+            @Html.DisplayFor(modelItem => item.ShortName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Active)
+            @Html.DisplayFor(modelItem => item.AddressStreet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressDistrict)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressCity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddressState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneFax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Website)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Document)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommercialPolicy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegisterDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdate)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
@@ -241,12 +305,13 @@ function MakeSelect2(){
 	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
 	});
 }
-$(document).ready(function() {
-	// Load Datatables and run plugin on tables
-    LoadDataTablesScripts(AllTables);
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
 
 
 	// Add Drag-n-Drop feature
 	WinMove();
 });
 </script>
+    
