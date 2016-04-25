@@ -27,6 +27,8 @@ namespace Control.DAL
         private IRepository<Unit> _unities;
         private IRepository<Vendor> _vendors;
         private IRepository<Transaction> _transactions;
+        private IRepository<Invoice> _invoices;
+        private IRepository<InvoiceItem> _invoiceItems;
 
         public DALContext()
         {
@@ -174,6 +176,26 @@ namespace Control.DAL
             }
         }
 
+        public IRepository<Invoice> Invoices
+        {
+            get
+            {
+                if (_invoices == null)
+                    _invoices = new InvoiceRepository(dbContext);
+                return _invoices;
+            }
+        }
+
+        public IRepository<InvoiceItem> InvoiceItems
+        {
+            get
+            {
+                if (_invoiceItems == null)
+                    _invoiceItems = new InvoiceItemRepository(dbContext);
+                return _invoiceItems;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -230,6 +252,12 @@ namespace Control.DAL
 
             if (_transactions != null)
                 _transactions.Dispose();
+
+            if (_invoices != null)
+                _invoices.Dispose();
+
+            if (_invoiceItems != null)
+                _invoiceItems.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();
