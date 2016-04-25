@@ -31,7 +31,7 @@ namespace Control.Model.Entities
         
         //Forgein Keys
         public int? CustomerID { get; set; }
-        [ForeignKey("ClientID")]
+        [ForeignKey("CustomerID")]
         public virtual Customer CustomerOrder { get; set; }
 
         public int? OrderTypeID { get; set; }
