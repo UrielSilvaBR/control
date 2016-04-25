@@ -204,7 +204,6 @@ namespace Control.UI.Controllers
         #region CFOP
         #endregion
 
-
         //<li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>
         //<li>@Html.ActionLink("Fornecedores", "Fornecedores", "Cadastro")</li>
         //<li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>

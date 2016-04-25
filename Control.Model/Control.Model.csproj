@@ -62,6 +62,8 @@
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\Invoice.cs" />
+    <Compile Include="Entities\InvoiceItem.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderProduct.cs" />
     <Compile Include="Entities\OrderType.cs" />
@@ -80,7 +82,84 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Documentation\NFSe\Manual_Integracao_V2_GINFES.pdf" />
+    <None Include="Documentation\NFSe\Manual_Integracao_V3_GINFES.pdf" />
+    <None Include="Documentation\NFSe\schemas_v202\servico_cancelar_nfse_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\servico_consultar_lote_rps_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\servico_consultar_nfse_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\servico_consultar_nfse_rps_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\servico_consultar_situacao_lote_rps_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\servico_enviar_lote_rps_envio_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\tipos_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v202\xmldsig-core-schema_v02.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\cabecalho_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_cancelar_nfse_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_cancelar_nfse_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_situacao_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_situacao_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_enviar_lote_rps_envio_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\servico_enviar_lote_rps_resposta_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\tipos_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\schemas_v300\xmldsig-core-schema20020212_v03.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFSe\Schema_Consumidor_v101\Cliente.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Documentation\NFSe\FluxoNFSe.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
