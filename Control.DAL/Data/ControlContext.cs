@@ -31,6 +31,8 @@ namespace Control.DAL.Data
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
+        public DbSet<MessageLog> Log { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
@@ -78,7 +80,7 @@ namespace Control.DAL.Data
             //modelBuilder.Entity<Vendor>();
         }
 
-        public System.Data.Entity.DbSet<Control.Model.Entities.Transaction> Transactions { get; set; }
+        
 
 
 

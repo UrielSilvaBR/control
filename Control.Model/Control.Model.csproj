@@ -64,6 +64,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceItem.cs" />
+    <Compile Include="Entities\MessageLog.cs" />
     <Compile Include="Entities\Order.cs" />
     <Compile Include="Entities\OrderProduct.cs" />
     <Compile Include="Entities\OrderType.cs" />

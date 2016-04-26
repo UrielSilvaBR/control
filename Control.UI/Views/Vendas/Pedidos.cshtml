@@ -1,0 +1,111 @@
+﻿@using Control.UI.Models 
+@model PedidoViewModel   
+
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Vendas</a></li>
+            <li><a href="#">Pedidos</a></li>
+            @*<li><a href="#">Edição</a></li>*@
+        </ol>
+    </div>
+</div>
+
+<div class="row"><!-- BOX -->
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Cadastro de Pedidos</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <!-- conteudo -->
+            <div class="box-content">
+                <div id="tabs">
+@using (Html.BeginForm("ClientesSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+                    <ul>
+                        <li><a href="#tabs-1">Dados Cadastrais</a></li>
+                        <li><a href="#tabs-2">Produtos</a></li>                        
+                    </ul>
+
+                    <div id="tabs-1">
+                        <p>
+                            Android is an operating system based on the Linux kernel, and designed primarily for touchscreen
+                            mobile devices such as smartphones and tablet computers. Initially developed by Android, Inc.,
+                            which Google backed financially and later bought in 2005, Android was unveiled in 2007 along with
+                            the founding of the Open Handset Alliance: a consortium of hardware, software, and telecommunication
+                            companies devoted to advancing open standards for mobile devices. The first publicly available
+                            smartphone running Android, the HTC Dream, was released on October 22, 2008.
+                        </p>
+                        @*Html.Partial("_addPedido", Model.Pedido)*@
+                    </div>
+                    <div id="tabs-2">
+                        <p>
+                            Firefox OS (project name: Boot to Gecko, also known as B2G) is a Linux-based open-source operating
+                            system for smartphones and tablet computers and is set to be used on smart TVs. It is being developed
+                            by Mozilla, the non-profit organization best known for the Firefox web browser. Firefox OS is
+                            designed to provide a "complete" community-based alternative system for mobile devices, using open
+                            standards and approaches such as HTML5 applications, JavaScript, a robust privilege model, open web
+                            APIs to communicate directly with cellphone hardware, and application marketplace. As such,
+                            it competes with proprietary systems such as Apple's iOS, Google's Chrome OS and Microsoft's Windows
+                            Phone, as well as other open source systems such as Android, Jolla's Sailfish OS and Ubuntu Touch.
+                        </p>
+                        @*Html.Partial("_addItensPedido", Model.Pedido)*@
+                    </div>
+}
+                </div>
+            </div>
+            <!-- conteudo -->
+
+        </div>
+    </div>
+</div><!-- BOX -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+	// Load TimePicker plugin and callback all time and date pickers
+	LoadTimePickerScript(AllTimePickers);
+	// Create jQuery-UI tabs
+	$("#tabs").tabs();
+	// Sortable for elements
+	$(".sort").sortable({
+		items: "div.col-sm-2",
+		appendTo: 'div.box-content'
+	});
+	// Droppable for example of trash
+	$(".drop div.col-sm-2").draggable({containment: '.dropbox' });
+	$('#trash').droppable({
+		drop: function(event, ui) {
+			$(ui.draggable).remove();
+		}
+	});
+	var icons = {
+		header: "ui-icon-circle-arrow-e",
+		activeHeader: "ui-icon-circle-arrow-s"
+	};
+	// Make accordion feature of jQuery-UI
+	$("#accordion").accordion({icons: icons });
+	// Create UI spinner
+	$("#ui-spinner").spinner();
+	// Add Drag-n-Drop to boxes
+	WinMove();
+});
+</script>

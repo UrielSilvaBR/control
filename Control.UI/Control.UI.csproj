@@ -626,6 +626,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
+    <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -663,6 +664,9 @@
     <Content Include="Views\Cadastro\Fornecedores.cshtml" />
     <Content Include="Views\Cadastro\Produtos.cshtml" />
     <Content Include="Views\Cadastro\Contatos.cshtml" />
+    <Content Include="Views\Vendas\_addPedido.cshtml" />
+    <Content Include="Views\Vendas\_addItensPedido.cshtml" />
+    <Content Include="Views\Vendas\Pedidos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
