@@ -29,6 +29,7 @@ namespace Control.DAL
         private IRepository<Transaction> _transactions;
         private IRepository<Invoice> _invoices;
         private IRepository<InvoiceItem> _invoiceItems;
+        private IRepository<MessageLog> _messageLog;
 
         public DALContext()
         {
@@ -196,6 +197,16 @@ namespace Control.DAL
             }
         }
 
+        public IRepository<MessageLog> MessageLog
+        {
+            get
+            {
+                if (_messageLog == null)
+                    _messageLog = new MessageLogRepository(dbContext);
+                return _messageLog;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -206,6 +217,30 @@ namespace Control.DAL
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool Log(int code, string message, string user)
+        {
+            MessageLog msg = new MessageLog();
+
+            try
+            {
+                msg.Code = code;
+                msg.Description = message;
+                msg.MessageDate = DateTime.Now;
+
+                if (!string.IsNullOrEmpty(user))
+                    msg.User = user;
+
+                _messageLog.Create(msg);                
+                SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -258,6 +293,9 @@ namespace Control.DAL
 
             if (_invoiceItems != null)
                 _invoiceItems.Dispose();
+
+            if (_messageLog != null)
+                _messageLog.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();

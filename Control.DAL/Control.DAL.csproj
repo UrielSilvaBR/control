@@ -94,6 +94,10 @@
     <Compile Include="Migrations\201604252148047_Initial_Create.Designer.cs">
       <DependentUpon>201604252148047_Initial_Create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604260424595_LogTable.cs" />
+    <Compile Include="Migrations\201604260424595_LogTable.Designer.cs">
+      <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="Repository\Interface\IUnitOfWork.cs" />
     <Compile Include="Repository\InvoiceItemRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
+    <Compile Include="Repository\MessageLogRepository.cs" />
     <Compile Include="Repository\OrderProductRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\OrderTypeRepository.cs" />
@@ -133,6 +138,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604252148047_Initial_Create.resx">
       <DependentUpon>201604252148047_Initial_Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604260424595_LogTable.resx">
+      <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

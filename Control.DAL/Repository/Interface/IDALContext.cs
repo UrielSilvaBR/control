@@ -28,6 +28,9 @@ namespace Control.DAL
         //IRepository<UserRoles> UsersRoles { get; }
         IRepository<Vendor> Vendors { get; }
         IRepository<Transaction> Transactions { get; }
+        IRepository<MessageLog> MessageLog { get; }
+
+        bool Log(int code, string message, string user);
 
     }
 }
