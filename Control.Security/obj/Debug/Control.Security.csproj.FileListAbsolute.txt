@@ -1,0 +1,4 @@
+D:\Uriel\GitHub\Control\Control.Security\bin\Debug\Control.Security.dll
+D:\Uriel\GitHub\Control\Control.Security\bin\Debug\Control.Security.pdb
+D:\Uriel\GitHub\Control\Control.Security\obj\Debug\Control.Security.dll
+D:\Uriel\GitHub\Control\Control.Security\obj\Debug\Control.Security.pdb

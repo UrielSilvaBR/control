@@ -1,0 +1,5 @@
+D:\Uriel\GitHub\Control\Control.Utility\bin\Debug\Control.Utility.dll
+D:\Uriel\GitHub\Control\Control.Utility\bin\Debug\Control.Utility.pdb
+D:\Uriel\GitHub\Control\Control.Utility\obj\Debug\Control.Utility.csprojResolveAssemblyReference.cache
+D:\Uriel\GitHub\Control\Control.Utility\obj\Debug\Control.Utility.dll
+D:\Uriel\GitHub\Control\Control.Utility\obj\Debug\Control.Utility.pdb
