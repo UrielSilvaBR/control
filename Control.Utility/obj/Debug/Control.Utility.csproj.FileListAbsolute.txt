@@ -1,0 +1,5 @@
+D:\HomeOffice\Github\control\Control.Utility\bin\Debug\Control.Utility.dll
+D:\HomeOffice\Github\control\Control.Utility\bin\Debug\Control.Utility.pdb
+D:\HomeOffice\Github\control\Control.Utility\obj\Debug\Control.Utility.csprojResolveAssemblyReference.cache
+D:\HomeOffice\Github\control\Control.Utility\obj\Debug\Control.Utility.dll
+D:\HomeOffice\Github\control\Control.Utility\obj\Debug\Control.Utility.pdb
