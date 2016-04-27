@@ -1,5 +1,0 @@
-D:\HomeOffice\Github\control\Control.Security\bin\Debug\Control.Security.dll
-D:\HomeOffice\Github\control\Control.Security\bin\Debug\Control.Security.pdb
-D:\HomeOffice\Github\control\Control.Security\obj\Debug\Control.Security.csprojResolveAssemblyReference.cache
-D:\HomeOffice\Github\control\Control.Security\obj\Debug\Control.Security.dll
-D:\HomeOffice\Github\control\Control.Security\obj\Debug\Control.Security.pdb
