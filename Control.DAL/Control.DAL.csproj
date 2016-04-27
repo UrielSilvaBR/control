@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201604260424595_LogTable.Designer.cs">
       <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604271948396_publish_2704.cs" />
+    <Compile Include="Migrations\201604271948396_publish_2704.Designer.cs">
+      <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
@@ -141,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604260424595_LogTable.resx">
       <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604271948396_publish_2704.resx">
+      <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
