@@ -105,6 +105,7 @@
       <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NFSe\Objects\NotaFiscal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -156,6 +157,10 @@
       <Project>{ed1d97b4-bb0e-47d6-bfb7-1fdefb4a899c}</Project>
       <Name>Control.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Control.Security\Control.Security.csproj">
+      <Project>{3537b41d-77b6-4d0d-8bbe-d5a34f30b0fe}</Project>
+      <Name>Control.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -187,6 +192,7 @@
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

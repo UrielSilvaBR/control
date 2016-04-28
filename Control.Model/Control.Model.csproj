@@ -79,6 +79,20 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRoles.cs" />
     <Compile Include="Entities\Vendor.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\CpfCnpj.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Endereco.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\EnviarLoteRpsEnvio.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\IdentificacaoRps.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\IdentificacaoTomador.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\InfRps.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\ListaRps.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\LoteRps.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Prestador.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Rps.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\RpsSubstituido.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Servico.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Tomador.cs" />
+    <Compile Include="NFSe\Xml\RecepcionarLoteRps\Valores.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +181,7 @@
   <ItemGroup>
     <Content Include="Documentation\NFSe\FluxoNFSe.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
