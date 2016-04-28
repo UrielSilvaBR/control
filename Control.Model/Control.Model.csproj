@@ -83,8 +83,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Documentation\NFSe\CERTIFICADO_TESTE_2015_2016.pfx" />
+    <None Include="Documentation\NFSe\Erros-e-Alertas_V114.xls" />
+    <None Include="Documentation\NFSe\Erros-e-Alertas_V115.xls" />
+    <None Include="Documentation\NFSe\Manual_Conceitual_GINFES.pdf" />
     <None Include="Documentation\NFSe\Manual_Integracao_V2_GINFES.pdf" />
     <None Include="Documentation\NFSe\Manual_Integracao_V3_GINFES.pdf" />
+    <None Include="Documentation\NFSe\Manual_Operacional_GINFES_novo.pdf" />
     <None Include="Documentation\NFSe\schemas_v202\servico_cancelar_nfse_envio_v02.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -109,49 +114,49 @@
     <None Include="Documentation\NFSe\schemas_v202\xmldsig-core-schema_v02.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\cabecalho_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\cabecalho_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_cancelar_nfse_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_cancelar_nfse_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_cancelar_nfse_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_cancelar_nfse_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_lote_rps_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_lote_rps_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_lote_rps_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_lote_rps_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_nfse_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_nfse_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_rps_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_nfse_rps_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_nfse_rps_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_nfse_rps_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_situacao_lote_rps_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_situacao_lote_rps_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_consultar_situacao_lote_rps_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_consultar_situacao_lote_rps_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_enviar_lote_rps_envio_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_enviar_lote_rps_envio_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\servico_enviar_lote_rps_resposta_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\servico_enviar_lote_rps_resposta_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\tipos_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\tipos_v03.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Documentation\NFSe\schemas_v300\xmldsig-core-schema20020212_v03.xsd">
+    <None Include="Documentation\NFSe\schemas_v301\xmldsig-core-schema20020212_v03.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Documentation\NFSe\Schema_Consumidor_v101\Cliente.xsd">
