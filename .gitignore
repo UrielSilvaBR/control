@@ -7,3 +7,10 @@ Control.UI.Tests/obj/
 Control.UI/bin/
 Control.UI/obj/
 Control.Utility/Security.cs
+.vs/Control.UI/v14/.suo
+.vs/config/applicationhost.config
+Control.UI/Control.UI.csproj.user
+Control.Utility/bin/
+Control.Utility/obj/
+Control.Security/bin/
+Control.Security/obj/
