@@ -31,6 +31,7 @@ namespace Control.DAL.Data
         public DbSet<Vendor> Vendors { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
+        public DbSet<InvoiceTax> InvoiceTaxes { get; set; }
         public DbSet<MessageLog> Log { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
