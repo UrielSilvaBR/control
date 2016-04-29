@@ -92,39 +92,8 @@
                         </div>
                         <div id="tabs-2">
                             <!-- Tab Itens Pedido -->
-                            @*@Html.Partial("_addItensPedido", ViewData)*@
-                            <div class="form-group">
-                                @Html.Label("Produtos", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5" style="align-content:flex-start">
-                                    @Html.DropDownListFor(model => model.Pedido.Comments, new SelectList(Model.Produtos, "Id", "Name"), htmlAttributes: new { @class = "selddl col-md-3" })
-                                </div>
-                                @Html.Label("Quantidade", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4">
-                                    @Html.TextBox("txtTexto","", htmlAttributes: new { @class = "datepicker form-control" })
-                                    @*@Html.TextBox("","", htmlAttributes: new { @class = "datepicker form-control" })*@
-                                    
-                                </div>
-                            </div>
+                            @Html.Partial("_addPedido", Model)
 
-                            <div class="form-group">
-                                @Html.Label("Preco Unitario", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5" style="align-content:flex-start">
-                                    @Html.TextBox("txtTextoUnitario", "", htmlAttributes: new { @class = "datepicker form-control" })
-                                </div>
-                                @Html.Label("Total", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4">
-                                    @Html.TextBox("txtTextoTotal", "", htmlAttributes: new { @class = "datepicker form-control" })
-                                    @*@Html.TextBox("","", htmlAttributes: new { @class = "datepicker form-control" })*@
-
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-5">
-                                    <input type="submit" value="Gravar" class="btn btn-primary" />
-                                </div>
-                            </div>
-                
                         </div>
                     }
                 </div>
@@ -133,75 +102,35 @@
                 @Html.ValidationMessageFor(model => model.Pedido.CustomerOrder.CompanyName, "", new { @class = "text-danger" })
 
                 <!-- conteudo -->
+                @if (Model.ItensPedido.Count > 0)
+                {                
                 <table class="table table-striped table-bordered table-hover table-heading no-border-bottom">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Company</th>
-                            <th>Product</th>
-                            <th>Homepage</th>
-                            <th>Product description</th>
+                            <th>Descrição</th>
+                            <th>Quantidade</th>
+                            <th>Preço</th>
+                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Oracle</td>
-                            <td>OracleDB</td>
-                            <td>http://oracle.com</td>
-                            <td>SQL server</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>RedHat</td>
-                            <td>RedHat Advanced Server</td>
-                            <td>http://redhat.com</td>
-                            <td>Operation System</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Microsoft</td>
-                            <td>Windows</td>
-                            <td>http://microsoft.com</td>
-                            <td>Operation System</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Apple</td>
-                            <td>MacOSX</td>
-                            <td>http://apple.com</td>
-                            <td>Operation System</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Adobe</td>
-                            <td>Adobe Photoshop</td>
-                            <td>http://adobe.com</td>
-                            <td>Design suite</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Corel</td>
-                            <td>Corel Draw!</td>
-                            <td>http://corel.com</td>
-                            <td>Design suite</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>Google</td>
-                            <td>Chrome</td>
-                            <td>http://google.com</td>
-                            <td>Web-browser</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>Mozilla</td>
-                            <td>Firefox</td>
-                            <td>http://mozilla.org</td>
-                            <td>Web-browser</td>
-                        </tr>
+
+
+                        @foreach (var item in Model.ItensPedido)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ProductName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+
+                            </tr>
+                        }
                     </tbody>
                 </table>
+                }
 
                 <div class="form-group">
                     <div class="col-md-offset-5">

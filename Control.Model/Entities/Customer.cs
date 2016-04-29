@@ -22,17 +22,17 @@ namespace Control.Model.Entities
         public string AddressDistrict { get; set; }
         public string AddressCity { get; set; }
         public string AddressState { get; set; }
-        public int ZipCode { get; set; }
-        public int PhoneCode { get; set; }
-        public int Phone { get; set; }
-        public int PhoneFax { get; set; }
+        public int? ZipCode { get; set; }
+        public int? PhoneCode { get; set; }
+        public int? Phone { get; set; }
+        public int? PhoneFax { get; set; }
         public string Email { get; set; }
         public string Website { get; set; }
         [Display(Name = "CPF/CNPJ")]
         public int Document { get; set; }
         public decimal Discount { get; set; }
-        public int CommercialPolicy { get; set; }
-        public DateTime RegisterDate { get; set; }
-        public DateTime LastUpdate { get; set; }
+        public int? CommercialPolicy { get; set; }
+        public DateTime? RegisterDate { get; set; }
+        public DateTime? LastUpdate { get; set; }
     }
 }

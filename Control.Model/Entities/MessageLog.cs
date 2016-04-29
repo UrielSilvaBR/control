@@ -14,7 +14,7 @@ namespace Control.Model.Entities
         [Key]
         [DataMember]
         public int Id { get; set; }
-        public int Code { get; set; }
+        public int? Code { get; set; }
         public string Description { get; set; }
         public string User { get; set; }
         public DateTime? MessageDate { get; set; }

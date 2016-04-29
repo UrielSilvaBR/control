@@ -14,3 +14,12 @@ Control.Utility/bin/
 Control.Utility/obj/
 Control.Security/bin/
 Control.Security/obj/
+Control.DAL/Migrations/201604290251475_Initial.Designer.cs
+Control.DAL/Migrations/201604290251475_Initial.cs
+Control.DAL/Migrations/201604290251475_Initial.resx
+Control.DAL/Migrations/201604290257408_publish.Designer.cs
+Control.DAL/Migrations/201604290257408_publish.cs
+Control.DAL/Migrations/201604290257408_publish.resx
+Control.UI/Views/Cadastro/FornecedoresEdit.cshtml
+Control.UI/Control.UI.csproj.orig
+Control.UI/Web.config.orig

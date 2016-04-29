@@ -16,7 +16,7 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
 
-        public int CustomerID { get; set; }
+        public int? CustomerID { get; set; }
         public int? VendorID { get; set; }
         public string ContatName { get; set; }
         public string ContatRoleName { get; set; }
@@ -28,8 +28,8 @@ namespace Control.Model.Entities
         public string AddressDistrict { get; set; }
         public string AddressCity { get; set; }
         public string AddressState { get; set; }
-        public int ZipCode { get; set; }
-        public DateTime RegisterDate { get; set; }
-        public DateTime LastUpdate { get; set; }
+        public int? ZipCode { get; set; }
+        public DateTime? RegisterDate { get; set; }
+        public DateTime? LastUpdate { get; set; }
     }
 }

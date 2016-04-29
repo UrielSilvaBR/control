@@ -671,6 +671,9 @@
     <Content Include="Views\Vendas\_addItensPedido.cshtml" />
     <Content Include="Views\Vendas\Pedidos.cshtml" />
     <Content Include="Views\Invoice\NotasFiscais.cshtml" />
+    <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
+    <Content Include="Views\Cadastro\ContatosEdit.cshtml" />
+    <Content Include="Views\Cadastro\ProdutosEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

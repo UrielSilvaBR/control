@@ -60,10 +60,10 @@ namespace Control.Model.Entities
             set { _description = value; }
         }
 
-        public decimal QuantityOrder { get; set; } 
-        public decimal QuantityDeliver { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal ItemDiscount { get; set; }
+        public decimal? QuantityOrder { get; set; } 
+        public decimal? QuantityDeliver { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public decimal? ItemDiscount { get; set; }
         public string Comments { get; set; }
         public string TotalPrice { get; set; }
 
