@@ -30,6 +30,8 @@ namespace Control.UI.Controllers
 
         public ActionResult GerarNotaFiscal(int InvoiceID)
         {
+
+
             return View();
         }
     }
