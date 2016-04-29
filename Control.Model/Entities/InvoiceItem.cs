@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Control.Model.Entities
 {
+    [DataContract]
     public class InvoiceItem : IEntity
     {
         [Key]

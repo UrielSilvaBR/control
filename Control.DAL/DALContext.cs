@@ -305,6 +305,9 @@ namespace Control.DAL
             if (_invoiceItems != null)
                 _invoiceItems.Dispose();
 
+            if (_invoiceTaxes != null)
+                _invoiceTaxes.Dispose();
+
             if (_messageLog != null)
                 _messageLog.Dispose();
 

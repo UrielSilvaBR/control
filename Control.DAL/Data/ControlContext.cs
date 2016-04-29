@@ -15,7 +15,6 @@ namespace Control.DAL.Data
     {
         private DbConnection _objCn;
 
-
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -38,7 +37,7 @@ namespace Control.DAL.Data
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public ControlContext(DbConnection cn)
