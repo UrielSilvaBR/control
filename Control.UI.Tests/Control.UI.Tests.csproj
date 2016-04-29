@@ -48,13 +48,29 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="NFSe\Objects\NotaFiscalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Control.DAL\Control.DAL.csproj">
+      <Project>{C12C2A77-A8AD-4B6D-9B3B-A2160B851849}</Project>
+      <Name>Control.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control.Model\Control.Model.csproj">
+      <Project>{ed1d97b4-bb0e-47d6-bfb7-1fdefb4a899c}</Project>
+      <Name>Control.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control.Security\Control.Security.csproj">
+      <Project>{3537b41d-77b6-4d0d-8bbe-d5a34f30b0fe}</Project>
+      <Name>Control.Security</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Control.UI\Control.UI.csproj">
       <Project>{0BC51867-32E9-4027-BF5A-83C01FAE1F7A}</Project>
       <Name>Control.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control.Utility\Control.Utility.csproj">
+      <Project>{53eae4ef-78e0-4bd1-82eb-87069122a25c}</Project>
+      <Name>Control.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

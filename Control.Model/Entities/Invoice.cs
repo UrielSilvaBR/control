@@ -15,5 +15,7 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
 
+
+
     }
 }

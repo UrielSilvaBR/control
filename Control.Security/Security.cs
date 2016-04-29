@@ -11,7 +11,7 @@ namespace Control.Security
 {
     public static class Security
     {
-        internal static string SignXml(string xml, string signatureTag, X509Certificate2 Certificate)
+        internal static string AssinarXml(string xml, string signatureTag, X509Certificate2 Certificate)
         {
             SignedXml signedXml = null;
             XmlDocument doc = null;
@@ -110,9 +110,33 @@ namespace Control.Security
             }
         }
 
-        public static string DigitalSignature(string xml, string signatureTag, X509Certificate2 Certificate)
+        public static string AssinaturaDigital(string xml, string signatureTag, X509Certificate2 Certificate)
         {
-            return SignXml(xml, signatureTag, Certificate);
+            return AssinarXml(xml, signatureTag, Certificate);
+        }
+
+        public static X509Certificate2 ObterCertificadoDigitalPorNome(string name)
+        {
+            X509Certificate2 certificado = null;
+
+            //Pega o certificado para o usuario logado na máquina
+            //O certificado deve ser instalado pelo usuario que será configurado para a aplicacao no IIS
+            X509Store listCertificados = new X509Store(StoreLocation.CurrentUser);
+
+            listCertificados.Open(OpenFlags.IncludeArchived);
+
+            for (int i = 0; i < listCertificados.Certificates.Count; i++)
+            {
+                X509Certificate2 item = listCertificados.Certificates[i];
+
+                if ((item.Subject.Contains(name)))
+                {
+                    certificado = item;
+                    break;
+                }
+            }
+
+            return certificado;
         }
     }
 }

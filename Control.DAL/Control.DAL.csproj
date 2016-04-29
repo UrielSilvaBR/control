@@ -78,6 +78,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -103,7 +105,13 @@
       <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="NFSe\Objects\NotaFiscal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
@@ -125,15 +133,33 @@
     <Compile Include="Repository\TypeUnitRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Repository\VendorRepository.cs" />
+    <Compile Include="Web References\br.com.ginfes.homologacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.ginfes.homologacao\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\br.com.ginfes.homologacao\ServiceGinfesImplService.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Control.Model\Control.Model.csproj">
       <Project>{ed1d97b4-bb0e-47d6-bfb7-1fdefb4a899c}</Project>
       <Name>Control.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control.Security\Control.Security.csproj">
+      <Project>{3537b41d-77b6-4d0d-8bbe-d5a34f30b0fe}</Project>
+      <Name>Control.Security</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +176,23 @@
       <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://homologacao.ginfes.com.br/ServiceGinfesImpl%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\br.com.ginfes.homologacao\</RelPath>
+      <UpdateFromURL>https://homologacao.ginfes.com.br/ServiceGinfesImpl%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
