@@ -44,8 +44,8 @@ namespace Control.DAL.Data
 
                 case 2:
                     //Local Gtwave
-                    strConn = @"User ID=cepe;Password=123;Data Source=SERVER2012;Initial Catalog=Control;";
-                    //strConn = @"Server=.\SQLEXPRESS;Database=Control;Integrated Security=SSPI;";
+                    //strConn = @"User ID=cepe;Password=123;Data Source=SERVER2012;Initial Catalog=Control;";
+                    strConn = @"Server=.\SQLEXPRESS;Database=Control;Integrated Security=SSPI;";
                     break;
 
                 case 3:

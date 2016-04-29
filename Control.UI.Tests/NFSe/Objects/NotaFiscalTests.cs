@@ -98,7 +98,7 @@ namespace Control.DAL.NFSe.Objects.Tests
             #endregion
 
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.RazaoSocial = "GT Wave Serviços em Tecnologia da Informação";
-            
+
             #region Endereco
 
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.DescEndereco = "R Luiz Antonio Burgain";
@@ -133,6 +133,22 @@ namespace Control.DAL.NFSe.Objects.Tests
             var objNotaFiscalDAL = new Control.DAL.NFSe.Objects.NotaFiscal();
 
             var retornoEnvioNFSe = objNotaFiscalDAL.GerarNotaFiscal(arquivoXml.InnerXml);
+
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void ObterArquivoXmlModeloTest()
+        {
+            string path = @"C:\Users\Paulo\Desktop\NFSe_NCC_XML.xml";
+            var objArquivoXml = new XmlDocument();
+            objArquivoXml.Load(path);
+
+            objArquivoXml.InnerXml = Security.Security.AssinaturaDigital(objArquivoXml.OuterXml, "InfRps", Security.Security.ObterCertificadoDigitalPorNome("MARIA APARECIDA NASCIMENTO"));
+
+            var objNotaFiscalDAL = new Control.DAL.NFSe.Objects.NotaFiscal();
+
+            var retornoEnvioNFSe = objNotaFiscalDAL.GerarNotaFiscal(objArquivoXml.InnerXml);
 
             Assert.Fail();
         }
