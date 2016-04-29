@@ -670,6 +670,7 @@
     <Content Include="Views\Vendas\_addPedido.cshtml" />
     <Content Include="Views\Vendas\_addItensPedido.cshtml" />
     <Content Include="Views\Vendas\Pedidos.cshtml" />
+    <Content Include="Views\Invoice\NotasFiscais.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -679,7 +680,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Invoice\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Control.DAL\Control.DAL.csproj">

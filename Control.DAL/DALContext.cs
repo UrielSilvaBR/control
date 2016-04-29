@@ -29,6 +29,7 @@ namespace Control.DAL
         private IRepository<Transaction> _transactions;
         private IRepository<Invoice> _invoices;
         private IRepository<InvoiceItem> _invoiceItems;
+        private IRepository<InvoiceTax> _invoiceTaxes;
         private IRepository<MessageLog> _messageLog;
 
         public DALContext()
@@ -194,6 +195,16 @@ namespace Control.DAL
                 if (_invoiceItems == null)
                     _invoiceItems = new InvoiceItemRepository(dbContext);
                 return _invoiceItems;
+            }
+        }
+
+        public IRepository<InvoiceTax> InvoiceTaxes
+        {
+            get
+            {
+                if (_invoiceTaxes == null)
+                    _invoiceTaxes = new InvoiceTaxRepository(dbContext);
+                return _invoiceTaxes;
             }
         }
 

@@ -30,6 +30,10 @@ namespace Control.DAL
         IRepository<Transaction> Transactions { get; }
         IRepository<MessageLog> MessageLog { get; }
 
+        IRepository<Invoice> Invoices { get; }
+        IRepository<InvoiceItem> InvoiceItems { get; }
+        IRepository<InvoiceTax> InvoiceTaxes { get; }
+        
         bool Log(int code, string message, string user);
 
     }

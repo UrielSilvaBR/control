@@ -120,6 +120,7 @@
     <Compile Include="Repository\Interface\IUnitOfWork.cs" />
     <Compile Include="Repository\InvoiceItemRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
+    <Compile Include="Repository\InvoiceTaxRepository.cs" />
     <Compile Include="Repository\MessageLogRepository.cs" />
     <Compile Include="Repository\OrderProductRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />

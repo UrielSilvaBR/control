@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -15,7 +16,25 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
 
+        public Int64 Numero { get; set; }
+        public string Serie { get; set; }
+        public decimal Valor { get; set; }
+        public DateTime DataEmissao { get; set; }
 
+        public string Status { get; set; }
+        public DateTime InsertDate { get; set; }
+        public DateTime OrderDate { get; set; }
+        public DateTime UpdateDate { get; set; }
 
+        ////Forgein Keys
+        public int? CustomerID { get; set; }
+        [ForeignKey("CustomerID")]
+        public virtual Customer CustomerInvoice { get; set; }
+
+        [ForeignKey("InvoiceId")]
+        public virtual List<InvoiceItem> Items { get; set; }
+
+        [ForeignKey("InvoiceId")]
+        public virtual List<InvoiceTax> Taxes { get; set; }
     }
 }
