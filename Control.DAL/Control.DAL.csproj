@@ -92,17 +92,9 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201604252148047_Initial_Create.cs" />
-    <Compile Include="Migrations\201604252148047_Initial_Create.Designer.cs">
-      <DependentUpon>201604252148047_Initial_Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604260424595_LogTable.cs" />
-    <Compile Include="Migrations\201604260424595_LogTable.Designer.cs">
-      <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201604271948396_publish_2704.cs" />
-    <Compile Include="Migrations\201604271948396_publish_2704.Designer.cs">
-      <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
+    <Compile Include="Migrations\201604291304591_Initial.cs" />
+    <Compile Include="Migrations\201604291304591_Initial.Designer.cs">
+      <DependentUpon>201604291304591_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -167,17 +159,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604252148047_Initial_Create.resx">
-      <DependentUpon>201604252148047_Initial_Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604260424595_LogTable.resx">
-      <DependentUpon>201604260424595_LogTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201604271948396_publish_2704.resx">
-      <DependentUpon>201604271948396_publish_2704.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +174,11 @@
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201604291304591_Initial.resx">
+      <DependentUpon>201604291304591_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
