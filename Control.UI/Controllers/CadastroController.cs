@@ -61,6 +61,9 @@ namespace Control.UI.Controllers
             {
                 model.RegisterDate = DateTime.Now;
                 model.LastUpdate = DateTime.Now;
+                model.PhoneCode = 13;
+                model.CommercialPolicy = 0;
+                model.Discount = 0;                
 
                 if (model.Id > 0)
                 {
@@ -124,6 +127,75 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+        
+        public ActionResult ContatosEdit(int? ContatoID)
+        {
+            Contact model = new Contact();
+            context = new DALContext();
+
+            if (ContatoID > 0)
+            {
+                model = context.Contacts.Find(p => p.Id == ContatoID);
+            }
+            return View(model);
+        }
+
+        public ActionResult FiltrarContato(string FiltroContato)
+        {
+            return RedirectToAction("Contatos");
+        }
+
+        public ActionResult ContatoSave(Contact model)
+        {
+            context = new DALContext();
+
+            try
+            {
+                model.RegisterDate = DateTime.Now;
+                model.LastUpdate = DateTime.Now;
+                
+                if (model.VendorID == null)
+                {
+                    model.VendorID = 1;
+                }
+
+                if (model.Id > 0)
+                {
+                    context.Contacts.Update(model);
+                }
+                else
+                {
+                    context.Contacts.Create(model);
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Contato cadastrado com sucesso.";
+
+            return RedirectToAction("Fornecedores");
+        }
+
+        public ActionResult ContatoDelete(int? ContatoID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.Contacts.Delete(p => p.Id == ContatoID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            context.SaveChanges();
+
+            ViewBag.Message = "Contato excluído com sucesso.";
+
+            return RedirectToAction("Fornecedores");
+        }
         #endregion
 
         #region VENDEDORES
@@ -148,6 +220,74 @@ namespace Control.UI.Controllers
             }
 
             return View(retorno);
+        }
+
+        public ActionResult VendedoresEdit(int? VendedorID)
+        {
+            Vendor model = new Vendor();
+            context = new DALContext();
+
+            if (VendedorID > 0)
+            {
+                model = context.Vendors.Find(p => p.Id == VendedorID);
+            }
+            return View(model);
+        }
+
+        public ActionResult FiltrarVendedores(string FiltroVendedor)
+        {
+            return RedirectToAction("Vendedores");
+        }
+
+        public ActionResult VendedorSave(Vendor model)
+        {
+            context = new DALContext();
+
+            try
+            {
+                model.Active = true;
+
+                if (model.PercentCommission <= 0)
+                {
+                    model.PercentCommission = 5;
+                }
+
+                if (model.Id > 0)
+                {
+                    context.Vendors.Update(model);
+                }
+                else
+                {
+                    context.Vendors.Create(model);
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Vendedor cadastrado com sucesso.";
+
+            return RedirectToAction("Vendedores");
+        }
+
+        public ActionResult VendedorDelete(int? VendedorID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.Vendors.Delete(p => p.Id == VendedorID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            context.SaveChanges();
+
+            ViewBag.Message = "Vendedor excluído com sucesso.";
+
+            return RedirectToAction("Vendedores");
         }
         #endregion
 
@@ -174,6 +314,73 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+
+        public ActionResult FornecedoresEdit(int? FornecedorID)
+        {
+            Provider model = new Provider();
+            context = new DALContext();
+
+            if (FornecedorID > 0)
+            {
+                model = context.Providers.Find(p => p.Id == FornecedorID);
+            }
+            return View(model);
+        }
+
+        public ActionResult FiltrarFornecedor(string FiltroFornecedor)
+        {
+            return RedirectToAction("Fornecedores");
+        }
+
+        public ActionResult FornecedorSave(Provider model)
+        {
+            context = new DALContext();
+
+            try
+            {
+                model.RegisterDate = DateTime.Now;
+                model.LastUpdate = DateTime.Now;
+                model.PhoneCode = 13;
+                model.CommercialPolicy = 0;
+                model.Discount = 0;
+
+                if (model.Id > 0)
+                {
+                    context.Providers.Update(model);
+                }
+                else
+                {
+                    context.Providers.Create(model);
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Fornecedor cadastrado com sucesso.";
+
+            return RedirectToAction("Fornecedores");
+        }
+
+        public ActionResult FornecedorDelete(int? FornecedorID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.Providers.Delete(p => p.Id == FornecedorID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            context.SaveChanges();
+
+            ViewBag.Message = "Fornecedor excluído com sucesso.";
+
+            return RedirectToAction("Fornecedores");
+        }
         #endregion
 
         #region PRODUTOS
@@ -198,6 +405,72 @@ namespace Control.UI.Controllers
             }
 
             return View(retorno);
+        }
+
+        public ActionResult ProdutosEdit(int? ProdutoID)
+        {
+            Product model = new Product();
+            context = new DALContext();
+
+            if (ProdutoID > 0)
+            {
+                model = context.Products.Find(p => p.Id == ProdutoID);
+            }
+            return View(model);
+        }
+
+        public ActionResult FiltrarProdutos(string FiltroProduto)
+        {
+            return RedirectToAction("Produtos");
+        }
+
+        public ActionResult ProdutosSave(Product model)
+        {
+            context = new DALContext();
+
+            try
+            {
+                model.AliqICMS = 3;
+                model.CombinedProduct = false;
+                model.MinimumStockAlert = 50;
+                model.TypeUnitID = 1;
+                
+                if (model.Id > 0)
+                {
+                    context.Products.Update(model);
+                }
+                else
+                {
+                    context.Products.Create(model);
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Produto cadastrado com sucesso.";
+
+            return RedirectToAction("Produtos");
+        }
+
+        public ActionResult ProdutoDelete(int? FornecedorID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.Providers.Delete(p => p.Id == FornecedorID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            context.SaveChanges();
+
+            ViewBag.Message = "Produto excluído com sucesso.";
+
+            return RedirectToAction("Produtos");
         }
         #endregion
 

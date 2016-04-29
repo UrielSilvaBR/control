@@ -37,7 +37,7 @@ namespace Control.DAL.Data
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public ControlContext(DbConnection cn)
@@ -65,25 +65,6 @@ namespace Control.DAL.Data
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<Transaction>().ToTable("Transaction");
 
-            //modelBuilder.Entity<Contact>();
-            //modelBuilder.Entity<Country>();
-            //modelBuilder.Entity<Customer>();
-            //modelBuilder.Entity<Order>();
-            //modelBuilder.Entity<OrderProduct>();
-            //modelBuilder.Entity<OrderType>();
-            //modelBuilder.Entity<Product>();
-            //modelBuilder.Entity<Provider>();
-            //modelBuilder.Entity<Stock>();
-            //modelBuilder.Entity<Storage>();
-            //modelBuilder.Entity<TypeUnit>();
-            //modelBuilder.Entity<Unit>();
-            //modelBuilder.Entity<Vendor>();
         }
-
-        
-
-
-
-        //public DbSet<User> Users { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace Control.UI.Models
         //Propriedades Cadastro
         public Order Pedido { get; set; }
         public List<OrderProduct> ItensPedido { get; set; }
+        public OrderProduct ItemPedido { get; set; }
 
         //listas preenchimento
         public List<Product> Produtos { get; set; }

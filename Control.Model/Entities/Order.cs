@@ -21,13 +21,13 @@ namespace Control.Model.Entities
         public DateTime OrderDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public string Comments { get; set; }
-        public int CFOP { get; set; }
-        public decimal Discount { get; set; }
-        public decimal TotalValue { get; set; }
+        public int? CFOP { get; set; }
+        public decimal? Discount { get; set; }
+        public decimal? TotalValue { get; set; }
 
         //Campos Nota Fiscal
-        public int InvoiceNumber { get; set; }
-        public int InvoiceStatus { get; set; }
+        public int? InvoiceNumber { get; set; }
+        public int? InvoiceStatus { get; set; }
 
         ////Forgein Keys
         public int? CustomerID { get; set; }
