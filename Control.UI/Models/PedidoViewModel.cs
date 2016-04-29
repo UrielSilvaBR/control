@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Control.UI.Models
 {
@@ -19,6 +20,11 @@ namespace Control.UI.Models
         public List<Customer> Clientes { get; set; }
         public List<Vendor> Vendedores { get; set; }
         public List<Storage> Estoque { get; set; }
+        public List<Contact> Contatos { get; set; }
+        //public List<CFOP> Contatos { get; set; }
+
+        public List<SelectListItem> CFOPs { get; set; }
+        public List<SelectListItem> Status { get; set; }
 
         public PedidoViewModel()
         {
@@ -42,7 +48,12 @@ namespace Control.UI.Models
             Clientes = context.Customers.All().ToList();
             Vendedores = context.Vendors.All().ToList();
             Estoque = context.Storages.All().ToList();
-        }
+            Contatos = context.Contacts.All().ToList();
+           
+            tempCFOP();
+            tempStatus();
+            //Add select list item to list of selectlistitems
+        }        
 
         public bool SalvarPedido()
         {
@@ -93,5 +104,46 @@ namespace Control.UI.Models
             }
             return true;
         }
+
+        #region METODOS TEMPORARIOS
+        private void tempStatus()
+        {
+            Status = new List<SelectListItem>();
+
+            SelectListItem stat1 = new SelectListItem() { Value = "ORÇAMENTO", Text = "ORÇAMENTO" };
+            SelectListItem stat2 = new SelectListItem() { Value = "PROPOSTA", Text = "PROPOSTA" };
+            SelectListItem stat3 = new SelectListItem() { Value = "PEDIDO - ABERTO", Text = "PEDIDO - ABERTO" };
+            SelectListItem stat4 = new SelectListItem() { Value = "PEDIDO - PENDENTE", Text = "PEDIDO - PENDENTE" };
+            SelectListItem stat5 = new SelectListItem() { Value = "PEDIDO - ENTREGUE", Text = "PEDIDO - ENTREGUE" };
+            SelectListItem stat6 = new SelectListItem() { Value = "ENCERRADO", Text = "ENCERRADO" };
+            SelectListItem stat7 = new SelectListItem() { Value = "CANCELADO", Text = "CANCELADO" };
+
+            Status.Add(stat1);
+            Status.Add(stat2);
+            Status.Add(stat3);
+            Status.Add(stat4);
+            Status.Add(stat5);
+            Status.Add(stat6);
+            Status.Add(stat7);
+        }
+
+        private void tempCFOP()
+        {
+            CFOPs = new List<SelectListItem>();
+
+            //Create the select list item you want to add
+            SelectListItem sli1 = new SelectListItem() { Value = "5101", Text = "VENDA DE PRODUÇÃO DO ESTABELECIMENTO" };
+            SelectListItem sli2 = new SelectListItem() { Value = "5102", Text = "VENDA DE MERCADORIA ADQUIR. DE TERCEIROS" };
+            SelectListItem sli3 = new SelectListItem() { Value = "6107", Text = "VENDA DE PRODUÇÃO DO ESTABELECIMENTO A NÃO CONTRIBUINTE" };
+            SelectListItem sli4 = new SelectListItem() { Value = "6201", Text = "DEVOLUÇÃO DE COMPRA P/INDUSTRIALIZAÇÃO" };
+            SelectListItem sli5 = new SelectListItem() { Value = "6202", Text = "DEVOLUÇÃO DE COMPRA P/COMERCIALIZAÇÃO" };
+
+            CFOPs.Add(sli1);
+            CFOPs.Add(sli2);
+            CFOPs.Add(sli3);
+            CFOPs.Add(sli4);
+            CFOPs.Add(sli5);
+        }
+        #endregion
     }
 }

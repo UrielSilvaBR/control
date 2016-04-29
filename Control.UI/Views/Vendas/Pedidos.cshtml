@@ -39,54 +39,195 @@
             <!-- conteudo -->
             <div class="box-content">
                 <div id="tabs">
-@using (Html.BeginForm("ClientesSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
-                    <ul>
-                        <li><a href="#tabs-1">Dados Cadastrais</a></li>
-                        <li><a href="#tabs-2">Produtos</a></li>                        
-                    </ul>
+                    @using (Html.BeginForm("ClientesSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <ul>
+                            <li><a href="#tabs-1">Dados Cadastrais</a></li>
+                            <li><a href="#tabs-2">Produtos</a></li>
+                        </ul>
 
-                    <div id="tabs-1"> <!--Tab Dados Cadastrais-->
-                        
-                        <div class="form-group">                            
-                            @Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
-                            <div class="col-md-2">                                
-                                @Html.EditorFor(model => model.Pedido.Id, new { htmlAttributes = new { @class = "form-control" } })                                
-                            </div>
-                            @Html.Label("Empresa", htmlAttributes: new { @class = "control-label col-md-1" })
-                            <div class="col-md-6">
-                                @Html.EditorFor(model => model.Pedido.CustomerOrder.CompanyName , new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Pedido.CustomerOrder.CompanyName, "", new { @class = "text-danger" })
-                            </div>
-                        </div>    
+                        <div id="tabs-1">
+                            <!--Tab Dados Cadastrais-->
+                            <div class="form-group">
+                                @Html.Label("Pedido", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Pedido.Id, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                                @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @*@Html.EditorFor(model => model.Pedido.Status, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @Html.DropDownListFor(model => model.Pedido.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                @Html.Label("Data Emissão", htmlAttributes: new { @class = "col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(model => model.Pedido.InsertDate, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                </div>
 
-                        @*Html.Partial("_addPedido", Model.Pedido)*@
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5" style="align-content:flex-start">
+
+                                    @Html.DropDownListFor(model => model.Pedido.CustomerID, new SelectList(Model.Clientes, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                @Html.Label("Contato", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Pedido.ContactID, new SelectList(Model.Contatos, "Id", "ContatName"), htmlAttributes: new { @class = "selddl col-md-3" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("CFOP", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5" style="align-content:flex-start">
+                                    @Html.DropDownListFor(model => model.Pedido.CFOP, Model.CFOPs, htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                @Html.Label("Vendedor", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Pedido.VendorID, new SelectList(Model.Vendedores, "Id", "Name"), htmlAttributes: new { @class = "selddl col-md-3" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="tabs-2">
+                            <!-- Tab Itens Pedido -->
+                            @*@Html.Partial("_addItensPedido", ViewData)*@
+                            <div class="form-group">
+                                @Html.Label("Produtos", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5" style="align-content:flex-start">
+                                    @Html.DropDownListFor(model => model.Pedido.Comments, new SelectList(Model.Produtos, "Id", "Name"), htmlAttributes: new { @class = "selddl col-md-3" })
+                                </div>
+                                @Html.Label("Quantidade", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.TextBox("txtTexto","", htmlAttributes: new { @class = "datepicker form-control" })
+                                    @*@Html.TextBox("","", htmlAttributes: new { @class = "datepicker form-control" })*@
+                                    
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Preco Unitario", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5" style="align-content:flex-start">
+                                    @Html.TextBox("txtTextoUnitario", "", htmlAttributes: new { @class = "datepicker form-control" })
+                                </div>
+                                @Html.Label("Total", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.TextBox("txtTextoTotal", "", htmlAttributes: new { @class = "datepicker form-control" })
+                                    @*@Html.TextBox("","", htmlAttributes: new { @class = "datepicker form-control" })*@
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-5">
+                                    <input type="submit" value="Gravar" class="btn btn-primary" />
+                                </div>
+                            </div>
+                
+                        </div>
+                    }
+                </div>
+                @Html.ValidationMessageFor(model => model.Pedido.CustomerOrder.CompanyName, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Pedido.InsertDate, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Pedido.CustomerOrder.CompanyName, "", new { @class = "text-danger" })
+
+                <!-- conteudo -->
+                <table class="table table-striped table-bordered table-hover table-heading no-border-bottom">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Company</th>
+                            <th>Product</th>
+                            <th>Homepage</th>
+                            <th>Product description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Oracle</td>
+                            <td>OracleDB</td>
+                            <td>http://oracle.com</td>
+                            <td>SQL server</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>RedHat</td>
+                            <td>RedHat Advanced Server</td>
+                            <td>http://redhat.com</td>
+                            <td>Operation System</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Microsoft</td>
+                            <td>Windows</td>
+                            <td>http://microsoft.com</td>
+                            <td>Operation System</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Apple</td>
+                            <td>MacOSX</td>
+                            <td>http://apple.com</td>
+                            <td>Operation System</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Adobe</td>
+                            <td>Adobe Photoshop</td>
+                            <td>http://adobe.com</td>
+                            <td>Design suite</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Corel</td>
+                            <td>Corel Draw!</td>
+                            <td>http://corel.com</td>
+                            <td>Design suite</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Google</td>
+                            <td>Chrome</td>
+                            <td>http://google.com</td>
+                            <td>Web-browser</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>Mozilla</td>
+                            <td>Firefox</td>
+                            <td>http://mozilla.org</td>
+                            <td>Web-browser</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5">
+                        <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                        <a href='@Url.Action("Clientes", "Cadastro")'>
+                            <i class="btn btn-primary">Histórico</i>
+                        </a>
+                        <a href='@Url.Action("Clientes", "Cadastro")'>
+                            <i class="btn btn-primary">Voltar</i>
+                        </a>
                     </div>
-                    <div id="tabs-2"><!-- Tab Itens Pedido -->
-                        <p>
-                            Firefox OS (project name: Boot to Gecko, also known as B2G) is a Linux-based open-source operating
-                            system for smartphones and tablet computers and is set to be used on smart TVs. It is being developed
-                            by Mozilla, the non-profit organization best known for the Firefox web browser. Firefox OS is
-                            designed to provide a "complete" community-based alternative system for mobile devices, using open
-                            standards and approaches such as HTML5 applications, JavaScript, a robust privilege model, open web
-                            APIs to communicate directly with cellphone hardware, and application marketplace. As such,
-                            it competes with proprietary systems such as Apple's iOS, Google's Chrome OS and Microsoft's Windows
-                            Phone, as well as other open source systems such as Android, Jolla's Sailfish OS and Ubuntu Touch.
-                        </p>
-                        @*Html.Partial("_addItensPedido", Model.Pedido)*@
-                    </div>
-}
                 </div>
             </div>
-            <!-- conteudo -->
-
         </div>
     </div>
 </div><!-- BOX -->
 
 <script type="text/javascript">
-$(document).ready(function() {
+    // Run Select2 on element
+    function Select2Test() {
+      //  $("#Pedido_CustomerID").select2();
+        //  $("#Pedido_ContactID").select2();
+        $(".selddl").select2();
+    }
+
+    $(document).ready(function () {
 	// Load TimePicker plugin and callback all time and date pickers
 	LoadTimePickerScript(AllTimePickers);
 	// Create jQuery-UI tabs
@@ -111,7 +252,28 @@ $(document).ready(function() {
 	$("#accordion").accordion({icons: icons });
 	// Create UI spinner
 	$("#ui-spinner").spinner();
-	// Add Drag-n-Drop to boxes
+    // Add Drag-n-Drop to boxes
+
+    // Load script of Select2 and run this
+	LoadSelect2Script(Select2Test);
+
+	$('.datepicker').datepicker({
+	    setDate: new Date(),
+	    dateFormat: 'dd/mm/yy',
+	    language: 'pt',
+	    dateFormat: 'dd/mm/yy',
+	    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+	    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+	    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+	    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+	    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+	    nextText: 'Próximo',
+	    prevText: 'Anterior'
+	});
+
+	//$("#Pedido_CustomerID").select2();
+	//$("#Pedido_ContactID").select2();
+
 	WinMove();
 });
 </script>
