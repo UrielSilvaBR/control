@@ -16,13 +16,22 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
 
+        [Display(Name = "Número")]
         public Int64 Numero { get; set; }
+
+        [Display(Name = "Série")]
         public string Serie { get; set; }
+
         public decimal Valor { get; set; }
+
+        [Display(Name = "Emissão")]
         public DateTime DataEmissao { get; set; }
 
         public string Status { get; set; }
+
+        [Display(Name = "Criação")]
         public DateTime InsertDate { get; set; }
+
         public DateTime OrderDate { get; set; }
         public DateTime UpdateDate { get; set; }
 

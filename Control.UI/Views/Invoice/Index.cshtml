@@ -2,7 +2,7 @@
 @model IEnumerable<Invoice>
 
 @{
-    ViewBag.Title = "NotasFiscais";
+    ViewBag.Title = "Notas Fiscais Emitidas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -135,16 +135,14 @@ function MakeSelect2(){
 	    //var url = Url.Action("ActionName", "ControllerName")';
 	    var url = '@Url.Action("ActionName", "ControllerName")';
 
-	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Invoice/Cadastrar\"' />");
+	    //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+	    //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
 	});
 }
 $(document).ready(function() {
 	// Load Datatables and run plugin on tables
     LoadDataTablesScripts(AllTables);
-
-
 
 	// Add Drag-n-Drop feature
 	WinMove();
