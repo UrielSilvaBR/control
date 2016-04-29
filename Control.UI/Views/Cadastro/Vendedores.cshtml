@@ -42,60 +42,17 @@
                             <tr>
                                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
                                 <th>
-                                    Cliente
+                                    Codigo
                                 </th>
                                 <th>
-                                    Apelido
+                                    Vendedor
                                 </th>
                                 <th>
-                                    Endereço
-                                </th>
-                                @*<th>
-                                        Número
-                                    </th>*@
-                                <th>
-                                    Bairro
+                                    Comissão %
                                 </th>
                                 <th>
-                                    Cidade
+                                    Ativo
                                 </th>
-                                <th>
-                                    Estado
-                                </th>
-                                <th>
-                                    Cep
-                                </th>
-                                @*<th>
-                                        DDD
-                                    </th>*@
-                                <th>
-                                    Telefone
-                                </th>
-                                @*<th>
-                                        Fax
-                                    </th>*@
-                                <th>
-                                    Email
-                                </th>
-                                @*<th>
-                                        Site
-                                    </th>*@
-                                <th>
-                                    CPF/CNPJ
-                                </th>
-                                @*<th>
-                                        @Html.DisplayNameFor(model => model.Discount)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.CommercialPolicy)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.RegisterDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.LastUpdate)
-                                    </th>*@
-
                             </tr>
                         </thead>
                         <tbody>
@@ -105,70 +62,34 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
-                                                <a href='@Url.Action("ClientesEdit", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("VendedoresEdit", "Cadastro", new { ClientID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("ClienteDelete", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("VendedorDelete", "Cadastro", new { ClientID = item.Id })'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
                                                 </a>
                                             </h4>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CompanyName)
+                                            @Html.DisplayFor(modelItem => item.Id )
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ShortName)
+                                            @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.AddressStreet)  - @Html.DisplayFor(modelItem => item.AddressNumber)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.AddressNumber)
-                                            </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.AddressDistrict)
+                                            @Html.DisplayFor(modelItem => item.PercentCommission)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.AddressCity)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.AddressState)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ZipCode)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.PhoneCode)
-                                            </td>*@
-                                        <td>
-                                            (@Html.DisplayFor(modelItem => item.PhoneCode))
-                                            @Html.DisplayFor(modelItem => item.Phone)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.PhoneFax)
-                                            </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Email)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.Website)
-                                            </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Document)
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.Discount)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.CommercialPolicy)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.RegisterDate)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(modelItem => item.LastUpdate)
-                                            </td>*@
+                                            @if (item.Active)
+                                            {
+                                                @Html.Display("Habilitado");
+                                            }
+                                            else
+                                            {
+                                                @Html.Display("Desabilitado");
+                                            }                                            
+                                        </td>                                      
 
                                     </tr>
                                 }
@@ -184,7 +105,7 @@
 </div>
 <!--    -->
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
@@ -220,7 +141,7 @@
     </tr>
 }
 
-</table>
+</table>*@
 
 <script type="text/javascript">
 // Run Datables plugin and create 3 variants of settings
@@ -236,9 +157,9 @@ function MakeSelect2(){
 	    //var url = Url.Action("ActionName", "ControllerName")';
 	    var url = '@Url.Action("ActionName", "ControllerName")';
 
-	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/VendedoresEdit\"' />");
+	    $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/VendedoresEdit\"' />");
+	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/VendedoresEdit\"' />");
 	});
 }
 $(document).ready(function() {
