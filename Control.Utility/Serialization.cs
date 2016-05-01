@@ -32,7 +32,7 @@ namespace Control.Utility
                 settings.Encoding = Encoding.UTF8;
 
                 //Identar o XML automaticamente
-                settings.Indent = true;
+                settings.Indent = false;
 
                 //Usar o Create do XmlTextWriter para aplicar as configurações no XML
                 XmlWriter writer = XmlTextWriter.Create(stream, settings);
@@ -45,9 +45,8 @@ namespace Control.Utility
                 byte[] arr = new byte[count];
                 stream.Seek(0, SeekOrigin.Begin);
                 stream.Read(arr, 0, count);
-                UTF8Encoding utf = new UTF8Encoding();
+                UTF8Encoding utf = new UTF8Encoding(true);
                 string xml = utf.GetString(arr).Trim();
-                //xml = CleanEmptyTags(xml);
                 xml = RemoveEmptyTags(xml);
                 return xml;
             }
@@ -174,10 +173,11 @@ namespace Control.Utility
 
             StringReader stream = new StringReader(sXSLT);
             XmlReader xmlReaderXslt = new XmlTextReader(stream);
-
+            
             objTransform.Load(xmlReaderXslt, null, null);
 
-            StringWriter objStream = new StringWriter();
+            Utf8StringWriter objStream = new Utf8StringWriter();
+            
             objTransform.Transform(xmlReader, null, objStream);
 
             return objStream.ToString().Replace(@"encoding=""utf-16""?>", @"encoding=""utf-8""?>");

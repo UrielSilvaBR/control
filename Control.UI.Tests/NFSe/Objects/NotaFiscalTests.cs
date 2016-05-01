@@ -98,7 +98,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             #endregion
 
-            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.RazaoSocial = "GT Wave Servicos em Tecnologia da Informacaoo";
+            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.RazaoSocial = "GT Wave Servicos em Tecnologia da Informacao";
 
             #region Endereco
 
@@ -123,9 +123,7 @@ namespace Control.DAL.NFSe.Objects.Tests
             var objXml = Utility.Serialization.Serialize(EnviarLoteRpsEnvio);
 
             var arquivoXml = new XmlDocument();
-            //arquivoXml.LoadXml(Utility.Utilities.RemoverBookMark(objXml));
             arquivoXml.LoadXml(objXml);
-            //Utility.Utilities.RemoveNamespaceAttributes(arquivoXml);
 
             var obj = Utility.Serialization.Deserialize<Model.NFSe.Xml.RecepcionarLoteRps.EnviarLoteRpsEnvio>(arquivoXml.OuterXml);
 
