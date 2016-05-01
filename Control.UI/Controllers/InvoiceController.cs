@@ -33,22 +33,22 @@ namespace Control.UI.Controllers
 
         public ActionResult Cadastrar(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            Invoice.Invoice = new Model.Entities.Invoice();
-            Invoice.InvoiceItems = new List<InvoiceItem>();
-            CarregarListas();
-            Invoice.Clientes = Clientes;
-            Invoice.Produtos = Produtos;
+            //Invoice.Invoice = new Model.Entities.Invoice();
+            //Invoice.InvoiceItems = new List<InvoiceItem>();
+            //CarregarListas();
+            //Invoice.Clientes = Clientes;
+            //Invoice.Produtos = Produtos;
 
             return View(Invoice);
         }
 
         public ActionResult Salvar(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            if(ModelState.IsValid)
-            {
-                if (Invoice.SalvarInvoice())
-                    Invoice.SalvarItens();
-            }
+            //if(ModelState.IsValid)
+            //{
+            //    if (Invoice.SalvarInvoice())
+            //        Invoice.SalvarItens();
+            //}
 
             return View();
         }

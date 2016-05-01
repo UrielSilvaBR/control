@@ -21,7 +21,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             EnviarLoteRpsEnvio.LoteRps.Id = "A101";
             EnviarLoteRpsEnvio.LoteRps.NumeroLote = "101";
-            EnviarLoteRpsEnvio.LoteRps.Cnpj = "15438788000190";
+            EnviarLoteRpsEnvio.LoteRps.Cnpj = "02390435000115";
             EnviarLoteRpsEnvio.LoteRps.InscricaoMunicipal = "1301669";
             EnviarLoteRpsEnvio.LoteRps.QuantidadeRps = "1";
 
@@ -84,7 +84,8 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             #region Prestador
 
-            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02919862000148";
+            //EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02919862000148";
+            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02390435000115";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.InscricaoMunicipal = "1301669";
 
             #endregion
@@ -97,7 +98,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             #endregion
 
-            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.RazaoSocial = "GT Wave Serviços em Tecnologia da Informação";
+            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.RazaoSocial = "GT Wave Servicos em Tecnologia da Informacaoo";
 
             #region Endereco
 
@@ -122,9 +123,9 @@ namespace Control.DAL.NFSe.Objects.Tests
             var objXml = Utility.Serialization.Serialize(EnviarLoteRpsEnvio);
 
             var arquivoXml = new XmlDocument();
-            arquivoXml.LoadXml(Utility.Utilities.RemoverBookMark(objXml));
-
-            Utility.Utilities.RemoveNamespaceAttributes(arquivoXml);
+            //arquivoXml.LoadXml(Utility.Utilities.RemoverBookMark(objXml));
+            arquivoXml.LoadXml(objXml);
+            //Utility.Utilities.RemoveNamespaceAttributes(arquivoXml);
 
             var obj = Utility.Serialization.Deserialize<Model.NFSe.Xml.RecepcionarLoteRps.EnviarLoteRpsEnvio>(arquivoXml.OuterXml);
 
