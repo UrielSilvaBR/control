@@ -25,8 +25,6 @@ namespace Control.DAL.NFSe.Objects.Tests
             EnviarLoteRpsEnvio.LoteRps.InscricaoMunicipal = "1301669";
             EnviarLoteRpsEnvio.LoteRps.QuantidadeRps = "1";
 
-            #endregion
-
             #region ListaRps
 
             #region Rps
@@ -115,6 +113,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             #endregion
 
+            #endregion
 
             #endregion
 
