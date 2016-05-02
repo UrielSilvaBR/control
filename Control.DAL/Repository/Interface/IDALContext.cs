@@ -33,7 +33,11 @@ namespace Control.DAL
         IRepository<Invoice> Invoices { get; }
         IRepository<InvoiceItem> InvoiceItems { get; }
         IRepository<InvoiceTax> InvoiceTaxes { get; }
-        
+
+        IRepository<Company> Companies { get; }
+        IRepository<Branch> Branches { get; }
+        IRepository<InvoiceSerie> InvoiceSeries { get; }
+
         bool Log(int code, string message, string user);
 
     }

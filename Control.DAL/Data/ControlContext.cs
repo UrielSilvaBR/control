@@ -34,6 +34,10 @@ namespace Control.DAL.Data
         public DbSet<MessageLog> Log { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Branch> Branches { get; set; }
+        public DbSet<InvoiceSerie> InvoiceSeries { get; set; }
+
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {

@@ -31,6 +31,9 @@ namespace Control.DAL
         private IRepository<InvoiceItem> _invoiceItems;
         private IRepository<InvoiceTax> _invoiceTaxes;
         private IRepository<MessageLog> _messageLog;
+        private IRepository<Company> _companies;
+        private IRepository<Branch> _branches;
+        private IRepository<InvoiceSerie> _invoiceSeries;
 
         public DALContext()
         {
@@ -218,6 +221,36 @@ namespace Control.DAL
             }
         }
 
+        public IRepository<Company> Companies
+        {
+            get
+            {
+                if (_companies == null)
+                    _companies = new CompanyRepository(dbContext);
+                return _companies;
+            }
+        }
+
+        public IRepository<Branch> Branches
+        {
+            get
+            {
+                if (_branches == null)
+                    _branches = new BranchRepository(dbContext);
+                return _branches;
+            }
+        }
+
+        public IRepository<InvoiceSerie> InvoiceSeries
+        {
+            get
+            {
+                if (_invoiceSeries == null)
+                    _invoiceSeries = new InvoiceSerieRepository(dbContext);
+                return _invoiceSeries;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -310,6 +343,15 @@ namespace Control.DAL
 
             if (_messageLog != null)
                 _messageLog.Dispose();
+
+            if (_companies != null)
+                _companies.Dispose();
+
+            if (_branches != null)
+                _branches.Dispose();
+
+            if (_invoiceSeries != null)
+                _invoiceSeries.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();

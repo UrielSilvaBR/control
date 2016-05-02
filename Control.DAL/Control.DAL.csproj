@@ -104,6 +104,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\BranchRepository.cs" />
+    <Compile Include="Repository\CompanyRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
     <Compile Include="Repository\CustomerRepository.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Repository\Interface\IUnitOfWork.cs" />
     <Compile Include="Repository\InvoiceItemRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
+    <Compile Include="Repository\InvoiceSerieRepository.cs" />
     <Compile Include="Repository\InvoiceTaxRepository.cs" />
     <Compile Include="Repository\MessageLogRepository.cs" />
     <Compile Include="Repository\OrderProductRepository.cs" />

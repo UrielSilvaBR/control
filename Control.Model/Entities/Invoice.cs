@@ -19,8 +19,17 @@ namespace Control.Model.Entities
         [Display(Name = "Número")]
         public Int64 Numero { get; set; }
 
+        public int InvoiceSerieID { get; set; }
+        
+        [ForeignKey("Id")]
+        public virtual InvoiceSerie Serie { get; set; }
+
+        [NotMapped]
         [Display(Name = "Série")]
-        public string Serie { get; set; }
+        public string SerieNota
+        {
+            get { return Serie.Descricao; }
+        }
 
         public decimal Valor { get; set; }
 
