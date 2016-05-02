@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,25 +13,24 @@ namespace Control.Model.Entities
     [DataContract]
     public class Invoice : IEntity
     {
+        public Invoice()
+        {
+            InsertDate = DateTime.Now;
+        }
+
         [Key]
         [DataMember]
         public int Id { get; set; }
 
+        [Required(ErrorMessage ="Número da Nota Fiscal é obrigatório!")]
         [Display(Name = "Número")]
         public Int64 Numero { get; set; }
 
         public int InvoiceSerieID { get; set; }
-        
-        [ForeignKey("Id")]
+        [ForeignKey("InvoiceSerieID")]
         public virtual InvoiceSerie Serie { get; set; }
 
-        [NotMapped]
-        [Display(Name = "Série")]
-        public string SerieNota
-        {
-            get { return Serie.Descricao; }
-        }
-
+        [Required(ErrorMessage = "O valor da Nota Fiscal é obrigatório!")]
         public decimal Valor { get; set; }
 
         [Display(Name = "Emissão")]
@@ -41,8 +41,8 @@ namespace Control.Model.Entities
         [Display(Name = "Criação")]
         public DateTime InsertDate { get; set; }
 
-        public DateTime OrderDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
 
         ////Forgein Keys
         public int? CustomerID { get; set; }

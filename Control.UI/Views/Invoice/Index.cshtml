@@ -6,6 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
@@ -73,24 +79,31 @@
                                 {
                                     <tr>
                                         <td>
-                                            <h4 style="color:red">
-                                                <a href='@Url.Action("GerarNotaFiscal", "Invoice", new { InvoiceID = item.Id })'>
+                                            <h4 style="color:red;    margin-left: 35px;">
+                                                <a href='@Url.Action("InvoiceEdit", "Invoice", new { InvoiceID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                @*<a href='@Url.Action("ClienteDelete", "Invoice", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("InvoiceDelete", "Invoice", new { InvoiceID = item.Id } )'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
-                                                </a>*@
+                                                </a>
+                                                <a href='@Url.Action("ConsultarNFSe", "Invoice", new { InvoiceID = item.Id })'>
+                                                    <i class="fa fa-check color5"></i>
+                                                </a>
+
                                             </h4>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Numero)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Serie)
+                                            @Html.DisplayFor(modelItem => item.Serie.Descricao)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Valor)
+                                            @{ 
+                                                string valor = item.Valor.ToString("C");
+                                            }
+                                            @Html.DisplayFor(modelItem => valor)
                                         </td>
                                         @*<td>
                                                 @Html.DisplayFor(modelItem => item.AddressNumber)
@@ -99,13 +112,14 @@
                                             @Html.DisplayFor(modelItem => item.Status)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.DataEmissao)
+                                            @{ string dataEmissao = item.DataEmissao.ToShortDateString(); }
+                                            @Html.DisplayFor(modelItem => dataEmissao)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.InsertDate)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerInvoice.ShortName)
+                                            @Html.DisplayFor(modelItem => item.CustomerInvoice.CompanyName)
                                         </td>
                                     </tr>
                                 }

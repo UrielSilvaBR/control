@@ -23,10 +23,10 @@ namespace Control.Model.Entities
         public decimal UnitPrice { get; set; }
         public decimal ItemDiscount { get; set; }
         public string Comments { get; set; }
-        public string TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         //Forgein Keys
-        public int? ProductID { get; set; }
+        public int ProductID { get; set; }
         [ForeignKey("ProductID")]
         public virtual Product ProductItem { get; set; }
     }

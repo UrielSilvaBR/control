@@ -11,9 +11,6 @@ namespace Control.UI.Controllers
     public class InvoiceController : Controller
     {
         private IDALContext context;
-        //listas preenchimento
-        public List<Product> Produtos { get; set; }
-        public List<Customer> Clientes { get; set; }
 
         public ActionResult Index()
         {
@@ -31,40 +28,66 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
-        public ActionResult Cadastrar(Control.UI.Models.InvoiceViewModel Invoice)
+        public ActionResult InvoiceCreate(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            //Invoice.Invoice = new Model.Entities.Invoice();
-            //Invoice.InvoiceItems = new List<InvoiceItem>();
-            //CarregarListas();
-            //Invoice.Clientes = Clientes;
-            //Invoice.Produtos = Produtos;
-
-            return View(Invoice);
+            return View("Cadastrar", Invoice);
         }
 
-        public ActionResult Salvar(Control.UI.Models.InvoiceViewModel Invoice)
+        public ActionResult InvoiceEdit(int InvoiceID)
         {
-            //if(ModelState.IsValid)
-            //{
-            //    if (Invoice.SalvarInvoice())
-            //        Invoice.SalvarItens();
-            //}
+            var model = new Control.UI.Models.InvoiceViewModel();
+            context = new DALContext();
+            Invoice retorno = new Invoice();
+            try
+            {
+                retorno = context.Invoices.Find(p => p.Id == InvoiceID);
+                model.Invoice = retorno;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-            return View();
+            return View("Cadastrar", model);
         }
 
-        private void CarregarListas()
+        [HttpPost]
+        public ActionResult InvoiceSave(Model.Entities.Invoice Invoice)
+        {
+            var model = new Models.InvoiceViewModel();
+
+            if (ModelState.IsValid)
+            {
+                Invoice.Status = "GERADA";
+                Invoice.Items = new List<InvoiceItem>();
+                Invoice.Items.Add(new InvoiceItem() { ProductID = 2, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400 });
+
+                context = new DALContext();
+                context.Invoices.Create(Invoice);
+                if (context.SaveChanges() > 0)
+                {
+                    model.Invoice = Invoice;
+                    model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == Invoice.CustomerID).FirstOrDefault();
+                    return View("Cadastrar", model);
+                }
+            }
+
+            return View("Cadastrar", model);
+        }
+
+        public ActionResult InvoiceDelete(int InvoiceID)
         {
             context = new DALContext();
-            Produtos = context.Products.All().ToList();
-            Clientes = context.Customers.All().ToList();
+            context.Invoices.Delete(p => p.Id == InvoiceID);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
+        [HttpPost]
         public ActionResult GerarNotaFiscal(int InvoiceID)
         {
-
-
-            return View();
+            return View("Index");
         }
     }
 }
