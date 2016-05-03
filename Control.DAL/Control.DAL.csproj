@@ -92,9 +92,13 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201604291337208_InitialCreate.cs" />
-    <Compile Include="Migrations\201604291337208_InitialCreate.Designer.cs">
-      <DependentUpon>201604291337208_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201605030227487_update02.cs" />
+    <Compile Include="Migrations\201605030227487_update02.Designer.cs">
+      <DependentUpon>201605030227487_update02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605030444174_publish02.cs" />
+    <Compile Include="Migrations\201605030444174_publish02.Designer.cs">
+      <DependentUpon>201605030444174_publish02.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -178,8 +182,11 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604291337208_InitialCreate.resx">
-      <DependentUpon>201604291337208_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605030227487_update02.resx">
+      <DependentUpon>201605030227487_update02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605030444174_publish02.resx">
+      <DependentUpon>201605030444174_publish02.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

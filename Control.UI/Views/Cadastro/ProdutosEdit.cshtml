@@ -77,8 +77,10 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.Label("Medida Unid.", htmlAttributes: new { @class = "control-label col-md-1" })
-                        @Html.Label("Medida Unid.", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.Label(string.Format(@"Unidade Medida"), htmlAttributes: new { @class = "control-label col-md-2" })
+                            
+                        </div>
                         <div class="col-md-2">
                             @Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })

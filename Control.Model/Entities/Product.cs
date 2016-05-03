@@ -15,7 +15,7 @@ namespace Control.Model.Entities
         [Key]
         [DataMember]
         public int Id { get; set; }
-        public int ProductCode { get; set; }
+        public int? ProductCode { get; set; }
         public string Name { get; set; }
         [DataMember]
         public string Brand { get; set; }
@@ -27,19 +27,19 @@ namespace Control.Model.Entities
         public string Width { get; set; } //Largura
         public string Lenght { get; set; } //Comprimento
 
-        public decimal Weight { get; set; }
+        public decimal? Weight { get; set; }
 
-        public decimal UnitPrice { get; set; }
-        public decimal CostPrice { get; set; }
-        public decimal AliqICMS { get; set; }
+        public decimal? UnitPrice { get; set; }
+        public decimal? CostPrice { get; set; }
+        public decimal? AliqICMS { get; set; }
 
-        public decimal MinimumStockAlert { get; set; }
+        public decimal? MinimumStockAlert { get; set; }
         public string ImageURL { get; set; }
         /// <summary>
         /// Indica se é um produto combinado, que possui outros produtos do estoque em sua composição
         /// </summary>
         /// 
-        public bool CombinedProduct { get; set; }
+        public bool? CombinedProduct { get; set; }
 
         //Forgein Keys
         public int? TypeUnitID { get; set; }

@@ -424,24 +424,24 @@ namespace Control.UI.Controllers
             return RedirectToAction("Produtos");
         }
 
-        public ActionResult ProdutosSave(Product model)
+        public ActionResult ProdutosSave(Product prod)
         {
             context = new DALContext();
 
             try
             {
-                model.AliqICMS = 3;
-                model.CombinedProduct = false;
-                model.MinimumStockAlert = 50;
-                model.TypeUnitID = 1;
+                prod.AliqICMS = 3;
+                prod.CombinedProduct = false;
+                prod.MinimumStockAlert = 50;
+                prod.TypeUnitID = 1;
                 
-                if (model.Id > 0)
+                if (prod.Id > 0)
                 {
-                    context.Products.Update(model);
+                    context.Products.Update(prod);
                 }
                 else
                 {
-                    context.Products.Create(model);
+                    context.Products.Create(prod);
                 }
                 context.SaveChanges();
             }
