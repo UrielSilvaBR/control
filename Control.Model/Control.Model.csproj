@@ -66,6 +66,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Invoice.cs" />
     <Compile Include="Entities\InvoiceItem.cs" />
+    <Compile Include="Entities\InvoiceRps.cs" />
     <Compile Include="Entities\InvoiceSerie.cs" />
     <Compile Include="Entities\InvoiceTax.cs" />
     <Compile Include="Entities\MessageLog.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRoles.cs" />
     <Compile Include="Entities\Vendor.cs" />
+    <Compile Include="Enums\Enumerations.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\CpfCnpj.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\Endereco.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\EnviarLoteRpsEnvio.cs" />

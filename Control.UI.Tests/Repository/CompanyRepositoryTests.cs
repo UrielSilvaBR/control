@@ -17,31 +17,36 @@ namespace Control.DAL.Repository.Tests
         public void CompanyRepositoryTest()
         {
 
-            //context = new DALContext();
-            //context.Companies.Create(new Model.Entities.Company() { RazaoSocial = "N.C.C. EQUIPAMENTOS INDUSTRIAIS" });
-            //context.SaveChanges();
+            context = new DALContext();
+            context.Companies.Create(new Model.Entities.Company() { RazaoSocial = "N.C.C. EQUIPAMENTOS INDUSTRIAIS" });
+            context.SaveChanges();
 
-            //context = new DALContext();
-            //context.Branches.Create(new Model.Entities.Branch() { CompanyID = 1, RazaoSocial = "N.C.C. 1701 EQUIPAMENTOS INDUSTRIAIS EIRELI - EPP",
-            //    Fantasia = "N.C.C. 1701 EQUIPAMENTOS INDUSTRIAIS",
-            //    InscricaoEstadual = 633394857111,
-            //    InscricaoMunicipal = 1234556,
-            //    CNPJ = 02919862000148
-            //});
-            //context.SaveChanges();
+            context = new DALContext();
+            context.Branches.Create(new Model.Entities.Branch()
+            {
+                CompanyID = 1,
+                RazaoSocial = "N.C.C. 1701 EQUIPAMENTOS INDUSTRIAIS EIRELI - EPP",
+                Fantasia = "N.C.C. 1701 EQUIPAMENTOS INDUSTRIAIS",
+                InscricaoEstadual = 633394857111,
+                InscricaoMunicipal = 1234556,
+                CNPJ = 02919862000148
+            });
+            context.SaveChanges();
 
-            //context = new DALContext();
-            //context.InvoiceSeries.Create(new Model.Entities.InvoiceSerie() { Descricao = "NFSE" });
-            //context.SaveChanges();
+            context = new DALContext();
+            context.InvoiceSeries.Create(new Model.Entities.InvoiceSerie() { Descricao = "NFSE" });
+            context.SaveChanges();
+
+            context = new DALContext();
+            context.TypesUnities.Create(new Model.Entities.TypeUnit() { Description = "PEÇA", Sign = "PÇ" });
+            context.SaveChanges();
+
 
             context = new DALContext();
             context.Products.Create(new Model.Entities.Product() { Name = "PLAYSTATION 4", UnitPrice = 1400, Description = "VIDEO GAME", ProductCode = 1, TypeUnitID = 1 });
             context.SaveChanges();
 
-            //context = new DALContext();
-            //context.TypesUnities.Create(new Model.Entities.TypeUnit() { Description = "PEÇA", Sign= "PÇ" });
-            //context.SaveChanges();
-
+           
 
             Assert.Fail();
         }

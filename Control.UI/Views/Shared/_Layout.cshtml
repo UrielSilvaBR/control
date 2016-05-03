@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Control.Model.Entities
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -26,11 +27,10 @@
             <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
     <![endif]-->
     <!-- Includes Layout - Fim-->
-
     <!-- Includes Layout - Inicio-->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!--<script src="http://code.jquery.com/jquery.js"></script>-->
-    
+
     <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/plugins/bootstrap/bootstrap.min.js"></script>
@@ -40,11 +40,67 @@
     <!-- All functions for this theme + document.ready processing -->
     <script src="/js/devoops.js"></script>
     <!-- Includes Layout - Fim -->
-
-
-
 </head>
 <body>
+
+    @Html.Partial("_AddInvoiceItem", new InvoiceItem())
+
+    <!-- Box de Mensagens de Alertas e Erros -->
+    <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    <h3>Atenção!</h3>
+                    <p>&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-sucesso" tabindex="-1" role="dialog" aria-labelledby="myModalSucessoLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalSucessoLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body">
+                    <p>&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Box de Confirmações -->
+    <div class="modal fade" id="modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalConfirmacoesLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalConfirmacoesLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    <h3>Atenção!</h3>
+                    <p>&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnConfirmNo" type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Não</button>
+                    <button id="btnConfirmYes" type="button" class="btn btn-primary btn-confirmar">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--Header Begin -->
     <!--Start Header-->
     <div id="screensaver">
@@ -69,24 +125,24 @@
             </div>
 
             <!--
-                
-            <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })
+
+                    <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-                --->
+                        --->
         </div>
     </div>
     <header class="navbar">
@@ -109,15 +165,14 @@
                         <div id="dvLoggedUser">
 
                             @Html.Partial("~/Views/Account/LoggedUserPartial.cshtml")
-                           
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>    
+    </header>
     <!--Header End -->
-
     <!--
                            Movimento Financeiro: Últimos lançamentos
                            Contas a Pagar/Receber
@@ -127,15 +182,13 @@
                            Agrupar pedidos e solicitações por Projeto
                            Visualizar Projetos
                            -->
-
-
     <!--Start Container-->
     <div id="main" class="container-fluid">
         <div class="row">
             <div id="sidebar-left" class="col-xs-2 col-sm-2">
                 <ul class="nav main-menu">
                     <li>
-                        <a href="@Url.Action("Index", "Painel")" >
+                        <a href="@Url.Action("Index", "Painel")">
                             <i class="fa fa-dashboard"></i>
                             <span class="hidden-xs">Painel</span>
                         </a>
@@ -166,10 +219,10 @@
                             <li>@Html.ActionLink("Pedido de Compras", "PedidoCompras", "Compras")</li>
                             <li>@Html.ActionLink("Conferência e Recebimento de Mercadorias", "Recebimento", "Compras")</li>
                             <li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>
-                            <li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>                            
+                            <li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>
                             <li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>
                             <li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>
-                            <li>@Html.ActionLink("Listagem de Pedidos", "ListaPedidos", "Compras")</li>                            
+                            <li>@Html.ActionLink("Listagem de Pedidos", "ListaPedidos", "Compras")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -180,7 +233,7 @@
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Cadastro de Movimentação Estoque", "MovimentacaoEstoque", "Estoque")</li>
                             <li>@Html.ActionLink("Importação de produtos de NFe Entrada", "ImportacaoNFE", "Estoque")</li>
-                            <li>@Html.ActionLink("Baixa de Produtos (RMA, Perda, Defeito, Composição)", "BaixaProdutos", "Estoque")</li>                            
+                            <li>@Html.ActionLink("Baixa de Produtos (RMA, Perda, Defeito, Composição)", "BaixaProdutos", "Estoque")</li>
                             <li>@Html.ActionLink("Inventário de Produtos", "Inventario Produtos", "Estoque")</li>
                             <li>@Html.ActionLink("Consulta Estoque", "ConsultaEstoque", "Estoque")</li>
                         </ul>
@@ -205,7 +258,7 @@
                             <span class="hidden-xs">Faturamento</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Controle e Emissão de Notas Fiscais", "InvoiceCreate", "Invoice")</li>
+                            <li>@Html.ActionLink("Controle e Emissão de Notas Fiscais", "Create", "Invoice")</li>
                             <li>@Html.ActionLink("Integração SEFAZ (Secretária da Fazenda): Inclusão e Cancelamento de NF", "", "Financeiro")</li>
                             <li>@Html.ActionLink("Emissão de DANFE", "", "Financeiro")</li>
                             <li>@Html.ActionLink("Notas Fiscais Emitidas", "Index", "Invoice")</li>
@@ -235,59 +288,59 @@
             <!--Start Content-->
             <div id="content" class="col-xs-12 col-sm-10">
                 @*<div class="preloader">
-                    <img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader" />
-                </div>*@
+                        <img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader" />
+                    </div>*@
                 @RenderBody()
                 @*<div id="ajax-content">
-                    
-                </div>*@
+
+                    </div>*@
                 @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
             </div>
             <!--End Content-->
         </div>
     </div>
     <!--End Container-->
-       
+
 
 
 
     <script type="text/javascript">
 
-    function atualizardefinicao() {
-        $.ajax(
-        {
-            type: 'get',
-            url: '/account/loggeduserpartial',
-            datatype: 'html',
-            cache: false,
-            async: true,
-            success: function (data) {
-                $('#dvloggeduser').html(data);
-            }
+        function atualizardefinicao() {
+            $.ajax(
+            {
+                type: 'get',
+                url: '/account/loggeduserpartial',
+                datatype: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#dvloggeduser').html(data);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            //setInterval(atualizarDefinicao, 30000);
+            WinMove();
+
+            //$('#datatable-1').DataTable({
+            //    "language": {
+            //        "lengthMenu": "Display _MENU_ records per page",
+            //        "zeroRecords": "Nothing found - sorry",
+            //        "info": "Showing page _PAGE_ of _PAGES_",
+            //        "infoEmpty": "No records available",
+            //        "infoFiltered": "(filtered from _MAX_ total records)"
+            //    }
+            //});
+
+            //$('#datatable-1_wrapper').DataTable({
+            //    "scrollY": 200,
+            //    "scrollX": 200
+            //});
+
         });
-    }
 
-    $(document).ready(function () {
-        //setInterval(atualizarDefinicao, 30000);
-        WinMove();
-
-        //$('#datatable-1').DataTable({
-        //    "language": {
-        //        "lengthMenu": "Display _MENU_ records per page",
-        //        "zeroRecords": "Nothing found - sorry",
-        //        "info": "Showing page _PAGE_ of _PAGES_",
-        //        "infoEmpty": "No records available",
-        //        "infoFiltered": "(filtered from _MAX_ total records)"
-        //    }
-        //});
-
-        //$('#datatable-1_wrapper').DataTable({
-        //    "scrollY": 200,
-        //    "scrollX": 200
-        //});
-
-    });
-   
     </script>
 
 
@@ -295,4 +348,3 @@
 
 </body>
 </html>
-

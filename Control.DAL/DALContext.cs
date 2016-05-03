@@ -34,6 +34,7 @@ namespace Control.DAL
         private IRepository<Company> _companies;
         private IRepository<Branch> _branches;
         private IRepository<InvoiceSerie> _invoiceSeries;
+        private IRepository<InvoiceRps> _invoiceRps;
 
         public DALContext()
         {
@@ -251,6 +252,16 @@ namespace Control.DAL
             }
         }
 
+        public IRepository<InvoiceRps> InvoiceRps
+        {
+            get
+            {
+                if (_invoiceRps == null)
+                    _invoiceRps = new InvoiceRpsRepository(dbContext);
+                return _invoiceRps;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -352,6 +363,9 @@ namespace Control.DAL
 
             if (_invoiceSeries != null)
                 _invoiceSeries.Dispose();
+
+            if (_invoiceRps != null)
+                _invoiceRps.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();

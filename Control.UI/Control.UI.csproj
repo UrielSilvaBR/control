@@ -209,6 +209,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\good_or_tick.png" />
+    <Content Include="Content\img\message-success.png" />
+    <Content Include="Content\Invoice\Invoice.js" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -677,6 +679,7 @@
     <Content Include="Views\Cadastro\ContatosEdit.cshtml" />
     <Content Include="Views\Cadastro\ProdutosEdit.cshtml" />
     <Content Include="Views\Invoice\Cadastrar.cshtml" />
+    <Content Include="Views\Invoice\_AddInvoiceItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -695,6 +698,10 @@
     <ProjectReference Include="..\Control.Model\Control.Model.csproj">
       <Project>{ed1d97b4-bb0e-47d6-bfb7-1fdefb4a899c}</Project>
       <Name>Control.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Control.Utility\Control.Utility.csproj">
+      <Project>{53eae4ef-78e0-4bd1-82eb-87069122a25c}</Project>
+      <Name>Control.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -37,6 +37,7 @@ namespace Control.DAL
         IRepository<Company> Companies { get; }
         IRepository<Branch> Branches { get; }
         IRepository<InvoiceSerie> InvoiceSeries { get; }
+        IRepository<InvoiceRps> InvoiceRps { get; }
 
         bool Log(int code, string message, string user);
 

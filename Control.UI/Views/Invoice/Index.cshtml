@@ -1,4 +1,6 @@
 ﻿@using Control.Model.Entities
+@using Control.Model.Enums
+@using Control.Utility
 @model IEnumerable<Invoice>
 
 @{
@@ -80,10 +82,10 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red;    margin-left: 35px;">
-                                                <a href='@Url.Action("InvoiceEdit", "Invoice", new { InvoiceID = item.Id })'>
+                                                <a href='@Url.Action("Edit", "Invoice", new { InvoiceID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("InvoiceDelete", "Invoice", new { InvoiceID = item.Id } )'>
+                                                <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id } )'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
                                                 </a>
@@ -100,16 +102,16 @@
                                             @Html.DisplayFor(modelItem => item.Serie.Descricao)
                                         </td>
                                         <td>
-                                            @{ 
+                                            @{
                                                 string valor = item.Valor.ToString("C");
                                             }
                                             @Html.DisplayFor(modelItem => valor)
                                         </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.AddressNumber)
-                                            </td>*@
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Status)
+                                            @{
+                                                string status = Utilities.EnumToList<StatusInvoice>().Where(p => Utilities.GetValueFromDescription<StatusInvoice>(p.GetDescription()) == item.Status).Select(p => p.GetDescription()).FirstOrDefault();
+                                            }
+                                            @Html.DisplayFor(modelItem => status)
                                         </td>
                                         <td>
                                             @{ string dataEmissao = item.DataEmissao.ToShortDateString(); }
@@ -122,11 +124,10 @@
                                             @Html.DisplayFor(modelItem => item.CustomerInvoice.CompanyName)
                                         </td>
                                     </tr>
-                                }
-                            }
+                                                    }
+                                                }
 
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -136,29 +137,29 @@
 <!--    -->
 
 <script type="text/javascript">
-// Run Datables plugin and create 3 variants of settings
-function AllTables(){
-	TestTable1();
-	LoadSelect2Script(MakeSelect2);
-}
-function MakeSelect2(){
-	$('select').select2();
-	$('.dataTables_filter').each(function(){
-	    $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+    // Run Datables plugin and create 3 variants of settings
+    function AllTables() {
+        TestTable1();
+        LoadSelect2Script(MakeSelect2);
+    }
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
 
-	    //var url = Url.Action("ActionName", "ControllerName")';
-	    var url = '@Url.Action("ActionName", "ControllerName")';
+            //var url = Url.Action("ActionName", "ControllerName")';
+            var url = '@Url.Action("ActionName", "ControllerName")';
 
-	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Invoice/Cadastrar\"' />");
-	    //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	});
-}
-$(document).ready(function() {
-	// Load Datatables and run plugin on tables
-    LoadDataTablesScripts(AllTables);
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Invoice/Create\"' />");
+            //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+        });
+    }
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
 
-	// Add Drag-n-Drop feature
-	WinMove();
-});
+        // Add Drag-n-Drop feature
+        WinMove();
+    });
 </script>

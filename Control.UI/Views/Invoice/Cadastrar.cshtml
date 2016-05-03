@@ -7,11 +7,31 @@
 }
 
 <head>
+
     <script src="~/plugins/datatables/jquery.dataTables.js"></script>
-    <script src="~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
     <script src="~/plugins/datatables/TableTools.js"></script>
     <script src="~/plugins/datatables/TableTools_orig.js"></script>
     <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/Content/Invoice/Invoice.js"></script>
+
+    <style type="text/css">
+        .form-horizontal .form-group {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        #modal-sucesso .modal-body {
+            min-height: 90px;
+            color: #074981;
+            padding: 49px 50px 0px 185px;
+            background: url('../../Content/img/message-success.png') no-repeat 35px 30px;
+            font-size: 18px;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+
 </head>
 
 <div class="row">
@@ -48,12 +68,12 @@
             <!-- conteudo -->
             <div class="box-content">
                 <div id="tabs">
-                    @using (Html.BeginForm("InvoiceSave", "Invoice", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
+                    new AjaxOptions { OnSuccess = "FinalizarInclusaoNotaFiscal(data)", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         <ul>
-                            <li><a href="#tabs-1">Dados Cadastrais</a></li>
-                            @*<li><a href="#tabs-2">Produtos</a></li>*@
+                            <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
 
                         <div id="tabs-1">
@@ -93,14 +113,10 @@
                             </div>
 
                         </div>
-                        <div id="tabs-2">
-                            <!-- Tab Itens Pedido -->
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
                         </div>
-                        <div class="add_delete_toolbar" />
-
-                    <!-- conteudo -->
                         <div id="table_wrapperz">
-
                             <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensNotaFiscal">
                                 <thead>
                                     <tr>
@@ -112,7 +128,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @if (Model.Invoice.Items.Count > 0)
                                     {
                                         foreach (var item in Model.Invoice.Items)
@@ -123,35 +138,26 @@
                                                 <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
                                                 <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
-
                                             </tr>
                                         }
                                     }
                                 </tbody>
                             </table>
-
                         </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-5">
-                                        <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" />
-                                    </div>
-                                </div>
-                    }
-                    @*<div class="form-group">
-                        <div class="col-md-offset-5">
-                            @*<input type="submit" value="Cadastrar" class="btn btn-primary" />*@
-                    @*<a href='@Url.Action("Cadastrar", "Invoice")'>
-                            <i class="btn btn-primary">Histórico</i>
-                        </a>*@
-                    @*<a href='@Url.Action("Clientes", "Cadastro")'>
-                                        <i class="btn btn-primary">Voltar</i>
-                                    </a>
+                        <div class="form-group">
+                            <div class="col-md-offset-5">
+                                @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
+                                <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" />
+                                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
                             </div>
-                        </div>*@
+                        </div>
+                    }
                 </div>
             </div>
         </div>
+
     </div>
 </div><!-- BOX -->
 
@@ -163,11 +169,23 @@
         $(".selddl").select2();
     }
 
+    var editor;
+
     $(document).ready(function () {
         // Load TimePicker plugin and callback all time and date pickers
         LoadTimePickerScript(AllTimePickers);
         // Create jQuery-UI tabs
         $("#tabs").tabs();
+        $("#btnAvancar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active + 1);
+        });
+
+        $("#btnVoltar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active - 1);
+        });
+
         // Sortable for elements
         $(".sort").sortable({
             items: "div.col-sm-2",
@@ -212,24 +230,32 @@
 
         WinMove();
 
-        $('#gdvItensNotaFiscal').dataTable();
+        $('#btnAddItemNotaFiscal').click(function () {
+
+        })
+
+        $(window).on('shown.bs.modal', function () {
+            //$('.modal-backdrop').removeClass();
+        })
+
+        $('#gdvItensNotaFiscal').DataTable({});
 
         $('#gdvItensNotaFiscal_filter').hide();
         $('#gdvItensNotaFiscal_info').hide();
         $('#gdvItensNotaFiscal_length').hide();
+
+        function fnClickAddRow() {
+
+            $('#gdvItensNotaFiscal').dataTable().fnAddData([
+                "1",
+                ".1",
+                ".2",
+                ".3",
+                ".4"]);
+
+            $('#gdvItensNotaFiscal_filter').hide();
+            $('#gdvItensNotaFiscal_info').hide();
+            $('#gdvItensNotaFiscal_length').hide();
+        }
     });
-
-    function fnClickAddRow() {
-
-        $('#gdvItensNotaFiscal').dataTable().fnAddData([
-            "1",
-            ".1",
-            ".2",
-            ".3",
-            ".4"]);
-
-        $('#gdvItensNotaFiscal_filter').hide();
-        $('#gdvItensNotaFiscal_info').hide();
-        $('#gdvItensNotaFiscal_length').hide();
-    }
 </script>

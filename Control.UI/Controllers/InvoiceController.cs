@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using Control.Model.Entities;
 using Control.DAL;
+using Control.Utility;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace Control.UI.Controllers
 {
@@ -28,12 +31,12 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
-        public ActionResult InvoiceCreate(Control.UI.Models.InvoiceViewModel Invoice)
+        public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
             return View("Cadastrar", Invoice);
         }
 
-        public ActionResult InvoiceEdit(int InvoiceID)
+        public ActionResult Edit(int InvoiceID)
         {
             var model = new Control.UI.Models.InvoiceViewModel();
             context = new DALContext();
@@ -52,30 +55,48 @@ namespace Control.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult InvoiceSave(Model.Entities.Invoice Invoice)
+        public ActionResult Save(Model.Entities.Invoice Invoice)
         {
             var model = new Models.InvoiceViewModel();
 
-            if (ModelState.IsValid)
+            try
             {
-                Invoice.Status = "GERADA";
-                Invoice.Items = new List<InvoiceItem>();
-                Invoice.Items.Add(new InvoiceItem() { ProductID = 2, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400 });
-
-                context = new DALContext();
-                context.Invoices.Create(Invoice);
-                if (context.SaveChanges() > 0)
+                if (ModelState.IsValid)
                 {
-                    model.Invoice = Invoice;
-                    model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == Invoice.CustomerID).FirstOrDefault();
-                    return View("Cadastrar", model);
+                    Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
+                    Invoice.Items = new List<InvoiceItem>();
+                    Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
+                    Invoice.Taxes = new List<InvoiceTax>();
+                    Invoice.Taxes.Add(new InvoiceTax() { ValorIss = Invoice.Valor * 0.03M });
+
+                    context = new DALContext();
+                    context.Invoices.Create(Invoice);
+                    if (context.SaveChanges() > 0)
+                    {
+                        model.Invoice = Invoice;
+                        model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == Invoice.CustomerID).FirstOrDefault();
+                        return Content(String.Format("Nota Fiscal {0} incluída com Sucesso!", Invoice.Numero));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
             }
 
             return View("Cadastrar", model);
         }
 
-        public ActionResult InvoiceDelete(int InvoiceID)
+        public JsonResult Teste(Model.Entities.InvoiceItem Item)
+        {
+            Item = new InvoiceItem();
+            Item.Id = 1;
+            string itemJson = JsonConvert.SerializeObject(Item);
+
+            return Json(itemJson);
+        }
+
+        public ActionResult Delete(int InvoiceID)
         {
             context = new DALContext();
             context.Invoices.Delete(p => p.Id == InvoiceID);

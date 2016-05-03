@@ -37,6 +37,7 @@ namespace Control.DAL.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<Branch> Branches { get; set; }
         public DbSet<InvoiceSerie> InvoiceSeries { get; set; }
+        public DbSet<InvoiceRps> InvoiceRps { get; set; }
 
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)

@@ -92,14 +92,6 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201605030227487_update02.cs" />
-    <Compile Include="Migrations\201605030227487_update02.Designer.cs">
-      <DependentUpon>201605030227487_update02.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605030444174_publish02.cs" />
-    <Compile Include="Migrations\201605030444174_publish02.Designer.cs">
-      <DependentUpon>201605030444174_publish02.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +110,7 @@
     <Compile Include="Repository\Interface\IUnitOfWork.cs" />
     <Compile Include="Repository\InvoiceItemRepository.cs" />
     <Compile Include="Repository\InvoiceRepository.cs" />
+    <Compile Include="Repository\InvoiceRpsRepository.cs" />
     <Compile Include="Repository\InvoiceSerieRepository.cs" />
     <Compile Include="Repository\InvoiceTaxRepository.cs" />
     <Compile Include="Repository\MessageLogRepository.cs" />
@@ -180,14 +173,6 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605030227487_update02.resx">
-      <DependentUpon>201605030227487_update02.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605030444174_publish02.resx">
-      <DependentUpon>201605030444174_publish02.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

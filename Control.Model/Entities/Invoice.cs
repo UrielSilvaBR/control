@@ -36,7 +36,7 @@ namespace Control.Model.Entities
         [Display(Name = "Emissão")]
         public DateTime DataEmissao { get; set; }
 
-        public string Status { get; set; }
+        public int Status { get; set; }
 
         [Display(Name = "Criação")]
         public DateTime InsertDate { get; set; }
