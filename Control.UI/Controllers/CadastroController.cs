@@ -133,6 +133,13 @@ namespace Control.UI.Controllers
             Contact model = new Contact();
             context = new DALContext();
 
+            var listaClientes = context.Customers.All().ToList();
+            ViewBag.ListaClientes = listaClientes;
+
+            var listaVendedores = context.Vendors.All().ToList();
+            ViewBag.ListaVendedores = listaVendedores;
+            
+
             if (ContatoID > 0)
             {
                 model = context.Contacts.Find(p => p.Id == ContatoID);

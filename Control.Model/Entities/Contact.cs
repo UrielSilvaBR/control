@@ -31,5 +31,11 @@ namespace Control.Model.Entities
         public int? ZipCode { get; set; }
         public DateTime? RegisterDate { get; set; }
         public DateTime? LastUpdate { get; set; }
+
+        [ForeignKey("VendorID")]
+        public virtual Vendor ContactVendor { get; set; }
+
+        [ForeignKey("CustomerID")]
+        public virtual Customer ContactCustomer { get; set; }
     }
 }

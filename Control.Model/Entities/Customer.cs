@@ -29,8 +29,8 @@ namespace Control.Model.Entities
         public string Email { get; set; }
         public string Website { get; set; }
         [Display(Name = "CPF/CNPJ")]
-        public long Document { get; set; }
-        public decimal Discount { get; set; }
+        public long? Document { get; set; }
+        public decimal? Discount { get; set; }
         public int? CommercialPolicy { get; set; }
         public DateTime? RegisterDate { get; set; }
         public DateTime? LastUpdate { get; set; }

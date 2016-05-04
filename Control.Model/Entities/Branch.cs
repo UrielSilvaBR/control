@@ -17,7 +17,7 @@ namespace Control.Model.Entities
         public int Id { get; set; }
 
         ////ForeignKey Keys
-        public int CompanyID { get; set; }
+        public int? CompanyID { get; set; }
         [ForeignKey("CompanyID")]
         public virtual Company Company { get; set; }
 
@@ -25,10 +25,10 @@ namespace Control.Model.Entities
 
         public string Fantasia { get; set; }
 
-        public long InscricaoEstadual { get; set; }
+        public long? InscricaoEstadual { get; set; }
 
-        public long InscricaoMunicipal { get; set; }
+        public long? InscricaoMunicipal { get; set; }
 
-        public long CNPJ { get; set; }
+        public long? CNPJ { get; set; }
     }
 }
