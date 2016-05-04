@@ -181,11 +181,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <StaticOptimizationLib>..\packages\System.Web.StaticOptimization.1.0.5\tools\System.Web.StaticOptimization.Build.dll</StaticOptimizationLib>
-  </PropertyGroup>
-  <UsingTask AssemblyFile="$(StaticOptimizationLib)" TaskName="System.Web.StaticOptimization.BundleGeneratorTask" />
-  <Target Name="ProcessStaticContent" AfterTargets="AfterBuild">
-    <BundleGeneratorTask BundleConfig="bundles.config" />
-  </Target>
+  
 </Project>
