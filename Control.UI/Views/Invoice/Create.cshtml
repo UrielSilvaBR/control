@@ -30,6 +30,15 @@
             font-size: 18px;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
+
+        p.modalsucesso {
+            word-break: break-all;
+        }
+
+        #modal-sucesso .modal-dialog {
+            width: 600px;
+            margin: 130px 475px;
+        }
     </style>
 
 </head>
@@ -68,6 +77,7 @@
             <!-- conteudo -->
             <div class="box-content">
                 <div id="tabs">
+
                     @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
                     new AjaxOptions { HttpMethod = "Post", OnBegin = "", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal" }))
                     {
@@ -96,6 +106,7 @@
                                 @Html.LabelFor(p => p.Invoice.DataEmissao, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.Invoice.DataEmissao, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                    @Html.ValidationMessageFor(p => p.Invoice.DataEmissao)
                                 </div>
                             </div>
 
@@ -241,19 +252,20 @@
         $('#gdvItensNotaFiscal_filter').hide();
         $('#gdvItensNotaFiscal_info').hide();
         $('#gdvItensNotaFiscal_length').hide();
-
-        function fnClickAddRow() {
-
-            $('#gdvItensNotaFiscal').dataTable().fnAddData([
-                "1",
-                ".1",
-                ".2",
-                ".3",
-                ".4"]);
-
-            $('#gdvItensNotaFiscal_filter').hide();
-            $('#gdvItensNotaFiscal_info').hide();
-            $('#gdvItensNotaFiscal_length').hide();
-        }
     });
+
+    function fnClickAddRow() {
+
+        $('#gdvItensNotaFiscal').dataTable().fnAddData([
+            "1",
+            ".1",
+            ".2",
+            ".3",
+            ".4"]);
+
+        $('#gdvItensNotaFiscal_filter').hide();
+        $('#gdvItensNotaFiscal_info').hide();
+        $('#gdvItensNotaFiscal_length').hide();
+    }
+
 </script>

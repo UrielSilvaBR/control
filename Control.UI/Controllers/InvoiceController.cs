@@ -57,8 +57,6 @@ namespace Control.UI.Controllers
         [HttpPost]
         public ActionResult Save(Models.InvoiceViewModel model)
         {
-            //var model = new Models.InvoiceViewModel();
-
             try
             {
                 if (ModelState.IsValid)

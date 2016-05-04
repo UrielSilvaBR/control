@@ -22,7 +22,7 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Número da Nota Fiscal é obrigatório!")]
+        [Required(ErrorMessage ="Campo obrigatório")]
         [Display(Name = "Número")]
         public Int64 Numero { get; set; }
 
@@ -30,9 +30,10 @@ namespace Control.Model.Entities
         [ForeignKey("InvoiceSerieID")]
         public virtual InvoiceSerie Serie { get; set; }
 
-        [Required(ErrorMessage = "Valor da Nota Fiscal é obrigatório!")]
+        [Required(ErrorMessage = "Campo obrigatório")]
         public decimal Valor { get; set; }
 
+        [Required(ErrorMessage = "Campo obrigatóriao")]
         [Display(Name = "Emissão")]
         public DateTime DataEmissao { get; set; }
 
