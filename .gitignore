@@ -23,3 +23,4 @@ Control.DAL/Migrations/201604290257408_publish.resx
 Control.UI/Views/Cadastro/FornecedoresEdit.cshtml
 Control.UI/Control.UI.csproj.orig
 Control.UI/Web.config.orig
+/Control.UI/Models/InvoiceViewModel.cs
