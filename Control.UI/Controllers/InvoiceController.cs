@@ -73,7 +73,7 @@ namespace Control.UI.Controllers
                     {
                         model.Invoice = model.Invoice;
                         model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == model.Invoice.CustomerID).FirstOrDefault();
-                        return Content(String.Format("Nota Fiscal {0} Gerada com Sucesso!", model.Invoice.Numero));
+                        return Content(String.Format("<b>Nota Fiscal {0}</br> Gerada com Sucesso!</b>", model.Invoice.Numero));
                     }
                 }
                 else
