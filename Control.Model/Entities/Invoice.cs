@@ -30,7 +30,7 @@ namespace Control.Model.Entities
         [ForeignKey("InvoiceSerieID")]
         public virtual InvoiceSerie Serie { get; set; }
 
-        [Required(ErrorMessage = "O valor da Nota Fiscal é obrigatório!")]
+        [Required(ErrorMessage = "Valor da Nota Fiscal é obrigatório!")]
         public decimal Valor { get; set; }
 
         [Display(Name = "Emissão")]

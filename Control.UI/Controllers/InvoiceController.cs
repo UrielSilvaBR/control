@@ -33,7 +33,7 @@ namespace Control.UI.Controllers
 
         public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            return View("Cadastrar", Invoice);
+            return View("Create", Invoice);
         }
 
         public ActionResult Edit(int InvoiceID)
@@ -51,40 +51,44 @@ namespace Control.UI.Controllers
                 throw ex;
             }
 
-            return View("Cadastrar", model);
+            return View("Create", model);
         }
 
         [HttpPost]
-        public ActionResult Save(Model.Entities.Invoice Invoice)
+        public ActionResult Save(Models.InvoiceViewModel model)
         {
-            var model = new Models.InvoiceViewModel();
+            //var model = new Models.InvoiceViewModel();
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
-                    Invoice.Items = new List<InvoiceItem>();
-                    Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
-                    Invoice.Taxes = new List<InvoiceTax>();
-                    Invoice.Taxes.Add(new InvoiceTax() { ValorIss = Invoice.Valor * 0.03M });
+                    model.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
+                    model.Invoice.Items = new List<InvoiceItem>();
+                    model.Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
+                    model.Invoice.Taxes = new List<InvoiceTax>();
+                    model.Invoice.Taxes.Add(new InvoiceTax() { ValorIss = model.Invoice.Valor * 0.03M });
 
                     context = new DALContext();
-                    context.Invoices.Create(Invoice);
+                    context.Invoices.Create(model.Invoice);
                     if (context.SaveChanges() > 0)
                     {
-                        model.Invoice = Invoice;
-                        model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == Invoice.CustomerID).FirstOrDefault();
-                        return Content(String.Format("Nota Fiscal {0} incluída com Sucesso!", Invoice.Numero));
+                        model.Invoice = model.Invoice;
+                        model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == model.Invoice.CustomerID).FirstOrDefault();
+                        return Content(String.Format("Nota Fiscal {0} Gerada com Sucesso!", model.Invoice.Numero));
                     }
                 }
+                else
+                {
+                    return View("Create", model);
+                }
+
+                return View("Create", model);
             }
             catch (Exception ex)
             {
                 return Content(ex.Message);
             }
-
-            return View("Cadastrar", model);
         }
 
         public JsonResult Teste(Model.Entities.InvoiceItem Item)

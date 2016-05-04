@@ -1,12 +1,10 @@
 ﻿$(document).ready(function () {
 
-    
+
 
 });
 
-function FinalizarInclusaoNotaFiscal(message)
-{
-
+function FinalizarInclusaoNotaFiscal(message) {
 
     ShowMessage(message, true);
 }
@@ -302,4 +300,15 @@ function ShowConfirmation(message, callback) {
         .bind("click", callback);
     modal.setMessage(message).modal("show");
     return modal;
+}
+
+function ShowHTTPException(httpex) {
+    var message = "";
+    if (httpex.responseText.indexOf("<html") >= 0) {
+        //Se for uma exception gerada pelo .NET, busca no HTML a mensagem de erro específica.
+        if (httpex.responseText.indexOf(".NET Framework") > -1) message = $($.parseHTML(httpex.responseText)).find("i").html();
+        else message = "Não foi possível realizar a operação solicitada.";
+    }
+    else message = httpex.responseText;
+    return ShowMessage(message);
 }

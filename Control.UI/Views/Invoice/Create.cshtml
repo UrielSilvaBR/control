@@ -69,36 +69,37 @@
             <div class="box-content">
                 <div id="tabs">
                     @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
-                    new AjaxOptions { OnSuccess = "FinalizarInclusaoNotaFiscal(data)", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal" }))
+                    new AjaxOptions { HttpMethod = "Post", OnBegin = "", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
+
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
 
                         <div id="tabs-1">
+
                             <!--Tab Dados Cadastrais-->
                             <div class="form-group">
-
                                 @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(p => p.Invoice.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(p => p.Invoice.Numero)
                                 </div>
 
                                 @Html.LabelFor(p => p.Invoice.Valor, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.Invoice.Valor, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(p => p.Invoice.Valor)
                                 </div>
 
                                 @Html.LabelFor(p => p.Invoice.DataEmissao, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.Invoice.DataEmissao, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
                                 </div>
-
                             </div>
 
                             <div class="form-group">
-
                                 @Html.Label("Série", htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2" style="align-content:flex-start">
                                     @Html.DropDownListFor(p => p.Invoice.InvoiceSerieID, new SelectList(Model.Series, "Id", "Descricao"), htmlAttributes: new { @class = "selddl" })
@@ -106,12 +107,9 @@
 
                                 @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-5 style=" align-content:flex-start">
-
                                     @Html.DropDownListFor(p => p.Invoice.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
                                 </div>
-
                             </div>
-
                         </div>
                         <div class="form-group">
                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
