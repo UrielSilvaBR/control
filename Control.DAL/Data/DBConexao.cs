@@ -42,9 +42,8 @@ namespace Control.DAL.Data
                     strConn = @"user id=sa; password=*talento2010; data source=192.168.2.111,1433; initial catalog=RPS; ";
                     break;
 
-                case 2:
-                    //Local Gtwave
-                    //strConn = @"User ID=cepe;Password=123;Data Source=SERVER2012;Initial Catalog=Control;";
+                case 2:                    
+                    //Local PC
                     strConn = @"Server=.\SQLEXPRESS;Database=Control;Integrated Security=SSPI;";
                     break;
 
@@ -55,9 +54,9 @@ namespace Control.DAL.Data
                     break;
 
                 case 4:
-
+                    //Local Gtwave
                     //Conexão de homologação na Arisp (testes da migração em produção)
-                    strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=CPEDIDOS_PROD2;";
+                    strConn = @"User ID=cepe;Password=123;Data Source=SERVER2012;Initial Catalog=Control;";
                     break;
 
                 case 5:

@@ -42,7 +42,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-5">
-                <input type="submit" value="Gravar" class="btn btn-primary" />
+                <input type="button" value="Go Somewhere Else" onclick="location.href='@Url.Action("AddItemPedido", "Vendas", new { par = Model });'" />
+                <input type="submit" value="Gravare" class="btn btn-primary" />
 
                 <a href='@Url.Action("Histórico Produto", "Cadastro")'>
                     <i class="btn btn-primary">Histórico</i>

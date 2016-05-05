@@ -43,7 +43,7 @@ namespace Control.DAL.Repository.Tests
 
 
             context = new DALContext();
-            context.Products.Create(new Model.Entities.Product() { Name = "PLAYSTATION 4", UnitPrice = 1400, Description = "VIDEO GAME", ProductCode = 1, TypeUnitID = 1 });
+            context.Products.Create(new Model.Entities.Product() { Name = "PLAYSTATION 4", UnitPrice = 1400, Description = "VIDEO GAME", ProductCode = 1, ProductTypeUnitID = 1 });
             context.SaveChanges();
 
            

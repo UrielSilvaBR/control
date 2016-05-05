@@ -42,9 +42,9 @@ namespace Control.Model.Entities
         public bool? CombinedProduct { get; set; }
 
         //Forgein Keys
-        public int? TypeUnitID { get; set; }
+        public int? ProductTypeUnitID { get; set; }
 
-        [ForeignKey("TypeUnitID")]
+        [ForeignKey("ProductTypeUnitID")]
         public virtual TypeUnit ProductUnit { get; set; }
     }
 }

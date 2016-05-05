@@ -34,5 +34,20 @@ namespace Control.UI.Controllers
 
             return View("Invoice", model);
         }
+
+        public ActionResult AddItemPedido(PedidoViewModel par)
+        {
+            if (par.ItemPedido.Id > 0)
+            {//Update Item
+                par.ItensPedido.Remove(par.ItensPedido.SingleOrDefault(p => p.Id == par.ItemPedido.Id));
+                par.ItensPedido.Add(par.ItemPedido);
+            }
+            else
+            {//Insert Item
+                par.ItensPedido.Add(par.ItemPedido);
+            }
+
+            return View("Pedidos", par);
+        }
     }
 }
