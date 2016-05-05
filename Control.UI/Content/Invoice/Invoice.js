@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿var giCount = 1;
+$(document).ready(function () {
    
     $('#Invoice_Valor').maskMoney({
         prefix:'R$ ', 
@@ -8,15 +9,23 @@
         affixesStay: true
     });
 
-    //$('#Invoice_DataEmissao').prop('readonly', true);
+    $('#Invoice_Numero').val('');
+    $('#Invoice_Valor').val('');
 
     $('#Invoice_DataEmissao').mask('99/99/9999');
 
+
+    $('#btnAdicionarItemNf').click(function()
+    {
+        AdicionarItemNotaFiscal();
+    })
+
 });
 
-function FinalizarInclusaoNotaFiscal(message) {
+function FinalizarInclusaoNotaFiscal(notaFiscal) {
 
-    ShowMessage(message, true);
+
+    ShowMessage(notaFiscal, true);
 }
 
 
@@ -30,5 +39,27 @@ function IniciarInclusaoNotaFiscal()
 
 function AdicionarItemNotaFiscal()
 {
+    
+
+    var quantidade = $('#QuantityOrder').val();
+    var precoUnitario = $('#UnitPrice').val();
+    var quantidadeEntregue = $('#QuantityDeliver').val();
+    var desconto = $('#ItemDiscount').val();
+    var precoTotal = $('#TotalPrice').val();
+
+    $('#gdvItensNotaFiscal').dataTable().fnAddData([
+        giCount,
+        quantidade,
+        precoUnitario,
+        quantidadeEntregue,
+        desconto,
+        precoTotal
+    ]);
+
+    giCount++;
+
+    $('#gdvItensNotaFiscal_filter').hide();
+    $('#gdvItensNotaFiscal_info').hide();
+    $('#gdvItensNotaFiscal_length').hide();
 
 }

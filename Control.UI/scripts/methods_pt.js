@@ -4,7 +4,8 @@
  */
 jQuery.extend(jQuery.validator.methods, {
     date: function (value, element) {
-        return this.optional(element) || /^\d\d?\/\d\d?\/\d\d\d?\d?$/.test(value);
+        //return this.optional(element) || /^\d\d?\/\d\d?\/\d\d\d?\d?$/.test(value);
+        return value.match(/^(0?[1-9]|[12][0-9]|3[0-1])[/., -](0?[1-9]|1[0-2])[/., -](19|20)?\d{2}$/);
     },
     number: function (value, element) {
 

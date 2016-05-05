@@ -17,11 +17,39 @@
                         <button type="button" class="close" data-dismiss="modal" style="margin-right: 8px !important;margin-top: 4px;">&times;</button>
                     </div>
                     <div class="box-icons">
-                        
+
                     </div>
                 </div>
                 <div class="box-content">
-                    
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.QuantityOrder, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.UnitPrice, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ItemDiscount, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.QuantityDeliver, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         @Html.LabelFor(p => p.TotalPrice, htmlAttributes: new { @class = "col-md-1" })
                         <div class="col-md-2">
@@ -29,9 +57,17 @@
                         </div>
                     </div>
 
+
                 </div>
+                
                 <div class="modal-footer">
-                    <input type="button" class="btn btn-primary" data-dismiss="modal" id="btnFechar" value="Fechar" />
+                    <div class="form-group">
+                        <div class="col-md-offset-5">
+                            <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" id="btnAdicionarItemNf" />
+                            @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />
+                                <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />*@
+                        </div>
+                    </div>
                 </div>
             </div>
             @*<div class="modal-header">

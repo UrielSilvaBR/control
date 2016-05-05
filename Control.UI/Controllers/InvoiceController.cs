@@ -69,6 +69,7 @@ namespace Control.UI.Controllers
 
                     context = new DALContext();
                     context.Invoices.Create(model.Invoice);
+
                     if (context.SaveChanges() > 0)
                     {
                         model.Invoice = model.Invoice;
