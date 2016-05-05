@@ -440,7 +440,7 @@ namespace Control.UI.Controllers
                 prod.AliqICMS = 3;
                 prod.CombinedProduct = false;
                 prod.MinimumStockAlert = 50;
-                prod.TypeUnitID = 1;
+                prod.ProductTypeUnitID = 1;
                 
                 if (prod.Id > 0)
                 {
