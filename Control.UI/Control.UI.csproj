@@ -221,6 +221,7 @@
     <Content Include="ajax\ui_progressbars.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\calendar.png" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\Invoice\Invoice.js" />
     <Content Include="Content\Site.css" />
@@ -653,6 +654,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DecimalModelBinder.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
