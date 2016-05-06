@@ -1,5 +1,6 @@
-﻿@using Control.Model.Entities
-@model InvoiceItem
+﻿@using Control.UI.Models
+@using Control.Model.Entities
+@model InvoiceViewModel
 <style type="text/css">
     .modal-footer {
         border-top: 0px solid #e5e5e5;
@@ -23,59 +24,59 @@
                 <div class="box-content">
 
                     <div class="form-group">
-                        @Html.LabelFor(p => p.QuantityOrder, htmlAttributes: new { @class = "col-md-2" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(p => p.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-5 style=" align-content:flex-start">
+                            @Html.DropDownListFor(p => p.InvoiceItem.ProductID, new SelectList(Model.Products, "Id", "Name"), htmlAttributes: new { @class = "selddl", @id="ddlProduto" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(p => p.UnitPrice, htmlAttributes: new { @class = "col-md-1" })
+                        @Html.LabelFor(p => p.InvoiceItem.QuantityOrder, htmlAttributes: new { @class = "col-md-2" })
                         <div class="col-md-2">
-                            @Html.EditorFor(p => p.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(p => p.InvoiceItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
+
+                        @Html.LabelFor(p => p.InvoiceItem.UnitPrice, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.InvoiceItem.UnitPrice, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        </div>
+
+                        @Html.LabelFor(p => p.InvoiceItem.ItemDiscount, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.InvoiceItem.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+                        @Html.LabelFor(p => p.InvoiceItem.QuantityDeliver, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.InvoiceItem.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
+
+                        @Html.LabelFor(p => p.InvoiceItem.TotalPrice, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.InvoiceItem.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.ItemDiscount, htmlAttributes: new { @class = "col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(p => p.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <div class="col-md-offset-5">
+                                <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" id="btnAdicionarItemNf" />
+                                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />*@
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.QuantityDeliver, htmlAttributes: new { @class = "col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(p => p.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.TotalPrice, htmlAttributes: new { @class = "col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(p => p.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-
                 </div>
-                
-                <div class="modal-footer">
-                    <div class="form-group">
-                        <div class="col-md-offset-5">
-                            <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" id="btnAdicionarItemNf" />
-                            @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />
-                                <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />*@
-                        </div>
+                @*<div class="modal-header">
+                        <h4 class="modal-title"></h4>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <p>Some text in the modal.</p>
+                    </div>*@
             </div>
-            @*<div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>*@
         </div>
     </div>
 </div>

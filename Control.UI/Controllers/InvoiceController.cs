@@ -33,7 +33,15 @@ namespace Control.UI.Controllers
 
         public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
+            ViewData["Products"] = Invoice.Products;
             return View("Create", Invoice);
+        }
+
+        public JsonResult GetProducts(int ProductID)
+        {
+            context = new DALContext();
+            var objProduct = context.Products.Find(p => p.Id == ProductID);
+            return Json(objProduct);
         }
 
         public ActionResult Edit(int InvoiceID)

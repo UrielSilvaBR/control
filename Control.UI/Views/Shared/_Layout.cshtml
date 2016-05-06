@@ -1,4 +1,4 @@
-﻿@using Control.Model.Entities
+﻿@using Control.UI.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,12 +95,13 @@
             margin-left: 150px;
             cursor: pointer;
         }
+
     </style>
 
 </head>
 <body>
 
-    @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceItem())
+    @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
 
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -132,7 +133,7 @@
                     <p class="modalsucesso">&nbsp;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-confirmar" style="font-size: 0.99em;" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

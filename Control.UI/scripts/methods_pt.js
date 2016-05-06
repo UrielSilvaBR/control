@@ -11,15 +11,10 @@ jQuery.extend(jQuery.validator.methods, {
 
         value = value.replace("R$", "").trim();
 
-        var valor = parseFloat(value);
+        var valor = value.replace(",", ".");
 
         if (valor == 0) {
             value = 0;
-            
-            var id = element.id;
-            $('#' + id).removeClass("valid");
-
-            return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(value);
         }
 
         return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:\.\d{3})+)(?:,\d+)?$/.test(value);
