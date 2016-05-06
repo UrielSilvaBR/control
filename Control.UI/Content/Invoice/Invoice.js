@@ -9,11 +9,13 @@ $(document).ready(function () {
         affixesStay: true
     });
 
-    $('#Invoice_Numero').val('');
-    $('#Invoice_Valor').val('');
+    if ($('#Invoice_Numero').val() == 0)
+        $('#Invoice_Numero').val('');
+
+    if ($('#Invoice_Valor').val() == 0)
+        $('#Invoice_Valor').val('');
 
     $('#Invoice_DataEmissao').mask('99/99/9999');
-
 
     $('#btnAdicionarItemNf').click(function()
     {
