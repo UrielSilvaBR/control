@@ -47,7 +47,7 @@ namespace Control.DAL.Repository.Tests
             //context.SaveChanges();
 
             context = new DALContext();
-            context.Products.Create(new Model.Entities.Product() { Name = "XBOX ONE", UnitPrice = 399, Description = "VIDEO GAME", ProductCode = 2, ProductTypeUnitID = 1 });
+            context.Products.Create(new Model.Entities.Product() { Name = "XBOX ONE", UnitPrice = 1299.99M, Description = "VIDEO GAME", ProductCode = 2, ProductTypeUnitID = 1 });
             context.SaveChanges();
 
             Assert.Fail();

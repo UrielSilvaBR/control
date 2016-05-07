@@ -5,9 +5,11 @@ $(document).ready(function () {
 
     $('#btnAdicionarItemNf').click(function () {
         AdicionarItemNotaFiscal();
+        $('#itemNotaFiscal').modal('hide');
+        LimparItemNotaFiscal();
     })
 
-    ObterValorUnitarioProduto($('#ddlProduto option:selected').val());
+    //ObterValorUnitarioProduto($('#ddlProduto option:selected').val());
 
     $('#ddlProduto').on('change', function (produto) {
         ObterValorUnitarioProduto(produto.val);
@@ -19,23 +21,32 @@ $(document).ready(function () {
 
 });
 
-function InicializarModalItemNotaFiscal()
+function LimparItemNotaFiscal()
 {
+    $('#InvoiceItem_QuantityOrder').val(1);
+    $('#InvoiceItem_UnitPrice').val(0);
+    $('#InvoiceItem_ItemDiscount').val(0);
+    $('#InvoiceItem_QuantityDeliver').val(0);
+    $('#InvoiceItem_TotalPrice').val(0);
+}
+
+function InicializarModalItemNotaFiscal() {
     IniciarlizarCamposItemNotaFiscal();
     InicializarMascaraItemNotaFiscal();
     InicializarCamposReadOnly();
 }
 
-function IniciarlizarCamposItemNotaFiscal()
-{
+function IniciarlizarCamposItemNotaFiscal() {
+
     $('#Invoice_Valor').val(0);
+
+    $('#InvoiceItem_QuantityOrder').ForceNumericOnly();
 
     if (parseInt($('#InvoiceItem_QuantityOrder').val()) == 0)
         $('#InvoiceItem_QuantityOrder').val(1);
 }
 
-function ValidarDescontoItemNotaFiscal(pValorDesconto)
-{
+function ValidarDescontoItemNotaFiscal(pValorDesconto) {
     var valorDesconto = pValorDesconto;
     valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
@@ -55,38 +66,53 @@ function ValidarDescontoItemNotaFiscal(pValorDesconto)
     $('#InvoiceItem_TotalPrice').val(valorTotal);
 }
 
-function InicializarMascaraItemNotaFiscal()
-{
+function InicializarMascaraItemNotaFiscal() {
     $('#Invoice_Valor').maskMoney({
-        prefix: 'R$ ',
-        thousands: '.',
-        decimal: ',',
-        precision: 2,
-        affixesStay: true
+        prefix: '', 
+        allowZero: false, 
+        allowNegative: false, 
+        defaultZero: true,
+        thousands: '.', 
+        decimal: ',', 
+        precision: 2, 
+        affixesStay: false, 
+        symbolPosition: 'left' 
     });
 
     $('#InvoiceItem_UnitPrice').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_ItemDiscount').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_TotalPrice').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_QuantityOrder').ForceNumericOnly();
@@ -94,12 +120,11 @@ function InicializarMascaraItemNotaFiscal()
     $('#Invoice_DataEmissao').mask('99/99/9999');
 }
 
-function InicializarCamposReadOnly()
-{
-    $('#Invoice_Valor').attr('readonly', true);
+function InicializarCamposReadOnly() {
+    //$('#Invoice_Valor').attr('readonly', true);
     $('#InvoiceItem_TotalPrice').attr('readonly', true);
     $('#InvoiceItem_UnitPrice').attr('readonly', true);
-    
+
 }
 
 function FinalizarInclusaoNotaFiscal(notaFiscal) {
@@ -110,10 +135,18 @@ function ObterValorUnitarioProduto(idProduto) {
 
     ObterProduto(idProduto, function (produto) {
         $('#InvoiceItem_UnitPrice').val(produto.UnitPrice.toFixed(2));
+        $('#InvoiceItem_TotalPrice').val(produto.UnitPrice.toFixed(2));
     });
 }
 
 function ObterProduto(idProduto, produto) {
+
+    if (idProduto == 0)
+    {
+        $('#InvoiceItem_UnitPrice').val(0);
+        $('#InvoiceItem_TotalPrice').val(0);
+        return;
+    }
 
     $.post("/Invoice/GetProducts",
         { ProductID: idProduto },

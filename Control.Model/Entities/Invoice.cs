@@ -33,7 +33,7 @@ namespace Control.Model.Entities
         public virtual InvoiceSerie Serie { get; set; }
 
         [Required(ErrorMessage = "Valor da Nota Fiscal é obrigatório" )]
-        [Range(1, int.MaxValue, ErrorMessage = "Valor da Nota Fiscal deve ser maior que 0")]
+        [Range(0.01, Double.PositiveInfinity, ErrorMessage = "Valor da Nota Fiscal deve ser maior que 0")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Data de Emissão é obrigatória")]
