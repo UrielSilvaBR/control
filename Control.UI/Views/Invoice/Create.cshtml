@@ -92,8 +92,6 @@
                         <div id="tabs-1">
                             <!--Tab Dados Cadastrais-->
 
-
-
                             <div class="form-group">
                                 @Html.ValidationMessageFor(p => p.Invoice.Numero)
                                 @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
@@ -135,7 +133,7 @@
 
                         Html.RenderPartial("_ListInvoiceItem", Model);
 
-                       @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
+                        Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
