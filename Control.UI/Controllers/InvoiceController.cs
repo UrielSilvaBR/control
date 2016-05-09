@@ -81,8 +81,6 @@ namespace Control.UI.Controllers
                         ProductID = 1
                     }).ToList();
 
-                    //model.Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
-
                     context = new DALContext();
                     context.Invoices.Create(model.Invoice);
 

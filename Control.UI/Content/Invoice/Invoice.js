@@ -203,8 +203,6 @@ function IniciarInclusaoNotaFiscal() {
     var itensNotaFiscal = JSON.stringify(Items);
 
     $('#itensNotaFiscal').val(itensNotaFiscal);
-
-    alert(itensNotaFiscal);
 }
 
 function AdicionarItemNotaFiscal() {

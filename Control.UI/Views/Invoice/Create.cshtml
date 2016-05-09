@@ -86,15 +86,14 @@
                     @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
                     new AjaxOptions { OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreateInvoice" }))
                     {
-                        @Html.AntiForgeryToken()
-
-                        @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
-
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
                         <div id="tabs-1">
                             <!--Tab Dados Cadastrais-->
+
+
+
                             <div class="form-group">
                                 @Html.ValidationMessageFor(p => p.Invoice.Numero)
                                 @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
@@ -136,13 +135,13 @@
 
                         Html.RenderPartial("_ListInvoiceItem", Model);
 
-                       
+                       @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
                                 @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
                                     <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
-                                <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoNotaFiscal();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
                                 @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
                             </div>
                         </div>
