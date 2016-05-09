@@ -8,6 +8,7 @@ using Control.DAL;
 using Control.Utility;
 using Newtonsoft.Json;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Control.UI.Controllers
 {
@@ -62,18 +63,24 @@ namespace Control.UI.Controllers
             return View("Create", model);
         }
 
-        [HttpPost]
-        public ActionResult Save(Models.InvoiceViewModel model)
+        public ActionResult Save(Models.InvoiceViewModel model, string itensNotaFiscal)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     model.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
-                    model.Invoice.Items = new List<InvoiceItem>();
-                    model.Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
-                    model.Invoice.Taxes = new List<InvoiceTax>();
-                    model.Invoice.Taxes.Add(new InvoiceTax() { ValorIss = model.Invoice.Valor * 0.03M });
+
+                    var arrayItensNotaFiscal = JArray.Parse(itensNotaFiscal);
+                    model.Invoice.Items = ((JArray)arrayItensNotaFiscal).Select(x => new Model.Entities.InvoiceItem
+                    {
+                        Id = (int)x["Id"],
+                        SequencialItem = (int)x["SequencialItem"],
+                        QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                        ProductID = 1
+                    }).ToList();
+
+                    //model.Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
 
                     context = new DALContext();
                     context.Invoices.Create(model.Invoice);
@@ -96,15 +103,6 @@ namespace Control.UI.Controllers
             {
                 return Content(ex.Message);
             }
-        }
-
-        public JsonResult Teste(Model.Entities.InvoiceItem Item)
-        {
-            Item = new InvoiceItem();
-            Item.Id = 1;
-            string itemJson = JsonConvert.SerializeObject(Item);
-
-            return Json(itemJson);
         }
 
         public ActionResult Delete(int InvoiceID)

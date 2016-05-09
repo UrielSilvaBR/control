@@ -84,9 +84,11 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
-            new AjaxOptions { HttpMethod = "Post", OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id="frmCreateInvoice" }))
+                    new AjaxOptions { OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreateInvoice" }))
                     {
                         @Html.AntiForgeryToken()
+
+                        @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
 
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
@@ -132,9 +134,9 @@
                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
                         </div>
 
-
                         Html.RenderPartial("_ListInvoiceItem", Model);
 
+                       
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
@@ -238,17 +240,13 @@
         $('#gdvItensNotaFiscal').dataTable({
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado"
-            }
+            }, 
+            //"aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }, { "bVisible": false, "aTargets": [2] }]
         });
 
         $('#gdvItensNotaFiscal_filter').hide();
         //$('#gdvItensNotaFiscal_info').hide();
         $('#gdvItensNotaFiscal_length').hide();
     });
-
-    function fnClickAddRow() {
-
-
-    }
 
 </script>

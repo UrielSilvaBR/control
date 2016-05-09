@@ -23,11 +23,9 @@ $(document).ready(function () {
     $('#InvoiceItem_ItemDiscount').focusout(function () {
         ValidarDescontoItemNotaFiscal($(this).val());
     });
-
 });
 
-function LimparItemNotaFiscal()
-{
+function LimparItemNotaFiscal() {
     $("#ddlProduto").select2().select2("val", '0');
     $('#InvoiceItem_QuantityOrder').val(1);
     $('#InvoiceItem_UnitPrice').val(0);
@@ -44,7 +42,14 @@ function InicializarModalItemNotaFiscal() {
 
 function IniciarlizarCamposItemNotaFiscal() {
 
-    $('#Invoice_Valor').val(0);
+    var valorNotaFiscal = $('#Invoice_Valor').val();
+    valorNotaFiscal = valorNotaFiscal.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    valorNotaFiscal = Number(valorNotaFiscal.replace(/[^0-9\.]+/g, ""));
+
+    if (valorNotaFiscal <= 0)
+        $('#Invoice_Valor').val(0);
+    else
+        $('#Invoice_Valor').val(valorNotaFiscal);
 
     $('#InvoiceItem_QuantityOrder').ForceNumericOnly();
 
@@ -52,13 +57,17 @@ function IniciarlizarCamposItemNotaFiscal() {
         $('#InvoiceItem_QuantityOrder').val(1);
 }
 
-function CalcularItemNotaFiscal(quantidade)
-{
+function CalcularItemNotaFiscal(quantidade) {
     var valorUnitario = $('#InvoiceItem_UnitPrice').val();
     valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
 
     var valorTotal = quantidade * valorUnitario;
+
+    //var valorDesconto = $('#InvoiceItem_ItemDiscount').val();
+    //valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    //valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
+    //valorTotal = valorTotal - valorDesconto;
 
     $('#InvoiceItem_TotalPrice').val(valorTotal);
 }
@@ -87,15 +96,15 @@ function ValidarDescontoItemNotaFiscal(pValorDesconto) {
 
 function InicializarMascaraItemNotaFiscal() {
     $('#Invoice_Valor').maskMoney({
-        prefix: '', 
-        allowZero: false, 
-        allowNegative: false, 
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
         defaultZero: true,
-        thousands: '.', 
-        decimal: ',', 
-        precision: 2, 
-        affixesStay: false, 
-        symbolPosition: 'left' 
+        thousands: '.',
+        decimal: ',',
+        precision: 2,
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_UnitPrice').maskMoney({
@@ -161,8 +170,7 @@ function ObterValorUnitarioProduto(idProduto) {
 
 function ObterProduto(idProduto, produto) {
 
-    if (idProduto == 0)
-    {
+    if (idProduto == 0) {
         $('#InvoiceItem_UnitPrice').val(0);
         $('#InvoiceItem_TotalPrice').val(0);
         return;
@@ -176,10 +184,27 @@ function ObterProduto(idProduto, produto) {
 }
 
 function IniciarInclusaoNotaFiscal() {
-    //var valorNf = $('#Invoice_Valor').val();
-    //valorNf = valorNf.replace(".", "").replace("R$", "").trim();
-    //alert(valorNf);
-    //$('#Invoice_Valor').val(valorNf);
+
+    var gdvItens = $('#frmCreateInvoice').find('#gdvItensNotaFiscal tbody');
+
+    var Items = new Array();
+    var index = 0;
+
+    gdvItens.find('tr').each(function (i, el) {
+        var $tds = $(this).find('td'),
+            Id = $tds.find('input').val() == undefined ? 0 : $tds.find('input').val(),
+            index = Id > 0 ? 1 : 0,
+            SequencialItem = $tds[index].innerHTML,
+            QuantityOrder = $tds[2].innerHTML
+
+        Items.push({ Id: Id, SequencialItem: SequencialItem, QuantityOrder: QuantityOrder });
+    });
+
+    var itensNotaFiscal = JSON.stringify(Items);
+
+    $('#itensNotaFiscal').val(itensNotaFiscal);
+
+    alert(itensNotaFiscal);
 }
 
 function AdicionarItemNotaFiscal() {

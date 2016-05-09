@@ -14,17 +14,19 @@
             </tr>
         </thead>
         <tbody>
-                @foreach (var item in Model.Invoice.Items)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
-                        <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
-                        <td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>
-                        <td>@{ string totalPrice = item.TotalPrice.ToString("N");}@Html.DisplayFor(modelItem => totalPrice)</td>
-                    </tr>
-                }
+
+            @foreach (var item in Model.Invoice.Items)
+            {
+                <tr>
+                    <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
+                    <td id="sequencialItem">@Html.DisplayFor(modelItem => item.SequencialItem)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
+                    <td id="quantityOrder"> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                    <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                    <td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>
+                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");}@Html.DisplayFor(modelItem => totalPrice)</td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
