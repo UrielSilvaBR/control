@@ -57,8 +57,6 @@
     </div>
 </div>
 
-
-
 <div class="row">
     <!-- BOX -->
     <div class="col-xs-12">
@@ -86,93 +84,67 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
-                    new AjaxOptions { HttpMethod = "Post", OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal" }))
+            new AjaxOptions { HttpMethod = "Post", OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id="frmCreateInvoice" }))
                     {
                         @Html.AntiForgeryToken()
-                        
+
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
-                                <div id="tabs-1">
-                                    <!--Tab Dados Cadastrais-->
-                                    <div class="form-group">
-                                        @Html.ValidationMessageFor(p => p.Invoice.Numero)
-                                        @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
-                                        <div class="col-md-2">
-                                            @Html.EditorFor(p => p.Invoice.Numero, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.ValidationMessageFor(p => p.Invoice.Valor)
-                                        @Html.LabelFor(p => p.Invoice.Valor, htmlAttributes: new { @class = "col-md-1" })
-                                        <div class="col-md-2">
-                                            @Html.TextBoxFor(p => p.Invoice.Valor, new { @class = "form-control" })
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        @Html.ValidationMessageFor(p => p.Invoice.DataEmissao)
-                                        @Html.LabelFor(p => p.Invoice.DataEmissao, htmlAttributes: new { @class = "col-md-1" })
-                                        <div class="col-md-2">
-                                            @Html.TextBoxFor(p => p.Invoice.DataEmissao, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        @Html.Label("Série", htmlAttributes: new { @class = "col-md-1" })
-                                        <div class="col-md-2" style="align-content:flex-start">
-                                            @Html.DropDownListFor(p => p.Invoice.InvoiceSerieID, new SelectList(Model.Series, "Id", "Descricao"), htmlAttributes: new { @class = "selddl" })
-                                        </div>
-
-                                        @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
-                                        <div class="col-md-5 style=" align-content:flex-start">
-                                            @Html.DropDownListFor(p => p.Invoice.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
-                                        </div>
-                                    </div>
+                        <div id="tabs-1">
+                            <!--Tab Dados Cadastrais-->
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.Numero)
+                                @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(p => p.Invoice.Numero, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                 </div>
-                                <div class="form-group">
-                                    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.Valor)
+                                @Html.LabelFor(p => p.Invoice.Valor, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.Invoice.Valor, new { @class = "form-control" })
+
                                 </div>
-                                <div id="table_wrapperz">
-                                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensNotaFiscal">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Descrição</th>
-                                                <th>Quantidade</th>
-                                                <th>Valor Unitário</th>
-                                                <th>Desconto</th>
-                                                <th>Valor Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @if (Model.Invoice.Items.Count > 0)
-                {
-                    foreach (var item in Model.Invoice.Items)
-                    {
-                                                    <tr>
-                                                        <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
-                                                        <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
-                                                        <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
-                                                        <td>@{ string unitPrice = item.UnitPrice.ToString("C");  } @Html.DisplayFor(modelItem => unitPrice)</td>
-                                                        <td>@{ string discount = item.ItemDiscount.ToString("C");  } @Html.DisplayFor(modelItem => discount)</td>
-                                                        <td>@{ string totalPrice = item.TotalPrice.ToString("C");  }@Html.DisplayFor(modelItem => totalPrice)</td>
-                                                    </tr>
-                                                                }
-                                                            }
-                                        </tbody>
-                                    </table>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.DataEmissao)
+                                @Html.LabelFor(p => p.Invoice.DataEmissao, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.Invoice.DataEmissao, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Série", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2" style="align-content:flex-start">
+                                    @Html.DropDownListFor(p => p.Invoice.InvoiceSerieID, new SelectList(Model.Series, "Id", "Descricao"), htmlAttributes: new { @class = "selddl" })
                                 </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-5">
-                                        @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
-                                            <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
-                                        <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
-                                        @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
-                                    </div>
+                                @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5 style=" align-content:flex-start">
+                                    @Html.DropDownListFor(p => p.Invoice.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
                                 </div>
-                                                            }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
+                        </div>
+
+
+                        Html.RenderPartial("_ListInvoiceItem", Model);
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-5">
+                                @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
+                                <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

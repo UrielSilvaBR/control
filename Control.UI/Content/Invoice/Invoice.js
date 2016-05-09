@@ -6,13 +6,18 @@ $(document).ready(function () {
     $('#btnAdicionarItemNf').click(function () {
         AdicionarItemNotaFiscal();
         $('#itemNotaFiscal').modal('hide');
-        LimparItemNotaFiscal();
+        setTimeout(function () {
+            LimparItemNotaFiscal();
+        }, 1000);
     })
-
-    //ObterValorUnitarioProduto($('#ddlProduto option:selected').val());
 
     $('#ddlProduto').on('change', function (produto) {
         ObterValorUnitarioProduto(produto.val);
+    });
+
+    $('#InvoiceItem_QuantityOrder').focusout(function () {
+        var quantidade = $(this).val();
+        CalcularItemNotaFiscal(quantidade);
     });
 
     $('#InvoiceItem_ItemDiscount').focusout(function () {
@@ -23,6 +28,7 @@ $(document).ready(function () {
 
 function LimparItemNotaFiscal()
 {
+    $("#ddlProduto").select2().select2("val", '0');
     $('#InvoiceItem_QuantityOrder').val(1);
     $('#InvoiceItem_UnitPrice').val(0);
     $('#InvoiceItem_ItemDiscount').val(0);
@@ -46,12 +52,23 @@ function IniciarlizarCamposItemNotaFiscal() {
         $('#InvoiceItem_QuantityOrder').val(1);
 }
 
+function CalcularItemNotaFiscal(quantidade)
+{
+    var valorUnitario = $('#InvoiceItem_UnitPrice').val();
+    valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
+
+    var valorTotal = quantidade * valorUnitario;
+
+    $('#InvoiceItem_TotalPrice').val(valorTotal);
+}
+
 function ValidarDescontoItemNotaFiscal(pValorDesconto) {
     var valorDesconto = pValorDesconto;
     valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
 
-    var valorUnitario = $('#InvoiceItem_UnitPrice').val();
+    var valorUnitario = $('#InvoiceItem_TotalPrice').val();
     valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
 
@@ -60,6 +77,8 @@ function ValidarDescontoItemNotaFiscal(pValorDesconto) {
         //$('#itemNotaFiscal').attr('style', 'display:block');
         //$('#itemNotaFiscal').modal('show');
     }
+
+
 
     var valorTotal = valorUnitario - valorDesconto;
 
@@ -121,7 +140,7 @@ function InicializarMascaraItemNotaFiscal() {
 }
 
 function InicializarCamposReadOnly() {
-    //$('#Invoice_Valor').attr('readonly', true);
+    $('#Invoice_Valor').attr('readonly', true);
     $('#InvoiceItem_TotalPrice').attr('readonly', true);
     $('#InvoiceItem_UnitPrice').attr('readonly', true);
 
@@ -136,6 +155,7 @@ function ObterValorUnitarioProduto(idProduto) {
     ObterProduto(idProduto, function (produto) {
         $('#InvoiceItem_UnitPrice').val(produto.UnitPrice.toFixed(2));
         $('#InvoiceItem_TotalPrice').val(produto.UnitPrice.toFixed(2));
+        CalcularItemNotaFiscal($('#InvoiceItem_QuantityOrder').val());
     });
 }
 
@@ -180,6 +200,8 @@ function AdicionarItemNotaFiscal() {
 
     var descricaoProduto = $('#ddlProduto option:selected').text();
     var quantidade = $('#InvoiceItem_QuantityOrder').val();
+    quantidade = parseFloat(quantidade).toFixed(2);
+    quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#InvoiceItem_UnitPrice').val();
     var quantidadeEntregue = $('#InvoiceItem_QuantityDeliver').val();
     var desconto = $('#InvoiceItem_ItemDiscount').val();

@@ -711,6 +711,7 @@
     <Content Include="Views\Invoice\Create.cshtml" />
     <Content Include="Views\Invoice\_AddInvoiceItem.cshtml" />
     <Content Include="scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
+    <Content Include="Views\Invoice\_ListInvoiceItem.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

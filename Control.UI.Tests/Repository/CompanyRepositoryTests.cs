@@ -16,7 +16,6 @@ namespace Control.DAL.Repository.Tests
         [TestMethod()]
         public void CompanyRepositoryTest()
         {
-
             //context = new DALContext();
             //context.Companies.Create(new Model.Entities.Company() { RazaoSocial = "N.C.C. EQUIPAMENTOS INDUSTRIAIS" });
             //context.SaveChanges();
@@ -41,13 +40,12 @@ namespace Control.DAL.Repository.Tests
             //context.TypesUnities.Create(new Model.Entities.TypeUnit() { Description = "PEÇA", Sign = "PÇ" });
             //context.SaveChanges();
 
-
             //context = new DALContext();
             //context.Products.Create(new Model.Entities.Product() { Name = "PLAYSTATION 4", UnitPrice = 1400, Description = "VIDEO GAME", ProductCode = 1, ProductTypeUnitID = 1 });
             //context.SaveChanges();
 
             context = new DALContext();
-            context.Products.Create(new Model.Entities.Product() { Name = "XBOX ONE", UnitPrice = 1299.99M, Description = "VIDEO GAME", ProductCode = 2, ProductTypeUnitID = 1 });
+            context.Products.Create(new Model.Entities.Product() { Name = "WII U", UnitPrice = 999.99M, Description = "VIDEO GAME", ProductCode = 3, ProductTypeUnitID = 1 });
             context.SaveChanges();
 
             Assert.Fail();

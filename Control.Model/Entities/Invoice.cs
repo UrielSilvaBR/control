@@ -16,6 +16,7 @@ namespace Control.Model.Entities
         public Invoice()
         {
             InsertDate = DateTime.Now;
+            Items = new List<InvoiceItem>();
         }
 
         [Key]
