@@ -63,6 +63,7 @@ namespace Control.UI.Controllers
             return View("Create", model);
         }
 
+        [HttpPost]
         public ActionResult Save(Models.InvoiceViewModel model, string itensNotaFiscal)
         {
             try
