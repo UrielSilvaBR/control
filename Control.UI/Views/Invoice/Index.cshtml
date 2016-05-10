@@ -10,6 +10,12 @@
 
 <head>
 
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/datatables/TableTools.js"></script>
+    <script src="~/plugins/datatables/TableTools_orig.js"></script>
+    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/plugins/select2/select2.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
 
 </head>
@@ -48,10 +54,12 @@
             </div>
             <div class="box-content no-padding">
                 <div id="table_wrapperz">
-                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvNotaFiscal" style="overflow: scroll !important;">
                         <thead>
                             <tr>
-                                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                <th class="no-sort"></th>
+                                <th></th>
+                                <th></th>
                                 <th>
                                     Número
                                 </th>
@@ -80,21 +88,23 @@
                             {
                                 {
                                     <tr>
-                                        <td>
-                                            <h4 style="color:red;    margin-left: 35px;">
-                                                <a href='@Url.Action("Edit", "Invoice", new { InvoiceID = item.Id })'>
-                                                    <i class="fa fa-edit red"></i>
-                                                </a>
-                                                <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id } )'>
-                                                    <i class="fa fa-times-circle" style="color:red"></i>
-
-                                                </a>
-                                                <a href='@Url.Action("ConsultarNFSe", "Invoice", new { InvoiceID = item.Id })'>
-                                                    <i class="fa fa-check color5"></i>
-                                                </a>
-
-                                            </h4>
+                                        <td style="text-align: center;">
+                                            <a href='@Url.Action("Edit", "Invoice", new { InvoiceID = item.Id })'>
+                                                <i class="fa fa-edit red"></i>
+                                            </a>
                                         </td>
+                                        <td style="text-align: center;">
+                                            <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id } )'>
+                                                <i class="fa fa-times-circle" style="color:red"></i>
+
+                                            </a>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <a href='@Url.Action("ConsultarNFSe", "Invoice", new { InvoiceID = item.Id })'>
+                                                <i class="fa fa-check color5"></i>
+                                            </a>
+                                        </td>
+
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Numero)
                                         </td>
@@ -139,9 +149,10 @@
 <script type="text/javascript">
     // Run Datables plugin and create 3 variants of settings
     function AllTables() {
-        TestTable1();
+        TableNotaFiscal();
         LoadSelect2Script(MakeSelect2);
     }
+
     function MakeSelect2() {
         $('select').select2();
         $('.dataTables_filter').each(function () {
@@ -155,11 +166,62 @@
             //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
         });
     }
+
+    function TableNotaFiscal() {
+        $('#gdvNotaFiscal').dataTable({
+            "aaSorting": [[8, "desc"]],
+            "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sSearch": "",
+                "sLengthMenu": '_MENU_',
+                "scrollY": 200,
+                "scrollX": 200
+            },
+            "aoColumns": [
+               { "sName": "EditarNotaFiscal"},
+               { "sName": "ExcluirNotaFiscal" },
+               { "sName": "GerarNotaFiscal" },
+               { "data": "Numero" },
+               { "sName": "Serie" },
+               { "sName": "Valor" },
+               { "sName": "Status" },
+               { "sName": "DataEmissao" },
+               { "sName": "DataCriacao" },
+               { "sName": "Cliente" },
+           ],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+                "order": []
+            }]
+        });
+    }
+
     $(document).ready(function () {
         // Load Datatables and run plugin on tables
         LoadDataTablesScripts(AllTables);
 
         // Add Drag-n-Drop feature
         WinMove();
+
+        //$('#gdvNotaFiscal').DataTable({
+        //    "aoColumns": [
+        //        { "sName": "EditarNotaFiscal" },
+        //        { "sName": "ExcluirNotaFiscal" },
+        //        { "sName": "GerarNotaFiscal" },
+        //        { "data": "Numero" },
+        //        { "sName": "Serie" },
+        //        { "sName": "Valor" },
+        //        { "sName": "Status" },
+        //        { "sName": "DataEmissao" },
+        //        { "sName": "DataCriacao" },
+        //        { "sName": "Cliente" },
+        //    ],
+        //    "order": [[8, "desc"]],
+        //    "columnDefs": [
+        //        { "orderable": false, "targets": 3 }
+        //    ]
+        //});
     });
 </script>

@@ -316,7 +316,6 @@ function ShowHTTPException(httpex) {
     return ShowMessage(message);
 }
 
-
 // Numeric only control handler
 jQuery.fn.ForceNumericOnly =
 function () {

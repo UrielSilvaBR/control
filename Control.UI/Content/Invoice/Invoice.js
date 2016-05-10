@@ -212,6 +212,13 @@ function AdicionarItemNotaFiscal() {
 
     //ValidarDescontoItemNotaFiscal($('#InvoiceItem_ItemDiscount').val());
 
+    var idProduto = $('#ddlProduto option:selected').val();
+
+    if (idProduto) {
+        ShowMessage('Selecione o Produto para inclusão do Item!', false);
+        return;
+    }
+
     var rowEmpty = $('#gdvItensNotaFiscal > tbody > tr').find('.dataTables_empty').length == 1;
     var rowCount = $('#gdvItensNotaFiscal > tbody > tr').length;
 
@@ -223,7 +230,7 @@ function AdicionarItemNotaFiscal() {
     else
         giCount = rowCount + 1;
 
-    var idProduto = $('#ddlProduto option:selected').val();
+    
     var descricaoProduto = $('#ddlProduto option:selected').text();
     var quantidade = $('#InvoiceItem_QuantityOrder').val();
     quantidade = parseFloat(quantidade).toFixed(2);
