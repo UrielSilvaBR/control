@@ -1,4 +1,4 @@
-﻿@using Control.Model.Entities
+﻿@using Control.UI.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
     <script src="/Scripts/modernizr-2.6.2.js"></script>
 
     <!--Includes Layout - Begin-->
-    
+
     <link href="/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
     @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
     <link href="~/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -40,15 +40,15 @@
     <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
     <script src="~/scripts/jquery.validate.unobtrusive.bootstrap.js"></script>
+    <script src="~/scripts/methods_pt.js"></script>
     <script src="/plugins/justified-gallery/jquery.justifiedgallery.js"></script>
-    <script src="/plugins/tinymce/tinymce.js"></script>
-    <script src="/plugins/tinymce/jquery.tinymce.js"></script>
+    <script src="~/plugins/tinymce/tinymce.min.js"></script>
+    <script src="~/plugins/tinymce/jquery.tinymce.min.js"></script>
     <!-- All functions for this theme + document.ready processing -->
     <script src="/js/devoops.js"></script>
     <script src="~/scripts/control.js"></script>
     <script src="~/scripts/jquery.maskedinput.js"></script>
-    <script src="~/scripts/jquery.moneymask.js"></script>
-
+    <script src="~/scripts/jquery.maskMoney.js"></script>
     <!-- Includes Layout - Fim -->
 
     <style type="text/css">
@@ -58,13 +58,49 @@
             text-align: center;
             margin-left: -20px;
         }
-    </style>
 
+        .dataTables_empty {
+            text-align: center;
+        }
+
+        .form-group .form-control, .form-group .input-group {
+            margin-bottom: 0px;
+        }
+
+        .col-md-1 {
+            width: 8.333333333333332%;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        .select2-container .select2-choice {
+            height: 28px;
+        }
+
+        .form-control {
+            height: 28px;
+            padding: 2px 12px;
+        }
+
+        .field-validation-error {
+            position: absolute;
+            margin-left: 280px;
+            margin-top: 2px;
+        }
+
+        .ui-datepicker-trigger {
+            position: absolute;
+            margin-top: -25px;
+            margin-left: 150px;
+            cursor: pointer;
+        }
+
+    </style>
 
 </head>
 <body>
 
-    @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceItem())
+    @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
 
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -96,7 +132,7 @@
                     <p class="modalsucesso">&nbsp;</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary btn-confirmar" style="font-size: 0.99em;" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>

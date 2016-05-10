@@ -21,7 +21,7 @@ namespace Control.UI.Controllers
             {
                 if (string.IsNullOrEmpty(nomeCliente))
                 {
-                    retorno = context.Customers.All().ToList();
+                    retorno = context.Customers.All().OrderBy(p => p.ShortName).ToList();
                 }
                 else
                 {

@@ -17,12 +17,21 @@ namespace Control.Model.Entities
         public int Id { get; set; }
 
         public int InvoiceId { get; set; }
+
         public int SequencialItem { get; set; }
+
+        [Display(Name = "Quantidade")]
         public decimal QuantityOrder { get; set; }
+
+        [Display(Name = "Qtd. Entregue")]
         public decimal QuantityDeliver { get; set; }
+        [Display(Name = "Preço Unitário")]
         public decimal UnitPrice { get; set; }
+        [Display(Name = "Desconto")]
         public decimal ItemDiscount { get; set; }
         public string Comments { get; set; }
+
+        [Display(Name = "Preço Total")]
         public decimal TotalPrice { get; set; }
 
         //Forgein Keys

@@ -16,13 +16,16 @@ namespace Control.Model.Entities
         public Invoice()
         {
             InsertDate = DateTime.Now;
+            Items = new List<InvoiceItem>();
         }
 
         [Key]
         [DataMember]
         public int Id { get; set; }
 
+        
         [Required(ErrorMessage ="Número da Nota Fiscal é obrigatório")]
+        [Range(1, int.MaxValue, ErrorMessage = "Número da Nota Fiscal deve ser maior que 0")]
         [Display(Name = "Número")]
         public Int64 Numero { get; set; }
 
@@ -31,6 +34,7 @@ namespace Control.Model.Entities
         public virtual InvoiceSerie Serie { get; set; }
 
         [Required(ErrorMessage = "Valor da Nota Fiscal é obrigatório" )]
+        [Range(0.01, Double.PositiveInfinity, ErrorMessage = "Valor da Nota Fiscal deve ser maior que 0")]
         public decimal Valor { get; set; }
 
         [Required(ErrorMessage = "Data de Emissão é obrigatória")]
