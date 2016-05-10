@@ -6,6 +6,8 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
+                <th></th>
                 <th>Descrição</th>
                 <th>Quantidade</th>
                 <th>Valor Unitário</th>
@@ -19,12 +21,13 @@
             {
                 <tr>
                     <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
-                    <td id="sequencialItem">@Html.DisplayFor(modelItem => item.SequencialItem)</td>
+                    <td style="display:none">@Html.HiddenFor(modelItem => item.ProductID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
-                    <td id="quantityOrder"> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                    <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
                     <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
                     <td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>
-                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");}@Html.DisplayFor(modelItem => totalPrice)</td>
+                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
                 </tr>
             }
         </tbody>

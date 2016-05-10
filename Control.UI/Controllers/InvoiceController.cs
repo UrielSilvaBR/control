@@ -78,7 +78,10 @@ namespace Control.UI.Controllers
                         Id = (int)x["Id"],
                         SequencialItem = (int)x["SequencialItem"],
                         QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
-                        ProductID = 1
+                        ProductID = (int)x["ProductID"],
+                        UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
+                        ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                        TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString()),
                     }).ToList();
 
                     context = new DALContext();

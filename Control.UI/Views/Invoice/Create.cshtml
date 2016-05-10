@@ -133,7 +133,7 @@
 
                         Html.RenderPartial("_ListInvoiceItem", Model);
 
-                        Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
+                        @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
@@ -237,8 +237,18 @@
         $('#gdvItensNotaFiscal').dataTable({
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado"
-            }, 
-            //"aoColumnDefs": [{ "bVisible": false, "aTargets": [1] }, { "bVisible": false, "aTargets": [2] }]
+            },
+            "aoColumns": [
+            { "Name": "Id" },
+            { "Name": "IdProduto" },
+            { "Name": "SequencialItem" },
+            { "Name": "DescricaoProduto" },
+            { "Name": "Quantidade" },
+            { "Name": "ValorUnitario" },
+            { "Name": "Desconto" },
+            { "Name": "ValorTotal" },
+            ],
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1] }]
         });
 
         $('#gdvItensNotaFiscal_filter').hide();

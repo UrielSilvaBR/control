@@ -185,20 +185,23 @@ function ObterProduto(idProduto, produto) {
 
 function IniciarInclusaoNotaFiscal() {
 
-    var gdvItens = $('#frmCreateInvoice').find('#gdvItensNotaFiscal tbody');
+    var gdvItens = $('#gdvItensNotaFiscal').dataTable();
 
     var Items = new Array();
-    var index = 0;
+    var arrayItens = gdvItens.fnGetData();
 
-    gdvItens.find('tr').each(function (i, el) {
-        var $tds = $(this).find('td'),
-            Id = $tds.find('input').val() == undefined ? 0 : $tds.find('input').val(),
-            index = Id > 0 ? 1 : 0,
-            SequencialItem = $tds[index].innerHTML,
-            QuantityOrder = $tds[2].innerHTML
+    for (var i = 0; i < arrayItens.length ; i++) {
 
-        Items.push({ Id: Id, SequencialItem: SequencialItem, QuantityOrder: QuantityOrder });
-    });
+        Items.push({
+            Id: arrayItens[i][0],
+            ProductID : arrayItens[i][1],
+            SequencialItem: arrayItens[i][2],
+            QuantityOrder: arrayItens[i][4],
+            UnitPrice: arrayItens[i][5],
+            ItemDiscount: arrayItens[i][6],
+            TotalPrice: arrayItens[i][7]
+        });
+    }
 
     var itensNotaFiscal = JSON.stringify(Items);
 
@@ -220,7 +223,7 @@ function AdicionarItemNotaFiscal() {
     else
         giCount = rowCount + 1;
 
-
+    var idProduto = $('#ddlProduto option:selected').val();
     var descricaoProduto = $('#ddlProduto option:selected').text();
     var quantidade = $('#InvoiceItem_QuantityOrder').val();
     quantidade = parseFloat(quantidade).toFixed(2);
@@ -231,6 +234,8 @@ function AdicionarItemNotaFiscal() {
     var precoTotal = $('#InvoiceItem_TotalPrice').val();
 
     $('#gdvItensNotaFiscal').dataTable().fnAddData([
+        0,
+        idProduto,
         giCount,
         descricaoProduto,
         quantidade,
