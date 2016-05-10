@@ -1,4 +1,6 @@
-﻿using Control.UI.Models;
+﻿using Control.DAL;
+using Control.Model.Entities;
+using Control.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +50,29 @@ namespace Control.UI.Controllers
             }
 
             return View("Pedidos", par);
+        }
+
+        public ActionResult ListaPedidos(string nomeCliente)
+        {
+            DALContext context = new DALContext();
+            List<Order> retorno = new List<Order>();
+            try
+            {
+                if (string.IsNullOrEmpty(nomeCliente))
+                {
+                    retorno = context.Orders.All().OrderBy(p => p.InsertDate).ToList();
+                }
+                else
+                {
+                    //retorno = context.Orders.All().Where(p => p.CompanyName.ToUpper().Contains(nomeCliente.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
         }
     }
 }
