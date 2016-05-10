@@ -660,6 +660,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
@@ -669,6 +670,7 @@
     <Compile Include="Models\ClienteViewModel.cs" />
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\MovimentacaoEstoqueViewModel.cs" />
     <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\UserPartialViewModel.cs" />
@@ -711,6 +713,9 @@
     <Content Include="Views\Invoice\Create.cshtml" />
     <Content Include="Views\Invoice\_AddInvoiceItem.cshtml" />
     <Content Include="scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
+    <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
+    <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
+    <Content Include="Views\Estoque\EstoqueCreate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

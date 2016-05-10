@@ -1,0 +1,41 @@
+﻿@using Control.UI.Models
+@model  MovimentacaoEstoqueViewModel
+
+
+@using (Html.BeginForm("EstoqueSave", "Estoque", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EstoqueEditar.Id)
+
+
+    <div class="box-content">
+        <div class="form-group">
+            @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1" })
+           
+            <div class="col-md-5"> 
+
+                @Html.DropDownList("Produtos", String.Empty)
+
+            </div>
+           
+             @Html.Label("Quantidade", htmlAttributes: new { @class = "control-label col-md-1" })
+            <div class="col-md-4">
+                @Html.EditorFor(model => model.EstoqueEditar.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EstoqueEditar.Quantity, "", new { @class = "text-danger" })
+            </div>
+
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+ }
+
