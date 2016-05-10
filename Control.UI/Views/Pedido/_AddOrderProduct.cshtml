@@ -1,0 +1,81 @@
+﻿@using Control.UI.Models
+@using Control.Model.Entities
+@model PedidoViewModel
+
+<style type="text/css">
+    #modalFooterAddItem {
+        border-top: 0px solid #e5e5e5;
+        margin-top: -58px;
+        margin-left: 820px;
+    }
+</style>
+
+<div id="itemPedido" class="modal fade" role="dialog">
+   
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-left: 100px;margin-right: -55px;    height: 280px;">
+            <div class="box" style="margin-bottom: 0px;">
+                <div class="box-header">
+                    <div class="box-name">
+                        <span>Adicionar Item Pedido</span>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-right: 8px !important;margin-top: 4px;">&times;</button>
+                    </div>
+                    <div class="box-icons">
+
+                    </div>
+                </div>
+                <div class="modal-body" style="height: 194px;">
+                    <div class="box-content" style="height: 130px;" />
+
+                    <div class="form-group">
+
+                        @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-5 style=" align-content:flex-start">
+                            @Html.DropDownListFor(p => p.OrderProduct.ProductID, new SelectList(Model.Products, "Id", "Name"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedido" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.OrderProduct.QuantityOrder, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.OrderProduct.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.OrderProduct.UnitPrice, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.OrderProduct.UnitPrice, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.OrderProduct.ItemDiscount, htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.OrderProduct.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.OrderProduct.TotalPrice, htmlAttributes: new { @class = "col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(p => p.OrderProduct.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer" id="modalFooterAddItem">
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" id="btnAdicionarItemPedido" />
+                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />
+                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />*@
+            </div>
+        </div>
+    </div>
+</div>
+</div>

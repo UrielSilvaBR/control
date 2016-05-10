@@ -34,7 +34,6 @@ namespace Control.UI.Controllers
 
         public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            ViewData["Products"] = Invoice.Products;
             return View("Create", Invoice);
         }
 
@@ -64,16 +63,16 @@ namespace Control.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Models.InvoiceViewModel model, string itensNotaFiscal)
+        public ActionResult Save(Models.InvoiceViewModel InvoiceModel, string itensNotaFiscal)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    model.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
+                    InvoiceModel.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
 
                     var arrayItensNotaFiscal = JArray.Parse(itensNotaFiscal);
-                    model.Invoice.Items = ((JArray)arrayItensNotaFiscal).Select(x => new Model.Entities.InvoiceItem
+                    InvoiceModel.Invoice.Items = ((JArray)arrayItensNotaFiscal).Select(x => new Model.Entities.InvoiceItem
                     {
                         Id = (int)x["Id"],
                         SequencialItem = (int)x["SequencialItem"],
@@ -85,21 +84,21 @@ namespace Control.UI.Controllers
                     }).ToList();
 
                     context = new DALContext();
-                    context.Invoices.Create(model.Invoice);
+                    context.Invoices.Create(InvoiceModel.Invoice);
 
                     if (context.SaveChanges() > 0)
                     {
-                        model.Invoice = model.Invoice;
-                        model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == model.Invoice.CustomerID).FirstOrDefault();
-                        return Content(String.Format("<b>Nota Fiscal {0}</br> Gerada com Sucesso!</b>", model.Invoice.Numero));
+                        InvoiceModel.Invoice = InvoiceModel.Invoice;
+                        InvoiceModel.Invoice.CustomerInvoice = InvoiceModel.Customers.Where(p => p.Id == InvoiceModel.Invoice.CustomerID).FirstOrDefault();
+                        return Content(String.Format("<b>Nota Fiscal {0}</br> Gerada com Sucesso!</b>", InvoiceModel.Invoice.Numero));
                     }
                 }
                 else
                 {
-                    return View("Create", model);
+                    return View("Create", InvoiceModel);
                 }
 
-                return View("Create", model);
+                return View("Create", InvoiceModel);
             }
             catch (Exception ex)
             {

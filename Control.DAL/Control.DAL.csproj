@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201605101453385_primeiro.Designer.cs">
       <DependentUpon>201605101453385_primeiro.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605102250187_Pedido_Inclusao.cs" />
+    <Compile Include="Migrations\201605102250187_Pedido_Inclusao.Designer.cs">
+      <DependentUpon>201605102250187_Pedido_Inclusao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -180,6 +184,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605101453385_primeiro.resx">
       <DependentUpon>201605101453385_primeiro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605102250187_Pedido_Inclusao.resx">
+      <DependentUpon>201605102250187_Pedido_Inclusao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

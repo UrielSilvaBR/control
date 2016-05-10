@@ -8,7 +8,7 @@ $(document).ready(function () {
         $('#itemNotaFiscal').modal('hide');
         setTimeout(function () {
             LimparItemNotaFiscal();
-        }, 1000);
+        }, 800);
     })
 
     $('#ddlProduto').on('change', function (produto) {
@@ -214,7 +214,7 @@ function AdicionarItemNotaFiscal() {
 
     var idProduto = $('#ddlProduto option:selected').val();
 
-    if (idProduto) {
+    if (idProduto == 0) {
         ShowMessage('Selecione o Produto para inclusão do Item!', false);
         return;
     }

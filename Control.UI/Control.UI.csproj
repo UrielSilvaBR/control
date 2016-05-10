@@ -224,6 +224,7 @@
     <Content Include="Content\img\calendar.png" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\Invoice\Invoice.js" />
+    <Content Include="Content\Order\Order.js" />
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
@@ -663,6 +664,7 @@
     <Compile Include="Controllers\CadastroController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -702,9 +704,6 @@
     <Content Include="Views\Cadastro\Fornecedores.cshtml" />
     <Content Include="Views\Cadastro\Produtos.cshtml" />
     <Content Include="Views\Cadastro\Contatos.cshtml" />
-    <Content Include="Views\Vendas\_addPedido.cshtml" />
-    <Content Include="Views\Vendas\_addItensPedido.cshtml" />
-    <Content Include="Views\Vendas\Pedidos.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <Content Include="Views\Cadastro\ContatosEdit.cshtml" />
@@ -713,7 +712,14 @@
     <Content Include="Views\Invoice\_AddInvoiceItem.cshtml" />
     <Content Include="scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
     <Content Include="Views\Invoice\_ListInvoiceItem.cshtml" />
+    <Content Include="Views\Vendas\_addItensPedido.cshtml" />
+    <Content Include="Views\Vendas\_addPedido.cshtml" />
     <Content Include="Views\Vendas\ListaPedidos.cshtml" />
+    <Content Include="Views\Vendas\Pedidos.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\Pedido\Create.cshtml" />
+    <Content Include="Views\Pedido\_AddOrderProduct.cshtml" />
+    <Content Include="Views\Pedido\_ListOrders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -10,7 +10,7 @@ namespace Control.DAL.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ///AutomaticMigrationsEnabled = true;
+            //AutomaticMigrationsEnabled = true;
             //AutomaticMigrationDataLossAllowed = true;
         }
 
