@@ -25,13 +25,13 @@ namespace Control.Model.Entities
 
         [Display(Name = "Qtd. Entregue")]
         public decimal QuantityDeliver { get; set; }
-        [Display(Name = "Preço Unitário")]
+        [Display(Name = "Valor Unitário")]
         public decimal UnitPrice { get; set; }
         [Display(Name = "Desconto")]
         public decimal ItemDiscount { get; set; }
         public string Comments { get; set; }
 
-        [Display(Name = "Preço Total")]
+        [Display(Name = "Valor Total")]
         public decimal TotalPrice { get; set; }
 
         //Forgein Keys
