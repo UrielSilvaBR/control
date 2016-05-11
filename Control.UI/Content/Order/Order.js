@@ -313,11 +313,11 @@ function AdicionarItemPedido() {
 
 }
 
-function EditarItemPedido(sequencialItem)
+function EditarItemPedido(indiceLinha)
 {
     var gdvItens = $('#gdvItensPedido').dataTable();
 
-    var rowIndex = sequencialItem - 1;
+    var rowIndex = indiceLinha - 1;
 
     gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 4);
 
