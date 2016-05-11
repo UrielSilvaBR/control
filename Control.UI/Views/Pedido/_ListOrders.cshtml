@@ -8,7 +8,8 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th>Descrição</th>
+                <th></th>
+                <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Valor Unitário</th>
                 <th>Desconto</th>
@@ -22,6 +23,11 @@
                 <tr>
                     <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
                     <td style="display:none">@Html.HiddenFor(modelItem => item.ProductID)</td>
+                    <td style="text-align: center;">
+                        <a href="javascript:void(0);"  onclick="EditarItemPedido(@item.SequencialItem);">
+                            <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </td>
                     <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
                     <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>

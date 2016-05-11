@@ -86,7 +86,7 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Pedido" },
-            new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+    new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
                     {
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
@@ -99,7 +99,7 @@
                                 @Html.ValidationMessageFor(p => p.Order.Id)
                                 @Html.LabelFor(model => model.Order.Id, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
-                                    @Html.EditorFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly="true" } })
+                                    @Html.EditorFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -129,7 +129,7 @@
                                 <div class="col-md-5">
                                     @Html.DropDownListFor(model => model.Order.ContactID, new SelectList(Model.Contacts, "Id", "ContatName"), htmlAttributes: new { @class = "selddl" })
                                 </div>
-                               
+
                             </div>
 
                             <div class="form-group">
@@ -262,7 +262,8 @@
             "aoColumns": [
             { "Name": "Id" },
             { "Name": "IdProduto" },
-            { "Name": "SequencialItem" },
+            { "Name": "EditarItem", "sWidth": "10px", "sClass": "center", },
+            { "Name": "SequencialItem", "sClass": "center", },
             { "Name": "DescricaoProduto" },
             { "Name": "Quantidade" },
             { "Name": "ValorUnitario" },

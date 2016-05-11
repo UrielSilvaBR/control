@@ -274,8 +274,9 @@ function AdicionarItemPedido() {
     var precoTotal = $('#OrderProduct_TotalPrice').val();
 
     $('#gdvItensPedido').dataTable().fnAddData([
-        0,
+        "0",
         idProduto,
+        '<a href="javascript:void(0);" onclick="EditarItemPedido(' + giCount + ');" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
         giCount,
         descricaoProduto,
         quantidade,
@@ -309,5 +310,15 @@ function AdicionarItemPedido() {
     $('#gdvItensPedido_filter').hide();
     //$('#gdvItensPedido_info').hide();
     $('#gdvItensPedido_length').hide();
+
+}
+
+function EditarItemPedido(sequencialItem)
+{
+    var gdvItens = $('#gdvItensPedido').dataTable();
+
+    var rowIndex = sequencialItem - 1;
+
+    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 4);
 
 }
