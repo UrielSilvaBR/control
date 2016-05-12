@@ -228,11 +228,11 @@ function IniciarInclusaoPedido() {
         Items.push({
             Id: arrayItens[i][0],
             ProductID: arrayItens[i][1],
-            SequencialItem: arrayItens[i][2],
-            QuantityOrder: arrayItens[i][4],
-            UnitPrice: arrayItens[i][5],
-            ItemDiscount: arrayItens[i][6],
-            TotalPrice: arrayItens[i][7]
+            SequencialItem: arrayItens[i][3],
+            QuantityOrder: arrayItens[i][5],
+            UnitPrice: arrayItens[i][6],
+            ItemDiscount: arrayItens[i][7],
+            TotalPrice: arrayItens[i][8]
         });
     }
 
@@ -276,7 +276,7 @@ function AdicionarItemPedido() {
     $('#gdvItensPedido').dataTable().fnAddData([
         "0",
         idProduto,
-        '<a href="javascript:void(0);" onclick="EditarItemPedido(' + giCount + ');" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
+        '<a href="javascript:void(0);" onclick="EditarItemPedido(' + giCount + ');" data-toggle="modal" data-target="#itemPedidoEditar" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
         giCount,
         descricaoProduto,
         quantidade,
@@ -319,6 +319,6 @@ function EditarItemPedido(indiceLinha)
 
     var rowIndex = indiceLinha - 1;
 
-    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 4);
+    //gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 4);
 
 }

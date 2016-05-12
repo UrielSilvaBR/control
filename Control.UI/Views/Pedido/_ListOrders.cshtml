@@ -24,7 +24,7 @@
                     <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
                     <td style="display:none">@Html.HiddenFor(modelItem => item.ProductID)</td>
                     <td style="text-align: center;">
-                        <a href="javascript:void(0);"  onclick="EditarItemPedido(@item.SequencialItem);">
+                        <a href="javascript:void(0);"  onclick="EditarItemPedido(@item.SequencialItem);" data-toggle="modal" data-target="#itemPedido">
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>
