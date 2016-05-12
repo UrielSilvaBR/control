@@ -9,6 +9,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
+                <th></th>
                 <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Valor Unitário</th>
@@ -21,10 +22,11 @@
             @foreach (var item in Model.Order.Items)
             {
                 <tr>
-                    <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
-                    <td style="display:none">@Html.HiddenFor(modelItem => item.ProductID)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.OrderId)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.ProductID)</td>
                     <td style="text-align: center;">
-                        <a href="javascript:void(0);"  onclick="EditarItemPedido(@item.SequencialItem);" data-toggle="modal" data-target="#itemPedido">
+                        <a href="javascript:void(0);"  onclick="AbrirItemPedido(@item.SequencialItem);" data-toggle="modal" data-target="#itemPedido">
                             <i class="fa fa-pencil-square-o"></i>
                         </a>
                     </td>

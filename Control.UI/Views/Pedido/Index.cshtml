@@ -59,6 +59,9 @@
                                 <th></th>
                                 <th></th>
                                 <th>
+                                    Pedido
+                                </th>
+                                <th>
                                     Cliente
                                 </th>
                                 <th>
@@ -102,7 +105,9 @@
                                                     <i class="fa fa-check color5"></i>
                                                 </a>
                                             </td>*@
-
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.CustomerOrder.ShortName)
                                         </td>

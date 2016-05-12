@@ -86,7 +86,7 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Pedido" },
-    new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+    new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "IniciarInclusaoPedido", OnSuccess = Model.Order.Id > 0 ?  "FinalizarEdicaoPedido" : "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
                     {
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
@@ -158,11 +158,16 @@
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
-                                @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
-                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
-                                <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
-                                @*<input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />*@
-                                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
+                                
+                                @if (Model.Order.Id > 0)
+                                {
+                                    <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                }
+                                
                             </div>
                         </div>
                     }
@@ -248,20 +253,18 @@
 
         WinMove();
 
-        $('#btnAddItemNotaFiscal').click(function () {
-
-        })
-
         $(window).on('shown.bs.modal', function () {
             //$('.modal-backdrop').removeClass();
         })
 
         $('#gdvItensPedido').dataTable({
+            "aaSorting": [[4, "asc"]],
             "oLanguage": {
                 "sEmptyTable": "Nenhum registro encontrado"
             },
             "aoColumns": [
             { "Name": "Id" },
+            { "Name": "IdPedido" },
             { "Name": "IdProduto" },
             { "Name": "EditarItem", "sWidth": "10px", "sClass": "center", },
             { "Name": "SequencialItem", "sClass": "center", },
@@ -271,7 +274,7 @@
             { "Name": "Desconto" },
             { "Name": "ValorTotal" },
             ],
-            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1] }]
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }]
         });
 
         $('#gdvItensPedido_filter').hide();

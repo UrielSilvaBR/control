@@ -17,7 +17,7 @@
             <div class="box" style="margin-bottom: 0px;">
                 <div class="box-header">
                     <div class="box-name">
-                        <span>Adicionar Item Pedido</span>
+                        <span id="tituloItemPedido">Adicionar Item Pedido</span>
                         <button type="button" class="close" data-dismiss="modal" style="margin-right: 8px !important;margin-top: 4px;">&times;</button>
                     </div>
                     <div class="box-icons">
@@ -28,6 +28,8 @@
                     <div class="box-content" style="height: 130px;" />
 
                     <div class="form-group">
+
+                        <input type="hidden" id="rowIndexItemPedido" />
 
                         @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
                         <div class="col-md-5 style=" align-content:flex-start">
@@ -71,7 +73,7 @@
         <div class="form-group">
             <div class="col-md-5">
                 <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" id="btnAdicionarItemPedido" />
-                @*<input type="submit" value="Alterar" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditarItemPedido" />*@
+                <input type="submit" value="Alterar" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditarItemPedido" />
             </div>
         </div>
     </div>

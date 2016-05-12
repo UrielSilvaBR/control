@@ -57,12 +57,6 @@ namespace Control.UI.Controllers
             return View("Create", model);
         }
 
-        [HttpPost]
-        public ActionResult Edit(Models.PedidoViewModel Pedido)
-        {
-            return View();
-        }
-
         #endregion
 
         #region Delete
@@ -92,6 +86,7 @@ namespace Control.UI.Controllers
                     Pedido.Order.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.OrderProduct
                     {
                         Id = (int)x["Id"],
+                        OrderId = (int)x["IdPedido"],
                         SequencialItem = (int)x["SequencialItem"],
                         QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                         ProductID = (int)x["ProductID"],
@@ -104,13 +99,30 @@ namespace Control.UI.Controllers
                     Pedido.Order.OrderTypeID = 1;
 
                     context = new DALContext();
-                    context.Orders.Create(Pedido.Order);
+
+                    foreach (var item in Pedido.Order.Items.Where(p => p.OrderId > 0))
+                        context.OrdersProducts.Update(item);
+
+                    foreach (var item in Pedido.Order.Items.Where(p => p.OrderId == 0))
+                    {
+                        item.OrderId = Pedido.Order.Id;
+                        context.OrdersProducts.Create(item);
+                    }
+
+                    if (Pedido.Order.Id > 0)
+                        context.Orders.Update(Pedido.Order);
+                    else
+                        context.Orders.Create(Pedido.Order);
 
                     if (context.SaveChanges() > 0)
                     {
                         Pedido.Order = Pedido.Order;
                         Pedido.Order.CustomerOrder = Pedido.Customers.Where(p => p.Id == Pedido.Order.CustomerID).FirstOrDefault();
-                        return Content(String.Format("<b>Pedido {0}</br> Gerado com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
+
+                        if (Pedido.Order.Id > 0)
+                            return Content(String.Format("<b>Pedido {0}</br> Alterado com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
+                        else
+                            return Content(String.Format("<b>Pedido {0}</br> Gerado com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
                     }
                 }
                 else
