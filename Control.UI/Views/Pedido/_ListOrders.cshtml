@@ -1,10 +1,48 @@
-﻿@using Control.UI.Models
-@model PedidoViewModel
+﻿@using Control.Model.Entities
+@model List<OrderProduct>
 
-<div id="table_wrapperz">
+<head>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#gdvItensPedido').dataTable({
+                "aaSorting": [[5, "asc"]],
+                "oLanguage": {
+                    "sEmptyTable": "Nenhum registro encontrado"
+                },
+                "aoColumns": [
+                { "Name": "Id" },
+                { "Name": "IdPedido" },
+                { "Name": "IdProduto" },
+                { "Name": "EditarItem", "sWidth": "10px", "sClass": "center", },
+                { "Name": "ExcluirItem", "sWidth": "10px", "sClass": "center", },
+                { "Name": "SequencialItem", "sClass": "center", },
+                { "Name": "DescricaoProduto" },
+                { "Name": "Quantidade" },
+                { "Name": "ValorUnitario" },
+                { "Name": "Desconto" },
+                { "Name": "ValorTotal" },
+                ],
+                "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }]
+            });
+
+            $('#gdvItensPedido_filter').hide();
+            //$('#gdvItensPedido_info').hide();
+            $('#gdvItensPedido_length').hide();
+
+        });
+
+    </script>
+
+</head>
+
+<div id="table_wrapperz_ItensPedido">
     <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensPedido">
         <thead>
             <tr>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -19,15 +57,20 @@
         </thead>
         <tbody>
 
-            @foreach (var item in Model.Order.Items)
+            @foreach (var item in Model)
             {
                 <tr>
-                    <td style="display:none">@Html.DisplayFor(modelItem => item.Id)</td>
-                    <td style="display:none">@Html.DisplayFor(modelItem => item.OrderId)</td>
-                    <td style="display:none">@Html.DisplayFor(modelItem => item.ProductID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductID)</td>
                     <td style="text-align: center;">
-                        <a href="javascript:void(0);"  onclick="AbrirItemPedido(@item.SequencialItem);" data-toggle="modal" data-target="#itemPedido">
+                        <a href="javascript:void(0);" onclick="AbrirItemPedido(@item.SequencialItem);" data-toggle="modal" data-target="#itemPedido">
                             <i class="fa fa-pencil-square-o"></i>
+                        </a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="javascript:void(0);" onclick="ExcluirItemPedido(@item.SequencialItem);">
+                            <i class="fa fa-times"></i>
                         </a>
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>

@@ -7,14 +7,8 @@
 }
 
 <head>
-
-    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
-    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
-    <script src="~/plugins/datatables/TableTools.js"></script>
-    <script src="~/plugins/datatables/TableTools_orig.js"></script>
-    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
-    <script src="~/plugins/select2/select2.js"></script>
-    <script src="~/Content/Order/Order.js"></script>
+   
+     <script src="~/Content/Order/Order.js"></script>
 
     <style type="text/css">
         .form-horizontal .form-group {
@@ -86,7 +80,7 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Pedido" },
-    new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "IniciarInclusaoPedido", OnSuccess = Model.Order.Id > 0 ?  "FinalizarEdicaoPedido" : "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "IniciarInclusaoPedido", OnSuccess = Model.Order.Id > 0 ? "FinalizarEdicaoPedido" : "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
                     {
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
@@ -152,7 +146,12 @@
                             <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
                         </div>
 
-                        Html.RenderPartial("_ListOrders", Model);
+                        @*<div id="partialViewItensPedido">
+                          
+                        </div>*@
+
+                        //Html.RenderPartial("_ListOrders", Model.Order.Items);
+                        Html.RenderAction("GetOrderProducts", "Pedido", new { OrderID = Model.Order.Id });
 
                         @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
 
@@ -228,58 +227,16 @@
         // Load script of Select2 and run this
         LoadSelect2Script(Select2Test);
 
-        $('.datepicker').datepicker({
-            setDate: new Date(),
-            onSelect: function (date) {
-                $(this).valid();
-            },
-            dateFormat: 'dd/mm/yy',
-            language: 'pt',
-            dateFormat: 'dd/mm/yy',
-            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-            nextText: 'Próximo',
-            prevText: 'Anterior',
-            showOn: "button",
-            buttonImage: "../content/img/calendar.png",
-            buttonImageOnly: true
-        });
-
         //$("#Pedido_CustomerID").select2();
         //$("#Pedido_ContactID").select2();
+
+
 
         WinMove();
 
         $(window).on('shown.bs.modal', function () {
             //$('.modal-backdrop').removeClass();
         })
-
-        $('#gdvItensPedido').dataTable({
-            "aaSorting": [[4, "asc"]],
-            "oLanguage": {
-                "sEmptyTable": "Nenhum registro encontrado"
-            },
-            "aoColumns": [
-            { "Name": "Id" },
-            { "Name": "IdPedido" },
-            { "Name": "IdProduto" },
-            { "Name": "EditarItem", "sWidth": "10px", "sClass": "center", },
-            { "Name": "SequencialItem", "sClass": "center", },
-            { "Name": "DescricaoProduto" },
-            { "Name": "Quantidade" },
-            { "Name": "ValorUnitario" },
-            { "Name": "Desconto" },
-            { "Name": "ValorTotal" },
-            ],
-            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }]
-        });
-
-        $('#gdvItensPedido_filter').hide();
-        //$('#gdvItensPedido_info').hide();
-        $('#gdvItensPedido_length').hide();
     });
 
 </script>

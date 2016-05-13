@@ -71,6 +71,16 @@ namespace Control.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult DeleteOrderProduct(int OrderProductID)
+        {
+            context = new DALContext();
+            context.OrdersProducts.Delete(p => p.Id == OrderProductID);
+            context.SaveChanges();
+
+            return Content("Item Excluído com Sucesso!");
+        }
+
         #endregion
 
         #region Save
@@ -145,6 +155,13 @@ namespace Control.UI.Controllers
             context = new DALContext();
             var objProduct = context.Products.Find(p => p.Id == ProductID);
             return Json(objProduct);
+        }
+
+        public PartialViewResult GetOrderProducts(int OrderID)
+        {
+            context = new DALContext();
+            var OrderProducts = context.OrdersProducts.Filter(p => p.OrderId == OrderID).ToList();
+            return PartialView("_ListOrders", OrderProducts);
         }
     }
 }
