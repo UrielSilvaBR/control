@@ -5,42 +5,79 @@ $(document).ready(function () {
 
     $('#btnAdicionarItemNf').click(function () {
         AdicionarItemNotaFiscal();
+        $('#itemNotaFiscal').modal('hide');
+        setTimeout(function () {
+            LimparItemNotaFiscal();
+        }, 800);
     })
-
-    ObterValorUnitarioProduto($('#ddlProduto option:selected').val());
 
     $('#ddlProduto').on('change', function (produto) {
         ObterValorUnitarioProduto(produto.val);
     });
 
+    $('#InvoiceItem_QuantityOrder').focusout(function () {
+        var quantidade = $(this).val();
+        CalcularItemNotaFiscal(quantidade);
+    });
+
     $('#InvoiceItem_ItemDiscount').focusout(function () {
         ValidarDescontoItemNotaFiscal($(this).val());
     });
-
 });
 
-function InicializarModalItemNotaFiscal()
-{
+function LimparItemNotaFiscal() {
+    $("#ddlProduto").select2().select2("val", '0');
+    $('#InvoiceItem_QuantityOrder').val(1);
+    $('#InvoiceItem_UnitPrice').val(0);
+    $('#InvoiceItem_ItemDiscount').val(0);
+    $('#InvoiceItem_QuantityDeliver').val(0);
+    $('#InvoiceItem_TotalPrice').val(0);
+}
+
+function InicializarModalItemNotaFiscal() {
     IniciarlizarCamposItemNotaFiscal();
     InicializarMascaraItemNotaFiscal();
     InicializarCamposReadOnly();
 }
 
-function IniciarlizarCamposItemNotaFiscal()
-{
-    $('#Invoice_Valor').val(0);
+function IniciarlizarCamposItemNotaFiscal() {
+
+    var valorNotaFiscal = $('#Invoice_Valor').val();
+    valorNotaFiscal = valorNotaFiscal.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    valorNotaFiscal = Number(valorNotaFiscal.replace(/[^0-9\.]+/g, ""));
+
+    if (valorNotaFiscal <= 0)
+        $('#Invoice_Valor').val(0);
+    else
+        $('#Invoice_Valor').val(valorNotaFiscal);
+
+    $('#InvoiceItem_QuantityOrder').ForceNumericOnly();
 
     if (parseInt($('#InvoiceItem_QuantityOrder').val()) == 0)
         $('#InvoiceItem_QuantityOrder').val(1);
 }
 
-function ValidarDescontoItemNotaFiscal(pValorDesconto)
-{
+function CalcularItemNotaFiscal(quantidade) {
+    var valorUnitario = $('#InvoiceItem_UnitPrice').val();
+    valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
+
+    var valorTotal = quantidade * valorUnitario;
+
+    //var valorDesconto = $('#InvoiceItem_ItemDiscount').val();
+    //valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    //valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
+    //valorTotal = valorTotal - valorDesconto;
+
+    $('#InvoiceItem_TotalPrice').val(valorTotal);
+}
+
+function ValidarDescontoItemNotaFiscal(pValorDesconto) {
     var valorDesconto = pValorDesconto;
     valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
 
-    var valorUnitario = $('#InvoiceItem_UnitPrice').val();
+    var valorUnitario = $('#InvoiceItem_TotalPrice').val();
     valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
     valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
 
@@ -50,43 +87,60 @@ function ValidarDescontoItemNotaFiscal(pValorDesconto)
         //$('#itemNotaFiscal').modal('show');
     }
 
+
+
     var valorTotal = valorUnitario - valorDesconto;
 
     $('#InvoiceItem_TotalPrice').val(valorTotal);
 }
 
-function InicializarMascaraItemNotaFiscal()
-{
+function InicializarMascaraItemNotaFiscal() {
     $('#Invoice_Valor').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_UnitPrice').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_ItemDiscount').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_TotalPrice').maskMoney({
-        prefix: 'R$ ',
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
         thousands: '.',
         decimal: ',',
         precision: 2,
-        affixesStay: true
+        affixesStay: false,
+        symbolPosition: 'left'
     });
 
     $('#InvoiceItem_QuantityOrder').ForceNumericOnly();
@@ -94,12 +148,11 @@ function InicializarMascaraItemNotaFiscal()
     $('#Invoice_DataEmissao').mask('99/99/9999');
 }
 
-function InicializarCamposReadOnly()
-{
+function InicializarCamposReadOnly() {
     $('#Invoice_Valor').attr('readonly', true);
     $('#InvoiceItem_TotalPrice').attr('readonly', true);
     $('#InvoiceItem_UnitPrice').attr('readonly', true);
-    
+
 }
 
 function FinalizarInclusaoNotaFiscal(notaFiscal) {
@@ -110,10 +163,18 @@ function ObterValorUnitarioProduto(idProduto) {
 
     ObterProduto(idProduto, function (produto) {
         $('#InvoiceItem_UnitPrice').val(produto.UnitPrice.toFixed(2));
+        $('#InvoiceItem_TotalPrice').val(produto.UnitPrice.toFixed(2));
+        CalcularItemNotaFiscal($('#InvoiceItem_QuantityOrder').val());
     });
 }
 
 function ObterProduto(idProduto, produto) {
+
+    if (idProduto == 0) {
+        $('#InvoiceItem_UnitPrice').val(0);
+        $('#InvoiceItem_TotalPrice').val(0);
+        return;
+    }
 
     $.post("/Invoice/GetProducts",
         { ProductID: idProduto },
@@ -123,15 +184,40 @@ function ObterProduto(idProduto, produto) {
 }
 
 function IniciarInclusaoNotaFiscal() {
-    //var valorNf = $('#Invoice_Valor').val();
-    //valorNf = valorNf.replace(".", "").replace("R$", "").trim();
-    //alert(valorNf);
-    //$('#Invoice_Valor').val(valorNf);
+
+    var gdvItens = $('#gdvItensNotaFiscal').dataTable();
+
+    var Items = new Array();
+    var arrayItens = gdvItens.fnGetData();
+
+    for (var i = 0; i < arrayItens.length ; i++) {
+
+        Items.push({
+            Id: arrayItens[i][0],
+            ProductID : arrayItens[i][1],
+            SequencialItem: arrayItens[i][2],
+            QuantityOrder: arrayItens[i][4],
+            UnitPrice: arrayItens[i][5],
+            ItemDiscount: arrayItens[i][6],
+            TotalPrice: arrayItens[i][7]
+        });
+    }
+
+    var itensNotaFiscal = JSON.stringify(Items);
+
+    $('#itensNotaFiscal').val(itensNotaFiscal);
 }
 
 function AdicionarItemNotaFiscal() {
 
     //ValidarDescontoItemNotaFiscal($('#InvoiceItem_ItemDiscount').val());
+
+    var idProduto = $('#ddlProduto option:selected').val();
+
+    if (idProduto == 0) {
+        ShowMessage('Selecione o Produto para inclusão do Item!', false);
+        return;
+    }
 
     var rowEmpty = $('#gdvItensNotaFiscal > tbody > tr').find('.dataTables_empty').length == 1;
     var rowCount = $('#gdvItensNotaFiscal > tbody > tr').length;
@@ -144,15 +230,19 @@ function AdicionarItemNotaFiscal() {
     else
         giCount = rowCount + 1;
 
-
+    
     var descricaoProduto = $('#ddlProduto option:selected').text();
     var quantidade = $('#InvoiceItem_QuantityOrder').val();
+    quantidade = parseFloat(quantidade).toFixed(2);
+    quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#InvoiceItem_UnitPrice').val();
     var quantidadeEntregue = $('#InvoiceItem_QuantityDeliver').val();
     var desconto = $('#InvoiceItem_ItemDiscount').val();
     var precoTotal = $('#InvoiceItem_TotalPrice').val();
 
     $('#gdvItensNotaFiscal').dataTable().fnAddData([
+        0,
+        idProduto,
         giCount,
         descricaoProduto,
         quantidade,

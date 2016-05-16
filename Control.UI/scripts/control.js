@@ -1,5 +1,27 @@
 ﻿var originalVal = $.fn.val;
 
+$(document).ready(function () {
+    $('.datepicker').datepicker({
+        setDate: new Date(),
+        onSelect: function (date) {
+            $(this).valid();
+        },
+        dateFormat: 'dd/mm/yy',
+        language: 'pt',
+        dateFormat: 'dd/mm/yy',
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+        dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        nextText: 'Próximo',
+        prevText: 'Anterior',
+        showOn: "button",
+        buttonImage: "../content/img/calendar.png",
+        buttonImageOnly: true
+    });
+});
+
 $.fn.val = function (value) {
     if (typeof value == 'undefined') {
         return originalVal.call(this);
@@ -10,6 +32,7 @@ $.fn.val = function (value) {
         return originalVal.call(this, value);
     }
 };
+
 
 
 jQuery.fn.extend({
@@ -315,7 +338,6 @@ function ShowHTTPException(httpex) {
     else message = httpex.responseText;
     return ShowMessage(message);
 }
-
 
 // Numeric only control handler
 jQuery.fn.ForceNumericOnly =

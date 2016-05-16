@@ -224,6 +224,7 @@
     <Content Include="Content\img\calendar.png" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\Invoice\Invoice.js" />
+    <Content Include="Content\Order\Order.js" />
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
@@ -231,6 +232,7 @@
     <Content Include="Global.asax" />
     <Content Include="js\devoops.js" />
     <Content Include="js\devoops.min.js" />
+    <Content Include="js\Pedidos_Vendas.js" />
     <Content Include="Links.txt" />
     <Content Include="plugins\bootstrapvalidator\bootstrapValidator.css" />
     <Content Include="plugins\bootstrapvalidator\bootstrapValidator.js" />
@@ -637,7 +639,7 @@
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery.maskedinput.js" />
     <Content Include="scripts\jquery.maskedinput.min.js" />
-    <Content Include="scripts\jquery.moneymask.js" />
+    <Content Include="scripts\jquery.maskMoney.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="scripts\jquery.validate-vsdoc.js" />
@@ -663,6 +665,7 @@
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\PedidoController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -703,9 +706,6 @@
     <Content Include="Views\Cadastro\Fornecedores.cshtml" />
     <Content Include="Views\Cadastro\Produtos.cshtml" />
     <Content Include="Views\Cadastro\Contatos.cshtml" />
-    <Content Include="Views\Vendas\_addPedido.cshtml" />
-    <Content Include="Views\Vendas\_addItensPedido.cshtml" />
-    <Content Include="Views\Vendas\Pedidos.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <Content Include="Views\Cadastro\ContatosEdit.cshtml" />
@@ -713,6 +713,15 @@
     <Content Include="Views\Invoice\Create.cshtml" />
     <Content Include="Views\Invoice\_AddInvoiceItem.cshtml" />
     <Content Include="scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
+    <Content Include="Views\Invoice\_ListInvoiceItem.cshtml" />
+    <Content Include="Views\Vendas\_addItensPedido.cshtml" />
+    <Content Include="Views\Vendas\_addPedido.cshtml" />
+    <Content Include="Views\Vendas\ListaPedidos.cshtml" />
+    <Content Include="Views\Vendas\Pedidos.cshtml" />
+    <Content Include="Views\Pedido\Index.cshtml" />
+    <Content Include="Views\Pedido\Create.cshtml" />
+    <Content Include="Views\Pedido\_AddOrderProduct.cshtml" />
+    <Content Include="Views\Pedido\_ListOrders.cshtml" />
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <Content Include="Views\Estoque\EstoqueCreate.cshtml" />

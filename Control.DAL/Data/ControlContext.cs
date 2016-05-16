@@ -48,7 +48,7 @@ namespace Control.DAL.Data
         public ControlContext(DbConnection cn)
             : base(cn, true)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MLogisticContext>());
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public static ControlContext Create()

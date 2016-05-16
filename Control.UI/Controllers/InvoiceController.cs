@@ -8,6 +8,7 @@ using Control.DAL;
 using Control.Utility;
 using Newtonsoft.Json;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Control.UI.Controllers
 {
@@ -33,7 +34,6 @@ namespace Control.UI.Controllers
 
         public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
-            ViewData["Products"] = Invoice.Products;
             return View("Create", Invoice);
         }
 
@@ -63,48 +63,47 @@ namespace Control.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Save(Models.InvoiceViewModel model)
+        public ActionResult Save(Models.InvoiceViewModel InvoiceModel, string itensNotaFiscal)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    model.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
-                    model.Invoice.Items = new List<InvoiceItem>();
-                    model.Invoice.Items.Add(new InvoiceItem() { ProductID = 1, QuantityOrder = 1, SequencialItem = 1, TotalPrice = 1400, UnitPrice = 1400 });
-                    model.Invoice.Taxes = new List<InvoiceTax>();
-                    model.Invoice.Taxes.Add(new InvoiceTax() { ValorIss = model.Invoice.Valor * 0.03M });
+                    InvoiceModel.Invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
+
+                    var arrayItensNotaFiscal = JArray.Parse(itensNotaFiscal);
+                    InvoiceModel.Invoice.Items = ((JArray)arrayItensNotaFiscal).Select(x => new Model.Entities.InvoiceItem
+                    {
+                        Id = (int)x["Id"],
+                        SequencialItem = (int)x["SequencialItem"],
+                        QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                        ProductID = (int)x["ProductID"],
+                        UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
+                        ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                        TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString()),
+                    }).ToList();
 
                     context = new DALContext();
-                    context.Invoices.Create(model.Invoice);
+                    context.Invoices.Create(InvoiceModel.Invoice);
 
                     if (context.SaveChanges() > 0)
                     {
-                        model.Invoice = model.Invoice;
-                        model.Invoice.CustomerInvoice = model.Customers.Where(p => p.Id == model.Invoice.CustomerID).FirstOrDefault();
-                        return Content(String.Format("<b>Nota Fiscal {0}</br> Gerada com Sucesso!</b>", model.Invoice.Numero));
+                        InvoiceModel.Invoice = InvoiceModel.Invoice;
+                        InvoiceModel.Invoice.CustomerInvoice = InvoiceModel.Customers.Where(p => p.Id == InvoiceModel.Invoice.CustomerID).FirstOrDefault();
+                        return Content(String.Format("<b>Nota Fiscal {0}</br> Gerada com Sucesso!</b>", InvoiceModel.Invoice.Numero));
                     }
                 }
                 else
                 {
-                    return View("Create", model);
+                    return View("Create", InvoiceModel);
                 }
 
-                return View("Create", model);
+                return View("Create", InvoiceModel);
             }
             catch (Exception ex)
             {
                 return Content(ex.Message);
             }
-        }
-
-        public JsonResult Teste(Model.Entities.InvoiceItem Item)
-        {
-            Item = new InvoiceItem();
-            Item.Id = 1;
-            string itemJson = JsonConvert.SerializeObject(Item);
-
-            return Json(itemJson);
         }
 
         public ActionResult Delete(int InvoiceID)

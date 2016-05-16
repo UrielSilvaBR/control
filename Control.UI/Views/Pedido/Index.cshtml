@@ -1,0 +1,226 @@
+﻿@using Control.Model.Entities
+@using Control.Model.Enums
+@using Control.Utility
+@model IEnumerable<Order>
+@{
+    ViewBag.Title = "Pedidos Efetivados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/datatables/TableTools.js"></script>
+    <script src="~/plugins/datatables/TableTools_orig.js"></script>
+    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/plugins/select2/select2.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Vendas</a></li>
+            <li><a href="#">Histórico Pedidos</a></li>
+            @*<li><a href="#">Edição</a></li>*@
+        </ol>
+    </div>
+</div>
+
+
+<!--Teste-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Histórico Pedidos</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <div id="table_wrapperz">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvPedidos" style="overflow: scroll !important;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>
+                                    Pedido
+                                </th>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contato
+                                </th>
+                                <th>
+                                    Tipo
+                                </th>
+                                <th>
+                                    Vendedor
+                                </th>
+                                <th>
+                                    Data Emissão
+                                </th>
+                                <th>
+                                    Valor
+                                </th>
+                                <th>
+                                    Nota Fiscal
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                {
+                                    <tr>
+                                        <td style="text-align: center;">
+                                            <a href='@Url.Action("Edit", "Pedido", new { OrderID = item.Id })'>
+                                                <i class="fa fa-edit red"></i>
+                                            </a>
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <a href='@Url.Action("Delete", "Pedido", new { OrderID = item.Id } )'>
+                                                <i class="fa fa-times-circle" style="color:red"></i>
+
+                                            </a>
+                                        </td>
+                                        @*<td style="text-align: center;">
+                                                <a href='@Url.Action("ConsultarNFSe", "Invoice", new { OrderID = item.Id })'>
+                                                    <i class="fa fa-check color5"></i>
+                                                </a>
+                                            </td>*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerOrder.ShortName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ContactOrder.ContatName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TypeOrder.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.VendorOrder.Name)
+                                        </td>
+                                        <td>
+                                            @{ string dataEmissao = item.OrderDate.ToShortDateString(); }
+                                            @Html.DisplayFor(modelItem => dataEmissao)
+                                        </td>
+                                        <td>
+                                            @{
+                                                string totalValue = item.TotalValue.ToString("C");
+                                            }
+                                            @Html.DisplayFor(modelItem => totalValue)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                        </td>
+                                    </tr>
+                                                    }
+                                                }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    -->
+
+<script type="text/javascript">
+    // Run Datables plugin and create 3 variants of settings
+    function AllTables() {
+        TableNotaFiscal();
+        LoadSelect2Script(MakeSelect2);
+    }
+
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+
+            //var url = Url.Action("ActionName", "ControllerName")';
+            var url = '@Url.Action("ActionName", "ControllerName")';
+
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Pedido/Create\"' />");
+            //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+        });
+    }
+
+    function TableNotaFiscal() {
+        $('#gdvPedidos').dataTable({
+            "aaSorting": [[8, "desc"]],
+            "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sSearch": "",
+                "sLengthMenu": '_MENU_',
+                "scrollY": 200,
+                "scrollX": 200
+            },
+            "aoColumns": [
+               { "sName": "EditarPedido" },
+               { "sName": "ExcluirPedido" },
+               { "data": "Cliente" },
+               { "sName": "Contato" },
+               { "sName": "Tipo" },
+               { "sName": "Vendedor" },
+               { "sName": "DataEmissao" },
+               { "sName": "Valor" },
+               { "sName": "NotaFiscal" },
+            ],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+                "order": []
+            }]
+        });
+    }
+
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
+
+        // Add Drag-n-Drop feature
+        WinMove();
+
+        //$('#gdvNotaFiscal').DataTable({
+        //    "aoColumns": [
+        //        { "sName": "EditarNotaFiscal" },
+        //        { "sName": "ExcluirNotaFiscal" },
+        //        { "sName": "GerarNotaFiscal" },
+        //        { "data": "Numero" },
+        //        { "sName": "Serie" },
+        //        { "sName": "Valor" },
+        //        { "sName": "Status" },
+        //        { "sName": "DataEmissao" },
+        //        { "sName": "DataCriacao" },
+        //        { "sName": "Cliente" },
+        //    ],
+        //    "order": [[8, "desc"]],
+        //    "columnDefs": [
+        //        { "orderable": false, "targets": 3 }
+        //    ]
+        //});
+    });
+</script>

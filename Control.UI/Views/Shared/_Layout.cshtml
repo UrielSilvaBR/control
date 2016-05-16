@@ -46,10 +46,17 @@
     <script src="~/plugins/tinymce/jquery.tinymce.min.js"></script>
     <!-- All functions for this theme + document.ready processing -->
     <script src="/js/devoops.js"></script>
+
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/datatables/TableTools.js"></script>
+    <script src="~/plugins/datatables/TableTools_orig.js"></script>
+    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/plugins/select2/select2.js"></script>
+
     <script src="~/scripts/control.js"></script>
     <script src="~/scripts/jquery.maskedinput.js"></script>
-    <script src="~/scripts/jquery.moneymask.js"></script>
-
+    <script src="~/scripts/jquery.maskMoney.js"></script>
     <!-- Includes Layout - Fim -->
 
     <style type="text/css">
@@ -96,12 +103,18 @@
             cursor: pointer;
         }
 
+        .modal{
+                overflow-y: hidden;
+        }
+
     </style>
 
 </head>
 <body>
 
     @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
+
+    @Html.Partial("~/Views/Pedido/_AddOrderProduct.cshtml", new PedidoViewModel())
 
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -258,13 +271,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Propostas", "Propostas", "Vendas")</li>
-                            <li>@Html.ActionLink("Pedidos", "Pedidos", "Vendas")</li>
+                            <li>@Html.ActionLink("Pedidos", "Create", "Pedido")</li>
                             <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
                             <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>
                             <li>@Html.ActionLink("Tabela de Preços", "TabelaPrecos", "Vendas")</li>
                             <li>@Html.ActionLink("Disponibilidade Produtos", "ConsultaEstoque", "Vendas")</li>
-                            <li>@Html.ActionLink("Histórico Pedidos", "Historicos Pedidos", "Vendas")</li>
-                            <li>@Html.ActionLink("Vendas por Periodo", "Historicos Pedidos", "Vendas")</li>
+                            <li>@Html.ActionLink("Histórico Pedidos", "Index", "Pedido")</li>
+                            <li>@Html.ActionLink("Vendas por Periodo", "ListaPedidos", "Vendas")</li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -335,7 +348,7 @@
                             <li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
                             <li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
                             <!--<li>Html.ActionLink("Cadastro de “Prospects” (Funil de Vendas)", "Prospects", "Cadastro")</li>-->
-                            <li>@Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>
+                            <!--<li>Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>-->
                             <!--<li><a class="ajax-link" href="ajax/maps.html">OpenStreetMap</a></li>
                             <li><a class="ajax-link" href="ajax/map_fullscreen.html">Fullscreen map</a></li>-->
                         </ul>

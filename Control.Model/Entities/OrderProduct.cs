@@ -12,60 +12,63 @@ namespace Control.Model.Entities
     [DataContract]
     public class OrderProduct : IEntity
     {
-        
         [Key]
         [DataMember]
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int SequencialItem { get; set; }
 
-        private string _productName;
-        public string ProductName
-        {
-            get
-            {
-                if (ProductID > 0)
-                    return ProductItem.Name;
-                else
-                    return _productName;
+        //private string _productName;
+        //public string ProductName
+        //{
+        //    get
+        //    {
+        //        if (ProductID > 0)
+        //            return ProductItem.Name;
+        //        else
+        //            return _productName;
 
-            } set { _productName = value; }
-        }
+        //    } set { _productName = value; }
+        //}
 
-        private string _productModel;
-        public string ProductModel
-        {
-            get
-            {
-                if (ProductID > 0)
-                    return ProductItem.Model;
-                else
-                    return _productModel;
+        //private string _productModel;
+        //public string ProductModel
+        //{
+        //    get
+        //    {
+        //        if (ProductID > 0)
+        //            return ProductItem.Model;
+        //        else
+        //            return _productModel;
 
-            }
-            set { _productModel = value; }
-        }
+        //    }
+        //    set { _productModel = value; }
+        //}
 
-        private string _description;
-        public string Description
-        {
-            get
-            {
-                if (ProductID > 0)
-                    return ProductItem.Description;
-                else
-                    return _description;
+        //private string _description;
+        //public string Description
+        //{
+        //    get
+        //    {
+        //        if (ProductID > 0)
+        //            return ProductItem.Description;
+        //        else
+        //            return _description;
 
-            }
-            set { _description = value; }
-        }
+        //    }
+        //    set { _description = value; }
+        //}
 
-        public decimal? QuantityOrder { get; set; } 
+        [Display(Name ="Quantidade")]
+        public decimal QuantityOrder { get; set; } 
         public decimal? QuantityDeliver { get; set; }
-        public decimal? UnitPrice { get; set; }
-        public decimal? ItemDiscount { get; set; }
+        [Display(Name = "Valor Unitário")]
+        public decimal UnitPrice { get; set; }
+        [Display(Name = "Desconto")]
+        public decimal ItemDiscount { get; set; }
         public string Comments { get; set; }
-        public string TotalPrice { get; set; }
+        [Display(Name = "Valor Total")]
+        public decimal TotalPrice { get; set; }
 
         //Forgein Keys
         public int? ProductID { get; set; }

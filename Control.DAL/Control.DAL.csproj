@@ -88,6 +88,14 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
+    <Compile Include="Migrations\201605101453385_primeiro.cs" />
+    <Compile Include="Migrations\201605101453385_primeiro.Designer.cs">
+      <DependentUpon>201605101453385_primeiro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605102250187_Pedido_Inclusao.cs" />
+    <Compile Include="Migrations\201605102250187_Pedido_Inclusao.Designer.cs">
+      <DependentUpon>201605102250187_Pedido_Inclusao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -172,6 +180,14 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201605101453385_primeiro.resx">
+      <DependentUpon>201605101453385_primeiro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605102250187_Pedido_Inclusao.resx">
+      <DependentUpon>201605102250187_Pedido_Inclusao.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,7 +11,7 @@
         <div class="form-group">
             @Html.Label("Produtos", htmlAttributes: new { @class = "col-md-1" })
             <div class="col-md-5">
-                @Html.DropDownListFor(model => model.ItemPedido.ProductID, new SelectList(Model.Produtos, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                @Html.DropDownListFor(model => model.ItemPedido.ProductID, new SelectList(Model.Produtos, "Id", "Name"), htmlAttributes: new { @class = "selddl", @id = "ddlProduto" })
             </div>
             <div class="col-md-4" style="display:none">
                 @Html.ActionLink("Histórico Produto", "Historico")
@@ -42,8 +42,9 @@
 
         <div class="form-group">
             <div class="col-md-offset-5">
-                <input type="button" value="Go Somewhere Else" onclick="location.href='@Url.Action("AddItemPedido", "Vendas", new { par = Model });'" />
-                <input type="submit" value="Gravare" class="btn btn-primary" />
+                @*<input type="button" value="Go Somewhere Else" onclick="location.href='@Url.Action("AddItemPedido", "Vendas", new { par  = Model });'" />*@
+                @*<input type="button"  value="Go Somewhere Else"  />*@
+                <input type="button" id="btnAddItem" value="Gravare" class="btn btn-primary" />
 
                 <a href='@Url.Action("Histórico Produto", "Cadastro")'>
                     <i class="btn btn-primary">Histórico</i>
