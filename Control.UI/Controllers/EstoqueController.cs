@@ -159,10 +159,11 @@ namespace Control.UI.Controllers
 
             context = new DALContext();
             estoque.UpdateDate = DateTime.Now;
-
-            if (estoque.Id > 0)
+            Storage EstoqueProduto = context.Storages.Find(p => p.ProductID == estoque.ProductID);
+            if (EstoqueProduto != null)
             {
-                context.Storages.Update(estoque);
+                EstoqueProduto.Quantity += estoque.Quantity;
+                context.Storages.Update(EstoqueProduto);
             }
             else
             { 
@@ -170,7 +171,7 @@ namespace Control.UI.Controllers
                 context.Storages.Create(estoque);
             }
             context.SaveChanges();
-            return RedirectToAction("ConsultaEstoque");
+            return RedirectToAction("MovimentacaoEstoque");
         }
 
         public ActionResult EstoqueCreate(int? StorageID)

@@ -12,39 +12,72 @@
 </div>
 
 
-@using (Html.BeginForm("EstoqueSave", "Estoque", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Storage</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProductID, new SelectList(ViewBag.ListaProdutos, "Id", "Name"), htmlAttributes: new { @class = "form-control selddl" })
-                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+
+<div id="addItemEstque" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content" style="margin-left: 100px;margin-right: -55px;    height: 280px;">
+            <div class="box" style="margin-bottom: 0px;">
+                <div class="box-header">
+                    <div class="box-name">
+                        <span id="tituloItemPedido">Adicionar Item Pedido</span>
+                        <button type="button" class="close" data-dismiss="modal" style="margin-right: 8px !important;margin-top: 4px;">&times;</button>
+                    </div>
+                    <div class="box-icons">
+                    </div>
+                </div>
+                <div class="modal-body" style="height: 194px;">
+                    <div class="box-content" style="height: 130px;" >
+
+
+                        @using (Html.BeginForm("EstoqueSave", "Estoque", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.DropDownListFor(model => model.ProductID, new SelectList(ViewBag.ListaProdutos, "Id", "Name"), htmlAttributes: new { @class = "form-control selddl" })
+                                        @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Create" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                   </div>
+                     
+                </div>
             </div>
         </div>
-
+    </div>
+    <div class="modal-footer" id="modalFooterAddItem">
         <div class="form-group">
-            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-5">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-}
- 
+</div>
 
+ <div class="form-group">
+    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemEstque" style="font-size: 0.8em;float:right" value="Adicionar Item" />
+</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -87,13 +120,13 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ProductUnit.Name)
+                                            @item.ProductUnit.Name
                                         </td> 
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Quantity)
+                                           @item.Quantity 
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.UpdateDate)
+                                            @item.UpdateDate
                                         </td>
 
                                     </tr>
