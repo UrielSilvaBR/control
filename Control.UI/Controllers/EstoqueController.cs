@@ -132,36 +132,27 @@ namespace Control.UI.Controllers
         }
 
         public ActionResult MovimentacaoEstoque(int? StorageID)
-        {
-            MovimentacaoEstoqueViewModel model = new MovimentacaoEstoqueViewModel();
+        {   
+            Storage model = new Storage();
             context = new DALContext();
+
+
+            var ListaProdutos = context.Products.All().ToList();
+            ViewBag.ListaProdutos = ListaProdutos;
+
+
+            var listaUnidades = context.Unities.All().ToList();
+            ViewBag.ListaUnidades = listaUnidades;
+
+            var listaEstoque = context.Storages.All().ToList();
+            ViewBag.ListaEstoque = listaEstoque;
 
             if (StorageID > 0)
             {
-                model.EstoqueEditar = context.Storages.Find(p => p.Id == StorageID);
-                // estrutura de DropDownList
-                model.Produtos = new SelectList(
-                         context.Products.All().ToList(),
-                         "Id",
-                         "Name",
-                         model.EstoqueEditar.ProductID
-                     );
-                
+                model = context.Storages.Find(p => p.Id == StorageID);
             }
-            else {
-
-                model.Produtos = new SelectList(
-                         context.Products.All().ToList(),
-                         "Id",
-                         "Name"
-                     );
-
-            }
-
-
-            
-
-            return View(model);
+             
+            return View(model); 
         }
 
         public ActionResult EstoqueSave(Storage estoque) {
