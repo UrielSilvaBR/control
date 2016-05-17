@@ -7,8 +7,8 @@
 }
 
 <head>
-   
-     <script src="~/Content/Order/Order.js"></script>
+
+    <script src="~/Content/Order/Order.js"></script>
 
     <style type="text/css">
         .form-horizontal .form-group {
@@ -18,18 +18,16 @@
         }
 
         #modal-sucesso .modal-body {
-            min-height: 127px;
+            min-height: 146px;
             color: #074981;
             padding: 50px 50px 0px 200px;
-            background: url('../../Content/img/message-success.png') no-repeat 40px 5px;
+            background: url('../../Content/img/message-success.png') no-repeat 40px 27px;
             font-size: 18px;
             font-family: Segoe UI Light;
         }
 
-
-
         #modal-sucesso .modal-dialog {
-            width: 600px;
+            width: 495px;
             margin: 130px 475px;
         }
 
@@ -100,7 +98,7 @@ new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "Inicia
                                 @Html.ValidationMessageFor(p => p.Order.OrderDate)
                                 @Html.LabelFor(p => p.Order.OrderDate, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
-                                    @Html.TextBoxFor(p => p.Order.OrderDate, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                    @Html.TextBoxFor(p => p.Order.OrderDate, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control", @required = "" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -147,8 +145,8 @@ new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "Inicia
                         </div>
 
                         @*<div id="partialViewItensPedido">
-                          
-                        </div>*@
+
+                            </div>*@
 
                         //Html.RenderPartial("_ListOrders", Model.Order.Items);
                         Html.RenderAction("GetOrderProducts", "Pedido", new { OrderID = Model.Order.Id });
@@ -157,7 +155,7 @@ new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "Inicia
 
                         <div class="form-group">
                             <div class="col-md-offset-5">
-                                
+
                                 @if (Model.Order.Id > 0)
                                 {
                                     <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
@@ -166,7 +164,7 @@ new AjaxOptions { OnBegin = Model.Order.Id > 0 ? "IniciarEdicaoPedido" : "Inicia
                                 {
                                     <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
                                 }
-                                
+
                             </div>
                         </div>
                     }
