@@ -717,15 +717,13 @@
     <Content Include="Views\Vendas\_addItensPedido.cshtml" />
     <Content Include="Views\Vendas\_addPedido.cshtml" />
     <Content Include="Views\Vendas\ListaPedidos.cshtml" />
-    <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
-    <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
-    <Content Include="Views\Estoque\EstoqueCreate.cshtml" />
     <Content Include="Views\Vendas\Pedidos.cshtml" />
     <Content Include="Views\Pedido\Index.cshtml" />
     <Content Include="Views\Pedido\Create.cshtml" />
     <Content Include="Views\Pedido\_AddOrderProduct.cshtml" />
     <Content Include="Views\Pedido\_ListOrders.cshtml" />
-    <Content Include="Views\Invoice\Invoice.cshtml" />
+    <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
+    <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

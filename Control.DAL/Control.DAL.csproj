@@ -185,17 +185,6 @@
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605101453385_primeiro.resx">
-      <DependentUpon>201605101453385_primeiro.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605102250187_Pedido_Inclusao.resx">
-      <DependentUpon>201605102250187_Pedido_Inclusao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605110409599_publish.resx">
-      <DependentUpon>201605110409599_publish.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
