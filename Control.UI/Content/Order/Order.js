@@ -196,6 +196,8 @@ function InicializarCamposReadOnly() {
 
 function FinalizarInclusaoPedido(pedido) {
 
+    setTimeout(function () {
+
     var retornoPedido = pedido.split(';');
     var mensagemRetorno = retornoPedido[0];
     var idPedido = retornoPedido[1];
@@ -203,6 +205,7 @@ function FinalizarInclusaoPedido(pedido) {
     if (retornoPedido.length > 1)
         $('#Order_Id').val(idPedido);
 
+    waitingDialog.hide();
     ShowMessage(mensagemRetorno, true);
 
     if (parseInt(idPedido) > 0) {
@@ -215,9 +218,13 @@ function FinalizarInclusaoPedido(pedido) {
             }
         });
     }
+
+    }, 1000);
 }
 
 function FinalizarEdicaoPedido(pedido) {
+
+    setTimeout(function () {
 
     var retornoPedido = pedido.split(';');
     var mensagemRetorno = retornoPedido[0];
@@ -226,6 +233,7 @@ function FinalizarEdicaoPedido(pedido) {
     if (retornoPedido.length > 1)
         $('#Order_Id').val(idPedido);
 
+    waitingDialog.hide();
     ShowMessage(mensagemRetorno, true);
 
     if (parseInt(idPedido) > 0) {
@@ -239,6 +247,8 @@ function FinalizarEdicaoPedido(pedido) {
             }
         });
     }
+
+    }, 1000);
 }
 
 function ObterValorUnitarioProduto(idProduto) {
@@ -266,6 +276,8 @@ function ObterProduto(idProduto, produto) {
 }
 
 function IniciarInclusaoPedido() {
+
+    waitingDialog.show('Criando Pedido', { dialogSize: 'sm', progressType: 'success' });
 
     var gdvItens = $('#gdvItensPedido').dataTable();
 
@@ -365,6 +377,10 @@ function AdicionarItemPedido() {
 }
 
 function IniciarEdicaoPedido() {
+
+    waitingDialog.show('Alterando Pedido', { dialogSize: 'sm', progressType: 'success' });
+
+    
 
     var gdvItens = $('#gdvItensPedido').dataTable();
 

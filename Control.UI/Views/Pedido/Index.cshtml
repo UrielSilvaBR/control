@@ -9,14 +9,6 @@
 
 <head>
 
-    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
-    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
-    <script src="~/plugins/datatables/TableTools.js"></script>
-    <script src="~/plugins/datatables/TableTools_orig.js"></script>
-    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
-    <script src="~/plugins/select2/select2.js"></script>
-    <link href="~/Content/Site.css" rel="stylesheet" />
-
 </head>
 
 <div class="row">
@@ -97,14 +89,8 @@
                                         <td style="text-align: center;">
                                             <a href='@Url.Action("Delete", "Pedido", new { OrderID = item.Id } )'>
                                                 <i class="fa fa-times-circle" style="color:red"></i>
-
                                             </a>
                                         </td>
-                                        @*<td style="text-align: center;">
-                                                <a href='@Url.Action("ConsultarNFSe", "Invoice", new { OrderID = item.Id })'>
-                                                    <i class="fa fa-check color5"></i>
-                                                </a>
-                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Id)
                                         </td>
@@ -131,7 +117,10 @@
                                             @Html.DisplayFor(modelItem => totalValue)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                            @{
+                                                string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
+                                            }
+                                            @Html.DisplayFor(modelItem => invoiceNumber)
                                         </td>
                                     </tr>
                                                     }
@@ -149,7 +138,7 @@
 <script type="text/javascript">
     // Run Datables plugin and create 3 variants of settings
     function AllTables() {
-        TableNotaFiscal();
+        TablePedidos();
         LoadSelect2Script(MakeSelect2);
     }
 
@@ -167,9 +156,9 @@
         });
     }
 
-    function TableNotaFiscal() {
+    function TablePedidos() {
         $('#gdvPedidos').dataTable({
-            "aaSorting": [[8, "desc"]],
+            "aaSorting": [[7, "desc"]],
             "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
             "sPaginationType": "bootstrap",
             "oLanguage": {
@@ -181,7 +170,8 @@
             "aoColumns": [
                { "sName": "EditarPedido" },
                { "sName": "ExcluirPedido" },
-               { "data": "Cliente" },
+               { "sName": "Pedido" },
+               { "sName": "Cliente" },
                { "sName": "Contato" },
                { "sName": "Tipo" },
                { "sName": "Vendedor" },

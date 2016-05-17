@@ -49,6 +49,9 @@ namespace Control.DAL.Data
 
                 case 3:
 
+                    //Conexão de produção Gtwave
+                    //strConn = @"Data Source=192.99.149.206;Initial Catalog=control;Persist Security Info=True;User ID=userControl;Password=Ncc123";
+                    strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=userdbControl;Password=Ncc123";
                     //Conexão de produção Gtwave 
                     strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
