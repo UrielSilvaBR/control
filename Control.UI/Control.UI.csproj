@@ -725,6 +725,7 @@
     <Content Include="Views\Pedido\Create.cshtml" />
     <Content Include="Views\Pedido\_AddOrderProduct.cshtml" />
     <Content Include="Views\Pedido\_ListOrders.cshtml" />
+    <Content Include="Views\Invoice\Invoice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
