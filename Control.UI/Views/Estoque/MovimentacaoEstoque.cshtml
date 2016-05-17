@@ -13,77 +13,16 @@
 
 
 
+@using (Html.BeginForm("EstoqueSave", "Estoque", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
 
-<div id="addItemEstque" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
-        <!-- Modal content-->
-        <div class="modal-content" style="margin-left: 100px;margin-right: -55px;    height: 280px;">
-            <div class="box" style="margin-bottom: 0px;">
-                <div class="box-header">
-                    <div class="box-name">
-                        <span id="tituloItemPedido">Adicionar Item Pedido</span>
-                        <button type="button" class="close" data-dismiss="modal" style="margin-right: 8px !important;margin-top: 4px;">&times;</button>
-                    </div>
-                    <div class="box-icons">
-                    </div>
-                </div>
-                <div class="modal-body" style="height: 194px;">
-                    <div class="box-content" style="height: 130px;" >
-
-
-                        @using (Html.BeginForm("EstoqueSave", "Estoque", FormMethod.Post, new { @class = "form-horizontal" }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-horizontal">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.ProductID, "ProductID", htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.DropDownListFor(model => model.ProductID, new SelectList(ViewBag.ListaProdutos, "Id", "Name"), htmlAttributes: new { @class = "form-control selddl" })
-                                        @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-                                    <div class="col-md-10">
-                                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" value="Create" class="btn btn-default" />
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                   </div>
-                     
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal-footer" id="modalFooterAddItem">
-        <div class="form-group">
-            <div class="col-md-5">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-</div>
-
- <div class="form-group">
-    <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItemEstque" style="font-size: 0.8em;float:right" value="Adicionar Item" />
-</div>
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
-                    <span>Consultar Estoque</span>
+                    <span>Incluir Produto No Estoque</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -98,51 +37,102 @@
                 </div>
                 <div class="no-move"></div>
             </div>
-            <div class="box-content no-padding">
-                <div id="table_wrapperz">
-                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Produto
-                                </th>
-                                <th>
-                                    Quantidade
-                                </th>
-                                <th>
-                                   Data Atualização
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in ViewBag.ListaEstoque)
-                            {
-                                {
-                                    <tr>
-                                        <td>
-                                            @item.ProductUnit.Name
-                                        </td> 
-                                        <td>
-                                           @item.Quantity 
-                                        </td>
-                                        <td>
-                                            @item.UpdateDate
-                                        </td>
+            <div class="box-content">
 
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProductID, "Produto", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.ProductID, new SelectList(ViewBag.ListaProdutos, "Id", "Name"), htmlAttributes: new { @class = "form-control selddl" })
+                                @Html.ValidationMessageFor(model => model.ProductID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Quantity,  "Quantidade", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Salvar" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                
             </div>
         </div>
     </div>
 </div>
+}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <div class="box-name">
+                                    <span>Consultar Estoque</span>
+                                </div>
+                                <div class="box-icons">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="expand-link">
+                                        <i class="fa fa-expand"></i>
+                                    </a>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                                <div class="no-move"></div>
+                            </div>
+                            <div class="box-content no-padding">
+                                <div id="table_wrapperz">
+                                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Produto
+                                                </th>
+                                                <th>
+                                                    Quantidade
+                                                </th>
+                                                <th>
+                                                    Data Atualização
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in ViewBag.ListaEstoque)
+                                            {
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @item.ProductUnit.Name
+                                                        </td>
+                                                        <td>
+                                                            @item.Quantity
+                                                        </td>
+                                                        <td>
+                                                            @item.UpdateDate
+                                                        </td>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+                <script src="~/Scripts/jquery.validate.min.js"></script>
+                <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 
- 
