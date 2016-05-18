@@ -124,12 +124,14 @@ namespace Control.UI.Controllers
                     else
                         context.Orders.Create(Pedido.Order);
 
+                    bool pedidoExiste = Pedido.Order.Id > 0;
+
                     if (context.SaveChanges() > 0)
                     {
                         Pedido.Order = Pedido.Order;
                         Pedido.Order.CustomerOrder = Pedido.Customers.Where(p => p.Id == Pedido.Order.CustomerID).FirstOrDefault();
 
-                        if (Pedido.Order.Id > 0)
+                        if (pedidoExiste)
                             return Content(String.Format("<b>Proposta {0}</br> Alterada com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
                         else
                             return Content(String.Format("<b>Proposta {0}</br> Incluída com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
