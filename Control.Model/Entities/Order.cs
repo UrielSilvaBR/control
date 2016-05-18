@@ -19,7 +19,7 @@ namespace Control.Model.Entities
 
         [Key]
         [DataMember]
-        [Display(Name ="Pedido")]
+        [Display(Name ="Proposta")]
         public int Id { get; set; }
 
         public string Status { get; set; }
@@ -33,6 +33,7 @@ namespace Control.Model.Entities
         public string Comments { get; set; }
         public int? CFOP { get; set; }
         public decimal Discount { get; set; }
+        [Display(Name = "Valor")]
         public decimal TotalValue { get; set; }
 
         //Campos Nota Fiscal

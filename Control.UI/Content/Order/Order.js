@@ -18,7 +18,7 @@ $(document).ready(function () {
     $('#btnEditarItemPedido').attr('style', 'display:none');
 
     $('#btnAddItemPedido').click(function () {
-        $('#tituloItemPedido').text('Adicionar Item Pedido');
+        $('#tituloItemPedido').text('Adicionar Item');
         $('#btnAdicionarItemPedido').attr('style', 'display:block');
         $('#btnEditarItemPedido').attr('style', 'display:none');
     })
@@ -110,17 +110,6 @@ function ValidarDescontoItemPedido(pValorDesconto) {
 }
 
 function InicializarMascaraItemPedido() {
-    $('#Invoice_Valor').maskMoney({
-        prefix: '',
-        allowZero: false,
-        allowNegative: false,
-        defaultZero: true,
-        thousands: '.',
-        decimal: ',',
-        precision: 2,
-        affixesStay: false,
-        symbolPosition: 'left'
-    });
 
     $('#OrderProduct_UnitPrice').maskMoney({
         prefix: '',
@@ -188,7 +177,8 @@ function InicializarMascaraItemPedido() {
 }
 
 function InicializarCamposReadOnly() {
-    //$('#Order_TotalValue').attr('readonly', true);
+
+    $('#Order_TotalValue').val(0);
     $('#OrderProduct_TotalPrice').attr('readonly', true);
     $('#OrderProduct_UnitPrice').attr('readonly', true);
 
@@ -277,12 +267,19 @@ function ObterProduto(idProduto, produto) {
 
 function IniciarInclusaoPedido() {
 
-    waitingDialog.show('Criando Pedido', { dialogSize: 'sm', progressType: 'success' });
-
     var gdvItens = $('#gdvItensPedido').dataTable();
 
     var Items = new Array();
     var arrayItens = gdvItens.fnGetData();
+
+    if (arrayItens.length == 0)
+    {
+        waitingDialog.hide
+        ShowMessage('É necessário adicionar Itens!', false);
+        return false;
+    }
+
+    waitingDialog.show('Criando Proposta', { dialogSize: 'sm', progressType: 'success' });
 
     for (var i = 0; i < arrayItens.length ; i++) {
 
@@ -360,6 +357,8 @@ function AdicionarItemPedido() {
 
     valorTotalPedido += precoTotal;
 
+    $('#Order_TotalValue').val(valorTotalPedido);
+
     var descontoTotalPedido = $('#Order_Discount').val();
     descontoTotalPedido = descontoTotalPedido.replace("R$", "").replace(",", "").replace(".", ",").trim();
 
@@ -378,14 +377,18 @@ function AdicionarItemPedido() {
 
 function IniciarEdicaoPedido() {
 
-    waitingDialog.show('Alterando Pedido', { dialogSize: 'sm', progressType: 'success' });
-
-    
-
     var gdvItens = $('#gdvItensPedido').dataTable();
 
     var Items = new Array();
     var arrayItens = gdvItens.fnGetData();
+
+    if (arrayItens.length == 0) {
+        waitingDialog.hide();
+        ShowMessage('É necessário adicionar Itens!', false);
+        return false;
+    }
+
+    waitingDialog.show('Alterando Proposta', { dialogSize: 'sm', progressType: 'success' });
 
     for (var i = 0; i < arrayItens.length ; i++) {
 
@@ -415,7 +418,7 @@ function AbrirItemPedido(indiceLinha) {
     var items = gdvItens.fnGetData();
     item = items[rowIndex];
 
-    $('#tituloItemPedido').text('Alterar Item Pedido');
+    $('#tituloItemPedido').text('Alterar Item');
     $('#btnEditarItemPedido').attr('style', 'display:block');
     $('#btnAdicionarItemPedido').attr('style', 'display:none');
 
@@ -479,6 +482,8 @@ function ExcluirItemPedido(indiceLinha) {
         AtualizarSequencialItemPedido();
         giCount--;
     }
+
+
 }
 
 function AtualizarSequencialItemPedido() {

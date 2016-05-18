@@ -130,9 +130,9 @@ namespace Control.UI.Controllers
                         Pedido.Order.CustomerOrder = Pedido.Customers.Where(p => p.Id == Pedido.Order.CustomerID).FirstOrDefault();
 
                         if (Pedido.Order.Id > 0)
-                            return Content(String.Format("<b>Pedido {0}</br> Alterado com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
+                            return Content(String.Format("<b>Proposta {0}</br> Alterada com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
                         else
-                            return Content(String.Format("<b>Pedido {0}</br> Gerado com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
+                            return Content(String.Format("<b>Proposta {0}</br> Incluída com Sucesso!</b>;{1}", Pedido.Order.Id, Pedido.Order.Id));
                     }
                 }
                 else
