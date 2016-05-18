@@ -41,11 +41,29 @@ namespace Control.Model.Entities
         /// 
         public bool? CombinedProduct { get; set; }
 
+        [Display(Name="NCM")]
+        public string NCMCode { get; set; }
+
+        [Display(Name = "Descrição NCC")]
+        public string DescriptionNCC { get; set; }
+
         //Forgein Keys
         public int? ProductTypeUnitID { get; set; }
 
         [ForeignKey("ProductTypeUnitID")]
         public virtual TypeUnit ProductUnit { get; set; }
+
+        [NotMapped]
+        public string FullDescription
+        {
+            get
+            {
+                if (Id > 0)
+                    return String.Format("{0} - {1} - {2}", Name, Model, NCMCode);
+                else
+                    return Name;
+            }
+        }
     }
 }
 

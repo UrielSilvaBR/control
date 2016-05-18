@@ -33,7 +33,7 @@
 
                         @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
                         <div class="col-md-5 style=" align-content:flex-start">
-                            @Html.DropDownListFor(p => p.OrderProduct.ProductID, new SelectList(Model.Products, "Id", "Name"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedido" })
+                            @Html.DropDownListFor(p => p.OrderProduct.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedido" })
                         </div>
                     </div>
                     <div class="form-group">

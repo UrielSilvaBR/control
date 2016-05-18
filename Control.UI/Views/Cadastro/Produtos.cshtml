@@ -83,10 +83,10 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
-                                                <a href='@Url.Action("ProdutosEdit", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("ProdutosEdit", "Cadastro", new { ProdutoID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("ProdutoDelete", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("ProdutoDelete", "Cadastro", new { ProdutoID = item.Id })'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
                                                 </a>
@@ -117,7 +117,7 @@
                                             @Html.DisplayFor(modelItem => item.UnitPrice)
                                         </td>
                                         <td>
-                                            (@Html.DisplayFor(modelItem => item.CostPrice)
+                                            @Html.DisplayFor(modelItem => item.CostPrice)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.AliqICMS)

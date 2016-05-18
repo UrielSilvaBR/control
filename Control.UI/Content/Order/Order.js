@@ -186,8 +186,9 @@ function InicializarCamposReadOnly() {
     if(valorTotalPedido == 0)
         $('#Order_TotalValue').val(0);
 
-    $('#OrderProduct_TotalPrice').attr('readonly', true);
-    $('#OrderProduct_UnitPrice').attr('readonly', true);
+    $("#Order_TotalValue").prop('readonly', true);
+    $('#OrderProduct_TotalPrice').attr('disabled', true);
+    $('#OrderProduct_UnitPrice').attr('disabled', true);
 
 }
 

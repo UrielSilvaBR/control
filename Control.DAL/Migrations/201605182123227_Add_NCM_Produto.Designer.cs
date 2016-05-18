@@ -7,13 +7,13 @@ namespace Control.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class publish : IMigrationMetadata
+    public sealed partial class Add_NCM_Produto : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(publish));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_NCM_Produto));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605110409599_publish"; }
+            get { return "201605182123227_Add_NCM_Produto"; }
         }
         
         string IMigrationMetadata.Source

@@ -12,7 +12,8 @@ namespace Control.UI.Controllers
     {
         private IDALContext context;
 
-        #region CLIENTES
+        #region Clientes
+
         public ActionResult Clientes(string nomeCliente)
         {
             context = new DALContext();
@@ -104,7 +105,8 @@ namespace Control.UI.Controllers
         }
         #endregion
 
-        #region CONTATOS
+        #region Contatos
+
         public ActionResult Contatos(string nomeContato)
         {
             context = new DALContext();
@@ -205,7 +207,8 @@ namespace Control.UI.Controllers
         }
         #endregion
 
-        #region VENDEDORES
+        #region Vendedores
+
         public ActionResult Vendedores(string nomeVendedor)
         {
             context = new DALContext();
@@ -298,7 +301,8 @@ namespace Control.UI.Controllers
         }
         #endregion
 
-        #region FORNECEDORES
+        #region Fornecedores
+
         public ActionResult Fornecedores(string nomeFornecedor)
         {
             context = new DALContext();
@@ -390,7 +394,8 @@ namespace Control.UI.Controllers
         }
         #endregion
 
-        #region PRODUTOS
+        #region Produtos
+
         public ActionResult Produtos(string nomeProduto)
         {
             context = new DALContext();
@@ -437,9 +442,9 @@ namespace Control.UI.Controllers
 
             try
             {
-                prod.AliqICMS = 3;
-                prod.CombinedProduct = false;
-                prod.MinimumStockAlert = 50;
+                //prod.AliqICMS = 3;
+                //prod.CombinedProduct = false;
+                //prod.MinimumStockAlert = 50;
                 prod.ProductTypeUnitID = 1;
                 
                 if (prod.Id > 0)
@@ -461,13 +466,13 @@ namespace Control.UI.Controllers
             return RedirectToAction("Produtos");
         }
 
-        public ActionResult ProdutoDelete(int? FornecedorID)
+        public ActionResult ProdutoDelete(int? ProdutoID)
         {
             context = new DALContext();
 
             try
             {
-                var retorno = context.Providers.Delete(p => p.Id == FornecedorID);
+                var retorno = context.Products.Delete(p => p.Id == ProdutoID);
             }
             catch (Exception ex)
             {
@@ -482,6 +487,7 @@ namespace Control.UI.Controllers
         #endregion
 
         #region CFOP
+
         #endregion
 
         //<li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>

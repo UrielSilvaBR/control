@@ -24,7 +24,7 @@ namespace Control.UI.Models
             Customers = context.Customers.All().OrderBy(p => p.ShortName).ToList();
             Series = context.InvoiceSeries.All().OrderBy(p => p.Descricao).ToList();
             Products = context.Products.All().OrderBy(p => p.Description).ToList();
-            Products.Insert(0, new Product() { Id = 0, Name = "-- SELECIONE --" });
+            Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
             if (Invoice == null)
             {
                 Invoice = new Invoice();

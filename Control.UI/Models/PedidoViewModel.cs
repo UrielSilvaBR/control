@@ -167,7 +167,7 @@ namespace Control.UI.Models
             Contacts = context.Contacts.All().OrderBy(p => p.ContatName).ToList();
             Vendors = context.Vendors.All().OrderBy(p => p.Name).ToList();
             Products = context.Products.All().OrderBy(p => p.Name).ToList();
-            Products.Insert(0, new Product() { Id = 0, Name = "-- SELECIONE --" });
+            Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
             if (Order == null)
             {
                 Order = new Order();
