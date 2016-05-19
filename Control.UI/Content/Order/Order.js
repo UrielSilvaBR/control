@@ -48,6 +48,10 @@ $(document).ready(function () {
         $('#btnEditar').show();
     }
 
+    $('#itemPedido').on('hidden.bs.modal', function () {
+        LimparItemPedido();
+    })
+
 });
 
 function LimparItemPedido() {
@@ -68,6 +72,8 @@ function InicializarModalItemPedido() {
 function IniciarlizarCamposItemPedido() {
 
     $('#OrderProduct_ItemDiscount').val(0);
+    $('#OrderProduct_UnitPrice').val(0);
+    $('#OrderProduct_TotalPrice').val(0);
 
     $('#OrderProduct_QuantityOrder').val(1);
     $('#OrderProduct_QuantityOrder').ForceNumericOnly();
