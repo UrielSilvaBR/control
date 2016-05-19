@@ -114,7 +114,8 @@
                                 @*@Html.ValidationMessageFor(p => p.Order.OrderDate)*@
                                 @Html.LabelFor(p => p.Order.OrderDate, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
-                                    @Html.TextBoxFor(p => p.Order.OrderDate, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                    @{ DateTime dataEmissao = Model.Order.OrderDate; }
+                                    @Html.TextBoxFor(p => p.Order.OrderDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control" })
                                 </div>
 
                             </div>
