@@ -710,7 +710,6 @@
     <Content Include="Views\Cadastro\Produtos.cshtml" />
     <Content Include="Views\Cadastro\Contatos.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
-    <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <Content Include="Views\Cadastro\ContatosEdit.cshtml" />
     <Content Include="Views\Cadastro\ProdutosEdit.cshtml" />
     <Content Include="Views\Invoice\Create.cshtml" />
