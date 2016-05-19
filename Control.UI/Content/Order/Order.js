@@ -37,13 +37,11 @@ $(document).ready(function () {
     });
 
     var idPedido = $('#Order_Id').val();
-    if(idPedido == 0)
-    {
+    if (idPedido == 0) {
         $('#btnCadastrar').show();
         $('#btnEditar').hide();
     }
-    else
-    {
+    else {
         $('#btnCadastrar').hide();
         $('#btnEditar').show();
     }
@@ -189,7 +187,7 @@ function InicializarMascaraItemPedido() {
 function InicializarCamposReadOnly() {
 
     var valorTotalPedido = $('#Order_TotalValue').val();
-    if(valorTotalPedido == 0)
+    if (valorTotalPedido == 0)
         $('#Order_TotalValue').val(0);
 
     $("#Order_TotalValue").prop('readonly', true);
@@ -202,8 +200,7 @@ function IniciarInclusaoPedido() {
 
     var idPedido = $('#Order_Id').val();
 
-    if (idPedido > 0)
-    {
+    if (idPedido > 0) {
         IniciarEdicaoPedido();
         return;
     }
@@ -402,7 +399,10 @@ function AdicionarItemPedido() {
     var desconto = $('#OrderProduct_ItemDiscount').val();
     var precoTotal = $('#OrderProduct_TotalPrice').val();
 
-    $('#gdvItensPedido').dataTable().fnAddData([
+    var gdvItens = $('#gdvItensPedido').dataTable();
+    $(gdvItens).removeClass('table-striped');
+
+    var indiceLinhaAdicionada = gdvItens.fnAddData([
         "0",
         "0",
         idProduto,
@@ -415,6 +415,9 @@ function AdicionarItemPedido() {
         desconto,
         precoTotal
     ]);
+
+    var tr = gdvItens.fnGetNodes(indiceLinhaAdicionada);
+    $(tr).effect("highlight", { color: "#9fdf9f" }, 2000);
 
     giCount++;
 
@@ -455,6 +458,7 @@ function AbrirItemPedido(indiceLinha) {
 }
 
 function EditarItemPedido() {
+
     var gdvItens = $('#gdvItensPedido').dataTable();
 
     var rowIndex = $('#rowIndexItemPedido').val();
@@ -471,8 +475,13 @@ function EditarItemPedido() {
 
     AtualizarValorTotalPedido();
     gdvItens.fnDraw();
-    
+
     LimparItemPedido();
+
+    $(gdvItens).removeClass('table-striped');
+
+    var tr = gdvItens.fnGetNodes(rowIndex);
+    $(tr).effect("highlight", { color: "#80c1ff" }, 2000);
 
     $("#itemPedido").modal('hide');
 
@@ -489,21 +498,30 @@ function ExcluirItemPedido(indiceLinha) {
         var arrayItens = gdvItens.fnGetData();
         var idItem = arrayItens[rowIndex][0];
 
-        if (idItem > 0) {
-            $.post('/Pedido/DeleteOrderProduct', { OrderProductID: idItem }, function (data) {
+        $(gdvItens).removeClass('table-striped');
+
+        var tr = gdvItens.fnGetNodes(rowIndex);
+        $(tr).effect("highlight", { color: "#ff3333" }, 2000);
+
+        setTimeout(function () {
+
+            if (idItem > 0) {
+                $.post('/Pedido/DeleteOrderProduct', { OrderProductID: idItem }, function (data) {
+                    gdvItens.fnDeleteRow(rowIndex);
+                    AtualizarSequencialItemPedido();
+                    AtualizarValorTotalPedido();
+                    giCount--;
+                });
+            }
+            else {
                 gdvItens.fnDeleteRow(rowIndex);
                 AtualizarSequencialItemPedido();
                 AtualizarValorTotalPedido();
                 giCount--;
-            });
-        }
-        else {
-            gdvItens.fnDeleteRow(rowIndex);
-            AtualizarSequencialItemPedido();
-            AtualizarValorTotalPedido();
-            giCount--;
-        }
-       
+            }
+
+        }, 1000);
+
         $("#modal-confirmation").modal("hide");
     });
 }
@@ -521,8 +539,7 @@ function AtualizarSequencialItemPedido() {
     }
 }
 
-function AtualizarValorTotalPedido()
-{
+function AtualizarValorTotalPedido() {
     var gdvItens = $('#gdvItensPedido').dataTable();
 
     var arrayItens = gdvItens.fnGetData();
