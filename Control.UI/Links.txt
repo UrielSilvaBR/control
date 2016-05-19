@@ -16,3 +16,6 @@ Partial Views with AJax
 http://www.devmedia.com.br/asp-net-mvc-e-ajax-atualizando-o-conteudo-de-partial-views-via-jquery/26232
 
 http://weblogs.thinktecture.com/cnagel/2011/06/filter-and-display-data-with-aspnet-mvc-part-2partial-views-and-jquery.html
+
+Exemplo Reformulacao Gtwave Site
+https://parall.ax/

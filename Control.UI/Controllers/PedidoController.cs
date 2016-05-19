@@ -165,5 +165,21 @@ namespace Control.UI.Controllers
             var OrderProducts = context.OrdersProducts.Filter(p => p.OrderId == OrderID).ToList();
             return PartialView("_ListOrders", OrderProducts);
         }
+
+        public ActionResult VisualizarProposta(int OrderID)
+        {
+            context = new DALContext();
+            Order retorno = new Order();
+            try
+            {
+                retorno = context.Orders.Find(p => p.Id == OrderID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
     }
 }

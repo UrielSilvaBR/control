@@ -62,16 +62,13 @@ namespace Control.UI.Controllers
             return View("Create", model);
         }
 
-        public ActionResult Invoice(int? InvoiceID)
-        {
-            var model = new Control.UI.Models.InvoiceViewModel();
+        public ActionResult Invoice(int InvoiceID)
+        {            
             context = new DALContext();
             Invoice retorno = new Invoice();
             try
             {
-                retorno = context.Invoices.Find(p => p.Id == 9);
-                //retorno = context.Invoices.Find(p => p.Id == InvoiceID);
-                model.Invoice = retorno;
+                retorno = context.Invoices.Find(p => p.Id == 9);                
             }
             catch (Exception ex)
             {
@@ -80,6 +77,8 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+
+        
 
         [HttpPost]
         public ActionResult Save(Models.InvoiceViewModel InvoiceModel, string itensNotaFiscal)
