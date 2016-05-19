@@ -64,7 +64,7 @@ namespace Control.UI.Controllers
                 model.LastUpdate = DateTime.Now;
                 model.PhoneCode = 13;
                 model.CommercialPolicy = 0;
-                model.Discount = 0;                
+                model.Discount = 0;
 
                 if (model.Id > 0)
                 {
@@ -129,7 +129,7 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
-        
+
         public ActionResult ContatosEdit(int? ContatoID)
         {
             Contact model = new Contact();
@@ -140,7 +140,7 @@ namespace Control.UI.Controllers
 
             var listaVendedores = context.Vendors.All().ToList();
             ViewBag.ListaVendedores = listaVendedores;
-            
+
 
             if (ContatoID > 0)
             {
@@ -162,21 +162,25 @@ namespace Control.UI.Controllers
             {
                 model.RegisterDate = DateTime.Now;
                 model.LastUpdate = DateTime.Now;
-                
-                if (model.VendorID == null)
-                {
-                    model.VendorID = 1;
-                }
 
-                if (model.Id > 0)
+                if (ModelState.IsValid)
                 {
-                    context.Contacts.Update(model);
+
+                    if (model.VendorID == null)
+                    {
+                        model.VendorID = 1;
+                    }
+
+                    if (model.Id > 0)
+                    {
+                        context.Contacts.Update(model);
+                    }
+                    else
+                    {
+                        context.Contacts.Create(model);
+                    }
+                    context.SaveChanges();
                 }
-                else
-                {
-                    context.Contacts.Create(model);
-                }
-                context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -446,7 +450,7 @@ namespace Control.UI.Controllers
                 //prod.CombinedProduct = false;
                 //prod.MinimumStockAlert = 50;
                 prod.ProductTypeUnitID = 1;
-                
+
                 if (prod.Id > 0)
                 {
                     context.Products.Update(prod);
