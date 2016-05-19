@@ -727,6 +727,7 @@
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <Content Include="Views\Pedido\VisualizarProposta.cshtml" />
+    <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
