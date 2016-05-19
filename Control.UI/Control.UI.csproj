@@ -707,6 +707,7 @@
     <Content Include="Views\Cadastro\VendedoresEdit.cshtml" />
     <Content Include="Views\Financeiro\ExtratoBancario.cshtml" />
     <Content Include="Views\Cadastro\Fornecedores.cshtml" />
+    <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <Content Include="Views\Cadastro\Produtos.cshtml" />
     <Content Include="Views\Cadastro\Contatos.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
@@ -727,7 +728,6 @@
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <Content Include="Views\Pedido\VisualizarProposta.cshtml" />
-    <Content Include="Views\Cadastro\FornecedoresEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
