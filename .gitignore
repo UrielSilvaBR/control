@@ -61,3 +61,14 @@ packages/jquery.validate.unobtrusive.bootstrap.1.2.3/content/Scripts/jquery.vali
 packages/jquery.validate.unobtrusive.bootstrap.1.2.3/content/Scripts/jquery.validate.unobtrusive.bootstrap.min.js
 packages/jquery.validate.unobtrusive.bootstrap.1.2.3/content/Scripts/jquery.validate.unobtrusive.bootstrap.min.js.map
 packages/jquery.validate.unobtrusive.bootstrap.1.2.3/jquery.validate.unobtrusive.bootstrap.1.2.3.nupkg
+Control.UI/Views/Cadastro/bkp/Clientes.cshtml
+Control.UI/Views/Cadastro/bkp/ClientesEdit.cshtml
+Control.UI/Views/Cadastro/bkp/ClientesFiltro.cshtml
+Control.UI/Views/Cadastro/bkp/Contatos.cshtml
+Control.UI/Views/Cadastro/bkp/ContatosEdit.cshtml
+Control.UI/Views/Cadastro/bkp/Fornecedores.cshtml
+Control.UI/Views/Cadastro/bkp/FornecedoresEdit - Copy.cshtml
+Control.UI/Views/Cadastro/bkp/Produtos.cshtml
+Control.UI/Views/Cadastro/bkp/ProdutosEdit.cshtml
+Control.UI/Views/Cadastro/bkp/Vendedores.cshtml
+Control.UI/Views/Cadastro/bkp/VendedoresEdit.cshtml
