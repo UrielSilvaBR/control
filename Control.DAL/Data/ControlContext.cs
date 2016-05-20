@@ -39,6 +39,9 @@ namespace Control.DAL.Data
         public DbSet<InvoiceSerie> InvoiceSeries { get; set; }
         public DbSet<InvoiceRps> InvoiceRps { get; set; }
 
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
+
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
@@ -69,6 +72,8 @@ namespace Control.DAL.Data
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<Transaction>().ToTable("Transaction");
+            modelBuilder.Entity<PurchaseOrder>().ToTable("PurchaseOrder");
+            modelBuilder.Entity<PurchaseOrderItem>().ToTable("PurchaseOrderItem");
 
         }
     }
