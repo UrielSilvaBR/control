@@ -32,6 +32,9 @@ namespace Control.Model.Entities
         public decimal TotalValue { get; set; }
 
         public string Comments { get; set; }
+        
+        [ForeignKey("PurchaseOrderId")]
+        public virtual List<PurchaseOrderItem> Items { get; set; }
 
 
     }

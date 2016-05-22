@@ -1,0 +1,191 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using Control.DAL.Data;
+using Control.Model.Entities;
+using Control.DAL;
+using Newtonsoft.Json.Linq;
+
+namespace Control.UI.Controllers
+{
+    public class ComprasController : Controller
+    {
+        private IDALContext context;
+
+        #region Index
+
+        public ActionResult Index()
+        {
+            context = new DALContext();
+
+            var Orders = context.PurchaseOrders.All().ToList();
+
+            return View(Orders);
+        }
+
+        #endregion
+
+        #region Create
+
+        [HttpGet]
+        public ActionResult Create(Models.PedidoCompraViewModel Pedido)
+        {
+            return View(Pedido);
+        }
+
+        #endregion
+
+        #region Edit
+
+        [HttpGet]
+        public ActionResult Edit(int OrderID)
+        {
+            var model = new Control.UI.Models.PedidoCompraViewModel();
+            context = new DALContext();
+            PurchaseOrder retorno = new PurchaseOrder();
+            try
+            {
+                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+                model.PurchaseOrder = retorno;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View("Create", model);
+        }
+
+        #endregion
+
+        #region Delete
+
+        [HttpGet]
+        public ActionResult Delete(int OrderID)
+        {
+            context = new DALContext();
+            context.PurchaseOrders.Delete(p => p.Id == OrderID);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult DeletePurchaseOrderItem(int PurchaseOrderItemID)
+        {
+            context = new DALContext();
+            context.PurchaseOrderItem.Delete(p => p.Id == PurchaseOrderItemID);
+            context.SaveChanges();
+
+            return Content("Item Excluído com Sucesso!");
+        }
+
+        #endregion
+
+        #region Save
+
+        [HttpPost]
+        public ActionResult Save(Models.PedidoCompraViewModel Pedido, string itensPedido)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var arrayItensPedido = JArray.Parse(itensPedido);
+                    Pedido.PurchaseOrder.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.PurchaseOrderItem
+                    {
+                        Id = (int)x["Id"],
+                        PurchaseOrderId = (int)x["IdPedido"],
+                        SequencialItem = (int)x["SequencialItem"],
+                        QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                        ProductID = (int)x["ProductID"],
+                        UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
+                        ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                        TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString())
+                    }).ToList();
+                    
+                    context = new DALContext();
+
+                    foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.PurchaseOrderId > 0))
+                        context.PurchaseOrderItem.Update(item);
+
+                    foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.PurchaseOrderId == 0))
+                    {
+                        item.PurchaseOrderId = Pedido.PurchaseOrder.Id;
+                        context.PurchaseOrderItem.Create(item);
+                    }
+
+                    if (Pedido.PurchaseOrder.Id > 0)
+                        context.PurchaseOrders.Update(Pedido.PurchaseOrder);
+                    else
+                    {
+                        Pedido.PurchaseOrder.InsertDate = DateTime.Now;
+                        context.PurchaseOrders.Create(Pedido.PurchaseOrder);
+                    }
+
+                    bool pedidoExiste = Pedido.PurchaseOrder.Id > 0;
+
+                    if (context.SaveChanges() > 0)
+                    {
+                        Pedido.PurchaseOrder = Pedido.PurchaseOrder;
+                        Pedido.PurchaseOrder.ProviderPurchaseOrder = Pedido.Providers.Where(p => p.Id == Pedido.PurchaseOrder.ProviderID).FirstOrDefault();
+
+                        if (pedidoExiste)
+                            return Content(String.Format("<b>Ordem de Compras {0}</br> Alterada com Sucesso!</b>;{1}", Pedido.PurchaseOrder.Id, Pedido.PurchaseOrder.Id));
+                        else
+                            return Content(String.Format("<b>Ordem de Compras {0}</br> Incluída com Sucesso!</b>;{1}", Pedido.PurchaseOrder.Id, Pedido.PurchaseOrder.Id));
+                    }
+                }
+                else
+                {
+                    return View("Create", Pedido);
+                }
+
+                return View("Create", Pedido);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        #endregion
+
+        public JsonResult GetProducts(int ProductID)
+        {
+            context = new DALContext();
+            var objProduct = context.Products.Find(p => p.Id == ProductID);
+            return Json(objProduct);
+        }
+
+        public PartialViewResult GetOrderProducts(int OrderID)
+        {
+            context = new DALContext();
+            var OrderProducts = context.PurchaseOrderItem.Filter(p => p.PurchaseOrderId == OrderID).ToList();
+            return PartialView("_ListOrders", OrderProducts);
+        }
+
+        public ActionResult VisualizarProposta(int OrderID)
+        {
+            context = new DALContext();
+            PurchaseOrder retorno = new PurchaseOrder();
+            try
+            {
+                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
+
+
+    }
+}

@@ -45,13 +45,13 @@ namespace Control.DAL.Data
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public ControlContext(DbConnection cn)
             : base(cn, true)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public static ControlContext Create()

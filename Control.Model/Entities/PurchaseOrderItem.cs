@@ -16,8 +16,8 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; } 
 
-        public int PuchaseOrderID { get; set; }
-
+        public int PurchaseOrderId { get; set; }
+                   
         public int SequencialItem { get; set; }
 
         [Display(Name = "Quantidade")]
