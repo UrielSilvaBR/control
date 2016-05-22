@@ -67,8 +67,7 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
-                            {
-                                {
+                            { 
                                     <tr>
                                         <td style="text-align: center;">
                                             <a href='@Url.Action("Edit", "Compras", new { OrderID = item.Id })'>
@@ -106,7 +105,6 @@
                                             @Html.DisplayFor(modelItem => totalValue)
                                         </td>
                                     </tr>
-                                                    }
                                                 }
 
                         </tbody>
@@ -133,7 +131,7 @@
             //var url = Url.Action("ActionName", "ControllerName")';
             var url = '@Url.Action("ActionName", "ControllerName")';
 
-            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Comptas/Create\"' />");
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Compras/Create\"' />");
         });
     }
 
@@ -155,8 +153,8 @@
                { "sName": "Fornecedor" },
                { "sName": "Status" },
                { "sName": "Validade" },
-               { "sName": "NotaFiscal" },,
-               { "sName": "Valor" },
+               { "sName": "NotaFiscal" },
+               { "sName": "Valor" }
             ],
             "columnDefs": [{
                 "targets": 'no-sort',
