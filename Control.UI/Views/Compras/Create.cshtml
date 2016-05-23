@@ -39,16 +39,16 @@
                 ObterValorUnitarioProduto(produto.val);
             });
 
-            $('#OrderProduct_QuantityOrder').focusout(function () {
+            $('#PurchaseOrder_QuantityOrder').focusout(function () {
                 var quantidade = $(this).val();
                 CalcularItemPedido(quantidade);
             });
 
-            $('#OrderProduct_ItemDiscount').focusout(function () {
+            $('#PurchaseOrder_ItemDiscount').focusout(function () {
                 ValidarDescontoItemPedido($(this).val());
             });
 
-            var idPedido = $('#Order_Id').val();
+            var idPedido = $('#PurchaseOrder_Id').val();
             if (idPedido == 0) {
                 $('#btnCadastrar').show();
                 $('#btnEditar').hide();
@@ -167,7 +167,7 @@
                 symbolPosition: 'left'
             });
 
-            $('#Order_TotalValue').maskMoney({
+            $('#PurchaseOrder_TotalValue').maskMoney({
                 prefix: '',
                 allowZero: false,
                 allowNegative: false,
@@ -179,7 +179,7 @@
                 symbolPosition: 'left'
             });
 
-            $('#Order_Discount').maskMoney({
+            $('#PurchaseOrder_Discount').maskMoney({
                 prefix: '',
                 allowZero: false,
                 allowNegative: false,
@@ -193,16 +193,16 @@
 
             $('#OrderProduct_QuantityOrder').ForceNumericOnly();
 
-            $('#Order_OrderDate').mask('99/99/9999');
+            $('#PurchaseOrder_ValidateDate').mask('99/99/9999');
         }
 
         function InicializarCamposReadOnly() {
 
-            var valorTotalPedido = $('#Order_TotalValue').val();
+            var valorTotalPedido = $('#PurchaseOrder_TotalValue').val();
             if (valorTotalPedido == 0)
-                $('#Order_TotalValue').val(0);
+                $('#PurchaseOrder_TotalValue').val(0);
 
-            $("#Order_TotalValue").prop('readonly', true);
+            $("#PurchaseOrder_TotalValue").prop('readonly', true);
             $('#OrderProduct_TotalPrice').attr('disabled', true);
             $('#OrderProduct_UnitPrice').attr('disabled', true);
 
@@ -210,7 +210,7 @@
 
         function IniciarInclusaoPedido() {
 
-            var idPedido = $('#Order_Id').val();
+            var idPedido = $('#PurchaseOrder_Id').val();
 
             if (idPedido > 0) {
                 IniciarEdicaoPedido();
@@ -228,7 +228,7 @@
                 return false;
             }
 
-            waitingDialog.show('Criando Ordem de Compra', { dialogSize: 'sm', progressType: 'success' });
+            waitingDialog.show('Salvando Ordem de Compra', { dialogSize: 'sm', progressType: 'success' });
 
             for (var i = 0; i < arrayItens.length ; i++) {
 
@@ -258,7 +258,7 @@
                 var idPedido = retornoPedido[1];
 
                 if (retornoPedido.length > 1)
-                    $('#Order_Id').val(idPedido);
+                    $('#PurchaseOrder_Id').val(idPedido);
 
                 waitingDialog.hide();
                 ShowMessage(mensagemRetorno, true);
@@ -329,7 +329,7 @@
                 var idPedido = retornoPedido[1];
 
                 if (retornoPedido.length > 1)
-                    $('#Order_Id').val(idPedido);
+                    $('#PurchaseOrder_Id').val(idPedido);
 
                 waitingDialog.hide();
                 ShowMessage(mensagemRetorno, true);
@@ -571,10 +571,9 @@
                 descontoTotalPedido += descontoPedido;
             }
 
-            $('#Order_TotalValue').val(valorTotalPedido);
-            $('#Order_Discount').val(descontoTotalPedido);
-        }
-
+            $('#PurchaseOrder_TotalValue').val(valorTotalPedido);
+            $('#PurchaseOrder_Discount').val(descontoTotalPedido);
+        } 
     </script>
 
     <style type="text/css">
@@ -668,6 +667,7 @@
                         <div id="tabs-1">
                             
                             <div class="form-group">
+                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate);
 
                                 @Html.ValidationMessageFor(p => p.PurchaseOrder.Id)
                                 @Html.LabelFor(model => model.PurchaseOrder.Id, htmlAttributes: new { @class = "col-md-1" })
@@ -711,7 +711,7 @@
                                 <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
                             </div>
 
-                            @{ Html.RenderAction("GetOrderProducts", "Pedido", new { OrderID = Model.PurchaseOrder.Id });
+                            @{ Html.RenderAction("GetOrderProducts", "Compras", new { OrderID = Model.PurchaseOrder.Id });
                             }
 
                             @Html.Hidden("itensPedido", "", new { id = "itensPedido" });

@@ -96,29 +96,8 @@ namespace Control.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var arrayItensPedido = JArray.Parse(itensPedido);
-                    Pedido.PurchaseOrder.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.PurchaseOrderItem
-                    {
-                        Id = (int)x["Id"],
-                        PurchaseOrderId = (int)x["IdPedido"],
-                        SequencialItem = (int)x["SequencialItem"],
-                        QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
-                        ProductID = (int)x["ProductID"],
-                        UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
-                        ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
-                        TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString())
-                    }).ToList();
                     
-                    context = new DALContext();
-
-                    foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.PurchaseOrderId > 0))
-                        context.PurchaseOrderItem.Update(item);
-
-                    foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.PurchaseOrderId == 0))
-                    {
-                        item.PurchaseOrderId = Pedido.PurchaseOrder.Id;
-                        context.PurchaseOrderItem.Create(item);
-                    }
+                    context = new DALContext(); 
 
                     if (Pedido.PurchaseOrder.Id > 0)
                         context.PurchaseOrders.Update(Pedido.PurchaseOrder);
@@ -127,18 +106,35 @@ namespace Control.UI.Controllers
                         Pedido.PurchaseOrder.InsertDate = DateTime.Now;
                         context.PurchaseOrders.Create(Pedido.PurchaseOrder);
                     }
-
-                    bool pedidoExiste = Pedido.PurchaseOrder.Id > 0;
-
+                    
                     if (context.SaveChanges() > 0)
                     {
-                        Pedido.PurchaseOrder = Pedido.PurchaseOrder;
-                        Pedido.PurchaseOrder.ProviderPurchaseOrder = Pedido.Providers.Where(p => p.Id == Pedido.PurchaseOrder.ProviderID).FirstOrDefault();
+                    
+                        var arrayItensPedido = JArray.Parse(itensPedido);
+                        Pedido.PurchaseOrder.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.PurchaseOrderItem
+                        {
+                            Id = (int)x["Id"],
+                            PurchaseOrderId = (int)x["IdPedido"],
+                            SequencialItem = (int)x["SequencialItem"],
+                            QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                            ProductID = (int)x["ProductID"],
+                            UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
+                            ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                            TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString())
+                        }).ToList();
 
-                        if (pedidoExiste)
-                            return Content(String.Format("<b>Ordem de Compras {0}</br> Alterada com Sucesso!</b>;{1}", Pedido.PurchaseOrder.Id, Pedido.PurchaseOrder.Id));
-                        else
-                            return Content(String.Format("<b>Ordem de Compras {0}</br> Incluída com Sucesso!</b>;{1}", Pedido.PurchaseOrder.Id, Pedido.PurchaseOrder.Id));
+
+                        foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.Id > 0))
+                            context.PurchaseOrderItem.Update(item);
+
+                        foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.Id == 0))
+                        {
+                            item.PurchaseOrderId = Pedido.PurchaseOrder.Id;
+                            context.PurchaseOrderItem.Create(item);
+                        }
+
+                        context.SaveChanges();
+                        
                     }
                 }
                 else
@@ -167,7 +163,7 @@ namespace Control.UI.Controllers
         {
             context = new DALContext();
             var OrderProducts = context.PurchaseOrderItem.Filter(p => p.PurchaseOrderId == OrderID).ToList();
-            return PartialView("_ListOrders", OrderProducts);
+            return PartialView("_ListPurchaseOrdemItem", OrderProducts);
         }
 
         public ActionResult VisualizarProposta(int OrderID)
