@@ -45,6 +45,8 @@ namespace Control.UI.Controllers
             if (ClientID > 0)
             {
                 model = context.Customers.Find(p => p.Id == ClientID);
+                model.Document = model.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+                model.ZipCode = model.ZipCode.Replace("-", "");
             }
             return View(model);
         }
@@ -65,6 +67,9 @@ namespace Control.UI.Controllers
                 model.PhoneCode = 13;
                 model.CommercialPolicy = 0;
                 model.Discount = 0;
+
+                model.Document = model.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+                model.ZipCode = model.ZipCode.Replace("-", "");
 
                 if (model.Id > 0)
                 {
@@ -198,16 +203,16 @@ namespace Control.UI.Controllers
             try
             {
                 var retorno = context.Contacts.Delete(p => p.Id == ContatoID);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            context.SaveChanges();
 
             ViewBag.Message = "Contato excluído com sucesso.";
 
-            return RedirectToAction("Fornecedores");
+            return RedirectToAction("Contatos");
         }
         #endregion
 

@@ -23,6 +23,7 @@
     <link href="/plugins/xcharts/xcharts.min.css" rel="stylesheet">
     <link href="/plugins/select2/select2.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
             <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
@@ -60,6 +61,19 @@
     <script src="~/scripts/jquery.maskMoney.js"></script>
     <script src="~/scripts/ModalLoading.js"></script>
     <!-- Includes Layout - Fim -->
+
+    <script type="text/javascript">
+
+        function Select2Test() {
+
+            $(".selddl").select2();
+        }
+
+        $(document).ready(function () {
+            LoadSelect2Script(Select2Test);
+        });
+
+    </script>
 
     <style type="text/css">
         p.modalsucesso {

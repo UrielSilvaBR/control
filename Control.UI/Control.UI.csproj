@@ -221,6 +221,9 @@
     <Content Include="ajax\ui_progressbars.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cadastros\Cliente\Cliente.js" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\calendar.png" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\img\warning.png" />
@@ -229,6 +232,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="js\devoops.js" />
@@ -633,6 +637,11 @@
     <Content Include="plugins\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="plugins\xcharts\LICENSE" />
     <Content Include="plugins\xcharts\README.md" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\ControlGtwave.pubxml" />
     <None Include="Properties\PublishProfiles\uriel.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
