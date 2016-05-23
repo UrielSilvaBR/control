@@ -197,5 +197,15 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
+
+
+        public ActionResult OrdensDeCompras()
+        {
+            context = new DALContext();
+
+            var Orders = context.PurchaseOrders.All().ToList();
+
+            return View(Orders);
+        }
     }
 }

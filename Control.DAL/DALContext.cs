@@ -36,9 +36,14 @@ namespace Control.DAL
         private IRepository<InvoiceSerie> _invoiceSeries;
         private IRepository<InvoiceRps> _invoiceRps;
 
+        private IRepository<PurchaseOrder> _purchaseOrders;
+        private IRepository<PurchaseOrderItem> _purchaseOrderItems;
+
+
+
         public DALContext()
         {
-            dbContext = new ControlContext();
+            dbContext = new ControlContext();         
         }
 
         public IRepository<Contact> Contacts
@@ -262,6 +267,26 @@ namespace Control.DAL
             }
         }
 
+        public IRepository<PurchaseOrder> PurchaseOrders
+        {
+            get
+            {
+                if (_purchaseOrders == null)
+                    _purchaseOrders = new PurchaseOrderRepository(dbContext);
+                return _purchaseOrders;
+            }
+        }
+
+        public IRepository<PurchaseOrderItem> PurchaseOrderItem
+        {
+            get
+            {
+                if (_purchaseOrderItems == null)
+                    _purchaseOrderItems = new PurchaseOrderItemRepository(dbContext);
+                return _purchaseOrderItems;
+            }
+        }
+
         public int SaveChanges()
         {
             try
@@ -366,6 +391,12 @@ namespace Control.DAL
 
             if (_invoiceRps != null)
                 _invoiceRps.Dispose();
+
+            if (_purchaseOrders != null)
+                _purchaseOrderItems.Dispose();
+
+            if (_purchaseOrderItems != null)
+                _purchaseOrderItems.Dispose();
 
             if (dbContext != null)
                 dbContext.Dispose();

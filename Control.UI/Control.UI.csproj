@@ -674,6 +674,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -686,6 +687,7 @@
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MovimentacaoEstoqueViewModel.cs" />
+    <Compile Include="Models\PedidoCompraViewModel.cs" />
     <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\UserPartialViewModel.cs" />
@@ -737,6 +739,11 @@
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <Content Include="Views\Pedido\VisualizarProposta.cshtml" />
+    <Content Include="Views\Compras\ListaPedidos.cshtml" />
+    <Content Include="Views\Compras\_AddPurchaseOrderItem.cshtml" />
+    <Content Include="Views\Compras\_ListPurchaseOrdemItem.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

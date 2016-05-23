@@ -39,6 +39,9 @@ namespace Control.DAL
         IRepository<InvoiceSerie> InvoiceSeries { get; }
         IRepository<InvoiceRps> InvoiceRps { get; }
 
+        IRepository<PurchaseOrder> PurchaseOrders { get; }
+        IRepository<PurchaseOrderItem> PurchaseOrderItem { get; }
+
         bool Log(int code, string message, string user);
 
     }
