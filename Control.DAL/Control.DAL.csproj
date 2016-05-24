@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CEP\Objects\CEP.cs" />
     <Compile Include="DALContext.cs" />
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
@@ -117,6 +118,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Repository\BranchRepository.cs" />
+    <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CompanyRepository.cs" />
     <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\CountryRepository.cs" />
@@ -138,6 +140,8 @@
     <Compile Include="Repository\PurchaseOrderItemRepository.cs" />
     <Compile Include="Repository\PurchaseOrderRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\RolesRepository.cs" />
+    <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\StockRepository.cs" />
     <Compile Include="Repository\StorageRepository.cs" />
     <Compile Include="Repository\TransactionRepository.cs" />
@@ -145,6 +149,11 @@
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Repository\VendorRepository.cs" />
     <Compile Include="Web References\br.com.ginfes.homologacao\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\servico.cidades\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -165,6 +174,11 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.com.ginfes.homologacao\ServiceGinfesImplService.wsdl" />
+    <None Include="Web References\servico.cidades\cidades.wsdl" />
+    <None Include="Web References\servico.cidades\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Control.Model\Control.Model.csproj">
@@ -183,6 +197,17 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://academico.engsupport.eti.br/servicos/cidades.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\servico.cidades\</RelPath>
+      <UpdateFromURL>http://academico.engsupport.eti.br/servicos/cidades.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_servico_cidades_cidades</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://homologacao.ginfes.com.br/ServiceGinfesImpl%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\br.com.ginfes.homologacao\</RelPath>
@@ -194,6 +219,9 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\servico.cidades\cidades.disco" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201605101453385_primeiro.resx">

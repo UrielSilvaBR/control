@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CEP\Objects\CEPTests.cs" />
     <Compile Include="Controllers\EstoqueControllerTest.cs" />
     <Compile Include="NFSe\Objects\NotaFiscalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

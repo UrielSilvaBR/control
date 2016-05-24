@@ -15,6 +15,8 @@ namespace Control.DAL
 
         private IRepository<Contact> _contacts;
         private IRepository<Country> _countries;
+        private IRepository<City> _cities;
+        private IRepository<State> _states;
         private IRepository<Customer> _customers;
         private IRepository<Order> _orders;
         private IRepository<OrderProduct> _ordersProducts;
@@ -35,11 +37,8 @@ namespace Control.DAL
         private IRepository<Branch> _branches;
         private IRepository<InvoiceSerie> _invoiceSeries;
         private IRepository<InvoiceRps> _invoiceRps;
-
         private IRepository<PurchaseOrder> _purchaseOrders;
         private IRepository<PurchaseOrderItem> _purchaseOrderItems;
-
-
 
         public DALContext()
         {
@@ -63,6 +62,26 @@ namespace Control.DAL
                 if (_countries == null)
                     _countries = new CountryRepository(dbContext);
                 return _countries;
+            }
+        }
+
+        public IRepository<City> Cities
+        {
+            get
+            {
+                if (_cities == null)
+                    _cities = new CityRepository(dbContext);
+                return _cities;
+            }
+        }
+
+        public IRepository<State> States
+        {
+            get
+            {
+                if (_states == null)
+                    _states = new StateRepository(dbContext);
+                return _states;
             }
         }
 
@@ -175,7 +194,6 @@ namespace Control.DAL
                 return _vendors;
             }
         }
-
 
         public IRepository<Transaction> Transactions
         {
@@ -332,6 +350,12 @@ namespace Control.DAL
             if (_countries != null)
                 _countries.Dispose();
 
+            if (_cities != null)
+                _cities.Dispose();
+
+            if (_states != null)
+                _states.Dispose();
+
             if (_customers != null)
                 _customers.Dispose();
 
@@ -403,6 +427,5 @@ namespace Control.DAL
 
             GC.SuppressFinalize(this);
         }
-        
     }
 }

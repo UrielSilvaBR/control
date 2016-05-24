@@ -15,8 +15,10 @@ namespace Control.Model.Entities
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string CountryCode { get; set; }
+        public string Code { get; set; }
         [DataMember]
         public string Name { get; set; }
+        [DataMember]
+        public int IBGECode { get; set; }
     }
 }

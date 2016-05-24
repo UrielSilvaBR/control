@@ -32,5 +32,15 @@ namespace Control.DAL.Properties {
                 return ((string)(this["Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://academico.engsupport.eti.br/servicos/cidades.asmx")]
+        public string Control_DAL_servico_cidades_cidades {
+            get {
+                return ((string)(this["Control_DAL_servico_cidades_cidades"]));
+            }
+        }
     }
 }

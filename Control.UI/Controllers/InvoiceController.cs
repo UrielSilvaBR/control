@@ -78,8 +78,6 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
-        
-
         [HttpPost]
         public ActionResult Save(Models.InvoiceViewModel InvoiceModel, string itensNotaFiscal)
         {

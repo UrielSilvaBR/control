@@ -11,6 +11,8 @@ namespace Control.DAL
     {
         IRepository<Contact> Contacts { get; }
         IRepository<Country> Countries { get; }
+        IRepository<City> Cities { get; }
+        IRepository<State> States { get; }
         IRepository<Customer> Customers { get; }
         IRepository<Order> Orders { get; }
         IRepository<OrderProduct> OrdersProducts { get; }
