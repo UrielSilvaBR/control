@@ -324,6 +324,7 @@
     <Content Include="plugins\fullcalendar\lang\uk.js" />
     <Content Include="plugins\fullcalendar\lang\zh-cn.js" />
     <Content Include="plugins\fullcalendar\lang\zh-tw.js" />
+    <Content Include="plugins\html2canvas.js" />
     <Content Include="plugins\jQuery-Knob\jquery.knob.js" />
     <Content Include="plugins\jquery-ui-timepicker-addon\i18n\jquery-ui-timepicker-af.js" />
     <Content Include="plugins\jquery-ui-timepicker-addon\i18n\jquery-ui-timepicker-am.js" />
@@ -463,6 +464,8 @@
     <Content Include="plugins\jquery-ui\jquery-ui.min.css" />
     <Content Include="plugins\jquery-ui\jquery-ui.min.js" />
     <Content Include="plugins\jquery\jquery-2.1.0.min.js" />
+    <Content Include="plugins\jspdf.debug.js" />
+    <Content Include="plugins\jspdf.min.js" />
     <Content Include="plugins\justified-gallery\jquery.justifiedgallery.css" />
     <Content Include="plugins\justified-gallery\jquery.justifiedgallery.js" />
     <Content Include="plugins\justified-gallery\jquery.justifiedgallery.min.css" />

@@ -3,7 +3,8 @@
 
 @{
     ViewBag.Title = "VisualizarProposta";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "";
 }
 
 <div class="row">
@@ -87,7 +88,7 @@
                     <small>* VAT included</small>
                 </div>
                 <div class="clearfix"></div>
-                <div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
+                <div id="dvSalvarBtn" class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
                     <div class="col-xs-4">
                         <a href="#" id="savePDFlink" class="btn btn-default btn-label-left"><span><i class="fa fa-floppy-o"></i></span> Salvar pdf</a>
                     </div>
@@ -225,11 +226,14 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Back to List", "Index")
+        
 </p>
-<script src="http://html2canvas.hertzen.com/build/html2canvas.js"></script>
-@*<script type="text/javascript" src="dist/jspdf.min.js"></script>*@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="~/plugins/html2canvas.js"></script>
 <script src="~/plugins/jspdf.min.js"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -237,19 +241,28 @@
     });
 
     function SalvarPDF() {
-        alert("TESTE 123");
-
-        var pdf = new jsPDF('p', 'pt', 'a4');
-
-        pdf.fromHTML($('#divToPDF').html(), 15, 15, {
-            
+        var doc = new jsPDF('landscape', 'pt', 'a4');
+        doc.addHTML($('#dvSalvarBtn'), function () {
+            doc.save("teste.pdf");
         });
-        pdf.save('sample-file.pdf');
-
-        //pdf.addHTML(document.body, function () {
-        //    var string = pdf.output('datauristring');
-        //    //$('.preview-pane').attr('src', string);
-        //});
     }
-    
+
+    //pdf.addHTML($('#divToPDF'), function () {
+    //    pdf.save('Test.pdf');
+    //});
+
+    //pdf.addHTML($('#divToPDF'), function () {
+    //    pdf.save('sample-file.pdf')
+    //});
+
+
+    //pdf.fromHTML($('#divToPDF').html(), 15, 15, {
+    //});
+    //pdf.save('sample-file.pdf');
+
+    //pdf.addHTML(document.body, function () {
+    //    var string = pdf.output('datauristring');
+    //    //$('.preview-pane').attr('src', string);
+    //});
+
 </script>
