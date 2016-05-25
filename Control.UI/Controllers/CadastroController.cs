@@ -1,5 +1,6 @@
 ﻿using Control.DAL;
 using Control.Model.Entities;
+using Control.UI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,12 +40,14 @@ namespace Control.UI.Controllers
 
         public ActionResult ClientesEdit(int? ClientID)
         {
-            Customer model = new Customer();
+            ClienteViewModel model = new ClienteViewModel();
             context = new DALContext();
 
             if (ClientID > 0)
             {
-                model = context.Customers.Find(p => p.Id == ClientID);
+                model.Customer = context.Customers.Find(p => p.Id == ClientID);
+                model.Customer.Document = model.Customer.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+                model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
             }
             return View(model);
         }
@@ -54,25 +57,29 @@ namespace Control.UI.Controllers
             return RedirectToAction("Clientes");
         }
 
-        public ActionResult ClientesSave(Customer model)
+        public ActionResult ClientesSave(ClienteViewModel model)
         {
             context = new DALContext();
 
             try
             {
-                model.RegisterDate = DateTime.Now;
-                model.LastUpdate = DateTime.Now;
-                model.PhoneCode = 13;
-                model.CommercialPolicy = 0;
-                model.Discount = 0;
+                //model.RegisterDate = DateTime.Now;
+                //model.LastUpdate = DateTime.Now;
+                //model.PhoneCode = 13;
 
-                if (model.Id > 0)
+                model.Customer.CommercialPolicy = 0;
+                model.Customer.Discount = 0;
+
+                model.Customer.Document = model.Customer.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+                model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
+
+                if (model.Customer.Id > 0)
                 {
-                    context.Customers.Update(model);
+                    context.Customers.Update(model.Customer);
                 }
                 else
                 {
-                    context.Customers.Create(model);
+                    context.Customers.Create(model.Customer);
                 }
                 context.SaveChanges();
             }
@@ -103,6 +110,59 @@ namespace Control.UI.Controllers
 
             return RedirectToAction("Clientes");
         }
+
+        public JsonResult GetAddressByCep(string cep)
+        {
+            var CEP = new DAL.CEP.Objects.CEP();
+
+            var objCityCEP = CEP.GetCityByCEP(cep);
+            objCityCEP.CEP = Utility.Serialization.Deserialize<Utility.CEP>(Utility.Utilities.GetXmlAddressByCEP(cep));
+            objCityCEP.Name = objCityCEP.CEP.Cidade.ToUpper();
+            objCityCEP.CEP.Bairro = objCityCEP.CEP.Bairro.ToUpper();
+
+            context = new DALContext();
+
+            bool cityExists = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode) == null ? false : true;
+
+            if (!cityExists)
+            {
+                var objCity = new City()
+                {
+                    Name = objCityCEP.Name,
+                    CEPInicial = objCityCEP.CEPInicial,
+                    CEPFinal = objCityCEP.CEPFinal,
+                    IBGECode = objCityCEP.IBGECode,
+                    StateId = context.States.Find(p => p.UF.Trim().ToUpper() == objCityCEP.CEP.UF.Trim().ToUpper()).Id,
+                    CEP = objCityCEP.CEP
+                };
+
+                context.Cities.Create(objCity);
+                context.SaveChanges();
+
+                var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
+
+                return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                var objCity = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode);
+                objCity.CEP = objCityCEP.CEP;
+
+                var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
+
+                return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult GetCitiesByState(int StateID)
+        {
+            context = new DALContext();
+
+            var CityList = context.Cities.Filter(p => p.StateId == StateID).ToList();
+
+            return Json(new { CityList }, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Contatos
@@ -198,16 +258,16 @@ namespace Control.UI.Controllers
             try
             {
                 var retorno = context.Contacts.Delete(p => p.Id == ContatoID);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            context.SaveChanges();
 
             ViewBag.Message = "Contato excluído com sucesso.";
 
-            return RedirectToAction("Fornecedores");
+            return RedirectToAction("Contatos");
         }
         #endregion
 

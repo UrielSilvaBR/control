@@ -160,7 +160,7 @@ namespace Control.Utility
             sb.Append("     </xsl:if>");
             sb.Append("   </xsl:template>");
             sb.Append("</xsl:stylesheet>");
-            return transXMLStringThroughXSLTString(Utility.Utilities.RemoverBookMark(sXML), sb.ToString());
+            return transXMLStringThroughXSLTString(Utility.Utilities.RemoveBookMark(sXML), sb.ToString());
         }
 
         private static string transXMLStringThroughXSLTString(string sXML, string sXSLT)

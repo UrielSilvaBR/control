@@ -23,6 +23,7 @@
     <link href="/plugins/xcharts/xcharts.min.css" rel="stylesheet">
     <link href="/plugins/select2/select2.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
             <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
@@ -60,6 +61,19 @@
     <script src="~/scripts/jquery.maskMoney.js"></script>
     <script src="~/scripts/ModalLoading.js"></script>
     <!-- Includes Layout - Fim -->
+
+    <script type="text/javascript">
+
+        function Select2Test() {
+
+            $(".selddl").select2();
+        }
+
+        $(document).ready(function () {
+            LoadSelect2Script(Select2Test);
+        });
+
+    </script>
 
     <style type="text/css">
         p.modalsucesso {
@@ -294,13 +308,13 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Solicitação de Materiais", "SolicitacaoMateriais", "Compras")</li>
-                            <li>@Html.ActionLink("Pedido de Compras", "PedidoCompras", "Compras")</li>
+                            <li>@Html.ActionLink("Pedido de Compras", "", "Compras")</li>
                             <li>@Html.ActionLink("Conferência e Recebimento de Mercadorias", "Recebimento", "Compras")</li>
                             <li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>
                             <li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>
                             <li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>
                             <li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>
-                            <li>@Html.ActionLink("Listagem de Pedidos", "ListaPedidos", "Compras")</li>
+                            <li>@Html.ActionLink("Listagem de Pedidos", "", "Compras")</li>
                         </ul>
                     </li>
                     <li class="dropdown">

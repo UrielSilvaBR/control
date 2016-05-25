@@ -12,4 +12,12 @@ namespace Control.Model.Enums
         [Description("GERADA")]
         Gerada = 1
     }
+
+    public enum CustomerType
+    {
+        [Description("FÍSICA")]
+        Fisica = 1,
+        [Description("JURÍDICA")]
+        Juridica = 2
+    }
 }

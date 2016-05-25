@@ -221,6 +221,11 @@
     <Content Include="ajax\ui_progressbars.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cadastros\Cliente\Cliente.js" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\calendar.png" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\img\warning.png" />
@@ -229,6 +234,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="js\devoops.js" />
@@ -636,10 +642,60 @@
     <Content Include="plugins\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="plugins\xcharts\LICENSE" />
     <Content Include="plugins\xcharts\README.md" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\ControlGtwave.pubxml" />
     <None Include="Properties\PublishProfiles\uriel.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\control.js" />
+    <Content Include="scripts\i18n\ar.js" />
+    <Content Include="scripts\i18n\az.js" />
+    <Content Include="scripts\i18n\bg.js" />
+    <Content Include="scripts\i18n\ca.js" />
+    <Content Include="scripts\i18n\cs.js" />
+    <Content Include="scripts\i18n\da.js" />
+    <Content Include="scripts\i18n\de.js" />
+    <Content Include="scripts\i18n\en.js" />
+    <Content Include="scripts\i18n\es.js" />
+    <Content Include="scripts\i18n\et.js" />
+    <Content Include="scripts\i18n\eu.js" />
+    <Content Include="scripts\i18n\fa.js" />
+    <Content Include="scripts\i18n\fi.js" />
+    <Content Include="scripts\i18n\fr.js" />
+    <Content Include="scripts\i18n\gl.js" />
+    <Content Include="scripts\i18n\he.js" />
+    <Content Include="scripts\i18n\hi.js" />
+    <Content Include="scripts\i18n\hr.js" />
+    <Content Include="scripts\i18n\hu.js" />
+    <Content Include="scripts\i18n\id.js" />
+    <Content Include="scripts\i18n\is.js" />
+    <Content Include="scripts\i18n\it.js" />
+    <Content Include="scripts\i18n\ja.js" />
+    <Content Include="scripts\i18n\ko.js" />
+    <Content Include="scripts\i18n\lt.js" />
+    <Content Include="scripts\i18n\lv.js" />
+    <Content Include="scripts\i18n\mk.js" />
+    <Content Include="scripts\i18n\ms.js" />
+    <Content Include="scripts\i18n\nb.js" />
+    <Content Include="scripts\i18n\nl.js" />
+    <Content Include="scripts\i18n\pl.js" />
+    <Content Include="scripts\i18n\pt-BR.js" />
+    <Content Include="scripts\i18n\pt.js" />
+    <Content Include="scripts\i18n\ro.js" />
+    <Content Include="scripts\i18n\ru.js" />
+    <Content Include="scripts\i18n\sk.js" />
+    <Content Include="scripts\i18n\sr-Cyrl.js" />
+    <Content Include="scripts\i18n\sr.js" />
+    <Content Include="scripts\i18n\sv.js" />
+    <Content Include="scripts\i18n\th.js" />
+    <Content Include="scripts\i18n\tr.js" />
+    <Content Include="scripts\i18n\uk.js" />
+    <Content Include="scripts\i18n\vi.js" />
+    <Content Include="scripts\i18n\zh-CN.js" />
+    <Content Include="scripts\i18n\zh-TW.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery.maskedinput.js" />
@@ -657,6 +713,8 @@
     <Content Include="scripts\methods_pt.js" />
     <Content Include="scripts\ModalLoading.js" />
     <Content Include="scripts\modernizr-2.6.2.js" />
+    <Content Include="scripts\select2.js" />
+    <Content Include="scripts\select2.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -668,6 +726,7 @@
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CadastroController.cs" />
+    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\EstoqueController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
@@ -680,6 +739,7 @@
     <Compile Include="Models\InvoiceViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MovimentacaoEstoqueViewModel.cs" />
+    <Compile Include="Models\PedidoCompraViewModel.cs" />
     <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\UserPartialViewModel.cs" />
@@ -731,6 +791,11 @@
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Estoque\MovimentacaoEstoque.cshtml" />
     <Content Include="Views\Pedido\VisualizarProposta.cshtml" />
+    <Content Include="Views\Compras\ListaPedidos.cshtml" />
+    <Content Include="Views\Compras\_AddPurchaseOrderItem.cshtml" />
+    <Content Include="Views\Compras\_ListPurchaseOrdemItem.cshtml" />
+    <Content Include="Views\Compras\Create.cshtml" />
+    <Content Include="Views\Compras\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

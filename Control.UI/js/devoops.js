@@ -1,3 +1,6 @@
+/// <reference path="C:\inetpub\wwwroot\control-master\Control.UI\scripts/select2.js" />
+/// <reference path="C:\inetpub\wwwroot\control-master\Control.UI\scripts/select2.js" />
+/// <reference path="C:\inetpub\wwwroot\control-master\Control.UI\scripts/select2.js" />
 //
 //    Main script of DevOOPS v1.0 Bootstrap Theme
 //
@@ -78,7 +81,8 @@ function LoadBootstrapValidatorScript(callback){
 function LoadSelect2Script(callback){
     if (!$.fn.select2) {
 
-		$.getScript('/plugins/select2/select2.min.js', callback);
+        //$.getScript('/plugins/select2/select2.min.js', callback);
+        $.getScript('/scripts/select2.min.js', callback);
 	}
 	else {
 		if (callback && typeof(callback) === "function") {

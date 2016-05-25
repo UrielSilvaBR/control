@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="RETORNA_ESTADOS">
+        <s:complexType />
+      </s:element>
+      <s:element name="RETORNA_ESTADOSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_ESTADOSResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADES_ESTADO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ESTADO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADES_ESTADOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_CIDADES_ESTADOResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADES">
+        <s:complexType />
+      </s:element>
+      <s:element name="RETORNA_CIDADESResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_CIDADESResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADES_FILTRO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ESTADO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NOME" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADES_FILTROResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_CIDADES_FILTROResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADE_ESPECIFICA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="COD" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADE_ESPECIFICAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_CIDADE_ESPECIFICAResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_ESTADO_ESPECIFICO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="COD" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_ESTADO_ESPECIFICOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_ESTADO_ESPECIFICOResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADE_CEP">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CEP" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RETORNA_CIDADE_CEPResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RETORNA_CIDADE_CEPResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RETORNA_ESTADOSSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_ESTADOS" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_ESTADOSSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_ESTADOSResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADES_ESTADOSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADES_ESTADO" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADES_ESTADOSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADES_ESTADOResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADESSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADES" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADESSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADESResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADES_FILTROSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADES_FILTRO" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADES_FILTROSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADES_FILTROResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADE_ESPECIFICASoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADE_ESPECIFICA" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADE_ESPECIFICASoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADE_ESPECIFICAResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_ESTADO_ESPECIFICOSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_ESTADO_ESPECIFICO" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_ESTADO_ESPECIFICOSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_ESTADO_ESPECIFICOResponse" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADE_CEPSoapIn">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADE_CEP" />
+  </wsdl:message>
+  <wsdl:message name="RETORNA_CIDADE_CEPSoapOut">
+    <wsdl:part name="parameters" element="tns:RETORNA_CIDADE_CEPResponse" />
+  </wsdl:message>
+  <wsdl:portType name="cidadesSoap">
+    <wsdl:operation name="RETORNA_ESTADOS">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna os estados do Brasil</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_ESTADOSSoapIn" />
+      <wsdl:output message="tns:RETORNA_ESTADOSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_ESTADO">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna as cidades de um estado específico</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_CIDADES_ESTADOSoapIn" />
+      <wsdl:output message="tns:RETORNA_CIDADES_ESTADOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna as cidades do país</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_CIDADESSoapIn" />
+      <wsdl:output message="tns:RETORNA_CIDADESSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_FILTRO">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna as cidades de um estado específico filtrado pelas iniciais da cidade</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_CIDADES_FILTROSoapIn" />
+      <wsdl:output message="tns:RETORNA_CIDADES_FILTROSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_ESPECIFICA">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna os dados da cidade específica</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_CIDADE_ESPECIFICASoapIn" />
+      <wsdl:output message="tns:RETORNA_CIDADE_ESPECIFICASoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_ESTADO_ESPECIFICO">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna o Estado de uma Cidade específica</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_ESTADO_ESPECIFICOSoapIn" />
+      <wsdl:output message="tns:RETORNA_ESTADO_ESPECIFICOSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_CEP">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retorna uma Cidade específica com base no CEP</wsdl:documentation>
+      <wsdl:input message="tns:RETORNA_CIDADE_CEPSoapIn" />
+      <wsdl:output message="tns:RETORNA_CIDADE_CEPSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="cidadesSoap" type="tns:cidadesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RETORNA_ESTADOS">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_ESTADOS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_ESTADO">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_CIDADES_ESTADO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_CIDADES" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_FILTRO">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_CIDADES_FILTRO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_ESPECIFICA">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_CIDADE_ESPECIFICA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_ESTADO_ESPECIFICO">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_ESTADO_ESPECIFICO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_CEP">
+      <soap:operation soapAction="http://tempuri.org/RETORNA_CIDADE_CEP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="cidadesSoap12" type="tns:cidadesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RETORNA_ESTADOS">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_ESTADOS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_ESTADO">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_CIDADES_ESTADO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_CIDADES" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADES_FILTRO">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_CIDADES_FILTRO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_ESPECIFICA">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_CIDADE_ESPECIFICA" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_ESTADO_ESPECIFICO">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_ESTADO_ESPECIFICO" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RETORNA_CIDADE_CEP">
+      <soap12:operation soapAction="http://tempuri.org/RETORNA_CIDADE_CEP" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="cidades">
+    <wsdl:port name="cidadesSoap" binding="tns:cidadesSoap">
+      <soap:address location="http://academico.engsupport.eti.br/servicos/cidades.asmx" />
+    </wsdl:port>
+    <wsdl:port name="cidadesSoap12" binding="tns:cidadesSoap12">
+      <soap12:address location="http://academico.engsupport.eti.br/servicos/cidades.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

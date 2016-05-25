@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -14,7 +15,7 @@ namespace Control.Utility
 {
     public static class Utilities
     {
-        public static string RemoverBookMark(string text)
+        public static string RemoveBookMark(string text)
         {
             string BOMMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
             if (text.StartsWith(BOMMarkUtf8))
@@ -40,7 +41,7 @@ namespace Control.Utility
 
         public static XDocument GetXmlFileSerialized(Object objeto, Encoding encode)
         {
-            var arquivoXml = Utilities.RemoverBookMark(Serialization.Serialize(objeto));
+            var arquivoXml = Utilities.RemoveBookMark(Serialization.Serialize(objeto));
 
             var objXml = new XmlDocument();
             objXml.LoadXml(arquivoXml);
@@ -133,6 +134,42 @@ namespace Control.Utility
                 call(isi);
         }
 
+        public static string GetXmlAddressByCEP(string cep)
+        {
+            try
+            {
+                if (!IsInternetConnected())
+                    throw new Exception("Computador não conectado a Internet, por favor, prossiga com o cadastro de endereço manualmente!");
+
+                var objXml = XDocument.Load(String.Format("http://cep.republicavirtual.com.br/web_cep.php?cep={0}&formato=xml", cep));
+
+                return objXml.ToString();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [DllImport("wininet.dll")]
+        private extern static Boolean InternetGetConnectedState(out int Description, int ReservedValue);
+
+        public static Boolean IsInternetConnected()
+        {
+            bool result;
+
+            try
+            {
+                int Description;
+                result = InternetGetConnectedState(out Description, 0);
+            }
+            catch
+            {
+                result = false;
+            }
+
+            return result;
+        }
 
     }
 }

@@ -1,0 +1,796 @@
+﻿@using Control.UI.Models
+@model PedidoCompraViewModel
+
+@{
+    ViewBag.Title = "Pedido de Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<head>
+
+    <script type="text/javascript">
+
+        var giCount = 1;
+        $(document).ready(function () {
+
+            InicializarModalItemPedido();
+
+            $('#btnAdicionarItemPedido').click(function () {
+                AdicionarItemPedido();
+                $('#itemPedido').modal('hide');
+                setTimeout(function () {
+                    LimparItemPedido();
+                }, 800);
+            })
+
+            $('#btnEditarItemPedido').click(function () {
+                EditarItemPedido();
+            });
+
+            $('#btnEditarItemPedido').attr('style', 'display:none');
+
+            $('#btnAddItemPedido').click(function () {
+                $('#tituloItemPedido').text('Adicionar Item');
+                $('#btnAdicionarItemPedido').attr('style', 'display:block');
+                $('#btnEditarItemPedido').attr('style', 'display:none');
+            })
+
+            $('#ddlProdutoPedido').on('change', function (produto) {
+                ObterValorUnitarioProduto(produto.val);
+            });
+
+            $('#PurchaseOrder_QuantityOrder').focusout(function () {
+                var quantidade = $(this).val();
+                CalcularItemPedido(quantidade);
+            });
+
+            $('#PurchaseOrder_ItemDiscount').focusout(function () {
+                ValidarDescontoItemPedido($(this).val());
+            });
+
+            var idPedido = $('#PurchaseOrder_Id').val();
+            if (idPedido == 0) {
+                $('#btnCadastrar').show();
+                $('#btnEditar').hide();
+            }
+            else {
+                $('#btnCadastrar').hide();
+                $('#btnEditar').show();
+            }
+
+            $('#itemPedido').on('hidden.bs.modal', function () {
+                LimparItemPedido();
+            })
+
+        });
+
+        function LimparItemPedido() {
+            $("#ddlProdutoPedido").select2().select2("val", '0');
+            $('#OrderProduct_QuantityOrder').val(1);
+            $('#OrderProduct_UnitPrice').val(0);
+            $('#OrderProduct_ItemDiscount').val(0);
+            $('#OrderProduct_QuantityDeliver').val(0);
+            $('#OrderProduct_TotalPrice').val(0);
+        }
+
+        function InicializarModalItemPedido() {
+            IniciarlizarCamposItemPedido();
+            InicializarMascaraItemPedido();
+            InicializarCamposReadOnly();
+        }
+
+        function IniciarlizarCamposItemPedido() {
+
+            $('#OrderProduct_ItemDiscount').val(0);
+            $('#OrderProduct_UnitPrice').val(0);
+            $('#OrderProduct_TotalPrice').val(0);
+
+            $('#OrderProduct_QuantityOrder').val(1);
+            $('#OrderProduct_QuantityOrder').ForceNumericOnly();
+
+            if (parseInt($('#OrderProduct_QuantityOrder').val()) == 0)
+                $('#OrderProduct_QuantityOrder').val(1);
+        }
+
+        function CalcularItemPedido(quantidade) {
+            var valorUnitario = $('#OrderProduct_UnitPrice').val();
+            valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
+            valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
+
+            var valorTotal = quantidade * valorUnitario;
+
+            //var valorDesconto = $('#OrderProduct_ItemDiscount').val();
+            //valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
+            //valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
+            //valorTotal = valorTotal - valorDesconto;
+
+            $('#OrderProduct_TotalPrice').val(valorTotal);
+        }
+
+        function ValidarDescontoItemPedido(pValorDesconto) {
+            var valorDesconto = pValorDesconto;
+            valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
+            valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
+
+            var valorUnitario = $('#OrderProduct_TotalPrice').val();
+            valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
+            valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
+
+            if (valorDesconto > valorUnitario) {
+                //ShowMessage('<b>Valor do Desconto não pode ser maior que </br>o Valor do Item!</b>', false);
+                //$('#itemNotaFiscal').attr('style', 'display:block');
+                //$('#itemNotaFiscal').modal('show');
+            }
+
+
+
+            var valorTotal = valorUnitario - valorDesconto;
+
+            $('#OrderProduct_TotalPrice').val(valorTotal);
+        }
+
+        function InicializarMascaraItemPedido() {
+
+            $('#OrderProduct_UnitPrice').maskMoney({
+                prefix: '',
+                allowZero: false,
+                allowNegative: false,
+                defaultZero: true,
+                thousands: '.',
+                decimal: ',',
+                precision: 2,
+                affixesStay: false,
+                symbolPosition: 'left'
+            });
+
+            $('#OrderProduct_ItemDiscount').maskMoney({
+                prefix: '',
+                allowZero: false,
+                allowNegative: false,
+                defaultZero: true,
+                thousands: '.',
+                decimal: ',',
+                precision: 2,
+                affixesStay: false,
+                symbolPosition: 'left'
+            });
+
+            $('#OrderProduct_TotalPrice').maskMoney({
+                prefix: '',
+                allowZero: false,
+                allowNegative: false,
+                defaultZero: true,
+                thousands: '.',
+                decimal: ',',
+                precision: 2,
+                affixesStay: false,
+                symbolPosition: 'left'
+            });
+
+            $('#PurchaseOrder_TotalValue').maskMoney({
+                prefix: '',
+                allowZero: false,
+                allowNegative: false,
+                defaultZero: true,
+                thousands: '.',
+                decimal: ',',
+                precision: 2,
+                affixesStay: false,
+                symbolPosition: 'left'
+            });
+
+            $('#PurchaseOrder_Discount').maskMoney({
+                prefix: '',
+                allowZero: false,
+                allowNegative: false,
+                defaultZero: true,
+                thousands: '.',
+                decimal: ',',
+                precision: 2,
+                affixesStay: false,
+                symbolPosition: 'left'
+            });
+
+            $('#OrderProduct_QuantityOrder').ForceNumericOnly();
+
+            $('#PurchaseOrder_ValidateDate').mask('99/99/9999');
+        }
+
+        function InicializarCamposReadOnly() {
+
+            var valorTotalPedido = $('#PurchaseOrder_TotalValue').val();
+            if (valorTotalPedido == 0)
+                $('#PurchaseOrder_TotalValue').val(0);
+
+            $("#PurchaseOrder_TotalValue").prop('readonly', true);
+            $('#OrderProduct_TotalPrice').attr('disabled', true);
+            $('#OrderProduct_UnitPrice').attr('disabled', true);
+
+        }
+
+        function IniciarInclusaoPedido() {
+
+            var idPedido = $('#PurchaseOrder_Id').val();
+
+            if (idPedido > 0) {
+                IniciarEdicaoPedido();
+                return;
+            }
+
+            var gdvItens = $('#gdvItensPedido').dataTable();
+
+            var Items = new Array();
+            var arrayItens = gdvItens.fnGetData();
+
+            if (arrayItens.length == 0) {
+                waitingDialog.hide
+                ShowMessage('É necessário adicionar Itens!', false);
+                return false;
+            }
+
+            waitingDialog.show('Salvando Ordem de Compra', { dialogSize: 'sm', progressType: 'success' });
+
+            for (var i = 0; i < arrayItens.length ; i++) {
+
+                Items.push({
+                    Id: arrayItens[i][0],
+                    IdPedido: arrayItens[i][1],
+                    ProductID: arrayItens[i][2],
+                    SequencialItem: arrayItens[i][5],
+                    QuantityOrder: arrayItens[i][7],
+                    UnitPrice: arrayItens[i][8],
+                    ItemDiscount: arrayItens[i][9],
+                    TotalPrice: arrayItens[i][10]
+                });
+            }
+
+            var itensPedido = JSON.stringify(Items);
+
+            $('#itensPedido').val(itensPedido);
+        }
+
+        function FinalizarInclusaoPedido(pedido) {
+
+            setTimeout(function () {
+
+                var retornoPedido = pedido.split(';');
+                var mensagemRetorno = retornoPedido[0];
+                var idPedido = retornoPedido[1];
+
+                if (retornoPedido.length > 1)
+                    $('#PurchaseOrder_Id').val(idPedido);
+
+                waitingDialog.hide();
+                ShowMessage(mensagemRetorno, true);
+
+                if (parseInt(idPedido) > 0) {
+                    $.ajax({
+                        url: '/Compras/GetOrderProducts',
+                        data: { OrderID: idPedido },
+                        type: 'GET',
+                        success: function (result) {
+                            $('#table_wrapperz_ItensPedido').html(result);
+                        }
+                    });
+                }
+
+                if (idPedido == 0) {
+                    $('#btnCadastrar').show();
+                    $('#btnEditar').hide();
+                }
+                else {
+                    $('#btnCadastrar').hide();
+                    $('#btnEditar').show();
+                }
+
+            }, 1000);
+        }
+
+        function IniciarEdicaoPedido() {
+
+            var gdvItens = $('#gdvItensPedido').dataTable();
+
+            var Items = new Array();
+            var arrayItens = gdvItens.fnGetData();
+
+            if (arrayItens.length == 0) {
+                waitingDialog.hide();
+                ShowMessage('É necessário adicionar Itens!', false);
+                return false;
+            }
+
+            waitingDialog.show('Alterando Proposta', { dialogSize: 'sm', progressType: 'success' });
+
+            for (var i = 0; i < arrayItens.length ; i++) {
+
+                Items.push({
+                    Id: arrayItens[i][0],
+                    IdPedido: arrayItens[i][1],
+                    ProductID: arrayItens[i][2],
+                    SequencialItem: arrayItens[i][5],
+                    QuantityOrder: arrayItens[i][7],
+                    UnitPrice: arrayItens[i][8],
+                    ItemDiscount: arrayItens[i][9],
+                    TotalPrice: arrayItens[i][10]
+                });
+            }
+
+            var itensPedido = JSON.stringify(Items);
+
+            $('#itensPedido').val(itensPedido);
+        }
+
+        function FinalizarEdicaoPedido(pedido) {
+
+            setTimeout(function () {
+
+                var retornoPedido = pedido.split(';');
+                var mensagemRetorno = retornoPedido[0];
+                var idPedido = retornoPedido[1];
+
+                if (retornoPedido.length > 1)
+                    $('#PurchaseOrder_Id').val(idPedido);
+
+                waitingDialog.hide();
+                ShowMessage(mensagemRetorno, true);
+
+                if (parseInt(idPedido) > 0) {
+
+                    $.ajax({
+                        url: '/Compras/GetOrderProducts',
+                        data: { OrderID: idPedido },
+                        type: 'GET',
+                        success: function (result) {
+                            $('#table_wrapperz_ItensPedido').html(result);
+                        }
+                    });
+                }
+
+
+                if (idPedido > 0) {
+                    $('#btnCadastrar').hide();
+                    $('#btnEditar').show();
+                }
+
+            }, 1000);
+        }
+
+        function ObterValorUnitarioProduto(idProduto) {
+
+            ObterProduto(idProduto, function (produto) {
+                $('#OrderProduct_UnitPrice').val(produto.UnitPrice.toFixed(2));
+                $('#OrderProduct_TotalPrice').val(produto.UnitPrice.toFixed(2));
+                CalcularItemPedido($('#OrderProduct_QuantityOrder').val());
+            });
+        }
+
+        function ObterProduto(idProduto, produto) {
+
+            if (idProduto == 0) {
+                $('#OrderProduct_UnitPrice').val(0);
+                $('#OrderProduct_TotalPrice').val(0);
+                return;
+            }
+
+            $.post("/Invoice/GetProducts",
+                { ProductID: idProduto },
+                function (result) {
+                    produto(result);
+                });
+        }
+
+        function AdicionarItemPedido() {
+
+            //ValidarDescontoItemNotaFiscal($('#OrderProduct_ItemDiscount').val());
+
+            var idProduto = $('#ddlProdutoPedido option:selected').val();
+
+            if (idProduto == 0) {
+                ShowMessage('Selecione o Produto para inclusão do Item!', false);
+                return;
+            }
+
+            var rowEmpty = $('#gdvItensPedido > tbody > tr').find('.dataTables_empty').length == 1;
+            var rowCount = $('#gdvItensPedido > tbody > tr').length;
+
+            if (rowEmpty)
+                rowCount = rowCount - 1;
+
+            if (giCount > rowCount)
+                giCount = giCount;
+            else
+                giCount = rowCount + 1;
+
+
+            var descricaoProduto = $('#ddlProdutoPedido option:selected').text();
+            var quantidade = $('#OrderProduct_QuantityOrder').val();
+            quantidade = parseFloat(quantidade).toFixed(2);
+            quantidade = quantidade.replace(".", ",");
+            var precoUnitario = $('#OrderProduct_UnitPrice').val();
+            var quantidadeEntregue = $('#OrderProduct_QuantityDeliver').val();
+            var desconto = $('#OrderProduct_ItemDiscount').val();
+            var precoTotal = $('#OrderProduct_TotalPrice').val();
+
+            var gdvItens = $('#gdvItensPedido').dataTable();
+            $(gdvItens).removeClass('table-striped');
+
+            var indiceLinhaAdicionada = gdvItens.fnAddData([
+                "0",
+                "0",
+                idProduto,
+                '<a href="javascript:void(0);" onclick="AbrirItemPedido(' + giCount + ');" data-toggle="modal" data-target="#itemPedidoEditar" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
+                '<a href="javascript:void(0);" onclick="ExcluirItemPedido(' + giCount + ');"><i class="fa fa-times"  style="padding: 0px 8px;"></i></a>',
+                giCount,
+                descricaoProduto,
+                quantidade,
+                precoUnitario,
+                desconto,
+                precoTotal
+            ]);
+
+            var tr = gdvItens.fnGetNodes(indiceLinhaAdicionada);
+            $(tr).effect("highlight", { color: "#9fdf9f" }, 2000);
+
+            giCount++;
+
+            AtualizarValorTotalPedido();
+
+            $('#gdvItensPedido_filter').hide();
+            //$('#gdvItensPedido_info').hide();
+            $('#gdvItensPedido_length').hide();
+        }
+
+        function AbrirItemPedido(indiceLinha) {
+
+            var gdvItens = $('#gdvItensPedido').dataTable();
+
+            var rowIndex = indiceLinha - 1;
+
+            var items = gdvItens.fnGetData();
+            item = items[rowIndex];
+
+            $('#tituloItemPedido').text('Alterar Item');
+            $('#btnEditarItemPedido').attr('style', 'display:block');
+            $('#btnAdicionarItemPedido').attr('style', 'display:none');
+
+            $("#ddlProdutoPedido").select2().select2("val", item[2]);
+
+            var quantidade = parseInt(item[7]);
+            $('#OrderProduct_QuantityOrder').val(quantidade);
+
+            $('#OrderProduct_UnitPrice').val(item[8]);
+            $('#OrderProduct_ItemDiscount').val(item[9]);
+            $('#OrderProduct_TotalPrice').val(item[10]);
+
+            $('#rowIndexItemPedido').val(rowIndex);
+
+            $("#itemPedido").modal('show');
+        }
+
+        function EditarItemPedido() {
+
+            var gdvItens = $('#gdvItensPedido').dataTable();
+
+            var rowIndex = $('#rowIndexItemPedido').val();
+
+            gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').val(), parseInt(rowIndex), 2);
+            gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 6);
+
+            var quantidade = parseFloat($('#OrderProduct_QuantityOrder').val()).toFixed(2);
+            quantidade = quantidade.replace(".", ",");
+            gdvItens.fnUpdate(quantidade, parseInt(rowIndex), 7);
+            gdvItens.fnUpdate($('#OrderProduct_UnitPrice').val(), parseInt(rowIndex), 8);
+            gdvItens.fnUpdate($('#OrderProduct_ItemDiscount').val(), parseInt(rowIndex), 9);
+            gdvItens.fnUpdate($('#OrderProduct_TotalPrice').val(), parseInt(rowIndex), 10);
+
+            AtualizarValorTotalPedido();
+            gdvItens.fnDraw();
+
+            LimparItemPedido();
+
+            $(gdvItens).removeClass('table-striped');
+
+            var tr = gdvItens.fnGetNodes(rowIndex);
+            $(tr).effect("highlight", { color: "#80c1ff" }, 2000);
+
+            $("#itemPedido").modal('hide');
+
+        }
+
+        function ExcluirItemPedido(indiceLinha) {
+
+            ShowConfirmation("Deseja remover este Item?", function () {
+
+                var gdvItens = $('#gdvItensPedido').dataTable();
+
+                var rowIndex = indiceLinha - 1;
+
+                var arrayItens = gdvItens.fnGetData();
+                var idItem = arrayItens[rowIndex][0];
+
+                $(gdvItens).removeClass('table-striped');
+
+                var tr = gdvItens.fnGetNodes(rowIndex);
+                $(tr).effect("highlight", { color: "#ff3333" }, 2000);
+
+                setTimeout(function () {
+
+                    if (idItem > 0) {
+                        $.post('/Compras/DeletePurchaseOrderItem', { OrderProductID: idItem }, function (data) {
+                            gdvItens.fnDeleteRow(rowIndex);
+                            AtualizarSequencialItemPedido();
+                            AtualizarValorTotalPedido();
+                            giCount--;
+                        });
+                    }
+                    else {
+                        gdvItens.fnDeleteRow(rowIndex);
+                        AtualizarSequencialItemPedido();
+                        AtualizarValorTotalPedido();
+                        giCount--;
+                    }
+
+                }, 1000);
+
+                $("#modal-confirmation").modal("hide");
+            });
+        }
+
+        function AtualizarSequencialItemPedido() {
+            var gdvItens = $('#gdvItensPedido').dataTable();
+            var arrayItens = gdvItens.fnGetData();
+
+            for (var i = 0; i < arrayItens.length; i++) {
+
+                gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="AbrirItemPedido(' + (i + 1) + ');" data-toggle="modal" data-target="#itemPedidoEditar" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>', i, 3);
+                gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="ExcluirItemPedido(' + (i + 1) + ');"><i class="fa fa-times"  style="padding: 0px 8px;"></i></a>', i, 4);
+                gdvItens.fnUpdate(i + 1, i, 5);
+                //giCount++;
+            }
+        }
+
+        function AtualizarValorTotalPedido() {
+            var gdvItens = $('#gdvItensPedido').dataTable();
+
+            var arrayItens = gdvItens.fnGetData();
+
+            var valorTotalPedido = 0;
+            var descontoTotalPedido = 0;
+
+            for (var i = 0; i < arrayItens.length; i++) {
+
+                var valorPedido = arrayItens[i][10];
+                valorPedido = valorPedido.replace("R$", "").replace(",", "").replace(".", ",").trim();
+                valorPedido = Number(valorPedido.replace(/[^0-9\.]+/g, ""));
+
+                var descontoPedido = arrayItens[i][9];
+                descontoPedido = descontoPedido.replace("R$", "").replace(",", "").replace(".", ",").trim();
+                descontoPedido = Number(descontoPedido.replace(/[^0-9\.]+/g, ""));
+
+                valorTotalPedido += valorPedido;
+                descontoTotalPedido += descontoPedido;
+            }
+
+            $('#PurchaseOrder_TotalValue').val(valorTotalPedido);
+            $('#PurchaseOrder_Discount').val(descontoTotalPedido);
+        } 
+    </script>
+
+    <style type="text/css">
+        .form-horizontal .form-group {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        #modal-sucesso .modal-body {
+            min-height: 146px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/message-success.png') no-repeat 40px 27px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+        #modal-erro-cenprot .modal-body {
+            min-height: 146px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/warning.png') no-repeat 40px 27px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+        #modal-sucesso .modal-dialog {
+            width: 495px;
+            margin: 130px 475px;
+        }
+
+        #modal-erro-cenprot .modal-dialog {
+            width: 495px;
+            margin: 130px 475px;
+        }
+
+        #modal-erro-cenprot, #modal-sucesso .modal-footer {
+            border-top: 0px solid #e5e5e5;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Compras</a></li>
+            <li><a href="#">Pedido de Compras</a></li> 
+            <li><a href="#">Adicionar</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <!-- BOX -->
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Cadastro de Propostas</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <!-- conteudo -->
+            <div class="box-content">
+
+                <div id="tabs">
+
+                    @using (Ajax.BeginForm("Save", new { Controller = "Compras" },
+    new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+                    {
+                        <ul>
+                            <li><a href="#tabs-1"> Dados Cadastrais </a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            
+                            <div class="form-group">
+                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate);
+
+                                @Html.ValidationMessageFor(p => p.PurchaseOrder.Id)
+                                @Html.LabelFor(model => model.PurchaseOrder.Id, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(p => p.PurchaseOrder.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.PurchaseOrder.ValidateDate, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                 @Html.LabelFor(p => p.PurchaseOrder.TotalValue, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5">
+                                     @Html.DropDownListFor(model => model.PurchaseOrder.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                                @Html.Label("Fornecedor", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5" style="align-content:flex-start">
+                                    @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
+                            </div>
+
+                            @{ Html.RenderAction("GetOrderProducts", "Compras", new { OrderID = Model.PurchaseOrder.Id });
+                            }
+
+                            @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
+
+                            <div class="form-group">
+                                <div class="col-md-offset-5">
+                                    <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
+                                    <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Compras")'" />
+                                </div>
+                            </div>
+                        </div>
+
+                                }
+                </div>
+            </div>
+        </div>
+    </div><!-- BOX -->
+
+    <script type="text/javascript">
+        // Run Select2 on element
+        function Select2Test() {
+            //  $("#Pedido_CustomerID").select2();
+            //  $("#Pedido_ContactID").select2();
+            $(".selddl").select2();
+        }
+
+        var editor;
+
+        $(document).ready(function () {
+            // Load TimePicker plugin and callback all time and date pickers
+            LoadTimePickerScript(AllTimePickers);
+            // Create jQuery-UI tabs
+            $("#tabs").tabs();
+            $("#btnAvancar").click(function () {
+                var active = $("#tabs").tabs("option", "active");
+                $("#tabs").tabs("option", "active", active + 1);
+            });
+
+            $("#btnVoltar").click(function () {
+                var active = $("#tabs").tabs("option", "active");
+                $("#tabs").tabs("option", "active", active - 1);
+            });
+
+            // Sortable for elements
+            $(".sort").sortable({
+                items: "div.col-sm-2",
+                appendTo: 'div.box-content'
+            });
+            // Droppable for example of trash
+            $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
+            $('#trash').droppable({
+                drop: function (event, ui) {
+                    $(ui.draggable).remove();
+                }
+            });
+            var icons = {
+                header: "ui-icon-circle-arrow-e",
+                activeHeader: "ui-icon-circle-arrow-s"
+            };
+            // Make accordion feature of jQuery-UI
+            $("#accordion").accordion({ icons: icons });
+            // Create UI spinner
+            $("#ui-spinner").spinner();
+            // Add Drag-n-Drop to boxes
+
+            // Load script of Select2 and run this
+            LoadSelect2Script(Select2Test);
+
+            //$("#Pedido_CustomerID").select2();
+            //$("#Pedido_ContactID").select2();
+
+
+
+            WinMove();
+
+            $(window).on('shown.bs.modal', function () {
+                //$('.modal-backdrop').removeClass();
+            })
+        });
+
+    </script>

@@ -11,6 +11,8 @@ namespace Control.DAL
     {
         IRepository<Contact> Contacts { get; }
         IRepository<Country> Countries { get; }
+        IRepository<City> Cities { get; }
+        IRepository<State> States { get; }
         IRepository<Customer> Customers { get; }
         IRepository<Order> Orders { get; }
         IRepository<OrderProduct> OrdersProducts { get; }
@@ -38,6 +40,9 @@ namespace Control.DAL
         IRepository<Branch> Branches { get; }
         IRepository<InvoiceSerie> InvoiceSeries { get; }
         IRepository<InvoiceRps> InvoiceRps { get; }
+
+        IRepository<PurchaseOrder> PurchaseOrders { get; }
+        IRepository<PurchaseOrderItem> PurchaseOrderItem { get; }
 
         bool Log(int code, string message, string user);
 

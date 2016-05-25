@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Branch.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Contact.cs" />
     <Compile Include="Entities\Country.cs" />
@@ -91,7 +92,10 @@
     <Compile Include="Entities\OrderType.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Provider.cs" />
+    <Compile Include="Entities\PurchaseOrder.cs" />
+    <Compile Include="Entities\PurchaseOrderItem.cs" />
     <Compile Include="Entities\Roles.cs" />
+    <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\Storage.cs" />
     <Compile Include="Entities\Transaction.cs" />
@@ -203,7 +207,12 @@
   <ItemGroup>
     <Content Include="Documentation\NFSe\FluxoNFSe.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Control.Utility\Control.Utility.csproj">
+      <Project>{53eae4ef-78e0-4bd1-82eb-87069122a25c}</Project>
+      <Name>Control.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

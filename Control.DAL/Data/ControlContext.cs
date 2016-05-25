@@ -17,6 +17,8 @@ namespace Control.DAL.Data
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<State> States { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrdersProducts { get; set; }
@@ -39,16 +41,19 @@ namespace Control.DAL.Data
         public DbSet<InvoiceSerie> InvoiceSeries { get; set; }
         public DbSet<InvoiceRps> InvoiceRps { get; set; }
 
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
+
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public ControlContext(DbConnection cn)
             : base(cn, true)
         {
-            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
         }
 
         public static ControlContext Create()
@@ -69,6 +74,8 @@ namespace Control.DAL.Data
             modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<Transaction>().ToTable("Transaction");
+            modelBuilder.Entity<PurchaseOrder>().ToTable("PurchaseOrder");
+            modelBuilder.Entity<PurchaseOrderItem>().ToTable("PurchaseOrderItem");
 
         }
     }

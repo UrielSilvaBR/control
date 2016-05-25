@@ -8,7 +8,5 @@ using Control.Model.Entities;
 
 namespace Control.DAL.Repository
 {
-    public class RolesRepository<Entities.User> : IRepository    
-    {
-    }
+   
 }
