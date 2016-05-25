@@ -158,9 +158,9 @@ namespace Control.UI.Controllers
         {
             context = new DALContext();
 
-            var CityList = context.Cities.Filter(p => p.StateId == StateID).ToList();
+            var CityList = context.Cities.All().Where(p => p.StateId == StateID).OrderBy(p => p.Name).ToList();
 
-            return Json(new { CityList }, JsonRequestBehavior.AllowGet);
+            return Json(new { Cidades = CityList }, JsonRequestBehavior.AllowGet);
         }
 
         #endregion

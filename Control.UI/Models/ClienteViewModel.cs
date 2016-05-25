@@ -20,8 +20,9 @@ namespace Control.UI.Models
         {
             context = new DALContext();
             Countries = context.Countries.All().OrderBy(p => p.Name).ToList();
-            Cities = context.Cities.All().OrderBy(p => p.Name).ToList();
+            Cities = new List<City>();
             States = context.States.All().OrderBy(p => p.Name).ToList();
+            States.Insert(0, new State() { Id = 0, Name = "SELECIONE..." });
         }
     }
 }

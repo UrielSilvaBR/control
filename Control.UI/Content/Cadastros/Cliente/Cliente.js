@@ -24,8 +24,11 @@
     });
 
     $('#Customer_CompanyName').focus();
-});
 
+    $('#Customer_AddressStateId').change(function () {
+        ObterListaCidadePorEstado($(this).val());
+    });
+});
 
 function InicializarMascarasCampos() {
     $('#Customer_ZipCode').mask('99999-999');
@@ -47,6 +50,8 @@ function AlterarTipoCliente(idTipoCliente) {
 function ObterEnderecoPorCEP(cep) {
 
     waitingDialog.show('Buscando Endereço', { dialogSize: 'sm', progressType: 'success' });
+    $('#Customer_AddressStreet').val('');
+    $('#Customer_AddressDistrict').val('');
 
     setTimeout(function () {
 
@@ -56,9 +61,10 @@ function ObterEnderecoPorCEP(cep) {
             success: function (result) {
                 $('#Customer_AddressStreet').val(result.Cidade.CEP.LogradouroCompleto);
                 $('#Customer_AddressDistrict').val(result.Cidade.CEP.Bairro);
-
+               
                 var list = $("#Customer_AddressCityId");
                 list.empty();
+                list.append(new Option('SELECIONE...', '0'));
                 $.each(result.ListaCidades, function (index, item) {
                     list.append(new Option(item.Name, item.Id));
                 });
@@ -67,8 +73,28 @@ function ObterEnderecoPorCEP(cep) {
                 $("#Customer_AddressStateId").select2().select2("val", result.Cidade.StateId);
 
                 waitingDialog.hide();
+                $('#Customer_AddressNumber').focus();
             }
         });
 
     }, 2000);
+}
+
+function ObterListaCidadePorEstado(idEstado)
+{
+    $.ajax({
+        url: '/Cadastro/GetCitiesByState',
+        data: { StateID: idEstado },
+        success: function (result) {
+
+            var list = $("#Customer_AddressCityId");
+            list.empty();
+            list.append(new Option('SELECIONE...', '0'));
+            $.each(result.Cidades, function (index, item) {
+                list.append(new Option(item.Name, item.Id));
+            });
+
+            list.select2().select2("val", 0);
+        }
+    });
 }

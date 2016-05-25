@@ -48,12 +48,8 @@ namespace Control.DAL.Repository.Tests
             //context.Products.Create(new Model.Entities.Product() { Name = "WII U", UnitPrice = 999.99M, Description = "VIDEO GAME", ProductCode = 3, ProductTypeUnitID = 1 });
             //context.SaveChanges();
 
-            //context = new DALContext();
-            //context.Countries.Create(new Model.Entities.Country() { Code = "BRA", IBGECode = 76, Name = "BRASIL" });
-            //context.SaveChanges();
-
             context = new DALContext();
-            context.States.Create(new Model.Entities.State() { CountryId = 1, IBGECode = 35, Name = "SÃO PAULO", UF = "SP" });
+            context.Countries.Create(new Model.Entities.Country() { Code = "BRA", IBGECode = 76, Name = "BRASIL" });
             context.SaveChanges();
 
             Assert.Fail();

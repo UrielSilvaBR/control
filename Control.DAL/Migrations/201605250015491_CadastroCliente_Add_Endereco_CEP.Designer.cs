@@ -7,18 +7,18 @@ namespace Control.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _21062016_puchaseOrder2 : IMigrationMetadata
+    public sealed partial class CadastroCliente_Add_Endereco_CEP : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_21062016_puchaseOrder2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CadastroCliente_Add_Endereco_CEP));
         
         string IMigrationMetadata.Id
         {
-            get { return "201605211949399_21062016_puchaseOrder2"; }
+            get { return "201605250015491_CadastroCliente_Add_Endereco_CEP"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return null; }
+            get { return Resources.GetString("Source"); }
         }
         
         string IMigrationMetadata.Target
