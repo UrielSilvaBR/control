@@ -21,14 +21,24 @@ namespace Control.Model.Entities
         [Key]
         [DataMember]
         public int Id { get; set; }
+
         public string CompanyName { get; set; }
         public string ShortName { get; set; }
         public CustomerType CustomerType { get; set; }
         public string AddressStreet { get; set; }
         public string AddressNumber { get; set; }
         public string AddressDistrict { get; set; }
+
+        [DataMember]
         public int AddressCityId { get; set; }
+
+        [ForeignKey("AddressCityId")]
+        public virtual City City { get; set; }
+
+        [DataMember]
         public int AddressStateId { get; set; }
+
+        [DataMember]
         public string AddressCountryId { get; set; }
         public string AddressComplement { get; set; }
         public string ZipCode { get; set; }

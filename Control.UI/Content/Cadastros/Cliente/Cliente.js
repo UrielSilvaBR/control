@@ -2,10 +2,12 @@
 
     InicializarMascarasCampos();
 
-    if ($('#Customer_Id').val() == "0")
+    if ($('#Customer_Id').val() == "0") {
         AlterarTipoCliente(1);
-    else
+    }
+    else {
         AlterarTipoCliente($('#cboTipoCliente option:selected').val());
+    }
 
     $('#cboTipoCliente').change(function () {
         var idTipoCliente = $(this).val();
@@ -61,7 +63,7 @@ function ObterEnderecoPorCEP(cep) {
             success: function (result) {
                 $('#Customer_AddressStreet').val(result.Cidade.CEP.LogradouroCompleto);
                 $('#Customer_AddressDistrict').val(result.Cidade.CEP.Bairro);
-               
+
                 var list = $("#Customer_AddressCityId");
                 list.empty();
                 list.append(new Option('SELECIONE...', '0'));
@@ -80,8 +82,10 @@ function ObterEnderecoPorCEP(cep) {
     }, 2000);
 }
 
-function ObterListaCidadePorEstado(idEstado)
-{
+function ObterListaCidadePorEstado(idEstado) {
+
+    if (typeof idCidade === 'undefined') { idCidade = 0; }
+
     $.ajax({
         url: '/Cadastro/GetCitiesByState',
         data: { StateID: idEstado },

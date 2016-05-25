@@ -20,7 +20,7 @@
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
-                    <span>Cadastro de Clientes</span>
+                    <span>Cadastro de Vendedores</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -62,10 +62,10 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
-                                                <a href='@Url.Action("VendedoresEdit", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("VendedoresEdit", "Cadastro", new { VendedorID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("VendedorDelete", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("VendedorDelete", "Cadastro", new { VendedorID = item.Id })'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
                                                 </a>

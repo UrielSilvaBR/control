@@ -1,4 +1,5 @@
 ﻿@using Control.Model.Entities
+@using Control.Model.Enums
 @model IEnumerable<Customer>
 
 @{
@@ -11,7 +12,6 @@
         <ol class="breadcrumb">
             <li><a href="#">Cadastros</a></li>
             <li><a href="#">Clientes</a></li>
-            @*<li><a href="#">Edição</a></li>*@
         </ol>
     </div>
 </div>
@@ -50,61 +50,27 @@
                                 <th>
                                     Apelido
                                 </th>
-                               <!-- <th>
-                                    Endereço
-                                </th>
-                                @*<th>
-                                    Número
-                                </th>*@
                                 <th>
-                                    Bairro
+                                    Estado
                                 </th>
                                 <th>
                                     Cidade
                                 </th>
                                 <th>
-                                    Estado
-                                </th>
-                                <th>
-                                    Cep
-                                </th>-->
-                                @*<th>
-                                    DDD
-                                </th>*@
-                                <th>
                                     Telefone
                                 </th>
-                                @*<th>
-                                    Fax
-                                </th>*@
                                 <th>
                                     Email
                                 </th>
-                                @*<th>
-                                    Site
-                                </th>*@
                                 <th>
                                     CPF/CNPJ
                                 </th>
-                                @*<th>
-                            @Html.DisplayNameFor(model => model.Discount)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CommercialPolicy)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.RegisterDate)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.LastUpdate)
-                        </th>*@
-                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
-                        {
                             {
+                                {
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
@@ -123,59 +89,34 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ShortName)
                                         </td>
-                                        <!--<td>
-                                            Html.DisplayFor(modelItem => item.AddressStreet)  - @Html.DisplayFor(modelItem => item.AddressNumber)
-                                        </td>
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.AddressNumber)
-                                        </td>*@
                                         <td>
-                                            Html.DisplayFor(modelItem => item.AddressDistrict)
+                                           @Html.DisplayFor(modelItem => item.City.State.Name)
                                         </td>
                                         <td>
-                                            Html.DisplayFor(modelItem => item.AddressCity)
+                                            @Html.DisplayFor(modelItem => item.City.Name)
                                         </td>
                                         <td>
-                                            Html.DisplayFor(modelItem => item.AddressState)
-                                        </td>
-                                        <td>
-                                            Html.DisplayFor(modelItem => item.ZipCode)
-                                        </td>-->
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.PhoneCode)
-                                        </td>*@
-                                        <td>
-                                            (@Html.DisplayFor(modelItem => item.PhoneCode)) 
+                                            (@Html.DisplayFor(modelItem => item.PhoneCode))
                                             @Html.DisplayFor(modelItem => item.Phone)
                                         </td>
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.PhoneFax)
-                                        </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Email)
                                         </td>
-                                        @*<td>
-                                            @Html.DisplayFor(modelItem => item.Website)
-                                        </td>*@
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Document)
-                                        </td>
-                                        @*<td>
-                                    @Html.DisplayFor(modelItem => item.Discount)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CommercialPolicy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.RegisterDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LastUpdate)
-                                </td>*@
-                                        
-                                    </tr>
-                            }
-                        }
+                                            @{
+                                                long CPF = Convert.ToInt64(item.Document);
+                                                string CPFFormatado = String.Format(@"{0:000\.000\.000\-00}", CPF);
+
+                                                long CNPJ = Convert.ToInt64(item.Document);
+                                                string CNPJFormatado = String.Format(@"{0:00\.000\.000\/0000\-00}", CNPJ);
+
+                                                string CNPJCPF = item.CustomerType == CustomerType.Fisica ? CPFFormatado : CNPJFormatado;
+                                        }
+                                        @Html.DisplayFor(modelItem => CNPJCPF)
+                                    </td>
+                                </tr>
+                                                }
+                                            }
 
                         </tbody>
 
@@ -188,34 +129,31 @@
 <!--    -->
 
 <script type="text/javascript">
-// Run Datables plugin and create 3 variants of settings
-function AllTables(){
-	TestTable1();
-	LoadSelect2Script(MakeSelect2);
-}
-function MakeSelect2(){
-	$('select').select2();
-	$('.dataTables_filter').each(function(){
-	    $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+    // Run Datables plugin and create 3 variants of settings
+    function AllTables() {
+        TestTable1();
+        LoadSelect2Script(MakeSelect2);
+    }
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
 
-	    //var url = Url.Action("ActionName", "ControllerName")';
-	    var url = '@Url.Action("ActionName", "ControllerName")';
+            //var url = Url.Action("ActionName", "ControllerName")';
+            var url = '@Url.Action("ActionName", "ControllerName")';
 
-	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-	});
-}
-$(document).ready(function() {
-	// Load Datatables and run plugin on tables
-    LoadDataTablesScripts(AllTables);
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+        });
+    }
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
 
 
 
-	// Add Drag-n-Drop feature
-	WinMove();
-});
+        // Add Drag-n-Drop feature
+        WinMove();
+    });
 </script>
-
-
-

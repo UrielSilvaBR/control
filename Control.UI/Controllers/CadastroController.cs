@@ -48,7 +48,10 @@ namespace Control.UI.Controllers
                 model.Customer = context.Customers.Find(p => p.Id == ClientID);
                 model.Customer.Document = model.Customer.Document.Replace(".", "").Replace("-", "").Replace("/", "");
                 model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
+                model.Cities = context.Cities.Filter(p => p.StateId == model.Customer.AddressStateId).OrderBy(p => p.Name).ToList();
+                model.Cities.Insert(0, new City() { Id = 0, Name = "SELECIONE..." });
             }
+
             return View(model);
         }
 
