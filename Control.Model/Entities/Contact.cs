@@ -12,12 +12,22 @@ namespace Control.Model.Entities
     [DataContract]
     public class Contact : IEntity 
     {
+        public Contact()
+        {
+            Vendors = new List<Vendor>();
+            Vendors.Add(ContactVendor);
+        }
+
         [Key]
         [DataMember]
         public int Id { get; set; }
 
         public int? CustomerID { get; set; }
         public int? VendorID { get; set; }
+
+        [NotMapped]
+        public List<Vendor> Vendors { get; set; }
+
         public string ContatName { get; set; }
         public string ContatRoleName { get; set; }
         public string Phone { get; set; }

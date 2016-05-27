@@ -36,6 +36,14 @@ $(document).ready(function () {
         ValidarDescontoItemPedido($(this).val());
     });
 
+    $("#Order_CustomerID").change(function () {
+        ObterListaContatoPorCliente($(this).val());
+    });
+
+    $('#Order_ContactID').change(function () {
+        ObterListaVendedorPorContato($(this).val());
+    });
+
     var idPedido = $('#Order_Id').val();
     if (idPedido == 0) {
         $('#btnCadastrar').show();
@@ -51,6 +59,40 @@ $(document).ready(function () {
     })
 
 });
+
+function ObterListaContatoPorCliente(idCliente) {
+    $.post("/Pedido/GetContactsByCustomer",
+      { CustomerID: idCliente },
+      function (result) {
+
+          var listContact = $("#Order_ContactID");
+          listContact.empty();
+          listContact.append(new Option('SELECIONE...', '0'));
+          $.each(result.contactList, function (index, item) {
+              listContact.append(new Option(item.ContatName, item.Id));
+          });
+
+          listContact.select2().select2("val", 0);
+
+          ObterListaVendedorPorContato(listContact.val());
+      });
+}
+
+function ObterListaVendedorPorContato(idContato) {
+    $.post("/Pedido/GetVendorsByContact",
+      { ContactID: idContato },
+      function (result) {
+
+          var listVendor = $("#Order_VendorID");
+          listVendor.empty();
+          listVendor.append(new Option('SELECIONE...', '0'));
+          $.each(result.vendorList, function (index, item) {
+              listVendor.append(new Option(item.Name, item.Id));
+          });
+
+          listVendor.select2().select2('val', listVendor.val());
+      });
+}
 
 function LimparItemPedido() {
     $("#ddlProdutoPedido").select2().select2("val", '0');
@@ -210,9 +252,44 @@ function IniciarInclusaoPedido() {
     var Items = new Array();
     var arrayItens = gdvItens.fnGetData();
 
+    var idStatusPedido = $('#Order_Status').val();
+    if (idStatusPedido == "0") {
+        ShowMessage('É necessário selecionar o Status!', false);
+        waitingDialog.hide();
+        return false;
+    }
+
+    var idCliente = $('#Order_CustomerID').val();
+    if (idCliente == "0") {
+        ShowMessage('É necessário selecionar o Cliente!', false);
+        waitingDialog.hide();
+        return false;
+    }
+
+    var idContato = $('#Order_ContactID').val();
+    if (idContato == "0") {
+        ShowMessage('É necessário selecionar o Contato!', false);
+        waitingDialog.hide();
+        return false;
+    }
+
+    var idVendedor = $('#Order_VendorID').val();
+    if (idVendedor == "0") {
+        ShowMessage('É necessário selecionar o Vendedor!', false);
+        waitingDialog.hide();
+        return false;
+    }
+
+    var idCFOP = $('#Order_CFOP').val();
+    if (idCFOP == "0") {
+        ShowMessage('É necessário selecionar o CFOP!', false);
+        waitingDialog.hide();
+        return false;
+    }
+
     if (arrayItens.length == 0) {
-        waitingDialog.hide
         ShowMessage('É necessário adicionar Itens!', false);
+        waitingDialog.hide();
         return false;
     }
 

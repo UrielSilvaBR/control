@@ -164,8 +164,9 @@ namespace Control.UI.Models
         {
             context = new DALContext();
             Customers = context.Customers.All().OrderBy(p => p.ShortName).ToList();
-            Contacts = context.Contacts.All().OrderBy(p => p.ContatName).ToList();
-            Vendors = context.Vendors.All().OrderBy(p => p.Name).ToList();
+            Customers.Insert(0, new Customer() { Id = 0, CompanyName = "SELECIONE..." });
+            Contacts = new List<Contact>();
+            Vendors = new List<Vendor>();
             Products = context.Products.All().OrderBy(p => p.Name).ToList();
             Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
             if (Order == null)
@@ -191,6 +192,10 @@ namespace Control.UI.Models
             CFOP.Add(sli3);
             CFOP.Add(sli4);
             CFOP.Add(sli5);
+            CFOP = CFOP.OrderBy(p => p.Text).ToList();
+            CFOP.Insert(0, new SelectListItem() { Value = "0", Text = "SELECIONE..." });
+
+            
 
             #endregion
 
@@ -213,6 +218,10 @@ namespace Control.UI.Models
             Status.Add(stat5);
             Status.Add(stat6);
             Status.Add(stat7);
+            Status.OrderBy(p => p.Text).ToList();
+            Status.Insert(0, new SelectListItem() { Value = "0", Text = "SELECIONE..." });
+
+            
 
             #endregion
 
