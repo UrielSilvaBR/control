@@ -48,6 +48,9 @@ namespace Control.UI.Controllers
             {
                 retorno = context.Orders.Find(p => p.Id == OrderID);
                 model.Order = retorno;
+                model.Contacts = context.Contacts.Filter(p => p.CustomerID == model.Order.CustomerID).ToList();
+                model.Contacts.Insert(0, new Contact() { Id = 0, ContatName = "SELECIONE..." });
+                model.Vendors = context.Vendors.Filter(p => p.Id == model.Order.ContactOrder.VendorID).ToList();
             }
             catch (Exception ex)
             {
@@ -154,16 +157,58 @@ namespace Control.UI.Controllers
 
         public JsonResult GetProducts(int ProductID)
         {
-            context = new DALContext();
-            var objProduct = context.Products.Find(p => p.Id == ProductID);
-            return Json(objProduct);
+            try
+            {
+                context = new DALContext();
+                var objProduct = context.Products.Find(p => p.Id == ProductID);
+                return Json(objProduct);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public PartialViewResult GetOrderProducts(int OrderID)
         {
-            context = new DALContext();
-            var OrderProducts = context.OrdersProducts.Filter(p => p.OrderId == OrderID).ToList();
-            return PartialView("_ListOrders", OrderProducts);
+            try
+            {
+                context = new DALContext();
+                var OrderProducts = context.OrdersProducts.Filter(p => p.OrderId == OrderID).ToList();
+                return PartialView("_ListOrders", OrderProducts);
+            }
+            catch (Exception ex)
+            {
+                return PartialView("_ListOrders", ex.Message);
+            }
+        }
+
+        public JsonResult GetContactsByCustomer(int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+                var contactList = context.Contacts.Filter(p => p.CustomerID == CustomerID).ToList();
+                return Json(new { contactList = contactList });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+        public JsonResult GetVendorsByContact(int ContactID)
+        {
+            try
+            {
+                context = new DALContext();
+                var vendorList = context.Vendors.Filter(p => p.Id == ContactID).ToList();
+                return Json(new { vendorList = vendorList });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public ActionResult VisualizarProposta(int OrderID)

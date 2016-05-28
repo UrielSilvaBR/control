@@ -46,12 +46,12 @@
                         <div class="form-group">
                             @Html.Label("Cliente", htmlAttributes: new { @class = "control-label col-md-1" })
                             <div class="col-md-5">
-                                @Html.DropDownListFor(model => model.CustomerID, new SelectList(ViewBag.ListaClientes, "Id", "ShortName"), htmlAttributes: new { @class = "form-control selddl" })
+                                @Html.DropDownListFor(model => model.CustomerID, new SelectList(ViewBag.ListaClientes, "Id", "ShortName"), htmlAttributes: new { @class = "selddl" })
                                 @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                             </div>
                             @Html.Label("Vendedor NCC", htmlAttributes: new { @class = "control-label col-md-1" })
                             <div class="col-md-4">
-                                @Html.DropDownListFor(model => model.VendorID, new SelectList(ViewBag.ListaVendedores, "Id", "Name"), htmlAttributes: new { @class = "form-control selddl" })
+                                @Html.DropDownListFor(model => model.VendorID, new SelectList(ViewBag.ListaVendedores, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
                                 @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
                             </div>
                         </div>
