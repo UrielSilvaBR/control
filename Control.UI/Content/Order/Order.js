@@ -36,6 +36,10 @@ $(document).ready(function () {
         ValidarDescontoItemPedido($(this).val());
     });
 
+    $('#Order_Discount').focusout(function () {
+        AplicarDesconto($(this).val());
+    });
+
     $("#Order_CustomerID").change(function () {
         ObterListaContatoPorCliente($(this).val());
     });
@@ -43,6 +47,8 @@ $(document).ready(function () {
     $('#Order_ContactID').change(function () {
         ObterListaVendedorPorContato($(this).val());
     });
+
+    $('#btnGerarNF').hide();
 
     var idPedido = $('#Order_Id').val();
     if (idPedido == 0) {
@@ -230,7 +236,10 @@ function InicializarCamposReadOnly() {
 
     var valorTotalPedido = $('#Order_TotalValue').val();
     if (valorTotalPedido == 0)
+    {
         $('#Order_TotalValue').val(0);
+        $('#Order_Discount').val(0);
+    }
 
     $("#Order_TotalValue").prop('readonly', true);
     $('#OrderProduct_TotalPrice').attr('disabled', true);
@@ -342,10 +351,12 @@ function FinalizarInclusaoPedido(pedido) {
         if (idPedido == 0) {
             $('#btnCadastrar').show();
             $('#btnEditar').hide();
+            $('#btnGerarNF').hide();
         }
         else {
             $('#btnCadastrar').hide();
             $('#btnEditar').show();
+            $('#btnGerarNF').show();
         }
 
     }, 1000);
@@ -467,7 +478,9 @@ function AdicionarItemPedido() {
         giCount = rowCount + 1;
 
 
-    var descricaoProduto = $('#ddlProdutoPedido option:selected').text();
+    var descricaoProduto = $('#ddlProdutoPedido option:selected').text().split('-')[0];
+    var modeloProduto = $('#ddlProdutoPedido option:selected').text().split('-')[1];
+    var NCM = $('#ddlProdutoPedido option:selected').text().split('-')[2];
     var quantidade = $('#OrderProduct_QuantityOrder').val();
     quantidade = parseFloat(quantidade).toFixed(2);
     quantidade = quantidade.replace(".", ",");
@@ -487,6 +500,8 @@ function AdicionarItemPedido() {
         '<a href="javascript:void(0);" onclick="ExcluirItemPedido(' + giCount + ');"><i class="fa fa-times"  style="padding: 0px 8px;"></i></a>',
         giCount,
         descricaoProduto,
+        modeloProduto,
+        NCM,
         quantidade,
         precoUnitario,
         desconto,
@@ -639,5 +654,39 @@ function AtualizarValorTotalPedido() {
     }
 
     $('#Order_TotalValue').val(valorTotalPedido);
-    $('#Order_Discount').val(descontoTotalPedido);
+    //$('#Order_Discount').val(descontoTotalPedido);
+}
+
+function IncluirNotaFiscal(idPedido) {
+
+    waitingDialog.show('Criando Nota Fiscal', { dialogSize: 'sm', progressType: 'success' });
+
+    setTimeout(function () {
+        $.ajax({
+            url: '/Pedido/GerarNotaFiscal',
+            data: { OrderID: idPedido },
+            type: 'POST',
+            success: function (result) {
+                waitingDialog.hide();
+                ShowSuccess(result);
+            }
+        });
+    }, 1000);
+}
+
+function AplicarDesconto(percentualDesconto)
+{
+    AtualizarValorTotalPedido();
+
+    var valorTotal = $('#Order_TotalValue').val();
+    valorTotal = valorTotal.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    //valorTotal = Number(valorTotal.replace(/[^0-9\.]+/g, ""));
+
+    percentualDesconto = percentualDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
+    //percentualDesconto = Number(percentualDesconto.replace(/[^0-9\.]+/g, ""));
+
+    var valorDesconto = parseFloat(valorTotal).toFixed(2) / 100 * (parseFloat(percentualDesconto).toFixed(2) / 100);
+
+    valorTotal = valorTotal - valorDesconto;
+    $('#Order_TotalValue').val(valorTotal);
 }

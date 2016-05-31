@@ -32,6 +32,7 @@ namespace Control.Model.Entities
         public DateTime? UpdateDate { get; set; }
         public string Comments { get; set; }
         public int? CFOP { get; set; }
+        [Display(Name = "Desconto")]
         public decimal Discount { get; set; }
         [Display(Name = "Valor")]
         public decimal TotalValue { get; set; }

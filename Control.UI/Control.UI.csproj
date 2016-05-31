@@ -702,6 +702,7 @@
     <Content Include="scripts\i18n\zh-TW.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery.mask.js" />
     <Content Include="scripts\jquery.maskedinput.js" />
     <Content Include="scripts\jquery.maskedinput.min.js" />
     <Content Include="scripts\jquery.maskMoney.js" />

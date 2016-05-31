@@ -8,7 +8,6 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
             $('#gdvItensPedido').dataTable({
                 "aaSorting": [[5, "asc"]],
                 "oLanguage": {
@@ -22,10 +21,12 @@
                 { "Name": "EditarItem", "sWidth": "10px", "sClass": "center" },
                 { "Name": "ExcluirItem", "sWidth": "10px", "sClass": "center" },
                 { "Name": "SequencialItem" },
-                { "Name": "DescricaoProduto", "sWidth": "300px" },
+                { "Name": "DescricaoProduto", "sWidth": "200px" },
+                { "Name": "Modelo" },
+                { "Name": "NCM" },
                 { "Name": "Quantidade" },
                 { "Name": "ValorUnitario" },
-                { "Name": "Desconto" },
+                //{ "Name": "Desconto" },
                 { "Name": "ValorTotal" },
                 ],
                 "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }, { "sClass": "center", "aTargets": [5]}]
@@ -34,10 +35,8 @@
             $('#gdvItensPedido_filter').hide();
             //$('#gdvItensPedido_info').hide();
             $('#gdvItensPedido_length').hide();
-
         });
-
-   </script>
+</script>
 
 </head>
 
@@ -52,9 +51,11 @@
                 <th></th>
                 <th></th>
                 <th>Produto</th>
+                <th>Modelo</th>
+                <th>NCM</th>
                 <th>Quantidade</th>
                 <th>Valor Unitário</th>
-                <th>Desconto</th>
+                @*<th>Desconto</th>*@
                 <th>Valor Total</th>
             </tr>
         </thead>
@@ -78,9 +79,11 @@
                     </td>
                     <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProductItem.FullDescription)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductItem.Model)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
                     <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
                     <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
-                    <td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>
+                    @*<td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>*@
                     <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
                 </tr>
                         }

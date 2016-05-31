@@ -32,6 +32,22 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
+        public ActionResult InvoicesCustomer(int ClientID)
+        {
+            context = new DALContext();
+            List<Invoice> retorno = new List<Invoice>();
+            try
+            {
+                retorno = context.Invoices.Filter(p => p.CustomerID == ClientID).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View("Index",retorno);
+        }
+
         public ActionResult Create(Control.UI.Models.InvoiceViewModel Invoice)
         {
             return View("Create", Invoice);
@@ -86,12 +102,12 @@ namespace Control.UI.Controllers
             {
                 retorno = context.Invoices.Find(p => p.Id == 9);
 
-                SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=9");
+                //SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+                //SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=9");
 
                 
-                doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
-                doc.Close();
+                //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
+                //doc.Close();
             }
             catch (Exception ex)
             {
@@ -155,9 +171,9 @@ namespace Control.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult GerarNotaFiscal(int InvoiceID)
+        public ActionResult GerarArquivoXml(int InvoiceID)
         {
-            return View("Index");
+            return Content("É necessário o Certificado Digital para assinar o XML da Nota Fiscal!");
         }
     }
 }

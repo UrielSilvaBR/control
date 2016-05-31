@@ -16,6 +16,20 @@
         }
     </style>
 
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var CustomerID = $('#Customer_Id').val();
+
+            if (CustomerID > 0)
+                $('#btnCadastrar').val('Alterar');
+            else
+                $('#btnCadastrar').val('Cadastrar');
+        });
+
+    </script>
+
 </head>
 
 <div class="row">
@@ -173,13 +187,6 @@
                     </fieldset>
                     <fieldset>
                         <legend>Contatos</legend>
-                        @*<div class="form-group">
-                                @Html.Label(model => model.PhoneCode, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                                    @Html.EditorFor(model => model.PhoneCode, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.PhoneCode, "", new { @class = "text-danger" })
-                                </div>
-                            </div>*@
 
                         <div class="form-group">
 
@@ -212,44 +219,23 @@
                             </div>
                         </div>
                     </fieldset>
-
-                    @*div class="form-group">
-                            @Html.LabelFor(model => model.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.CommercialPolicy, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.CommercialPolicy, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.CommercialPolicy, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.RegisterDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.RegisterDate, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.RegisterDate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.LastUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.LastUpdate, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.LastUpdate, "", new { @class = "text-danger" })
-                            </div>
-                        </div>*@
-
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Cadastrar" class="btn btn-primary" />
-                            <a href='@Url.Action("Clientes", "Cadastro")'>
-                                <i class="btn btn-primary">Voltar</i>
+                        <div class="col-md-offset-4 col-md-10">
+
+
+                            <input type="submit" value="Cadastrar" class="btn btn-primary" id="btnCadastrar" />
+
+                            <a href='@Url.Action("Clientes", "Cadastro")' style="text-decoration: none;">
+                                <input type="button" class="btn btn-primary" value="Clientes" />
+                            </a>
+
+
+                            <a href='@Url.Action("OrdersCustomer", "Pedido", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
+                                <input type="button" class="btn btn-primary" value="Pedidos" />
+                            </a>
+
+                            <a href='@Url.Action("InvoicesCustomer", "Invoice", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
+                                <input type="button" class="btn btn-primary" value=" Nota Fiscal" />
                             </a>
                         </div>
                     </div>
@@ -262,5 +248,5 @@
 </div><!--row-->
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>

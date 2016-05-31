@@ -24,6 +24,15 @@ namespace Control.UI.Controllers
             return View(Orders);
         }
 
+        public ActionResult OrdersCustomer(int ClientID)
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.Filter(p => p.CustomerID == ClientID).ToList();
+
+            return View("Index", Orders);
+        }
+
         #endregion
 
         #region Create
@@ -208,6 +217,55 @@ namespace Control.UI.Controllers
             catch (Exception ex)
             {
                 return Json(ex.Message);
+            }
+        }
+
+        public ActionResult GerarNotaFiscal(int OrderID)
+        {
+            try
+            {
+                context = new DALContext();
+                var Order = context.Orders.Find(p => p.Id == OrderID);
+
+                var invoiceItems = new List<InvoiceItem>();
+
+                Order.Items.ForEach(p =>
+                {
+                    invoiceItems.Add(new InvoiceItem()
+                    {
+                        Comments = p.Comments,
+                        ItemDiscount = p.ItemDiscount,
+                        ProductID = p.ProductID.Value,
+                        QuantityDeliver = p.QuantityDeliver.HasValue ? p.QuantityDeliver.Value : 0,
+                        QuantityOrder = p.QuantityOrder,
+                        SequencialItem = p.SequencialItem,
+                        TotalPrice = p.TotalPrice,
+                        UnitPrice = p.UnitPrice
+                    });
+                });
+
+                var invoice = new Invoice();
+                
+                invoice.InvoiceSerieID = context.InvoiceSeries.Find(p => p.Descricao == "NFSE").Id;
+                invoice.Numero = Order.Id;
+                invoice.DataEmissao = Order.OrderDate;
+                invoice.CustomerID = Order.CustomerID;
+                invoice.Status = (int)Model.Enums.StatusInvoice.Gerada;
+                invoice.Valor = Order.TotalValue;
+                invoice.Items = invoiceItems;
+
+                context.Invoices.Create(invoice);
+                context.SaveChanges();
+
+                Order.InvoiceNumber = (int)invoice.Numero;
+                context.Orders.Update(Order);
+                context.SaveChanges();
+
+                return Content(String.Format("Nota Fiscal {0} gerada com sucesso!", invoice.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
             }
         }
 
