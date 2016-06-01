@@ -257,6 +257,10 @@ namespace Control.UI.Controllers
                 context.Invoices.Create(invoice);
                 context.SaveChanges();
 
+                invoice.Numero = invoice.Id;
+                context.Invoices.Update(invoice);
+                context.SaveChanges();
+
                 Order.InvoiceNumber = (int)invoice.Numero;
                 context.Orders.Update(Order);
                 context.SaveChanges();

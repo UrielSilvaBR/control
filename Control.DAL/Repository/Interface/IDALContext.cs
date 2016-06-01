@@ -44,6 +44,8 @@ namespace Control.DAL
         IRepository<PurchaseOrder> PurchaseOrders { get; }
         IRepository<PurchaseOrderItem> PurchaseOrderItem { get; }
 
+        IRepository<PaymentTerm> PaymentTerms { get; }
+
         bool Log(int code, string message, string user);
 
     }

@@ -60,5 +60,9 @@ namespace Control.Model.Entities
         public int ContactID { get; set; }
         [ForeignKey("ContactID")]
         public virtual Contact ContactOrder { get; set; }
+
+        public int? PaymentTermID { get; set; }
+        [ForeignKey("PaymentTermID")]
+        public virtual PaymentTerm PaymentTerm { get; set; }
     }
 }
