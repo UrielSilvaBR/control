@@ -70,6 +70,9 @@ namespace Control.Model.Entities
         [Display(Name = "Valor Total")]
         public decimal TotalPrice { get; set; }
 
+        [Display(Name = "Prazo Entrega")]
+        public int DeadlineItem { get; set; }
+
         //Forgein Keys
         public int? ProductID { get; set; }
         [ForeignKey("ProductID")]

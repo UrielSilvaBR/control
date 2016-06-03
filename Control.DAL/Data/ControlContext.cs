@@ -44,6 +44,8 @@ namespace Control.DAL.Data
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
 
+        public DbSet<PaymentTerm> PaymentTerm { get; set; }
+
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {

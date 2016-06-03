@@ -226,6 +226,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cadastros\Cliente\Cliente.js" />
+    <Content Include="Content\Cadastros\CondicaoPagamento\CondicaoPagamento.js" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -702,6 +703,7 @@
     <Content Include="scripts\i18n\zh-TW.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
+    <Content Include="scripts\jquery.mask.js" />
     <Content Include="scripts\jquery.maskedinput.js" />
     <Content Include="scripts\jquery.maskedinput.min.js" />
     <Content Include="scripts\jquery.maskMoney.js" />
@@ -801,6 +803,8 @@
     <Content Include="Views\Compras\Create.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
     <Content Include="Views\Invoice\Invoice.cshtml" />
+    <Content Include="Views\Cadastro\CondicaoPagamento.cshtml" />
+    <Content Include="Views\Cadastro\CondicaoPagamentoEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

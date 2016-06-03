@@ -557,11 +557,24 @@ namespace Control.UI.Controllers
 
         #endregion
 
-        //<li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>
-        //<li>@Html.ActionLink("Fornecedores", "Fornecedores", "Cadastro")</li>
-        //<li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>
-        //<li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
-        //<li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
-        //<li>@Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>
+        #region Condição de Pagamento
+
+        public ActionResult CondicaoPagamento()
+        {
+            return View();
+        }
+
+        public ActionResult CondicaoPagamentoEdit(int? PaymentTermID)
+        {
+            var model = new PaymentTerm();
+            context = new DALContext();
+
+            if (PaymentTermID > 0)
+                model = context.PaymentTerms.Find(p => p.Id == PaymentTermID);
+
+            return View(model);
+        }
+
+        #endregion
     }
 }

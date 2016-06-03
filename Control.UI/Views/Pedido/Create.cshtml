@@ -92,14 +92,14 @@
                 <div id="tabs">
 
                     @using (Ajax.BeginForm("Save", new { Controller = "Pedido" },
-            new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
                     {
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
                         <div id="tabs-1">
                             <!--Tab Dados Cadastrais-->
-                            @Html.HiddenFor(model => model.Order.Discount)
+                            @*@Html.HiddenFor(model => model.Order.Discount)*@
 
                             <div class="form-group">
 
@@ -117,50 +117,64 @@
                                     @{ DateTime dataEmissao = Model.Order.OrderDate; }
                                     @Html.TextBoxFor(p => p.Order.OrderDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control" })
                                 </div>
-
                             </div>
 
                             <div class="form-group">
                                 @*@Html.ValidationMessageFor(p => p.Order.OrderDate)*@
                                 @Html.LabelFor(p => p.Order.TotalValue, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
-                                    @Html.TextBoxFor(p => p.Order.TotalValue, new { @class = "form-control"  })
+                                    @Html.TextBoxFor(p => p.Order.TotalValue, new { @class = "form-control" })
                                 </div>
 
                             </div>
 
                             <div class="form-group">
+                                @Html.LabelFor(p => p.Order.Discount, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.Order.Discount, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
 
                                 @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     @*@Html.EditorFor(model => model.Pedido.Status, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @Html.DropDownListFor(model => model.Order.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
                                 </div>
 
                                 @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5" style="align-content:flex-start">
+                                <div class="col-md-4" style="align-content:flex-start">
                                     @Html.DropDownListFor(model => model.Order.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
                                 </div>
-
+                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </a>
                             </div>
 
                             <div class="form-group">
                                 @Html.Label("Contato", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     @Html.DropDownListFor(model => model.Order.ContactID, new SelectList(Model.Contacts, "Id", "ContatName"), htmlAttributes: new { @class = "selddl" })
                                 </div>
+                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
+                                    <i class="fa fa-plus" aria-hidden="false"></i>
+                                </a>
 
-                                @Html.Label("CFOP", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5" style="align-content:flex-start">
-                                    @Html.DropDownListFor(model => model.Order.CFOP, Model.CFOP, htmlAttributes: new { @class = "selddl" })
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                @Html.Label("Vendedor", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5">
-                                    @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                @*@Html.Label("CFOP", htmlAttributes: new { @class = "col-md-1" })
+                                    <div class="col-md-5" style="align-content:flex-start">
+                                        @Html.DropDownListFor(model => model.Order.CFOP, Model.CFOP, htmlAttributes: new { @class = "selddl" })
+                                    </div>*@
+
+                                <div style="margin-top: -25px;">
+                                    @Html.Label("Vendedor", htmlAttributes: new { @class = "col-md-1", @style = "right: -13px;" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                    </div>
                                 </div>
+                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </a>
                             </div>
                             <div class="form-group">
                                 <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
@@ -169,13 +183,22 @@
                             @{ Html.RenderAction("GetOrderProducts", "Pedido", new { OrderID = Model.Order.Id });
                             }
 
-                            @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
+                            @Html.Hidden("itensPedido", "", new { id = "itensPedido" })
+
+                            @Html.Label("Observação", htmlAttributes: new { @class = "col-md-1" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(p => p.Order.Comments, new { @class = "form-control", @style= "height: 90px;" })
+                                </div>
+
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-offset-5">
                                     <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
                                     <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
-                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Pedido")'"/>
+                                    <input type="button" value="Gerar NF" onclick="return IncluirNotaFiscal($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;" id="btnGerarNF" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Pedido")'" />
                                 </div>
                             </div>
                         </div>

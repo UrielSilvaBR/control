@@ -18,6 +18,18 @@
     <script src="~/plugins/select2/select2.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
    
+    <script type="text/javascript">
+
+        function GerarArquivoXmlNotaFiscal(idNotaFiscal) {
+            $.post("/Invoice/GerarArquivoXml",
+               { InvoiceID: idNotaFiscal },
+               function (result) {
+                   ShowSuccess(result, true);
+               });
+        }
+
+    </script>
+
 </head>
 
 <div class="row">
@@ -134,10 +146,10 @@
                                             @Html.DisplayFor(modelItem => item.InsertDate)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerInvoice.CompanyName)
+                                            @Html.ActionLink(item.CustomerInvoice.CompanyName, "ClientesEdit", "Cadastro", new { ClientID = item.CustomerID }, "")
                                         </td>
                                         <td style="text-align: center;">
-                                            <a href='@Url.Action("GerarArquivoXml", "Invoice", new { InvoiceID = item.Id })'>
+                                            <a href="javascript:void(0);" onclick="GerarArquivoXmlNotaFiscal(@item.Id);")'>
                                                 <i class="fa fa-file-code-o" aria-hidden="true"></i>
                                             </a>
                                         </td>

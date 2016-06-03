@@ -60,6 +60,8 @@
     <script src="~/scripts/jquery.maskedinput.js"></script>
     <script src="~/scripts/jquery.maskMoney.js"></script>
     <script src="~/scripts/ModalLoading.js"></script>
+
+    <script src="~/scripts/jquery.mask.js"></script>
     
     <!-- Includes Layout - Fim -->
 
@@ -117,7 +119,7 @@
         .ui-datepicker-trigger {
             position: absolute;
             margin-top: -25px;
-            margin-left: 150px;
+            margin-left: 157px;
             cursor: pointer;
         }
 
@@ -128,6 +130,11 @@
         .modal-sm
         {
                 margin-left: 575px;
+        }
+
+        .fa-plus
+        {
+            margin-top:7px;
         }
 
     </style>
@@ -369,6 +376,7 @@
                             <li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>
                             <li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
                             <li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
+                            <li>@Html.ActionLink("Condição de Pagamento", "CondicaoPagamento", "Cadastro")</li>
                             <!--<li>Html.ActionLink("Cadastro de “Prospects” (Funil de Vendas)", "Prospects", "Cadastro")</li>-->
                             <!--<li>Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>-->
                             <!--<li><a class="ajax-link" href="ajax/maps.html">OpenStreetMap</a></li>

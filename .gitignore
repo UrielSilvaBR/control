@@ -72,3 +72,4 @@ Control.UI/Views/Cadastro/bkp/Produtos.cshtml
 Control.UI/Views/Cadastro/bkp/ProdutosEdit.cshtml
 Control.UI/Views/Cadastro/bkp/Vendedores.cshtml
 Control.UI/Views/Cadastro/bkp/VendedoresEdit.cshtml
+Control.DAL/Data/DBConexao.cs

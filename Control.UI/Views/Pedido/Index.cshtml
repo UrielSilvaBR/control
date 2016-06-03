@@ -95,13 +95,13 @@
                                             @Html.DisplayFor(modelItem => item.Id)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.CustomerOrder.ShortName)
+                                            @Html.ActionLink(item.CustomerOrder.CompanyName, "ClientesEdit", "Cadastro", new { ClientID = item.CustomerID }, "")
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ContactOrder.ContatName)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.TypeOrder.Description)
+                                            @Html.DisplayFor(modelItem => item.Status)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.VendorOrder.Name)

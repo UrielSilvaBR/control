@@ -23,6 +23,11 @@ namespace Control.UI.Models
             Cities = new List<City>();
             States = context.States.All().OrderBy(p => p.Name).ToList();
             States.Insert(0, new State() { Id = 0, Name = "SELECIONE..." });
+
+            if(Customer == null)
+            {
+                Customer = new Customer();
+            }
         }
     }
 }

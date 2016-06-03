@@ -203,7 +203,6 @@ namespace Control.UI.Models
 
             Status = new List<SelectListItem>();
 
-            SelectListItem stat1 = new SelectListItem() { Value = "ORÇAMENTO", Text = "ORÇAMENTO" };
             SelectListItem stat2 = new SelectListItem() { Value = "PROPOSTA", Text = "PROPOSTA" };
             SelectListItem stat3 = new SelectListItem() { Value = "PEDIDO - ABERTO", Text = "PEDIDO - ABERTO" };
             SelectListItem stat4 = new SelectListItem() { Value = "PEDIDO - PENDENTE", Text = "PEDIDO - PENDENTE" };
@@ -211,7 +210,6 @@ namespace Control.UI.Models
             SelectListItem stat6 = new SelectListItem() { Value = "ENCERRADO", Text = "ENCERRADO" };
             SelectListItem stat7 = new SelectListItem() { Value = "CANCELADO", Text = "CANCELADO" };
 
-            Status.Add(stat1);
             Status.Add(stat2);
             Status.Add(stat3);
             Status.Add(stat4);
