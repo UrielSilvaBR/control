@@ -9,6 +9,7 @@ using Control.Utility;
 using Newtonsoft.Json;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Control.UI.Models;
 
 namespace Control.UI.Controllers
 {
@@ -79,12 +80,18 @@ namespace Control.UI.Controllers
         }
 
         public ActionResult Invoice(int InvoiceID)
-        {            
-            context = new DALContext();
-            Invoice retorno = new Invoice();
+        {
+            PedidoViewModel retorno = new PedidoViewModel();
+
+            context = new DALContext();            
+            Order pedido = new Order();            
+            
             try
             {
-                retorno = context.Invoices.Find(p => p.Id == 9);                
+                pedido = context.Orders.Find(p => p.Id == InvoiceID);
+                ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
+                retorno.Order = pedido;
+                
             }
             catch (Exception ex)
             {
