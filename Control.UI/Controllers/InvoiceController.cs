@@ -86,12 +86,12 @@ namespace Control.UI.Controllers
             {
                 retorno = context.Invoices.Find(p => p.Id == 9);
 
-                SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=9");
+                //SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+                //SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=9");
 
                 
-                doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
-                doc.Close();
+                //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
+                //doc.Close();
             }
             catch (Exception ex)
             {

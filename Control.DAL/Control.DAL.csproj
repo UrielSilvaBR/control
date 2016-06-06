@@ -89,9 +89,9 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201605250015491_CadastroCliente_Add_Endereco_CEP.cs" />
-    <Compile Include="Migrations\201605250015491_CadastroCliente_Add_Endereco_CEP.Designer.cs">
-      <DependentUpon>201605250015491_CadastroCliente_Add_Endereco_CEP.cs</DependentUpon>
+    <Compile Include="Migrations\201606061521593_Initial.cs" />
+    <Compile Include="Migrations\201606061521593_Initial.Designer.cs">
+      <DependentUpon>201606061521593_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -208,8 +208,8 @@
     <None Include="Web References\servico.cidades\cidades.disco" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605250015491_CadastroCliente_Add_Endereco_CEP.resx">
-      <DependentUpon>201605250015491_CadastroCliente_Add_Endereco_CEP.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606061521593_Initial.resx">
+      <DependentUpon>201606061521593_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,20 +37,14 @@ namespace Control.UI.Models
 
             Status = new List<SelectListItem>();
 
-            SelectListItem stat1 = new SelectListItem() { Value = "ORÇAMENTO", Text = "ORÇAMENTO" };
-            SelectListItem stat2 = new SelectListItem() { Value = "PROPOSTA", Text = "PROPOSTA" };
-            SelectListItem stat3 = new SelectListItem() { Value = "PEDIDO - ABERTO", Text = "PEDIDO - ABERTO" };
-            SelectListItem stat4 = new SelectListItem() { Value = "PEDIDO - PENDENTE", Text = "PEDIDO - PENDENTE" };
-            SelectListItem stat5 = new SelectListItem() { Value = "PEDIDO - ENTREGUE", Text = "PEDIDO - ENTREGUE" };
-            SelectListItem stat6 = new SelectListItem() { Value = "ENCERRADO", Text = "ENCERRADO" };
+            SelectListItem stat3 = new SelectListItem() { Value = "PEDIDO_ABERTO", Text = "PEDIDO - ABERTO" };
+            SelectListItem stat4 = new SelectListItem() { Value = "PEDIDO_PENDENTE", Text = "PEDIDO - PENDENTE" };
+            SelectListItem stat5 = new SelectListItem() { Value = "PEDIDO_ENTREGUE", Text = "PEDIDO - ENTREGUE" }; 
             SelectListItem stat7 = new SelectListItem() { Value = "CANCELADO", Text = "CANCELADO" };
 
-            Status.Add(stat1);
-            Status.Add(stat2);
             Status.Add(stat3);
             Status.Add(stat4);
-            Status.Add(stat5);
-            Status.Add(stat6);
+            Status.Add(stat5); 
             Status.Add(stat7);
 
             #endregion

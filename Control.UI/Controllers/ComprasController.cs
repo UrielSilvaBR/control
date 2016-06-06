@@ -17,13 +17,51 @@ namespace Control.UI.Controllers
     {
         private IDALContext context;
 
+        #region Recebimento
+
+        public ActionResult Recebimento()
+        {
+            context = new DALContext();
+            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_PENDENTE");
+
+            return View(Orders);
+        }
+
+        [HttpGet]
+        public ActionResult Conferencia(int OrderID)
+        {
+            var model = new Control.UI.Models.PedidoCompraViewModel();
+            context = new DALContext();
+            PurchaseOrder retorno = new PurchaseOrder();
+            try
+            {
+                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+                model.PurchaseOrder = retorno;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
+        }
+
+        public PartialViewResult ConferenciaGetListaProdtos(int OrderID)
+        {
+            context = new DALContext();
+            var OrderProducts = context.PurchaseOrderItem.Filter(p => p.PurchaseOrderId == OrderID).ToList();
+            return PartialView("_ConferenciaListaProdutos", OrderProducts);
+        }
+
+        #endregion
+
+
         #region Index
 
         public ActionResult Index()
         {
             context = new DALContext();
-
-            var Orders = context.PurchaseOrders.All().ToList();
+            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_ABERTO");
 
             return View(Orders);
         }
@@ -69,7 +107,12 @@ namespace Control.UI.Controllers
         public ActionResult Delete(int OrderID)
         {
             context = new DALContext();
-            context.PurchaseOrders.Delete(p => p.Id == OrderID);
+            //context.PurchaseOrders.Delete(p => p.Id == OrderID);
+
+            PurchaseOrder purchaseOrder = context.PurchaseOrders.Find(p => p.Id == OrderID);
+            purchaseOrder.Status = "CANCELADO";
+            context.PurchaseOrders.Update(purchaseOrder);
+
             context.SaveChanges();
 
             return RedirectToAction("Index");
@@ -104,6 +147,7 @@ namespace Control.UI.Controllers
                     else
                     {
                         Pedido.PurchaseOrder.InsertDate = DateTime.Now;
+                        Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
                         context.PurchaseOrders.Create(Pedido.PurchaseOrder);
                     }
                     
@@ -151,6 +195,21 @@ namespace Control.UI.Controllers
         }
 
         #endregion
+
+
+        [HttpGet]
+        public ActionResult EnviarParaFonecedor(int OrderID)
+        {
+            context = new DALContext();
+            
+            PurchaseOrder purchaseOrder = context.PurchaseOrders.Find(p => p.Id == OrderID);
+            purchaseOrder.Status = "PEDIDO_PENDENTE";
+            context.PurchaseOrders.Update(purchaseOrder);
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
         public JsonResult GetProducts(int ProductID)
         {
