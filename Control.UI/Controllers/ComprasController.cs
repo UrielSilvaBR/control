@@ -17,7 +17,7 @@ namespace Control.UI.Controllers
     {
         private IDALContext context;
 
-        #region Recebimento
+        #region Recebimento e conferencia
 
         public ActionResult Recebimento()
         {
@@ -53,6 +53,60 @@ namespace Control.UI.Controllers
             return PartialView("_ConferenciaListaProdutos", OrderProducts);
         }
 
+
+        [HttpPost]
+        public ActionResult Save(Models.PedidoCompraViewModel Pedido, string itensPedido)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    context = new DALContext();
+
+                    if (Pedido.PurchaseOrder.Id > 0)
+                    {
+                        Pedido.PurchaseOrder.Status = "PEDIDO_ENTREGUE";
+                        context.PurchaseOrders.Update(Pedido.PurchaseOrder);
+                    } 
+
+                    if (context.SaveChanges() > 0)
+                    {
+
+                        var arrayItensPedido = JArray.Parse(itensPedido);
+                        Pedido.PurchaseOrder.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.PurchaseOrderItem
+                        {
+                            Id = (int)x["Id"],
+                            PurchaseOrderId = (int)x["IdPedido"],
+                            SequencialItem = (int)x["SequencialItem"],
+                            QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()), 
+                            QuantityDeliver = Convert.ToDecimal(x["QuantityDeliver"].ToString()),
+                            ProductID = (int)x["ProductID"],
+                            UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
+                            ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                            TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString())
+                        }).ToList();
+
+
+                        foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.Id > 0))
+                            context.PurchaseOrderItem.Update(item);
+                        
+                        context.SaveChanges();
+
+                    }
+                }
+                else
+                {
+                    return View("Recebimento", Pedido);
+                }
+
+                return View("Create", Pedido);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
         #endregion
 
 

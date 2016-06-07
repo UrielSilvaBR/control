@@ -15,7 +15,7 @@ namespace Control.UI.Models
         public Model.Entities.PurchaseOrder PurchaseOrder { get; set; }
         public List<Model.Entities.Provider> Providers { get; set; }
         public List<Model.Entities.Product> Products { get; set; }
-        public Model.Entities.OrderProduct OrderProduct { get; set; }
+        public Model.Entities.PurchaseOrderItem PurchaseOrderItem { get; set; }
         public List<SelectListItem> Status { get; set; }
 
         public PedidoCompraViewModel()
