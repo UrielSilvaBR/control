@@ -55,7 +55,7 @@ namespace Control.UI.Controllers
 
 
         [HttpPost]
-        public ActionResult Save(Models.PedidoCompraViewModel Pedido, string itensPedido)
+        public ActionResult SaveConferencia(Models.PedidoCompraViewModel Pedido, string itensPedido)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace Control.UI.Controllers
                     {
                         Pedido.PurchaseOrder.Status = "PEDIDO_ENTREGUE";
                         context.PurchaseOrders.Update(Pedido.PurchaseOrder);
-                    } 
+                    }
 
                     if (context.SaveChanges() > 0)
                     {
@@ -79,7 +79,7 @@ namespace Control.UI.Controllers
                             Id = (int)x["Id"],
                             PurchaseOrderId = (int)x["IdPedido"],
                             SequencialItem = (int)x["SequencialItem"],
-                            QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()), 
+                            QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                             QuantityDeliver = Convert.ToDecimal(x["QuantityDeliver"].ToString()),
                             ProductID = (int)x["ProductID"],
                             UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
@@ -88,8 +88,27 @@ namespace Control.UI.Controllers
                         }).ToList();
 
 
-                        foreach (var item in Pedido.PurchaseOrder.Items.Where(p => p.Id > 0))
-                            context.PurchaseOrderItem.Update(item);
+                        foreach (var item in Pedido.PurchaseOrder.Items) { 
+                            context.PurchaseOrderItem.Update(item); 
+                            Storage EstoqueProduto = context.Storages.Find(p => p.ProductID == item.ProductID);
+                            if (EstoqueProduto != null)
+                            {
+                                EstoqueProduto.Quantity += item.QuantityDeliver;
+                                context.Storages.Update(EstoqueProduto);
+                            }
+                            else
+                            {
+                                EstoqueProduto = new Storage
+                                {
+                                    ProductID = item.ProductID,
+                                    Quantity = item.QuantityDeliver,
+                                    UpdateDate = DateTime.Now,
+
+                                };
+                                context.Storages.Create(EstoqueProduto);
+                            }
+                            context.SaveChanges();
+                        }
                         
                         context.SaveChanges();
 
@@ -97,10 +116,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return View("Recebimento", Pedido);
+                    return View("ConsultaEstoque", "Estoque");
                 }
 
-                return View("Create", Pedido);
+                return View("ConsultaEstoque", "Estoque");
             }
             catch (Exception ex)
             {

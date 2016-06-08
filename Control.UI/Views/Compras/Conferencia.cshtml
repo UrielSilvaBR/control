@@ -227,7 +227,7 @@
                     Id: arrayItens[i][0],
                     IdPedido: arrayItens[i][1],
                     ProductID: arrayItens[i][2],
-                    SequencialItem: arrayItens[i][5],
+                    SequencialItem: arrayItens[i][4],
                     QuantityOrder: arrayItens[i][6],
                     QuantityDeliver: arrayItens[i][7],
                     UnitPrice: arrayItens[i][8],
@@ -299,8 +299,9 @@
                     Id: arrayItens[i][0],
                     IdPedido: arrayItens[i][1],
                     ProductID: arrayItens[i][2],
-                    SequencialItem: arrayItens[i][5],
-                    QuantityOrder: arrayItens[i][7],
+                    SequencialItem: arrayItens[i][4],
+                    QuantityOrder: arrayItens[i][6],
+                    QuantityDeliver: arrayItens[i][7], 
                     UnitPrice: arrayItens[i][8],
                     ItemDiscount: arrayItens[i][9],
                     TotalPrice: arrayItens[i][10]
@@ -643,8 +644,14 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 @Html.LabelFor(p => p.PurchaseOrder.TotalValue, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control", @readonly = "true" })
-                                </div>
+                                </div> 
+                            </div>
 
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.PurchaseOrder.InvoiceNumber, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.InvoiceNumber, new { @class = "form-control" })
+                                </div>
                             </div>
 
                             <div class="form-group">
