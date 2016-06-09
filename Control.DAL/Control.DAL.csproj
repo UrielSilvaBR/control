@@ -89,17 +89,9 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201605310520126_Initial.cs" />
-    <Compile Include="Migrations\201605310520126_Initial.Designer.cs">
-      <DependentUpon>201605310520126_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605310522135_final_build.cs" />
-    <Compile Include="Migrations\201605310522135_final_build.Designer.cs">
-      <DependentUpon>201605310522135_final_build.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201606031135186_update_pedidos.cs" />
-    <Compile Include="Migrations\201606031135186_update_pedidos.Designer.cs">
-      <DependentUpon>201606031135186_update_pedidos.cs</DependentUpon>
+    <Compile Include="Migrations\201606090259566_Initial.cs" />
+    <Compile Include="Migrations\201606090259566_Initial.Designer.cs">
+      <DependentUpon>201606090259566_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -217,14 +209,8 @@
     <None Include="Web References\servico.cidades\cidades.disco" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605310520126_Initial.resx">
-      <DependentUpon>201605310520126_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605310522135_final_build.resx">
-      <DependentUpon>201605310522135_final_build.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201606031135186_update_pedidos.resx">
-      <DependentUpon>201606031135186_update_pedidos.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606090259566_Initial.resx">
+      <DependentUpon>201606090259566_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
