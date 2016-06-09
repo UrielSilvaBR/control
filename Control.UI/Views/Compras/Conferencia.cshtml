@@ -2,10 +2,10 @@
 @model PedidoCompraViewModel
 
 @{
-    ViewBag.Title = "Pedido de Compras";
+    ViewBag.Title = "Conferencia";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+
 <head>
 
     <script type="text/javascript">
@@ -14,32 +14,20 @@
         $(document).ready(function () {
 
             InicializarModalItemPedido();
+ 
 
-            $('#btnAdicionarItemPedido').click(function () {
-                AdicionarItemPedido();
-                $('#itemPedido').modal('hide');
-                setTimeout(function () {
-                    LimparItemPedido();
-                }, 800);
-            })
-
-            $('#btnEditarItemPedido').click(function () {
+            $('#btnSalvarPuchaseOrderItem').click(function () {
                 EditarItemPedido();
             });
+             
+            $("#ddlConfItemProduto").prop("disabled", true);
+            $("#PurchaseOrder_ProviderID").prop("disabled", true);
 
-            $('#btnEditarItemPedido').attr('style', 'display:none');
-
-            $('#btnAddItemPedido').click(function () {
-                $('#tituloItemPedido').text('Adicionar Item');
-                $('#btnAdicionarItemPedido').attr('style', 'display:block');
-                $('#btnEditarItemPedido').attr('style', 'display:none');
-            })
-
-            $('#ddlProdutoPedido').on('change', function (produto) {
+            $('#ddlConfItemProduto').on('change', function (produto) {
                 ObterValorUnitarioProduto(produto.val);
             });
 
-            $('#PurchaseOrder_QuantityOrder').focusout(function () {
+            $('#PurchaseOrderItem_QuantityDeliver').focusout(function () {
                 var quantidade = $(this).val();
                 CalcularItemPedido(quantidade);
             });
@@ -58,19 +46,19 @@
                 $('#btnEditar').show();
             }
 
-            $('#itemPedido').on('hidden.bs.modal', function () {
+            $('#itemConferenciaEdit').on('hidden.bs.modal', function () {
                 LimparItemPedido();
             })
 
         });
 
         function LimparItemPedido() {
-            $("#ddlProdutoPedido").select2().select2("val", '0');
-            $('#OrderProduct_QuantityOrder').val(1);
-            $('#OrderProduct_UnitPrice').val(0);
-            $('#OrderProduct_ItemDiscount').val(0);
-            $('#OrderProduct_QuantityDeliver').val(0);
-            $('#OrderProduct_TotalPrice').val(0);
+            $("#ddlConfItemProduto").select2().select2("val", '0');
+            $('#PurchaseOrderItem_QuantityOrder').val(1);
+            $('#PurchaseOrderItem_UnitPrice').val(0);
+            $('#PurchaseOrderItem_ItemDiscount').val(0);
+            $('#PurchaseOrderItem_QuantityDeliver').val(0);
+            $('#PurchaseOrderItem_TotalPrice').val(0);
         }
 
         function InicializarModalItemPedido() {
@@ -81,30 +69,33 @@
 
         function IniciarlizarCamposItemPedido() {
 
-            $('#OrderProduct_ItemDiscount').val(0);
-            $('#OrderProduct_UnitPrice').val(0);
-            $('#OrderProduct_TotalPrice').val(0);
+            $('#PurchaseOrderItem_ItemDiscount').val(0);
+            $('#PurchaseOrderItem_UnitPrice').val(0);
+            $('#PurchaseOrderItem_TotalPrice').val(0);
 
-            $('#OrderProduct_QuantityOrder').val(1);
-            $('#OrderProduct_QuantityOrder').ForceNumericOnly();
+            $('#PurchaseOrderItem_QuantityOrder').val(1);
+            $('#PurchaseOrderItem_QuantityOrder').ForceNumericOnly();
 
-            if (parseInt($('#OrderProduct_QuantityOrder').val()) == 0)
-                $('#OrderProduct_QuantityOrder').val(1);
+            $('#PurchaseOrderItem_QuantityDeliver').val(1);
+            $('#PurchaseOrderItem_QuantityDeliver').ForceNumericOnly();
+
+            if (parseInt($('#PurchaseOrderItem_QuantityOrder').val()) == 0)
+                $('#PurchaseOrderItem_QuantityOrder').val(1);
         }
 
         function CalcularItemPedido(quantidade) {
-            var valorUnitario = $('#OrderProduct_UnitPrice').val();
+            var valorUnitario = $('#PurchaseOrderItem_UnitPrice').val();
             valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
             valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
 
             var valorTotal = quantidade * valorUnitario;
 
-            //var valorDesconto = $('#OrderProduct_ItemDiscount').val();
+            //var valorDesconto = $('#PurchaseOrderItem_ItemDiscount').val();
             //valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
             //valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
             //valorTotal = valorTotal - valorDesconto;
 
-            $('#OrderProduct_TotalPrice').val(valorTotal);
+            $('#PurchaseOrderItem_TotalPrice').val(valorTotal);
         }
 
         function ValidarDescontoItemPedido(pValorDesconto) {
@@ -112,7 +103,7 @@
             valorDesconto = valorDesconto.replace("R$", "").replace(",", "").replace(".", ",").trim();
             valorDesconto = Number(valorDesconto.replace(/[^0-9\.]+/g, ""));
 
-            var valorUnitario = $('#OrderProduct_TotalPrice').val();
+            var valorUnitario = $('#PurchaseOrderItem_TotalPrice').val();
             valorUnitario = valorUnitario.replace("R$", "").replace(",", "").replace(".", ",").trim();
             valorUnitario = Number(valorUnitario.replace(/[^0-9\.]+/g, ""));
 
@@ -126,12 +117,12 @@
 
             var valorTotal = valorUnitario - valorDesconto;
 
-            $('#OrderProduct_TotalPrice').val(valorTotal);
+            $('#PurchaseOrderItem_TotalPrice').val(valorTotal);
         }
 
         function InicializarMascaraItemPedido() {
 
-            $('#OrderProduct_UnitPrice').maskMoney({
+            $('#PurchaseOrderItem_UnitPrice').maskMoney({
                 prefix: '',
                 allowZero: false,
                 allowNegative: false,
@@ -143,7 +134,7 @@
                 symbolPosition: 'left'
             });
 
-            $('#OrderProduct_ItemDiscount').maskMoney({
+            $('#PurchaseOrderItem_ItemDiscount').maskMoney({
                 prefix: '',
                 allowZero: false,
                 allowNegative: false,
@@ -155,7 +146,7 @@
                 symbolPosition: 'left'
             });
 
-            $('#OrderProduct_TotalPrice').maskMoney({
+            $('#PurchaseOrderItem_TotalPrice').maskMoney({
                 prefix: '',
                 allowZero: false,
                 allowNegative: false,
@@ -191,7 +182,7 @@
                 symbolPosition: 'left'
             });
 
-            $('#OrderProduct_QuantityOrder').ForceNumericOnly();
+            $('#PurchaseOrderItem_QuantityOrder').ForceNumericOnly();
 
             $('#PurchaseOrder_ValidateDate').mask('99/99/9999');
         }
@@ -203,8 +194,8 @@
                 $('#PurchaseOrder_TotalValue').val(0);
 
             $("#PurchaseOrder_TotalValue").prop('readonly', true);
-            $('#OrderProduct_TotalPrice').attr('disabled', true);
-            $('#OrderProduct_UnitPrice').attr('disabled', true);
+            $('#PurchaseOrderItem_TotalPrice').attr('disabled', true);
+            $('#PurchaseOrderItem_UnitPrice').attr('disabled', true);
 
         }
 
@@ -217,7 +208,7 @@
                 return;
             }
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var Items = new Array();
             var arrayItens = gdvItens.fnGetData();
@@ -236,8 +227,9 @@
                     Id: arrayItens[i][0],
                     IdPedido: arrayItens[i][1],
                     ProductID: arrayItens[i][2],
-                    SequencialItem: arrayItens[i][5],
-                    QuantityOrder: arrayItens[i][7],
+                    SequencialItem: arrayItens[i][4],
+                    QuantityOrder: arrayItens[i][6],
+                    QuantityDeliver: arrayItens[i][7],
                     UnitPrice: arrayItens[i][8],
                     ItemDiscount: arrayItens[i][9],
                     TotalPrice: arrayItens[i][10]
@@ -288,7 +280,7 @@
 
         function IniciarEdicaoPedido() {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var Items = new Array();
             var arrayItens = gdvItens.fnGetData();
@@ -307,8 +299,9 @@
                     Id: arrayItens[i][0],
                     IdPedido: arrayItens[i][1],
                     ProductID: arrayItens[i][2],
-                    SequencialItem: arrayItens[i][5],
-                    QuantityOrder: arrayItens[i][7],
+                    SequencialItem: arrayItens[i][4],
+                    QuantityOrder: arrayItens[i][6],
+                    QuantityDeliver: arrayItens[i][7], 
                     UnitPrice: arrayItens[i][8],
                     ItemDiscount: arrayItens[i][9],
                     TotalPrice: arrayItens[i][10]
@@ -358,17 +351,17 @@
         function ObterValorUnitarioProduto(idProduto) {
 
             ObterProduto(idProduto, function (produto) {
-                $('#OrderProduct_UnitPrice').val(produto.UnitPrice.toFixed(2));
-                $('#OrderProduct_TotalPrice').val(produto.UnitPrice.toFixed(2));
-                CalcularItemPedido($('#OrderProduct_QuantityOrder').val());
+                $('#PurchaseOrderItem_UnitPrice').val(produto.UnitPrice.toFixed(2));
+                $('#PurchaseOrderItem_TotalPrice').val(produto.UnitPrice.toFixed(2));
+                CalcularItemPedido($('#PurchaseOrderItem_QuantityOrder').val());
             });
         }
 
         function ObterProduto(idProduto, produto) {
 
             if (idProduto == 0) {
-                $('#OrderProduct_UnitPrice').val(0);
-                $('#OrderProduct_TotalPrice').val(0);
+                $('#PurchaseOrderItem_UnitPrice').val(0);
+                $('#PurchaseOrderItem_TotalPrice').val(0);
                 return;
             }
 
@@ -383,15 +376,15 @@
 
             //ValidarDescontoItemNotaFiscal($('#OrderProduct_ItemDiscount').val());
 
-            var idProduto = $('#ddlProdutoPedido option:selected').val();
+            var idProduto = $('#ddlConfItemProduto option:selected').val();
 
             if (idProduto == 0) {
                 ShowMessage('Selecione o Produto para inclusão do Item!', false);
                 return;
             }
 
-            var rowEmpty = $('#gdvItensPedido > tbody > tr').find('.dataTables_empty').length == 1;
-            var rowCount = $('#gdvItensPedido > tbody > tr').length;
+            var rowEmpty = $('#gdvItensPedidoDeCompras > tbody > tr').find('.dataTables_empty').length == 1;
+            var rowCount = $('#gdvItensPedidoDeCompras > tbody > tr').length;
 
             if (rowEmpty)
                 rowCount = rowCount - 1;
@@ -402,24 +395,23 @@
                 giCount = rowCount + 1;
 
 
-            var descricaoProduto = $('#ddlProdutoPedido option:selected').text();
-            var quantidade = $('#OrderProduct_QuantityOrder').val();
+            var descricaoProduto = $('#ddlConfItemProduto option:selected').text();
+            var quantidade = $('#PurchaseOrderItem_QuantityOrder').val();
             quantidade = parseFloat(quantidade).toFixed(2);
             quantidade = quantidade.replace(".", ",");
-            var precoUnitario = $('#OrderProduct_UnitPrice').val();
-            var quantidadeEntregue = $('#OrderProduct_QuantityDeliver').val();
-            var desconto = $('#OrderProduct_ItemDiscount').val();
-            var precoTotal = $('#OrderProduct_TotalPrice').val();
+            var precoUnitario = $('#PurchaseOrderItem_UnitPrice').val();
+            var quantidadeEntregue = $('#PurchaseOrderItem_QuantityDeliver').val();
+            var desconto = $('#PurchaseOrderItem_ItemDiscount').val();
+            var precoTotal = $('#PurchaseOrderItem_TotalPrice').val();
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
             $(gdvItens).removeClass('table-striped');
 
             var indiceLinhaAdicionada = gdvItens.fnAddData([
                 "0",
                 "0",
                 idProduto,
-                '<a href="javascript:void(0);" onclick="AbrirItemPedido(' + giCount + ');" data-toggle="modal" data-target="#itemPedidoEditar" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
-                '<a href="javascript:void(0);" onclick="ExcluirItemPedido(' + giCount + ');"><i class="fa fa-times"  style="padding: 0px 8px;"></i></a>',
+                '<a href="javascript:void(0);" onclick="AbrirItemPedido(' + giCount + ');"  ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>',
                 giCount,
                 descricaoProduto,
                 quantidade,
@@ -435,53 +427,57 @@
 
             AtualizarValorTotalPedido();
 
-            $('#gdvItensPedido_filter').hide();
+            $('#gdvItensPedidoDeCompras_filter').hide();
             //$('#gdvItensPedido_info').hide();
-            $('#gdvItensPedido_length').hide();
+            $('#gdvItensPedidoDeCompras_length').hide();
         }
 
         function AbrirItemPedido(indiceLinha) {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var rowIndex = indiceLinha - 1;
 
             var items = gdvItens.fnGetData();
             item = items[rowIndex];
+             
 
-            $('#tituloItemPedido').text('Alterar Item');
-            $('#btnEditarItemPedido').attr('style', 'display:block');
-            $('#btnAdicionarItemPedido').attr('style', 'display:none');
+            $("#ddlConfItemProduto").select2().select2("val", item[2]);
+            var quantidade = parseInt(item[6]);
+            $('#PurchaseOrderItem_QuantityOrder').val(quantidade);
+            var quantidadeEntregue = parseInt(item[7]);
+            $('#PurchaseOrderItem_QuantityDeliver').val(quantidadeEntregue);
 
-            $("#ddlProdutoPedido").select2().select2("val", item[2]);
 
-            var quantidade = parseInt(item[7]);
-            $('#OrderProduct_QuantityOrder').val(quantidade);
-
-            $('#OrderProduct_UnitPrice').val(item[8]);
-            $('#OrderProduct_ItemDiscount').val(item[9]);
-            $('#OrderProduct_TotalPrice').val(item[10]);
+            $('#PurchaseOrderItem_UnitPrice').val(item[8]);
+            $('#PurchaseOrderItem_ItemDiscount').val(item[9]);
+            $('#PurchaseOrderItem_TotalPrice').val(item[10]);
 
             $('#rowIndexItemPedido').val(rowIndex);
 
-            $("#itemPedido").modal('show');
+            $("#itemConferenciaEdit").modal('show');
         }
 
         function EditarItemPedido() {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var rowIndex = $('#rowIndexItemPedido').val();
 
-            gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').val(), parseInt(rowIndex), 2);
-            gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text(), parseInt(rowIndex), 6);
+            gdvItens.fnUpdate($('#ddlConfItemProduto option:selected').val(), parseInt(rowIndex), 2);
+            gdvItens.fnUpdate($('#ddlConfItemProduto option:selected').text(), parseInt(rowIndex), 6);
 
-            var quantidade = parseFloat($('#OrderProduct_QuantityOrder').val()).toFixed(2);
+            var quantidade = parseFloat($('#PurchaseOrderItem_QuantityOrder').val()).toFixed(2);
             quantidade = quantidade.replace(".", ",");
-            gdvItens.fnUpdate(quantidade, parseInt(rowIndex), 7);
-            gdvItens.fnUpdate($('#OrderProduct_UnitPrice').val(), parseInt(rowIndex), 8);
-            gdvItens.fnUpdate($('#OrderProduct_ItemDiscount').val(), parseInt(rowIndex), 9);
-            gdvItens.fnUpdate($('#OrderProduct_TotalPrice').val(), parseInt(rowIndex), 10);
+            gdvItens.fnUpdate(quantidade, parseInt(rowIndex), 6);
+
+            var quantidadeEntregue = parseFloat($('#PurchaseOrderItem_QuantityDeliver').val()).toFixed(2);
+            quantidadeEntregue = quantidadeEntregue.replace(".", ",");
+            gdvItens.fnUpdate(quantidadeEntregue, parseInt(rowIndex), 7);
+
+            gdvItens.fnUpdate($('#PurchaseOrderItem_UnitPrice').val(), parseInt(rowIndex), 8);
+            gdvItens.fnUpdate($('#PurchaseOrderItem_ItemDiscount').val(), parseInt(rowIndex),9);
+            gdvItens.fnUpdate($('#PurchaseOrderItem_TotalPrice').val(), parseInt(rowIndex), 10);
 
             AtualizarValorTotalPedido();
             gdvItens.fnDraw();
@@ -493,64 +489,24 @@
             var tr = gdvItens.fnGetNodes(rowIndex);
             $(tr).effect("highlight", { color: "#80c1ff" }, 2000);
 
-            $("#itemPedido").modal('hide');
+            $("#itemConferenciaEdit").modal('hide');
 
         }
-
-        function ExcluirItemPedido(indiceLinha) {
-
-            ShowConfirmation("Deseja remover este Item?", function () {
-
-                var gdvItens = $('#gdvItensPedido').dataTable();
-
-                var rowIndex = indiceLinha - 1;
-
-                var arrayItens = gdvItens.fnGetData();
-                var idItem = arrayItens[rowIndex][0];
-
-                $(gdvItens).removeClass('table-striped');
-
-                var tr = gdvItens.fnGetNodes(rowIndex);
-                $(tr).effect("highlight", { color: "#ff3333" }, 2000);
-
-                setTimeout(function () {
-
-                    if (idItem > 0) {
-                        $.post('/Compras/DeletePurchaseOrderItem', { OrderProductID: idItem }, function (data) {
-                            gdvItens.fnDeleteRow(rowIndex);
-                            AtualizarSequencialItemPedido();
-                            AtualizarValorTotalPedido();
-                            giCount--;
-                        });
-                    }
-                    else {
-                        gdvItens.fnDeleteRow(rowIndex);
-                        AtualizarSequencialItemPedido();
-                        AtualizarValorTotalPedido();
-                        giCount--;
-                    }
-
-                }, 1000);
-
-                $("#modal-confirmation").modal("hide");
-            });
-        }
-
+         
         function AtualizarSequencialItemPedido() {
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
             var arrayItens = gdvItens.fnGetData();
 
             for (var i = 0; i < arrayItens.length; i++) {
 
-                gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="AbrirItemPedido(' + (i + 1) + ');" data-toggle="modal" data-target="#itemPedidoEditar" ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>', i, 3);
-                gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="ExcluirItemPedido(' + (i + 1) + ');"><i class="fa fa-times"  style="padding: 0px 8px;"></i></a>', i, 4);
-                gdvItens.fnUpdate(i + 1, i, 5);
+                gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="AbrirItemPedido(' + (i + 1) + ');"  ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>', i, 3);
+                 gdvItens.fnUpdate(i + 1, i, 5);
                 //giCount++;
             }
         }
 
         function AtualizarValorTotalPedido() {
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var arrayItens = gdvItens.fnGetData();
 
@@ -573,7 +529,7 @@
 
             $('#PurchaseOrder_TotalValue').val(valorTotalPedido);
             $('#PurchaseOrder_Discount').val(descontoTotalPedido);
-        } 
+        }
     </script>
 
     <style type="text/css">
@@ -625,8 +581,7 @@
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Compras</a></li>
-            <li><a href="#">Pedido de Compras</a></li> 
-            <li><a href="#">Adicionar</a></li>
+            <li><a href="#">Conferência e Recebimento de Mercadorias</a></li>
         </ol>
     </div>
 </div>
@@ -638,7 +593,7 @@
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
-                    <span>Cadastro de Propostas</span>
+                    <span>Conferência e Recebimento de Mercadorias</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -658,14 +613,14 @@
 
                 <div id="tabs">
 
-                    @using (Ajax.BeginForm("Save", new { Controller = "Compras" },
-    new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+                    @using (Ajax.BeginForm("SaveConferencia", new { Controller = "Compras" },
+new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
                     {
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
                         <div id="tabs-1">
-                            
+
                             <div class="form-group">
                                 @Html.HiddenFor(model => model.PurchaseOrder.InsertDate);
 
@@ -680,48 +635,48 @@
                                 @Html.LabelFor(p => p.PurchaseOrder.ValidateDate, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
                                     @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control" })
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control"  ,@readonly = "true" })
                                 </div>
 
                             </div>
 
                             <div class="form-group">
-                                 @Html.LabelFor(p => p.PurchaseOrder.TotalValue, htmlAttributes: new { @class = "col-md-1" })
+                                @Html.LabelFor(p => p.PurchaseOrder.TotalValue, htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-2">
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control" })
-                                </div>
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control", @readonly = "true" })
+                                </div> 
+                            </div>
 
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.PurchaseOrder.InvoiceNumber, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.InvoiceNumber, new { @class = "form-control" })
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <!--
-                                @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5">
-                                     @Html.DropDownListFor(model => model.PurchaseOrder.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
-                                </div>
-                               -->
+                                 @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
+                                 <div class="col-md-5">
+                                      @Html.DropDownListFor(model => model.PurchaseOrder.Status, Model.Status, htmlAttributes: new { @class = "selddl" , @readonly = "true" })
+                                 </div>
+                                -->
 
                                 @Html.Label("Fornecedor", htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-5" style="align-content:flex-start">
-                                    @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
+                                    @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" , @readonly = "true" })
                                 </div>
 
                             </div>
-
-                            <div class="form-group">
-                                <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
-                            </div>
-
-                            @{ Html.RenderAction("GetOrderProducts", "Compras", new { OrderID = Model.PurchaseOrder.Id });
+                             
+                            @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
                             }
 
                             @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
 
                             <div class="form-group">
                                 <div class="col-md-offset-5">
-                                    <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
-                                    <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
-                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Compras")'" />
+                                    <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
                                 </div>
                             </div>
                         </div>
@@ -737,7 +692,7 @@
         function Select2Test() {
             //  $("#Pedido_CustomerID").select2();
             //  $("#Pedido_ContactID").select2();
-            $(".selddl").select2();
+            //$(".selddl").select2();
         }
 
         var editor;
@@ -790,7 +745,7 @@
             WinMove();
 
             $(window).on('shown.bs.modal', function () {
-                //$('.modal-backdrop').removeClass();
+                $('.modal-backdrop').removeClass();
             })
         });
 

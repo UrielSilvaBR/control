@@ -3,20 +3,19 @@
 @using Control.Utility
 @model IEnumerable<PurchaseOrder>
 @{
-    ViewBag.Title = "Pedido de compras";
+    ViewBag.Title = "Conferência e Recebimento de Mercadorias";
     Layout = "~/Views/Shared/_Layout.cshtml";
-} 
+}
 
 
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Compras</a></li>
-            <li><a href="#">Pedido de Compras</a></li> 
+            <li><a href="#">Conferência e Recebimento de Mercadorias</a></li>
         </ol>
     </div>
 </div>
-
 
 <!--Teste-->
 <div class="row">
@@ -46,7 +45,6 @@
                             <tr>
                                 <th></th>
                                 <th></th>
-                                <th></th>
                                 <th>
                                     Pedido
                                 </th>
@@ -64,55 +62,50 @@
                                 </th>
                                 <th>
                                     Valor
-                                </th> 
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model)
-                            { 
-                                        <tr>
-                                        <td style="text-align: center;">
-                                                <a href='@Url.Action("EnviarParaFonecedor", "Compras", new { OrderID = item.Id } )'>
-                                                    Enviar Para Fornecedor
-                                                </a>
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <a href='@Url.Action("Edit", "Compras", new { OrderID = item.Id })'>
-                                                <i class="fa fa-edit red"></i>
-                                            </a>
-                                        </td>
-                                        <td style="text-align: center;">
-                                            <a href='@Url.Action("Delete", "Compras", new { OrderID = item.Id } )'>
-                                                <i class="fa fa-times-circle" style="color:red"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Id)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ProviderPurchaseOrder.ShortName)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Status)
-                                        </td>
-                                        <td>
-                                            @{ string dataEmissao = item.ValidateDate.ToShortDateString(); }
-                                            @Html.DisplayFor(modelItem => dataEmissao)
-                                        </td> 
-                                        <td>
-                                            @{
-                                                string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
+                            {
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <a href='@Url.Action("Conferencia", "Compras", new { OrderID = item.Id } )'>
+                                            Conferência
+                                        </a>
+                                    </td> 
+                                    <td style="text-align: center;">
+                                        <a href='@Url.Action("Delete", "Compras", new { OrderID = item.Id } )'>
+                                            <i class="fa fa-times-circle" style="color:red"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProviderPurchaseOrder.ShortName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @{ string dataEmissao = item.ValidateDate.ToShortDateString(); }
+                                        @Html.DisplayFor(modelItem => dataEmissao)
+                                    </td>
+                                    <td>
+                                        @{
+                                            string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
+                                        }
+                                        @Html.DisplayFor(modelItem => invoiceNumber)
+                                    </td>
+                                    <td>
+                                        @{
+                                            string totalValue = item.TotalValue.ToString("C");
+                                        }
+                                        @Html.DisplayFor(modelItem => totalValue)
+                                    </td>
+                                </tr>
                                             }
-                                            @Html.DisplayFor(modelItem => invoiceNumber)
-                                        </td>
-                                        <td>
-                                            @{
-                                                string totalValue = item.TotalValue.ToString("C");
-                                            }
-                                            @Html.DisplayFor(modelItem => totalValue)
-                                        </td>
-                                    </tr>
-                                                }
 
                         </tbody>
                     </table>
@@ -133,12 +126,7 @@
     function MakeSelect2() {
         $('select').select2();
         $('.dataTables_filter').each(function () {
-            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
-
-            //var url = Url.Action("ActionName", "ControllerName")';
-            var url = '@Url.Action("ActionName", "ControllerName")';
-
-            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Compras/Create\"' />");
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');      
         });
     }
 
@@ -176,7 +164,7 @@
         LoadDataTablesScripts(AllTables);
 
         // Add Drag-n-Drop feature
-        WinMove(); 
-        
+        WinMove();
+
     });
 </script>
