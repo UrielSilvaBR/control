@@ -561,7 +561,18 @@ namespace Control.UI.Controllers
 
         public ActionResult CondicaoPagamento()
         {
-            return View();
+            context = new DALContext();
+            List<PaymentTerm> retorno = new List<PaymentTerm>();
+            try
+            {
+                retorno = context.PaymentTerms.All().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
         }
 
         public ActionResult CondicaoPagamentoEdit(int? PaymentTermID)
