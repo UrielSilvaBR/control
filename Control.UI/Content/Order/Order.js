@@ -32,9 +32,9 @@ $(document).ready(function () {
         CalcularItemPedido(quantidade);
     });
 
-    $('#OrderProduct_ItemDiscount').focusout(function () {
-        ValidarDescontoItemPedido($(this).val());
-    });
+    //$('#OrderProduct_ItemDiscount').focusout(function () {
+    //    ValidarDescontoItemPedido($(this).val());
+    //});
 
     $('#Order_Discount').focusout(function () {
         AplicarDesconto($(this).val());
@@ -103,8 +103,10 @@ function ObterListaVendedorPorContato(idContato) {
 function LimparItemPedido() {
     $("#ddlProdutoPedido").select2().select2("val", '0');
     $('#OrderProduct_QuantityOrder').val(1);
+    $('#OrderProduct_DeadlineItem').val(0);
     $('#OrderProduct_UnitPrice').val(0);
-    $('#OrderProduct_ItemDiscount').val(0);
+    //$('#OrderProduct_ItemDiscount').val(0);
+    $('#OrderProduct_DeadlineItem').val(0);
     $('#OrderProduct_QuantityDeliver').val(0);
     $('#OrderProduct_TotalPrice').val(0);
 }
@@ -117,15 +119,20 @@ function InicializarModalItemPedido() {
 
 function IniciarlizarCamposItemPedido() {
 
-    $('#OrderProduct_ItemDiscount').val(0);
+    //$('#OrderProduct_ItemDiscount').val(0);
+
     $('#OrderProduct_UnitPrice').val(0);
     $('#OrderProduct_TotalPrice').val(0);
 
-    $('#OrderProduct_QuantityOrder').val(1);
-    $('#OrderProduct_QuantityOrder').ForceNumericOnly();
-
     if (parseInt($('#OrderProduct_QuantityOrder').val()) == 0)
         $('#OrderProduct_QuantityOrder').val(1);
+
+    $('#OrderProduct_QuantityOrder').ForceNumericOnly();
+
+    if (parseInt($('#OrderProduct_DeadlineItem').val()) == 0)
+        $('#OrderProduct_DeadlineItem').val(0);
+
+    $('#OrderProduct_DeadlineItem').ForceNumericOnly();
 }
 
 function CalcularItemPedido(quantidade) {
@@ -180,17 +187,17 @@ function InicializarMascaraItemPedido() {
         symbolPosition: 'left'
     });
 
-    $('#OrderProduct_ItemDiscount').maskMoney({
-        prefix: '',
-        allowZero: false,
-        allowNegative: false,
-        defaultZero: true,
-        thousands: '.',
-        decimal: ',',
-        precision: 2,
-        affixesStay: false,
-        symbolPosition: 'left'
-    });
+    //$('#OrderProduct_ItemDiscount').maskMoney({
+    //    prefix: '',
+    //    allowZero: false,
+    //    allowNegative: false,
+    //    defaultZero: true,
+    //    thousands: '.',
+    //    decimal: ',',
+    //    precision: 2,
+    //    affixesStay: false,
+    //    symbolPosition: 'left'
+    //});
 
     $('#OrderProduct_TotalPrice').maskMoney({
         prefix: '',
@@ -468,6 +475,13 @@ function AdicionarItemPedido() {
         return;
     }
 
+    var prazoEntrega = $('#OrderProduct_DeadlineItem').val();
+   
+    if (prazoEntrega == 0) {
+        ShowMessage('Informe o Prazo de Entrega para <br/>inclusão do Item!', false);
+        return;
+    }
+
     var rowEmpty = $('#gdvItensPedido > tbody > tr').find('.dataTables_empty').length == 1;
     var rowCount = $('#gdvItensPedido > tbody > tr').length;
 
@@ -488,7 +502,8 @@ function AdicionarItemPedido() {
     quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#OrderProduct_UnitPrice').val();
     var quantidadeEntregue = $('#OrderProduct_QuantityDeliver').val();
-    var desconto = $('#OrderProduct_ItemDiscount').val();
+    
+    //var desconto = $('#OrderProduct_ItemDiscount').val();
     var precoTotal = $('#OrderProduct_TotalPrice').val();
 
     var gdvItens = $('#gdvItensPedido').dataTable();
@@ -506,6 +521,7 @@ function AdicionarItemPedido() {
         NCM,
         quantidade,
         precoUnitario,
+        prazoEntrega,
         //desconto,
         precoTotal
     ]);
@@ -648,7 +664,7 @@ function AtualizarValorTotalPedido(aplicarDesconto) {
 
     for (var i = 0; i < arrayItens.length; i++) {
 
-        var valorPedido = arrayItens[i][11];
+        var valorPedido = arrayItens[i][12];
         valorPedido = valorPedido.replace("R$", "").replace(",", "").replace(".", ",").trim();
         valorPedido = Number(valorPedido.replace(/[^0-9\.]+/g, ""));
 

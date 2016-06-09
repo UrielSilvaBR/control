@@ -586,6 +586,55 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
+
+
+        public ActionResult CondicaoPagamentoSave(PaymentTerm PaymentTerm)
+        {
+            context = new DALContext();
+
+            try
+            {
+                //prod.AliqICMS = 3;
+                //prod.CombinedProduct = false;
+                //prod.MinimumStockAlert = 50;
+                if (PaymentTerm.Id > 0)
+                {
+                    context.PaymentTerms.Update(PaymentTerm);
+                }
+                else
+                {
+                    context.PaymentTerms.Create(PaymentTerm);
+                }
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Condição de Pagamento cadastrada com sucesso.";
+
+            return RedirectToAction("CondicaoPagamento");
+        }
+
+        public ActionResult CondicaoPagamentoDelete(int? PaymentTermID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.PaymentTerms.Delete(p => p.Id == PaymentTermID);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            context.SaveChanges();
+
+            ViewBag.Message = "Condição de Pagamento excluída com sucesso.";
+
+            return RedirectToAction("CondicaoPagamento");
+        }
+
         #endregion
     }
 }

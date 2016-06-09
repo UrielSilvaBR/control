@@ -47,7 +47,7 @@
                             <tr>
                                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
                                 <th>
-                                    Descrição Completa
+                                    Descrição 
                                 </th>
                                 <th>
                                     Descrição Resumida
@@ -61,6 +61,9 @@
                                 <th>
                                     Ativa
                                 </th>
+                                <th>
+                                    Alíquota
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,10 +73,10 @@
                                     <tr>
                                         <td>
                                             <h4 style="color:red">
-                                                <a href='@Url.Action("ClientesEdit", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("CondicaoPagamentoEdit", "Cadastro", new { PaymentTermID = item.Id })'>
                                                     <i class="fa fa-edit red"></i>
                                                 </a>
-                                                <a href='@Url.Action("ClienteDelete", "Cadastro", new { ClientID = item.Id })'>
+                                                <a href='@Url.Action("CondicaoPagamentoDelete", "Cadastro", new { PaymentTermID = item.Id })'>
                                                     <i class="fa fa-times-circle" style="color:red"></i>
 
                                                 </a>
@@ -95,6 +98,11 @@
                                         <td>
                                             @{ string status = item.IsActive ? "SIM" : "NÃO"; }
                                             @Html.DisplayFor(modelItem => status)
+                                        </td>
+
+                                        <td>
+                                            @{ string aliquota = String.Format("{0}%", item.Aliquota.ToString("N")); }
+                                            @Html.DisplayFor(modelItem => aliquota)
                                         </td>
 
                                     </tr>
@@ -125,9 +133,9 @@
             //var url = Url.Action("ActionName", "ControllerName")';
             var url = '@Url.Action("ActionName", "ControllerName")';
 
-            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-            $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
-            $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/CondicaoPagamentoEdit\"' />");
+            $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/CondicaoPagamentoEdit\"' />");
+            $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/CondicaoPagamentoEdit\"' />");
         });
     }
     $(document).ready(function () {
