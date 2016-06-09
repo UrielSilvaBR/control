@@ -88,8 +88,10 @@ namespace Control.UI.Controllers
             
             try
             {
+                
                 pedido = context.Orders.Find(p => p.Id == InvoiceID);
                 ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
+                 
                 retorno.Order = pedido;
                 
             }
@@ -103,14 +105,19 @@ namespace Control.UI.Controllers
 
         public ActionResult PDFInvoice(int InvoiceID)
         {
+            PedidoViewModel retorno = new PedidoViewModel();
+
             context = new DALContext();
-            Invoice retorno = new Invoice();
+            Order pedido = new Order();
             try
             {
-                retorno = context.Invoices.Find(p => p.Id == 9);
+                pedido = context.Orders.Find(p => p.Id == InvoiceID);
+                ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
 
-                //SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
-                //SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=9");
+                retorno.Order = pedido;
+
+                SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=" + InvoiceID.ToString());
 
                 
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");

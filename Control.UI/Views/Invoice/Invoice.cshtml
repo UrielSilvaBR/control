@@ -17,171 +17,115 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-content">
-                <div class="col-xs-6">
-                    <b>Solicitante:</b>
-                    <address>
-                        <strong>@Html.Display(Model.Order.CustomerOrder.CompanyName)</strong><br>
-                        Rua Franklin , 389, 5 Andar<br>
-                        Boston, MA 02110-1301<br>
-                        USA<br>
-                        <abbr title="Phone">P:</abbr> (123) 456-7890
-                    </address>
-                    <address>
-                        <strong>Ramon Valdez</strong><br>
-                        <a href="mailto:#">first.last@example.com</a>
-                    </address>
+                <div class="col-xs-12" style="margin-bottom:30px">
+                    <img src="~/img/logo.JPG" style="margin-right:380px" />
+                    <h3 class="invoice-header" style="margin-right:330px">
+                         PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3>Data Emissão: @DateTime.Now.ToShortDateString()  @*Html.DisplayFor(Model => Model.Order.InsertDate)*@
+                    
+
                 </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>NCC Equipamentos Industriais</strong><br>
-                        Rua Jo&atilde;o Guerra, 271 - Macuco<br>
-                        Santos/SP - CEP 11015-131<br>
-                        BR<br>
-                        <abbr title="Phone">P:</abbr> Fone: 13 3232.8909
-                    </address>
-                    <h3 class="invoice-header">Pedido #37095</h3>
-                    <p>Data Emissão: 1/12/16</p>
-                    <p class="txt-danger">Data Pagamento: 10/12/16</p>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-xs-12">
-                    <br />
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>ITEMS</th>
-                                <th>QUANTIDADE</th>
-                                <th>PRECO UNITARIO</th>
-                                <th>TOTAL</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="m-ticker"><b>Server #1</b><span>SAN Storage 40Gb, vCPU 2 Core, vRAM 2GB</span></td>
-                                <td>2</td>
-                                <td>$12.5</td>
-                                <td>$25</td>
-                            </tr>
-                            <tr>
-                                <td class="m-ticker"><b>Server #2</b><span>SAN Storage 80Gb, vCPU 4 Core, vRAM 4GB</span></td>
-                                <td>2</td>
-                                <td>$25</td>
-                                <td>$50</td>
-                            </tr>
-                            <tr>
-                                <td class="m-ticker"><b>Server #3</b><span>SAN Storage 1600Gb, vCPU 8 Core, vRAM 8GB</span></td>
-                                <td>2</td>
-                                <td>$50</td>
-                                <td>$100</td>
-                            </tr>
-                            <tr class="active">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>$175<sup>*</sup></b></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <small>* VAT included</small>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
-                    <div class="col-xs-4">
-                        <a href="#" class="btn btn-default btn-label-left"><span><i class="fa fa-floppy-o"></i></span> Salvar pdf</a>
+                    <div class="col-xs-6">
+                        <b>Solicitante:</b>
+                        <address>
+                            <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressStreet) , @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressNumber) @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressComplement) <br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.Name), @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.State.Name)  - @Html.DisplayFor(Model => Model.Order.CustomerOrder.ZipCode)<br>
+                            BR<br>
+                            <abbr title="Phone">Tel:</abbr> @Html.DisplayFor(Model => Model.Order.CustomerOrder.Phone)
+                        </address>
+                        <address>
+                            <strong>Contato: @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatName)</strong><br>
+                            Tel: @Html.DisplayFor(Model => Model.Order.ContactOrder.Phone) <br />
+                            <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.ContactOrder.Email)</a>
+                        </address>
                     </div>
-                    <div class="col-xs-4 col-xs-offset-4">
-                        <a href="#" class="btn btn-primary btn-label-left"><span><i class="fa fa-credit-card"></i></span> Imprimir</a>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>NCC EQUIPAMENTOS INDUSTRIAIS</strong><br>
+                            Rua Jo&atilde;o Guerra, 271 - Macuco<br>
+                            Santos/SP - CEP 11015-131<br>
+                            BR<br>
+                            <abbr title="Phone">P:</abbr> Fone: 13 3232-8909
+                        </address>
+                        <address>
+                            <strong>Vendedor: @Html.DisplayFor(Model => Model.Order.VendorOrder.Name )</strong><br>
+                            Tel: 13 3232-8909<br />
+                            <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.VendorOrder.Name)&#64;ncc.com.br</a>
+                        </address>
+                      
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <br />
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ITEMS</th>
+                                    <th>NCM</th>
+                                    <th>QUANTIDADE</th>
+                                    <th>PRECO UNITARIO</th>
+                                    <th>TOTAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+@foreach (var item in Model.Order.Items)
+{
+    <tr>
+                                    <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
+                                    <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                                    <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                </tr>
+}
+                                
+                                
+                                <tr class="active">
+                                    <td></td>
+                                    <td></td>
+                                    <td>Desconto=(@Html.DisplayFor(Model => Model.Order.Discount)%)</td>
+                                    <td></td>
+                                    <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) <sup>*</sup></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @*<small>* VAT included</small>*@
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>CONDIÇÕES DE FORNECIMENTO</strong><br /><br />
+                        <ol type="1">
+                            <li>Valor mínimo para faturamento à vista: R$ 200,00. Valor mínimo para faturamento a prazo: R$ 500,00. Os pedidos com valores entre R$ 200,00 e R$ 500,00 deverão ser retirados na NCC pelo cliente, ou poderão ser entregues com frete pago pelo cliente.</li>
+                            <li>Os preços mencionados nesta proposta estão sujeitos a alterações após o vencimento da data de validade.</li>
+                            <li>Não serão aceitos cancelamentos e/ou devoluções de produtos já encomendados.</li>
+                            <li>Na confirmação do Pedido, favor informar o número desta proposta.</li>
+                            <li>
+                                O prazo de entrega informado nesta proposta é em dias corridos, sujeito a alteração no momento do fechamento do pedido de venda. Este prazo é para o produto estar pronto para o faturamento ou a ser retirado na NCC em Santos.
+                                <ul>
+                                    <li>No caso de forma de entrega total, prevalecerá o maior prazo constante nesta proposta.</li>
+                                    <li>O prazo de entrega para São Paulo capital é de um dia útil após a emissão da nota fiscal, para outras localidades dependerá do meio de transporte e transportadora contratada por sua empresa.</li>
+                                </ul>
+                            </li>
+                            <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
+                            <li>Condições de pagamento acima de 14 dias possuem acréscimo de 2% de custo financeiro ao mês.</li>
+                            <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
+                        </ol>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
+                        <div class="col-xs-4">
+                            <a href='@Url.Action("PDFInvoice", new { InvoiceID = Model.Order.Id })' class="btn btn-default btn-label-left"><span><i class="fa fa-floppy-o"></i></span> Salvar pdf</a>
+                        </div>
+                        <div class="col-xs-4 col-xs-offset-4">
+                            @*<a href="#" class="btn btn-primary btn-label-left"><span><i class="fa fa-credit-card"></i></span> Imprimir</a>*@
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
 
 
 
-
-<h2>Invoice</h2>
-
-@*<div>
-    <h4>Invoice</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.c .CustomerInvoice.CompanyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerInvoice.CompanyName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Serie.Descricao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Serie.Descricao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Numero)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Numero)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DataEmissao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DataEmissao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.InsertDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.InsertDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.OrderDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.OrderDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-
-    </dl>
-</div>
-<p>*@
-    
-    @Html.ActionLink("Back to List", "Invoice", "PDFInvoice")
-</p>
