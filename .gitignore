@@ -74,3 +74,5 @@ Control.UI/Views/Cadastro/bkp/Vendedores.cshtml
 Control.UI/Views/Cadastro/bkp/VendedoresEdit.cshtml
 Control.DAL/Data/DBConexao.cs
 Control.DAL/_Control.DAL.csproj.orig
+Especificacao/Imagens/cadastro proposta.PNG
+Especificacao/Imagens/exemplo proposta.PNG
