@@ -84,8 +84,8 @@
                     <td>@Html.DisplayFor(modelItem => item.ProductItem.Model)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
                     <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
-                    <td> @Html.DisplayFor(modelItem => item.DeadlineItem)</td>
                     <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                    <td> @Html.DisplayFor(modelItem => item.DeadlineItem)</td>
                     @*<td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>*@
                     <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
                 </tr>

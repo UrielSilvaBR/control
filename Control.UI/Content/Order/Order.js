@@ -238,6 +238,18 @@ function InicializarMascaraItemPedido() {
     $('#OrderProduct_QuantityOrder').ForceNumericOnly();
 
     $('#Order_OrderDate').mask('99/99/9999');
+
+    $('#Order_DeadlineItem').maskMoney({
+        prefix: '',
+        allowZero: false,
+        allowNegative: false,
+        defaultZero: true,
+        thousands: '.',
+        decimal: ',',
+        precision: 2,
+        affixesStay: false,
+        symbolPosition: 'left'
+    });
 }
 
 function InicializarCamposReadOnly() {
@@ -321,8 +333,8 @@ function IniciarInclusaoPedido() {
             QuantityOrder: arrayItens[i][9],
             UnitPrice: arrayItens[i][10],
             //ItemDiscount: arrayItens[i][9],
-            ItemDiscount: 0,
-            TotalPrice: arrayItens[i][11]
+            DeadlineItem: arrayItens[i][11],
+            TotalPrice: arrayItens[i][12]
         });
     }
 
@@ -395,8 +407,8 @@ function IniciarEdicaoPedido() {
             QuantityOrder: arrayItens[i][9],
             UnitPrice: arrayItens[i][10],
             //ItemDiscount: arrayItens[i][9],
-            ItemDiscount: 0,
-            TotalPrice: arrayItens[i][11]
+            DeadlineItem: arrayItens[i][11],
+            TotalPrice: arrayItens[i][12]
         });
     }
 
@@ -558,7 +570,8 @@ function AbrirItemPedido(indiceLinha) {
 
     $('#OrderProduct_UnitPrice').val(item[10]);
     //$('#OrderProduct_ItemDiscount').val(item[9]);
-    $('#OrderProduct_TotalPrice').val(item[11]);
+    $('#OrderProduct_DeadlineItem').val(item[11]);
+    $('#OrderProduct_TotalPrice').val(item[12]);
 
     $('#rowIndexItemPedido').val(rowIndex);
 
@@ -583,7 +596,8 @@ function EditarItemPedido() {
     gdvItens.fnUpdate(quantidade, parseInt(rowIndex), 9);
     gdvItens.fnUpdate($('#OrderProduct_UnitPrice').val(), parseInt(rowIndex), 10);
     //gdvItens.fnUpdate($('#OrderProduct_ItemDiscount').val(), parseInt(rowIndex), 9);
-    gdvItens.fnUpdate($('#OrderProduct_TotalPrice').val(), parseInt(rowIndex), 11);
+    gdvItens.fnUpdate($('#OrderProduct_DeadlineItem').val(), parseInt(rowIndex), 11);
+    gdvItens.fnUpdate($('#OrderProduct_TotalPrice').val(), parseInt(rowIndex), 12);
 
     AtualizarValorTotalPedido();
     gdvItens.fnDraw();

@@ -64,5 +64,7 @@ namespace Control.Model.Entities
         public int? PaymentTermID { get; set; }
         [ForeignKey("PaymentTermID")]
         public virtual PaymentTerm PaymentTerm { get; set; }
+
+        public bool DespesaFinanceira { get; set; }
     }
 }

@@ -125,7 +125,6 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.Order.TotalValue, new { @class = "form-control" })
                                 </div>
-
                             </div>
 
                             <div class="form-group">
@@ -133,6 +132,12 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 <div class="col-md-2">
                                     @Html.TextBoxFor(p => p.Order.Discount, new { @class = "form-control" })
                                 </div>
+
+                                @Html.Label("Despesa Financeira", htmlAttributes: new { @class = "control-label col-md-1", @style= "width: 154px;text - align: left;" })
+                                <div class="col-md-1" style="text-align: left;margin-top: 6px;margin-left: -38px;">
+                                    @Html.CheckBoxFor(p => p.Order.DespesaFinanceira, new { @class = "", @style= "margin-left:18px;transform: scale(1.2);" })
+                                </div>
+
                             </div>
                             <div class="form-group">
 
@@ -178,8 +183,8 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                             </div>
 
                             <div class="form-group">
-                                
-                                @Html.Label("Forma Pagamento", htmlAttributes: new { @class = "col-md-1" })
+
+                                @Html.Label("Condição Pagto", htmlAttributes: new { @class = "col-md-1" })
                                 <div class="col-md-4">
                                     @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                                 </div>
@@ -198,7 +203,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                             @Html.Label("Observação", htmlAttributes: new { @class = "col-md-1" })
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    @Html.TextAreaFor(p => p.Order.Comments, new { @class = "form-control", @style= "height: 90px;" })
+                                    @Html.TextAreaFor(p => p.Order.Comments, new { @class = "form-control", @style = "height: 90px;" })
                                 </div>
 
                             </div>

@@ -113,7 +113,8 @@ namespace Control.UI.Controllers
                         QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                         ProductID = (int)x["ProductID"],
                         UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
-                        ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
+                        DeadlineItem = (int)x["DeadlineItem"],
+                        ItemDiscount = 0,
                         TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString()),
                         TypeUnitID = 1,
                     }).ToList();
