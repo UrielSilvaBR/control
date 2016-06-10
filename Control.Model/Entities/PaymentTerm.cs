@@ -26,12 +26,15 @@ namespace Control.Model.Entities
         [Display(Name = "Código")]
         public string ShortDescription { get; set; }
 
-        [Display(Name = "Dias")]
+        [Display(Name = "Qtd. Dias")]
         public int Days { get; set; }
 
         public DateTime InsertDate { get; set; }
 
         [Display(Name = "Ativa")]
         public bool IsActive { get; set; }
+
+        [Display(Name ="Alíquota (%)")]
+        public decimal Aliquota { get; set; }
     }
 }

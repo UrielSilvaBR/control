@@ -159,6 +159,7 @@ namespace Control.UI.Models
         public Model.Entities.OrderProduct OrderProduct { get; set; }
         public List<SelectListItem> CFOP { get; set; }
         public List<SelectListItem> Status { get; set; }
+        public List<Model.Entities.PaymentTerm> PaymentTerms { get; set; }
 
         public PedidoViewModel()
         {
@@ -169,6 +170,10 @@ namespace Control.UI.Models
             Vendors = new List<Vendor>();
             Products = context.Products.All().OrderBy(p => p.Name).ToList();
             Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
+
+            PaymentTerms = context.PaymentTerms.All().OrderBy(p => p.Days).ToList();
+            PaymentTerms.Insert(0, new PaymentTerm() { Id = 0, Description = "SELECIONE..." });
+
             if (Order == null)
             {
                 Order = new Order();

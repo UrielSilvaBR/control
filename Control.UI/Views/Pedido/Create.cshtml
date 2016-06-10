@@ -176,6 +176,16 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                 </a>
                             </div>
+
+                            <div class="form-group">
+                                
+                                @Html.Label("Forma Pagamento", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                            </div>
+
                             <div class="form-group">
                                 <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
                             </div>
