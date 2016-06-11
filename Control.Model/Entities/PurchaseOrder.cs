@@ -21,16 +21,17 @@ namespace Control.Model.Entities
         [ForeignKey("ProviderID")]
         public virtual Provider ProviderPurchaseOrder { get; set; }
 
+        [Display(Name = "Status")]
         public string Status { get; set; }
-
+        [Display(Name = "Nota Fiscal")]
         public int? InvoiceNumber { get; set; }
-
+        [Display(Name = "Data Cadastro")]
         public DateTime InsertDate { get; set; }
-
+        [Display(Name = "Validade")]
         public DateTime ValidateDate { get; set; }
-
+        [Display(Name = "Valor Total")]
         public decimal TotalValue { get; set; }
-
+        [Display(Name = "Observação")]
         public string Comments { get; set; }
         
         [ForeignKey("PurchaseOrderId")]

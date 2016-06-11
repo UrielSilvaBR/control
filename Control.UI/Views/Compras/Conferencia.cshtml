@@ -610,83 +610,117 @@
             </div>
             <!-- conteudo -->
             <div class="box-content">
-
-                <div id="tabs">
+                 
 
                     @using (Ajax.BeginForm("SaveConferencia", new { Controller = "Compras" },
 new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
-                    {
-                        <ul>
-                            <li><a href="#tabs-1"> Dados Cadastrais </a></li>
-                        </ul>
-                        <div id="tabs-1">
+                    { 
+                            <div class="row">
+                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate)
+                                @Html.HiddenFor(model => model.PurchaseOrder.ProviderPurchaseOrder.Id)
 
-                            <div class="form-group">
-                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate);
-
-                                @Html.ValidationMessageFor(p => p.PurchaseOrder.Id)
-                                @Html.LabelFor(model => model.PurchaseOrder.Id, htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-2">
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.PurchaseOrder.Id )
                                     @Html.EditorFor(p => p.PurchaseOrder.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(p => p.PurchaseOrder.ValidateDate, htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-2">
+                                <div class="form-group col-md-3">
+                                    @Html.Label("Validade")
                                     @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control"  ,@readonly = "true" })
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control", @readonly = "true" })
+                                   
                                 </div>
 
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(p => p.PurchaseOrder.TotalValue, htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-2">
+                                <div class="form-group col-md-3">
+                                    @Html.Label("Valor Total")
                                     @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control", @readonly = "true" })
-                                </div> 
-                            </div>
+                                </div>
 
-                            <div class="form-group">
-                                @Html.LabelFor(p => p.PurchaseOrder.InvoiceNumber, htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-2">
+                                <div class="form-group  col-md-6">
+                                    @Html.Label("Fornecedor")
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.ProviderPurchaseOrder.CompanyName, new { @class = "form-control", @readonly = "true" })
+                                </div>
+
+
+                                <div class="form-group  col-md-3">
+                                    @Html.Label("Nota Fiscal")
                                     @Html.TextBoxFor(p => p.PurchaseOrder.InvoiceNumber, new { @class = "form-control" })
                                 </div>
+
                             </div>
+                            <div class="row">
+                               <div class="col-md-12"><br>
+                                   <hr>
+                                    @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
+                                    }
 
-                            <div class="form-group">
-                                <!--
-                                 @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
-                                 <div class="col-md-5">
-                                      @Html.DropDownListFor(model => model.PurchaseOrder.Status, Model.Status, htmlAttributes: new { @class = "selddl" , @readonly = "true" })
-                                 </div>
-                                -->
-
-                                @Html.Label("Fornecedor", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-5" style="align-content:flex-start">
-                                    @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" , @readonly = "true" })
+                                    @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
                                 </div>
+                           </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-5">
+                                        <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
+                                    </div>
+                                </div> 
 
-                            </div>
-                             
-                            @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
-                            }
-
-                            @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
-
-                            <div class="form-group">
-                                <div class="col-md-offset-5">
-                                    <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
-                                </div>
-                            </div>
-                        </div>
-
-                                }
-                </div>
+                                } 
             </div>
         </div>
     </div><!-- BOX -->
 
+    @section top_modals{
+
+        <div id="itemConferenciaEdit" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                         <div class="modal-header">
+                             
+                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                             <h4 class="modal-title" id="tituloItemPedido">Conferência Item</h4>
+                        </div>
+                        <div class="modal-body" > 
+                            
+                            <input type="hidden" id="rowIndexItemPedido" />
+                           
+                            <div class="row">
+                                <div class="form-group col-md-12"> 
+                                    @Html.Label("Produto")
+                                    @Html.DropDownListFor(p => p.PurchaseOrderItem.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlConfItemProduto", @readonly = "true" })
+                                </div> 
+                                <div class="form-group col-md-3">
+                                    @Html.Label("Qnt Pedido")
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control" , @readonly = "true" } })
+                                </div> 
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(p => p.PurchaseOrderItem.UnitPrice)
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.UnitPrice, new { htmlAttributes = new { @class = "form-control" , @type = "text" , @readonly = "true" } })
+                                </div> 
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(p => p.PurchaseOrderItem.TotalPrice)
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.TotalPrice, new { htmlAttributes = new { @class = "form-control" , @readonly = "true" } })
+                                 </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(p => p.PurchaseOrderItem.QuantityDeliver) 
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
+                                 </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(p => p.PurchaseOrderItem.ItemDiscount)
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                                 </div>
+
+                                </div>
+                            </div>
+                        <div class="modal-footer" >
+                            <input type="submit" value="Salvar" class="btn btn-primary" style="font-size: 0.8em;" id="btnSalvarPuchaseOrderItem" />
+                        </div> 
+                </div>
+            </div>
+
+            
+        </div>  
+
+    }
     <script type="text/javascript">
         // Run Select2 on element
         function Select2Test() {

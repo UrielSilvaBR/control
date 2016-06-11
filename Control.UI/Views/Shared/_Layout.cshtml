@@ -140,12 +140,12 @@
     </style>
 </head>
 <body>
-
     @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
-
     @Html.Partial("~/Views/Pedido/_AddOrderProduct.cshtml", new PedidoViewModel())
 
-    @Html.Partial("~/Views/Compras/_ConferenciaEditProduto.cshtml", new PedidoCompraViewModel())
+
+    @RenderSection("top_modals", false)
+
 
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">

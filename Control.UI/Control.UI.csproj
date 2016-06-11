@@ -797,7 +797,6 @@
     <Content Include="Views\Estoque\ConsultaEstoque.cshtml" />
     <Content Include="Views\Pedido\VisualizarProposta.cshtml" />
     <Content Include="Views\Compras\ListaPedidos.cshtml" />
-    <Content Include="Views\Compras\_AddPurchaseOrderItem.cshtml" />
     <Content Include="Views\Compras\_ListPurchaseOrdemItem.cshtml" />
     <Content Include="Views\Compras\Create.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
@@ -807,7 +806,6 @@
     <Content Include="Views\Compras\Recebimento.cshtml" />
     <Content Include="Views\Compras\Conferencia.cshtml" />
     <Content Include="Views\Compras\_ConferenciaListaProdutos.cshtml" />
-    <Content Include="Views\Compras\_ConferenciaEditProduto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -14,10 +14,11 @@ namespace Control.Model.Entities
     {
         [Key]
         [DataMember]
-        public int Id { get; set; } 
+        public int Id { get; set; }
 
+        [Display(Name = "Pedido de Compra")]
         public int PurchaseOrderId { get; set; }
-                   
+         
         public int SequencialItem { get; set; }
 
         [Display(Name = "Quantidade")]
