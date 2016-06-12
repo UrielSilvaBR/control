@@ -200,7 +200,7 @@
                 return;
             }
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var Items = new Array();
             var arrayItens = gdvItens.fnGetData();
@@ -246,16 +246,16 @@
                 waitingDialog.hide();
                 ShowMessage(mensagemRetorno, true);
 
-                if (parseInt(idPedido) > 0) {
-                    $.ajax({
-                        url: '/Compras/GetOrderProducts',
-                        data: { OrderID: idPedido },
-                        type: 'GET',
-                        success: function (result) {
-                            $('#table_wrapperz_ItensPedido').html(result);
-                        }
-                    });
-                }
+                //if (parseInt(idPedido) > 0) {
+                //    $.ajax({
+                //        url: '/Compras/GetOrderProducts',
+                //        data: { OrderID: idPedido },
+                //        type: 'GET',
+                //        success: function (result) {
+                //            $('#table_wrapperz_ItensPedido').html(result);
+                //        }
+                //    });
+                //}
 
                 if (idPedido == 0) {
                     $('#btnCadastrar').show();
@@ -271,7 +271,7 @@
 
         function IniciarEdicaoPedido() {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var Items = new Array();
             var arrayItens = gdvItens.fnGetData();
@@ -338,8 +338,8 @@
                 return;
             }
 
-            var rowEmpty = $('#gdvItensPedido > tbody > tr').find('.dataTables_empty').length == 1;
-            var rowCount = $('#gdvItensPedido > tbody > tr').length;
+            var rowEmpty = $('#gdvItensPedidoDeCompras > tbody > tr').find('.dataTables_empty').length == 1;
+            var rowCount = $('#gdvItensPedidoDeCompras > tbody > tr').length;
 
             if (rowEmpty)
                 rowCount = rowCount - 1;
@@ -359,7 +359,7 @@
             var desconto = $('#PurchaseOrderItem_ItemDiscount').val();
             var precoTotal = $('#PurchaseOrderItem_TotalPrice').val();
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
             $(gdvItens).removeClass('table-striped');
 
             var indiceLinhaAdicionada = gdvItens.fnAddData([
@@ -383,14 +383,14 @@
 
             AtualizarValorTotalPedido();
 
-            $('#gdvItensPedido_filter').hide();
+            $('#gdvItensPedidoDeCompras_filter').hide();
             //$('#gdvItensPedido_info').hide();
-            $('#gdvItensPedido_length').hide();
+            $('#gdvItensPedidoDeCompras_length').hide();
         }
 
         function AbrirItemPedido(indiceLinha) {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var rowIndex = indiceLinha - 1;
 
@@ -417,7 +417,7 @@
 
         function EditarItemPedido() {
 
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var rowIndex = $('#rowIndexItemPedido').val();
 
@@ -449,7 +449,7 @@
 
             ShowConfirmation("Deseja remover este Item?", function () {
 
-                var gdvItens = $('#gdvItensPedido').dataTable();
+                var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
                 var rowIndex = indiceLinha - 1;
 
@@ -485,7 +485,7 @@
         }
 
         function AtualizarSequencialItemPedido() {
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
             var arrayItens = gdvItens.fnGetData();
 
             for (var i = 0; i < arrayItens.length; i++) {
@@ -498,7 +498,7 @@
         }
 
         function AtualizarValorTotalPedido() {
-            var gdvItens = $('#gdvItensPedido').dataTable();
+            var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
             var arrayItens = gdvItens.fnGetData();
 

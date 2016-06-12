@@ -9,7 +9,7 @@
 
         $(document).ready(function () {
 
-            $('#gdvItensPedido').dataTable({
+            $('#gdvItensPedidoDeCompras').dataTable({
                 "aaSorting": [[5, "asc"]],
                 "oLanguage": {
                     "sEmptyTable": "Nenhum registro encontrado"
@@ -31,9 +31,9 @@
                 "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }, { "sClass": "center", "aTargets": [5]}]
             });
 
-            $('#gdvItensPedido_filter').hide();
-            //$('#gdvItensPedido_info').hide();
-            $('#gdvItensPedido_length').hide();
+            $('#gdvItensPedidoDeCompras_filter').hide();
+            //$('#gdvItensPedidoDeCompras_info').hide();
+            $('#gdvItensPedidoDeCompras_length').hide();
 
         });
 
@@ -42,7 +42,7 @@
 </head>
 
 <div id="table_wrapperz_ItensPedido">
-    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensPedido">
+    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensPedidoDeCompras">
         <thead>
             <tr>
                 <th></th>

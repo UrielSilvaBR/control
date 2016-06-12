@@ -255,16 +255,16 @@
                 waitingDialog.hide();
                 ShowMessage(mensagemRetorno, true);
 
-                if (parseInt(idPedido) > 0) {
-                    $.ajax({
-                        url: '/Compras/GetOrderProducts',
-                        data: { OrderID: idPedido },
-                        type: 'GET',
-                        success: function (result) {
-                            $('#table_wrapperz_ItensPedido').html(result);
-                        }
-                    });
-                }
+                //if (parseInt(idPedido) > 0) {
+                //    $.ajax({
+                //        url: '/Compras/GetOrderProducts',
+                //        data: { OrderID: idPedido },
+                //        type: 'GET',
+                //        success: function (result) {
+                //            $('#table_wrapperz_ItensPedido').html(result);
+                //        }
+                //    });
+                //}
 
                 if (idPedido == 0) {
                     $('#btnCadastrar').show();
@@ -273,6 +273,10 @@
                 else {
                     $('#btnCadastrar').hide();
                     $('#btnEditar').show();
+
+                    setTimeout(function () {
+                        $(location).attr('href', '../Estoque/ConsultaEstoque ');
+                    }, 3000);
                 }
 
             }, 1000);

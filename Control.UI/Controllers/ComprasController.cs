@@ -117,10 +117,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return Content("0;Ordem de compra inválida");
+                    return Content("Ordem de compra inválida;0");
                 }
 
-                return Content(Pedido.PurchaseOrder.Id.ToString() + ";Ordem de compra recedida com sucesso ! <br> Estoque Atualizado");
+                return Content( "Ordem de compra recedida com sucesso ! <br> Estoque Atualizado;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -257,10 +257,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return Content("0;Ordem  de Compra inválida");
+                    return Content("Ordem  de Compra inválida;0");
                 }
 
-                return Content(Pedido.PurchaseOrder.Id.ToString() + ";Ordem  de Compra salva com Sucesso");
+                return Content( "Ordem  de Compra salva com Sucesso;" + Pedido.PurchaseOrder.Id.ToString() );
             }
             catch (Exception ex)
             {
