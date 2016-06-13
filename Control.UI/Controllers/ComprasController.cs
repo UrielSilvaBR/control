@@ -67,6 +67,7 @@ namespace Control.UI.Controllers
                     if (Pedido.PurchaseOrder.Id > 0)
                     {
                         Pedido.PurchaseOrder.Status = "PEDIDO_ENTREGUE";
+                        Pedido.PurchaseOrder.ProviderID = Pedido.PurchaseOrder.ProviderPurchaseOrder.Id;
                         context.PurchaseOrders.Update(Pedido.PurchaseOrder);
                     }
 
@@ -116,10 +117,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return View("ConsultaEstoque", "Estoque");
+                    return Content("Ordem de compra inválida;0");
                 }
 
-                return View("ConsultaEstoque", "Estoque");
+                return Content( "Ordem de compra recedida com sucesso ! <br> Estoque Atualizado;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -256,10 +257,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return View("Create", Pedido);
+                    return Content("Ordem  de Compra inválida;0");
                 }
 
-                return View("Create", Pedido);
+                return Content( "Ordem  de Compra salva com Sucesso;" + Pedido.PurchaseOrder.Id.ToString() );
             }
             catch (Exception ex)
             {
