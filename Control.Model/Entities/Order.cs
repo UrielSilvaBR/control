@@ -65,6 +65,10 @@ namespace Control.Model.Entities
         [ForeignKey("PaymentTermID")]
         public virtual PaymentTerm PaymentTerm { get; set; }
 
-        public bool DespesaFinanceira { get; set; }
+        public bool DespesaFinanceira { get; set; } //financial expense..rs (depois mudamos)
+        public bool Validated { get; set; } //Dupla confirmação no momento do cadastro da proposta
+        public bool AdminRoleAuthorized { get; set; } //Autorizada execução restrita nesta proposta
+        public string RegisteredBy { get; set; } //login/nome usuario criador
+
     }
 }
