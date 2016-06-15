@@ -3,6 +3,19 @@
 @using Control.Utility
 @model ClienteViewModel
 
+<head>
+
+    <script src="~/Content/Cadastros/Cliente/Cliente.js"></script>
+
+    <style type="text/css">
+        .col-md-1 {
+            margin-top: 0px;
+        }
+    </style>
+
+</head>
+
+
 @using (Html.BeginForm("ClientesSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
             {
     <div class="box-content">
