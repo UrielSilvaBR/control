@@ -61,6 +61,7 @@ namespace Control.Model.Entities
         [ForeignKey("ContactID")]
         public virtual Contact ContactOrder { get; set; }
 
+        [Display(Name = "Cond. Pagto")]
         public int? PaymentTermID { get; set; }
         [ForeignKey("PaymentTermID")]
         public virtual PaymentTerm PaymentTerm { get; set; }

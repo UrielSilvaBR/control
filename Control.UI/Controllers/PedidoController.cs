@@ -39,7 +39,7 @@ namespace Control.UI.Controllers
 
         [HttpGet]
         public ActionResult Create(Models.PedidoViewModel Pedido)
-        {
+        {   
             return View(Pedido);
         }
 
@@ -221,6 +221,21 @@ namespace Control.UI.Controllers
             }
         }
 
+        public JsonResult GetVendorsByCustomer(int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+                var vendorList = context.Contacts.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendors);
+                return Json(new { vendorList = vendorList });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+
         public ActionResult GerarNotaFiscal(int OrderID)
         {
             try
@@ -289,5 +304,23 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+
+        public ActionResult IncluirVendedor(Model.Entities.Vendor Vendor)
+        {
+            try
+            {
+                context = new DALContext();
+
+                context.Vendors.Create(Vendor);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", Vendor.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
     }
 }

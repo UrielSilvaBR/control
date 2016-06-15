@@ -322,8 +322,6 @@ namespace Control.UI.Controllers
 
             try
             {
-                model.Active = true;
-
                 if (model.PercentCommission <= 0)
                 {
                     model.PercentCommission = 5;

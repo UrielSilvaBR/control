@@ -743,3 +743,38 @@ function AplicarDesconto(percentualDesconto) {
 
     $('#Order_TotalValue').val(valorTotal);
 }
+
+function AbrirModalCadastroCliente()
+{
+    $('#modal-cadastro-cliente').modal('show');
+}
+
+function AbrirModalCadastroVendedor() {
+    $('#modal-cadastro-vendedor').modal('show');
+}
+
+function AbrirModalCadastroContato() {
+    $('#modal-cadastro-contato').modal('show');
+}
+
+function ObterListaVendedorPorCliente(idCliente) {
+    $.post("/Pedido/GetVendorsByCustomer",
+      { ContactID: idCliente },
+      function (result) {
+
+          var listVendor = $("#Order_VendorID");
+          listVendor.empty();
+          //listVendor.append(new Option('SELECIONE...', '0'));
+          $.each(result.vendorList, function (index, item) {
+              listVendor.append(new Option(item.Name, item.Id));
+          });
+
+          listVendor.select2().select2('val', listVendor.val());
+      });
+}
+
+function FinalizarInclusaoVendedor(id) {
+
+
+
+}

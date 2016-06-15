@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -49,7 +49,7 @@ namespace Control.DAL.Data
 
                 case 3:
 
-                    //Conexão de produção Gtwave
+                    //Conexï¿½o de produï¿½ï¿½o Gtwave
                     //strConn = @"Data Source=192.99.149.206;Initial Catalog=control;Persist Security Info=True;User ID=userControl;Password=Ncc123";
                     strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=userdbControl;Password=Ncc123";
                     //strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
@@ -57,7 +57,7 @@ namespace Control.DAL.Data
 
                 case 4:
                     //Local Gtwave
-                    //Conexão de homologação na Arisp (testes da migração em produção)
+                    //Conexï¿½o de homologaï¿½ï¿½o na Arisp (testes da migraï¿½ï¿½o em produï¿½ï¿½o)
                     strConn = @"User ID=cepe;Password=123;Data Source=SERVER2012;Initial Catalog=Control;";
                     break;
 
@@ -69,13 +69,13 @@ namespace Control.DAL.Data
 
                 case 6:
 
-                    //Conexão de produção na Arisp para debugar
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp para debugar
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=200.169.101.76; initial catalog=CPEDIDOS;";
                     break;
 
                 case 7:
 
-                    //Conexão de Natanael Silva - Desenvolvimento
+                    //Conexï¿½o de Natanael Silva - Desenvolvimento
                     strConn = @"Server=tcp:ckl86ymzyx.database.windows.net,1433;Database=NFS_control;User ID=meiabandeirada@ckl86ymzyx;Password=j0t@qu3st;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
                     break;
             }
@@ -92,7 +92,7 @@ namespace Control.DAL.Data
         }
 
         /// <summary>
-        /// Retorna objeto de transação
+        /// Retorna objeto de transaï¿½ï¿½o
         /// </summary>
         /// <param name="SQLTrans"></param>
         /// <returns></returns>
@@ -105,7 +105,7 @@ namespace Control.DAL.Data
 
         }
 
-        #region Metodos MySQl e Outras Conexões
+        #region Metodos MySQl e Outras Conexï¿½es
         public static string GetConnectionStringPenhora(bool blnPooling)
         {
             string strConn = "";
@@ -126,13 +126,13 @@ namespace Control.DAL.Data
 
                 case 3:
 
-                    //Conexão de produção na Arisp
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=penhoraOnline;";
                     break;
 
                 case 4:
 
-                    //Conexão de homologação na Arisp (testes da migração em produção)
+                    //Conexï¿½o de homologaï¿½ï¿½o na Arisp (testes da migraï¿½ï¿½o em produï¿½ï¿½o)
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=penhoraOnline_prod2;";
                     break;
 
@@ -144,7 +144,7 @@ namespace Control.DAL.Data
 
                 case 6:
 
-                    //Conexão de produção na Arisp para debugar
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp para debugar
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=200.169.101.76; initial catalog=penhoraOnline;";
                     break;
 
@@ -183,13 +183,13 @@ namespace Control.DAL.Data
 
                 case 3:
 
-                    //Conexão de produção na Arisp
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=MENSAGEM_PRODUCAO;";
                     break;
 
                 case 4:
 
-                    //Conexão de homologação na Arisp (testes da migração em produção)
+                    //Conexï¿½o de homologaï¿½ï¿½o na Arisp (testes da migraï¿½ï¿½o em produï¿½ï¿½o)
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=MENSAGEM;";
                     break;
 
@@ -208,7 +208,7 @@ namespace Control.DAL.Data
         }
 
         /// <summary>
-        /// Retorna string de conexão para MySQL
+        /// Retorna string de conexï¿½o para MySQL
         /// </summary>
         /// <param name="Server"></param>
         /// <param name="UserId"></param>
@@ -261,13 +261,13 @@ namespace Control.DAL.Data
 
                 case 3:
                 case 4:
-                    //Conexão de produção na Arisp
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=172.16.0.86; initial catalog=DEC;";
                     break;
 
                 case 6:
 
-                    //Conexão de produção na Arisp para debugar
+                    //Conexï¿½o de produï¿½ï¿½o na Arisp para debugar
                     strConn = @"user id=Cpedidos; password=*ar2011!; data source=200.169.101.76; initial catalog=DEC;";
                     break;
 
