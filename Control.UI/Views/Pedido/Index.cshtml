@@ -48,7 +48,9 @@
                     <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvPedidos" style="overflow: scroll !important;">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th>
+
+                                </th>
                                 
                                 <th>
                                     Pedido
@@ -93,9 +95,6 @@
                                             <a href='@Url.Action("Delete", "Pedido", new { OrderID = item.Id } )'>
                                                 <i class="fa fa-times-circle" style="color:red"></i>
                                             </a>
-                                        </td>
-                                        <td style="text-align: center;">
-                                            
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Id)

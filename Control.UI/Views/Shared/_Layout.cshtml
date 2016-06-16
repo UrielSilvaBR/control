@@ -187,7 +187,7 @@
                     <h4 class="modal-title" id="myModalLabel">Cadastro de Contato</h4>
                 </div>
                 <div class="modal-body modal-mensagem-alerta">
-                    @Html.Partial("~/Views/Shared/_AddContato.cshtml")
+                    @Html.Partial("~/Views/Shared/_AddContato.cshtml", new Contact())
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
@@ -351,6 +351,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Propostas", "Create", "Pedido")</li>
+
+                            <li>@Html.ActionLink("Pedidos em Carteira", "Create", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>
                             <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
                             <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>

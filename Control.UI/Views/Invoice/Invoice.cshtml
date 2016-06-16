@@ -18,12 +18,20 @@
         <div class="box">
             <div class="box-content">
                 <div class="col-xs-12" style="margin-bottom:30px">
-                    <img src="~/img/logo.JPG" style="margin-right:380px" />
-                    <h3 class="invoice-header" style="margin-right:330px">
-                         PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3>
-                        <div>
-                            Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
-                            Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
+                    <table class="col-xs-12">
+                        <tr>
+                            <td align="left" class="col-xs-4"><img src="~/img/logo.JPG"  /></td>
+                            <td align="center" class="col-xs-4"><h3 class="invoice-header" >PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3></td>
+                            <td align="right" class="col-xs-4">
+                                Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
+                                Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    
+                        <div ali>
+                            
                         </div>
                     
 

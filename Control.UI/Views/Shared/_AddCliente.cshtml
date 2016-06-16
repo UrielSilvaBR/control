@@ -68,7 +68,7 @@
             </div>
         </div>
         <fieldset>
-            <legend>Endereço</legend>
+            @*<legend>Endereço</legend>*@
             <div class="form-group">
 
                 @Html.Label("CEP", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -137,7 +137,7 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Contatos</legend>
+            @*<legend>Contatos</legend>*@
 
             <div class="form-group">
 
@@ -172,22 +172,7 @@
         </fieldset>
         <div class="form-group">
             <div class="col-md-offset-4 col-md-10">
-
-
                 <input type="submit" value="Cadastrar" class="btn btn-primary" id="btnCadastrar" />
-
-                <a href='@Url.Action("Clientes", "Cadastro")' style="text-decoration: none;">
-                    <input type="button" class="btn btn-primary" value="Clientes" />
-                </a>
-
-
-                <a href='@Url.Action("OrdersCustomer", "Pedido", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
-                    <input type="button" class="btn btn-primary" value="Pedidos" />
-                </a>
-
-                <a href='@Url.Action("InvoicesCustomer", "Invoice", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
-                    <input type="button" class="btn btn-primary" value=" Nota Fiscal" />
-                </a>
             </div>
         </div>
     </div>

@@ -12,4 +12,15 @@
         symbolPosition: 'left'
     });
 
+    $('#Order_CustomerID').change(function () {
+        $('#hdnCustomerID_Vendedor_Modal').val($(this).val());
+    });
+
+    var idCliente = $('#Order_CustomerID').val();
+
+    if (idCliente > 0)
+        $('#hdnCustomerID_Vendedor_Modal').val($('#Order_CustomerID').val());
+
+    $('#ckbVendedorAtivo').prop('checked', true);
+
 });
