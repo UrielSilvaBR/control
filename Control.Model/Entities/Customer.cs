@@ -70,8 +70,8 @@ namespace Control.Model.Entities
                     return CompanyName;
             }
         }
-        
-        [ForeignKey("Id")]
+
+        [ForeignKey("CustomerID")]
         public virtual List<VendorsCustomer> Vendors { get; set; }
     }
 }

@@ -12,6 +12,11 @@ namespace Control.Model.Entities
     [DataContract]
     public class VendorsCustomer : IEntity
     {
+        public VendorsCustomer()
+        {
+            InsertDate = DateTime.Now;
+        }
+
         [Key]
         [DataMember]
         public int Id { get; set; }
@@ -21,5 +26,7 @@ namespace Control.Model.Entities
         public int VendorID { get; set; }
         [ForeignKey("VendorID")]
         public virtual Vendor Vendor { get; set; }
+
+        public DateTime InsertDate { get; set; }
     }
 }
