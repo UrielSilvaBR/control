@@ -810,6 +810,7 @@
     <Content Include="Views\Shared\_AddCliente.cshtml" />
     <Content Include="Views\Shared\_AddVendedor.cshtml" />
     <Content Include="Views\Shared\_AddContato.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
