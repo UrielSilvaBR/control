@@ -5,10 +5,8 @@ $(document).ready(function () {
 
     $('#btnAdicionarItemPedido').click(function () {
         AdicionarItemPedido();
-        $('#itemPedido').modal('hide');
-        setTimeout(function () {
-            LimparItemPedido();
-        }, 800);
+        
+       
     })
 
     $('#btnEditarItemPedido').click(function () {
@@ -47,17 +45,35 @@ $(document).ready(function () {
 
     var idPedido = $('#Order_Id').val();
     if (idPedido == 0) {
-        $('#btnCadastrar').show();
-        $('#btnEditar').hide();
+        $('#btnCadastrarPedido').show();
+        $('#btnEditarPedido').hide();
     }
     else {
-        $('#btnCadastrar').hide();
-        $('#btnEditar').show();
+        $('#btnCadastrarPedido').hide();
+        $('#btnEditarPedido').show();
     }
 
     $('#itemPedido').on('hidden.bs.modal', function () {
         LimparItemPedido();
     })
+
+    if ($('#Order_DespesaFinanceira').is(':checked')) {
+        $('#Order_Discount').attr('disabled', true);
+    }
+    else
+    {
+        $('#Order_Discount').attr('disabled', false);
+    }
+
+
+    $("#Order_DespesaFinanceira").change(function () {
+        if (this.checked) {
+            $('#Order_Discount').attr('disabled', true);
+        }
+        else
+            $('#Order_Discount').attr('disabled', false);
+    });
+
 });
 
 function ObterListaContatoPorCliente(idCliente, defaultValue) {
@@ -300,12 +316,12 @@ function IniciarInclusaoPedido() {
     var Items = new Array();
     var arrayItens = gdvItens.fnGetData();
 
-    var idStatusPedido = $('#Order_Status').val();
-    if (idStatusPedido == "0") {
-        ShowMessage('É necessário selecionar o Status!', false);
-        waitingDialog.hide();
-        return false;
-    }
+    //var idStatusPedido = $('#Order_Status').val();
+    //if (idStatusPedido == "0") {
+    //    ShowMessage('É necessário selecionar o Status!', false);
+    //    waitingDialog.hide();
+    //    return false;
+    //}
 
     var idCliente = $('#Order_CustomerID').val();
     if (idCliente == "0") {
@@ -315,14 +331,14 @@ function IniciarInclusaoPedido() {
     }
 
     var idContato = $('#Order_ContactID').val();
-    if (idContato == "0") {
+    if (idContato == "0" || idContato == null) {
         ShowMessage('É necessário selecionar o Contato!', false);
         waitingDialog.hide();
         return false;
     }
 
     var idVendedor = $('#Order_VendorID').val();
-    if (idVendedor == "0") {
+    if (idVendedor == "0" || idVendedor == null) {
         ShowMessage('É necessário selecionar o Vendedor!', false);
         waitingDialog.hide();
         return false;
@@ -509,12 +525,29 @@ function AdicionarItemPedido() {
         return;
     }
 
-    var prazoEntrega = $('#OrderProduct_DeadlineItem').val();
-   
-    if (prazoEntrega == 0) {
-        ShowMessage('Informe o Prazo de Entrega para <br/>inclusão do Item!', false);
-        return;
+    var quantidade = $('#OrderProduct_QuantityOrder').val();
+    if (quantidade == 0) {
+        $('#divQuantityOrder').addClass('has-error');
+        $('#OrderProduct_QuantityOrder').focus();
+        return false;
     }
+    else
+        $('#divQuantityOrder').removeClass('has-error');
+
+    var prazoEntrega = $('#OrderProduct_DeadlineItem').val();
+    if (prazoEntrega == 0) {
+        //ShowMessage('Informe o Prazo de Entrega para <br/>inclusão do Item!', false);
+        $('#divDeadlineItem').addClass('has-error');
+        $('#OrderProduct_DeadlineItem').focus();
+        return false;
+    }
+    else
+        $('#divDeadlineItem').removeClass('has-error');
+
+    $('#itemPedido').modal('hide');
+    setTimeout(function () {
+        LimparItemPedido();
+    }, 800);
 
     var rowEmpty = $('#gdvItensPedido > tbody > tr').find('.dataTables_empty').length == 1;
     var rowCount = $('#gdvItensPedido > tbody > tr').length;
@@ -531,7 +564,6 @@ function AdicionarItemPedido() {
     var descricaoProduto = $('#ddlProdutoPedido option:selected').text().split('-')[0].trim();
     var modeloProduto = $('#ddlProdutoPedido option:selected').text().split('-')[1].trim();
     var NCM = $('#ddlProdutoPedido option:selected').text().split('-')[2].trim();
-    var quantidade = $('#OrderProduct_QuantityOrder').val();
     quantidade = parseFloat(quantidade).toFixed(2);
     quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#OrderProduct_UnitPrice').val();

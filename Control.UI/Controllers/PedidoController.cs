@@ -119,6 +119,7 @@ namespace Control.UI.Controllers
                     }).ToList();
 
                     Pedido.Order.OrderTypeID = 1;
+                    Pedido.Order.Status = "PROPOSTA";
 
                     context = new DALContext();
 

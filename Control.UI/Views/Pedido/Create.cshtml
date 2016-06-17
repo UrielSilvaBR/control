@@ -168,7 +168,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 </div>
                             </div>
 
-
+                            @Html.HiddenFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
                             @*<div class="form-group">
 
                                     @Html.ValidationMessageFor(p => p.Order.Id)
@@ -247,8 +247,8 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
 
                             <div class="form-group">
                                 <div class="col-md-offset-5">
-                                    <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
-                                    <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                    <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditarPedido" />
+                                    <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrarPedido" />
                                     <input type="button" value="Gerar NF" onclick="return IncluirNotaFiscal($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;" id="btnGerarNF" />
                                     <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Pedido")'" />
                                 </div>
