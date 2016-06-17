@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
     $(".show-sidebar").click();
+
+
+    var idPedidoInvoice = $('#hdOrderId').val();
+
+    if (idPedidoInvoice > 0)
+        $('#hdnOrderID_ConvertPedido_Modal').val($('#hdOrderId').val());
+
 });
 
 function ConfirmarPedido(idPedido) {

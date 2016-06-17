@@ -65,7 +65,6 @@ $(document).ready(function () {
         $('#Order_Discount').attr('disabled', false);
     }
 
-
     $("#Order_DespesaFinanceira").change(function () {
         if (this.checked) {
             $('#Order_Discount').attr('disabled', true);
@@ -73,6 +72,8 @@ $(document).ready(function () {
         else
             $('#Order_Discount').attr('disabled', false);
     });
+
+   
 
 });
 
