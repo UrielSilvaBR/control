@@ -1,7 +1,7 @@
 ﻿@using Control.UI.Models
 @model PedidoViewModel   
 @{
-    if (ViewBag.ToPDF != "1")
+    if (ViewBag.ToPDF != '1')
     {
         ViewBag.Title = "Invoice";
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,14 +10,14 @@
 }
 
 <script src="~/Content/Order/OrderReport.js"></script>
-@if (ViewBag.ToPDF != "1")
+@if (ViewBag.ToPDF != '1')
 {
 <div class="row">
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
             <li><a href="index.html">Vendas</a></li>
-            <li><a href="#">Pedidos</a></li>
-            <li><a href="#">Relatorio</a></li>
+            <li><a href="#">Proposta</a></li>
+            <li><a href="#">Relatório</a></li>
         </ol>
     </div>
 </div>
@@ -84,6 +84,7 @@
                                     <th>QUANTIDADE</th>
                                     <th>PRECO UNITARIO</th>
                                     <th>TOTAL</th>
+                                    <th>PRAZO ENTREGA (Dias)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,6 +96,7 @@
                                         <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
                                         <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
                                         <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DeadlineItem)</td>
                                     </tr>
                                         }
 
@@ -105,6 +107,7 @@
                                     <td></td>
                                     <td></td>
                                     <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) <sup>*</sup></b></td>
+                                    <td></td>
                                 </tr>
                             </tbody>
                         </table>

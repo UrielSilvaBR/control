@@ -21,8 +21,26 @@ namespace Control.UI.Controllers
             context = new DALContext();
 
             var Orders = context.Orders.All().ToList();
-
+            ViewBag.Title = "Histórico de Pedidos";
             return View(Orders);
+        }
+
+        public ActionResult Carteira()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p=> p.Status == "PEDIDO - ABERTO").ToList();
+            ViewBag.Title = "CARTEIRA";
+            return View("Index", Orders);
+        }
+
+        public ActionResult PropostasAbertas()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
+            ViewBag.Title = "PROPOSTAS ABERTAS";
+            return View("Index", Orders);
         }
 
         public ActionResult OrdersCustomer(int ClientID)
@@ -86,6 +104,29 @@ namespace Control.UI.Controllers
             {
                 return Content(ex.Message);
             }     
+        }
+
+        public ActionResult ConverterPedido(Model.Entities.Order order, int OrderID)
+        {
+            context = new DALContext();
+            Order convertPedido = new Order();
+
+            try
+            {
+                convertPedido = context.Orders.Find(p => p.Id == OrderID);
+
+                convertPedido.Status = "PEDIDO";
+                convertPedido.CustomerControlCode = order.CustomerControlCode;
+
+                context.Orders.Update(convertPedido);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", order.CustomerControlCode));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
         }
 
         public ActionResult ExportarPDF(int OrderID)

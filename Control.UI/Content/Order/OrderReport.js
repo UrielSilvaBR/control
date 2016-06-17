@@ -66,10 +66,21 @@ function AbrirModalEmail(idPedido)
 function FinalizarConverterPedido() {
 
     $('#modal-converter-pedido').modal('hide');
+    ShowSuccess('Pedido Cadastrado.');
 }
 
 function FinalizarEnvioEmail(idPedido) {
 
     $('#modal-email-proposta').modal('hide');
     //incluir rotina envio email
+}
+
+function ValidarConvertPedidoModal() {
+        
+    var idOrder = $('#hdOrderId').val();
+    alert('teste=>' + idOrder);
+    if (idOrder == 0) {
+        ShowMessage('Não foi possivel gravar o pedido para esta proposta, tente novamente.', false);
+        return false;
+    }
 }
