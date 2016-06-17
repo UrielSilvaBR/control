@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
+    $(".show-sidebar").click();
 });
 
 function ConfirmarPedido(idPedido) {
-    alert('teste');
+    
 
     waitingDialog.show('Proposta confirmada', { dialogSize: 'sm', progressType: 'success' });
 
@@ -14,7 +15,61 @@ function ConfirmarPedido(idPedido) {
             success: function (result) {
                 waitingDialog.hide();
                 ShowSuccess(result);
+                window.location = '/Invoice/Invoice?InvoiceID=' + idPedido;
             }
         });
     }, 1000);
+};
+
+function ImprimirPedido() {
+    
+
+    var printContents = document.getElementById('dvPrintArea').innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}
+
+function ExportarPDF(idPedido) {
+
+    alert('teste');
+    waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
+
+    setTimeout(function () {
+        $.ajax({
+            url: '/Pedido/ExportarPDF',
+            data: { OrderID: idPedido },
+            type: 'POST',
+            success: function (result) {
+                waitingDialog.hide();
+                //ShowSuccess(result);
+                //window.location = '/Invoice/Invoice?InvoiceID=' + idPedido;
+            }
+        });
+    }, 1000);
+};
+
+function AbrirModalPedido(idPedido)
+{
+    $('#modal-converter-pedido').modal('show');
+}
+
+function AbrirModalEmail(idPedido)
+{
+    $('#modal-email-proposta').modal('show');
+}
+
+function FinalizarConverterPedido() {
+
+    $('#modal-converter-pedido').modal('hide');
+}
+
+function FinalizarEnvioEmail(idPedido) {
+
+    $('#modal-email-proposta').modal('hide');
+    //incluir rotina envio email
 }

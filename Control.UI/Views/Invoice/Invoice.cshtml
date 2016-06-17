@@ -1,11 +1,17 @@
 ﻿@using Control.UI.Models
 @model PedidoViewModel   
 @{
-    ViewBag.Title = "Invoice";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (ViewBag.ToPDF != "1")
+    {
+        ViewBag.Title = "Invoice";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
 }
 
 <script src="~/Content/Order/OrderReport.js"></script>
+@if (ViewBag.ToPDF != "1")
+{
 <div class="row">
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
@@ -15,156 +21,163 @@
         </ol>
     </div>
 </div>
+}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
             <div class="box-content">
-                <div class="col-xs-12" style="margin-bottom:30px">
-                    <table class="col-xs-12">
-                        <tr>
-                            <td align="left" class="col-xs-4"><img src="~/img/logo.JPG" /></td>
-                            <td align="center" class="col-xs-4"><h3 class="invoice-header">PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3></td>
-                            <td align="right" class="col-xs-4">
-                                Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
-                                Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
-                            </td>
-                        </tr>
-                    </table>
-
-                </div>
-                <div class="col-xs-6">
-                    <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" } )
-                    <address>
-                        <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
-                        @Html.DisplayFor(Model => Model.Order.CustomerOrder.Document)<br>
-                        @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressStreet) , @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressNumber) @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressComplement) <br>
-                        @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.Name), @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.State.Name)  - @Html.DisplayFor(Model => Model.Order.CustomerOrder.ZipCode)<br>
-                        <abbr title="Phone">Tel:</abbr> @Html.DisplayFor(Model => Model.Order.CustomerOrder.Phone)
-                    </address>
-                    <address>
-                        <strong>Contato: @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatName)</strong><br>
-                        @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatRoleName) <br />
-                        Tel: @Html.DisplayFor(Model => Model.Order.ContactOrder.Phone) <br />
-                        <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.ContactOrder.Email)</a>
-                    </address>
-                </div>
-                <div class="col-xs-6 text-right">
-                    <address>
-                        <strong>NCC EQUIPAMENTOS INDUSTRIAIS</strong><br>
-                        Rua Jo&atilde;o Guerra, 271 - Macuco<br>
-                        Santos/SP - CEP 11015-131<br>
-                        <abbr title="Phone"></abbr> Tel: 13 3232-8909
-                    </address>
-                    <address>
-                        <strong>Vendedor: @Html.DisplayFor(Model => Model.Order.VendorOrder.Name)</strong><br>
-                        Tel: 13 3232-8909<br />
-                        @*<a href="mailto:#">@Html.DisplayFor(Model => Model.Order.VendorOrder.Name)&#64;ncc.com.br</a>*@
-                    </address>
-                    <address>
-                        <strong>Responsável: Uriel Silva @Html.DisplayFor(Model => Model.Order.RegisteredBy)</strong><br>
-                    </address>
-
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-xs-12">
-                    <br />
-                    <table class="table table-hover">
-                        <thead>
+                <div id="dvPrintArea">
+                    <div class="col-xs-12" style="margin-bottom:30px">
+                        <table class="col-xs-12">
                             <tr>
-                                <th>ITEMS</th>
-                                <th>NCM</th>
-                                <th>QUANTIDADE</th>
-                                <th>PRECO UNITARIO</th>
-                                <th>TOTAL</th>
+                                <td align="left" class="col-xs-4"><img src="~/img/logo.JPG" /></td>
+                                <td align="center" class="col-xs-4"><h3 class="invoice-header">PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3></td>
+                                <td align="right" class="col-xs-4">
+                                    Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
+                                    Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.Order.Items)
-                            {
+                        </table>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" } )
+                        <address>
+                            <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.Document)<br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressStreet) , @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressNumber) @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressComplement) <br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.Name), @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.State.Name)  - @Html.DisplayFor(Model => Model.Order.CustomerOrder.ZipCode)<br>
+                            <abbr title="Phone">Tel:</abbr> @Html.DisplayFor(Model => Model.Order.CustomerOrder.Phone)
+                        </address>
+                        <address>
+                            <strong>Contato: @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatRoleName) <br />
+                            Tel: @Html.DisplayFor(Model => Model.Order.ContactOrder.Phone) <br />
+                            <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.ContactOrder.Email)</a>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>NCC EQUIPAMENTOS INDUSTRIAIS</strong><br>
+                            Rua Jo&atilde;o Guerra, 271 - Macuco<br>
+                            Santos/SP - CEP 11015-131<br>
+                            <abbr title="Phone"></abbr> Tel: 13 3232-8909
+                        </address>
+                        <address>
+                            <strong>Vendedor: @Html.DisplayFor(Model => Model.Order.VendorOrder.Name)</strong><br>
+                            Tel: 13 3232-8909<br />
+                            @*<a href="mailto:#">@Html.DisplayFor(Model => Model.Order.VendorOrder.Name)&#64;ncc.com.br</a>*@
+                        </address>
+                        <address>
+                            <strong>Responsável: Uriel Silva @Html.DisplayFor(Model => Model.Order.RegisteredBy)</strong><br>
+                        </address>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <br />
+                        <table class="table table-hover">
+                            <thead>
                                 <tr>
-                                    <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
-                                    <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
-                                    <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
-                                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                    <th>ITEMS</th>
+                                    <th>NCM</th>
+                                    <th>QUANTIDADE</th>
+                                    <th>PRECO UNITARIO</th>
+                                    <th>TOTAL</th>
                                 </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order.Items)
+                            {
+                                    <tr>
+                                        <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                                        <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                                        <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                    </tr>
                                         }
 
 
-                            <tr class="active">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) <sup>*</sup></b></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    @*<small>* VAT included</small>*@
-                </div>
+                                <tr class="active">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) <sup>*</sup></b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @*<small>* VAT included</small>*@
+                    </div>
 
-                <div class="col-xs-12">
-                    <strong>CONDIÇÕES PAGAMENTO</strong><br />
-                    <div class="col-xs-10 table table-bordered">
-                        <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
-                            <li>@Html.DisplayFor(Model => Model.Order.PaymentTerm.Description)<br /></li>
-                        </ul>
+                    <div class="col-xs-12">
+                        <strong>CONDIÇÕES PAGAMENTO</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                <li>@Html.DisplayFor(Model => Model.Order.PaymentTerm.Description)<br /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>CONDIÇÕES DE FORNECIMENTO</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ol type="1" style="text-align:justify; margin:10px">
+                                <li>Valor mínimo para faturamento a prazo: R$ 500,00. </li>
+                                <li>Os preços mencionados nesta proposta estão sujeitos a alterações após o vencimento da data de validade.</li>
+                                <li>Não serão aceitos cancelamentos e/ou devoluções de produtos já encomendados.</li>
+                                <li>Na confirmação do Pedido, favor informar o número desta proposta.</li>
+                                <li>
+                                    O prazo de entrega informado nesta proposta é em dias corridos, sujeito a alteração no momento do fechamento do pedido de venda. Quando este estará disponível para retirada na sede da NCC em Santos.
+                                    <ul type="1">
+                                        <li>No caso de forma de entrega total, prevalecerá o maior prazo constante nesta proposta.</li>
+                                        <li>O prazo de entrega para São Paulo capital é de um dia útil após a emissão da nota fiscal, para outras localidades dependerá do meio de transporte e transportadora contratada por sua empresa.</li>
+                                    </ul>
+                                </li>
+                                <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
+                                <li>Condições de pagamento acima de 21 dias possuem acréscimo de 2% de custo financeiro ao mês.</li>
+                                <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>OBSERVAÇÕES</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                <li>@Html.DisplayFor(Model => Model.Order.Comments)<br /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>RETIRADA</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                <li><input type="checkbox" /> FOB - Pago pelo Cliente</li>
+                                <li><input type="checkbox" /> CIF</li>
+
+
+                            </ul>
+                        </div>
                     </div>
                 </div>
-
-                <div class="col-xs-12">
-                    <strong>CONDIÇÕES DE FORNECIMENTO</strong><br />
-                    <div class="col-xs-10 table table-bordered">
-                        <ol type="1" style="text-align:justify; margin:10px">
-                            <li>Valor mínimo para faturamento a prazo: R$ 500,00. </li>
-                            <li>Os preços mencionados nesta proposta estão sujeitos a alterações após o vencimento da data de validade.</li>
-                            <li>Não serão aceitos cancelamentos e/ou devoluções de produtos já encomendados.</li>
-                            <li>Na confirmação do Pedido, favor informar o número desta proposta.</li>
-                            <li>
-                                O prazo de entrega informado nesta proposta é em dias corridos, sujeito a alteração no momento do fechamento do pedido de venda. Quando este estará disponível para retirada na sede da NCC em Santos.
-                                <ul type="1">
-                                    <li>No caso de forma de entrega total, prevalecerá o maior prazo constante nesta proposta.</li>
-                                    <li>O prazo de entrega para São Paulo capital é de um dia útil após a emissão da nota fiscal, para outras localidades dependerá do meio de transporte e transportadora contratada por sua empresa.</li>
-                                </ul>
-                            </li>
-                            <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
-                            <li>Condições de pagamento acima de 21 dias possuem acréscimo de 2% de custo financeiro ao mês.</li>
-                            <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
-                        </ol>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <strong>OBSERVAÇÕES</strong><br />
-                    <div class="col-xs-10 table table-bordered" >                    
-                        <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
-                            <li>@Html.DisplayFor(Model => Model.Order.Comments)<br /></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-xs-12">
-                    <strong>RETIRADA</strong><br />
-                    <div class="col-xs-10 table table-bordered">
-                        <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
-                            <li><input type="checkbox" /> FOB - Pago pelo Cliente</li>
-                            <li><input type="checkbox" /> CIF</li>
-                            
-                           
-                        </ul>
-                    </div>
-                </div>
-
+                @if (ViewBag.ToPDF != "1")
+                {
                         <div class="clearfix"></div>
 
-                @if (Model.Order.Validated == true)
+                if (Model.Order.Validated == true)
                 {
                     <div class="col-xs-12" style="margin-top: 45px">
                         <div class="col-md-offset-5">
-                            <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
-                            <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
-                            <input type="button" value="Gerar NF" onclick="return IncluirNotaFiscal($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;" id="btnGerarNF" />
-                            <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Pedido")'" />
+                            
+                            <input type="button" id="btnImprimir"       value="Imprimir"        onclick="return ImprimirPedido();" class="btn btn-primary" style="font-size: 0.8em;"  />
+                            @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />*@
+                            <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />
+                            <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
+                            <input type="button" id="btnPedido"         value="Gerar Pedido"          onclick="return AbrirModalPedido();" class="btn btn-primary" style="font-size: 0.8em;" />
+                            <input type="button" id="btnNovaProposta"   value="Nova Proposta"   onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-primary" style="font-size: 0.8em" />
                         </div>
                     </div>
                 }
@@ -173,9 +186,10 @@
                     <div class="col-xs-12" style="margin-top: 45px">
                         <div class="col-md-offset-5">
                             <input type="button" id="btnConfirmar" value="Confirmar" onclick="return ConfirmarPedido($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            <input type="button" value="Voltar" style="font-size: 0.8em" onclick="location.href='@Url.Action("Index", "Pedido")'" class="btn btn-primary" />
+                            <input type="button" value="Voltar" style="font-size: 0.8em" onclick="location.href='@Url.Action("Edit", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" />
                         </div>
                     </div>
+                }
                 }
                         @*<div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
                             <div class="col-xs-4">

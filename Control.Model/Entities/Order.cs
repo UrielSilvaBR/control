@@ -70,6 +70,7 @@ namespace Control.Model.Entities
         public bool Validated { get; set; } //Dupla confirmação no momento do cadastro da proposta
         public bool AdminRoleAuthorized { get; set; } //Autorizada execução restrita nesta proposta
         public string RegisteredBy { get; set; } //login/nome usuario criador
-
+        public string CustomerControlCode { get; set; }
+        public string ProposalMailList { get; set; }
     }
 }
