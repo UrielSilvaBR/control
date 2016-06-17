@@ -71,6 +71,7 @@ namespace Control.Model.Entities
         public decimal TotalPrice { get; set; }
 
         [Display(Name = "Prazo Entrega")]
+        [Range(0, 1000)]
         public int DeadlineItem { get; set; }
 
         //Forgein Keys

@@ -32,13 +32,13 @@
                         <input type="hidden" id="rowIndexItemPedido" />
 
                         @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
-                        <div class="col-md-5 style=" align-content:flex-start">
+                        <div class="col-md-5" style=" align-content:flex-start">
                             @Html.DropDownListFor(p => p.OrderProduct.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedido" })
                         </div>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(p => p.OrderProduct.QuantityOrder, htmlAttributes: new { @class = "col-md-2" })
-                        <div class="col-md-2">
+                        <div class="col-md-2" id="divQuantityOrder">
                             @Html.EditorFor(p => p.OrderProduct.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                     </div>
@@ -53,8 +53,9 @@
 
                     <div class="form-group">
                         @Html.LabelFor(p => p.OrderProduct.DeadlineItem, htmlAttributes: new { @class = "col-md-1" })
-                        <div class="col-md-2">
+                        <div class="col-md-2" id="divDeadlineItem">
                             @Html.EditorFor(p => p.OrderProduct.DeadlineItem, new { htmlAttributes = new { @class = "form-control", @type="text" } })
+                            @Html.ValidationMessageFor(p => p.OrderProduct.DeadlineItem)
                         </div>
                     </div>
 
