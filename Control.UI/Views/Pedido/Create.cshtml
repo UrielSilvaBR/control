@@ -267,6 +267,8 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
     var editor;
 
     $(document).ready(function () {
+
+        $(".show-sidebar").click();
         // Load TimePicker plugin and callback all time and date pickers
         LoadTimePickerScript(AllTimePickers);
         // Create jQuery-UI tabs
