@@ -40,6 +40,7 @@ namespace Control.DAL
         private IRepository<PurchaseOrder> _purchaseOrders;
         private IRepository<PurchaseOrderItem> _purchaseOrderItems;
         private IRepository<PaymentTerm> _paymentTerm;
+        private IRepository<VendorsCustomer> _vendorsCustomer;
 
         public DALContext()
         {
@@ -313,6 +314,16 @@ namespace Control.DAL
                 if (_paymentTerm == null)
                     _paymentTerm = new PaymentTermRepository(dbContext);
                 return _paymentTerm;
+            }
+        }
+
+        public IRepository<VendorsCustomer> VendorsCustomer
+        {
+            get
+            {
+                if (_vendorsCustomer == null)
+                    _vendorsCustomer = new VendorsCustomerRepository(dbContext);
+                return _vendorsCustomer;
             }
         }
 

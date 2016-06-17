@@ -9,6 +9,9 @@
 <head>
 
     <script src="~/Content/Order/Order.js"></script>
+    <script src="~/Content/Cadastros/Cliente/Cliente.js"></script>
+    <script src="~/Content/Cadastros/Vendedor/Vendedor.js"></script>
+    <script src="~/Content/Cadastros/Contato/Contato.js"></script>
 
     <style type="text/css">
         .form-horizontal .form-group {
@@ -53,8 +56,6 @@
 
 </head>
 
-
-
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
@@ -97,18 +98,85 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                         <ul>
                             <li><a href="#tabs-1"> Dados Cadastrais </a></li>
                         </ul>
+
                         <div id="tabs-1">
                             <!--Tab Dados Cadastrais-->
                             @*@Html.HiddenFor(model => model.Order.Discount)*@
 
+
                             <div class="form-group">
 
-                                @Html.ValidationMessageFor(p => p.Order.Id)
-                                @Html.LabelFor(model => model.Order.Id, htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                                @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-10" style="width: 951px;">
+                                    @Html.DropDownListFor(model => model.Order.CustomerID, new SelectList(Model.Customers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                <a href="javascript:void(0);" onclick="AbrirModalCadastroCliente();">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-1">
+                                    @Html.Label("Contato", htmlAttributes: new { @class = "", @style = "width: 80px;text-align:center" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.ContactID, new SelectList(Model.Contacts, "Id", "ContatName"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroContato();">
+                                        <i class="fa fa-plus" aria-hidden="false"></i>
+                                    </a>
+                                </div>
+
+                                @*<div style="margin-top: -25px;">
+                                        @Html.Label("Vendedor", htmlAttributes: new { @class = "col-md-1", @style = "right: 3px; margin-left:72px;" })
+                                        <div class="col-md-4">
+                                            @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl", @style= "width: 333px;" })
+                                        </div>
+                                    </div>
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>*@
+
+                                <div class="col-sm-1"></div>
+
+                                <div class="col-xs-1" style="line-height:28px;margin-left: -13px;">
+                                    @Html.Label("Vendedor", htmlAttributes: new { @class = "" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.LabelFor(p => p.Order.PaymentTermID, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                                 </div>
                             </div>
+
+
+                            @*<div class="form-group">
+
+                                    @Html.ValidationMessageFor(p => p.Order.Id)
+                                    @Html.LabelFor(model => model.Order.Id, htmlAttributes: new { @class = "col-md-1" })
+                                    <div class="col-md-2">
+                                        @Html.EditorFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                                    </div>
+                                </div>*@
 
                             <div class="form-group">
                                 @*@Html.ValidationMessageFor(p => p.Order.OrderDate)*@
@@ -133,63 +201,32 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                     @Html.TextBoxFor(p => p.Order.Discount, new { @class = "form-control" })
                                 </div>
 
-                                @Html.Label("Despesa Financeira", htmlAttributes: new { @class = "control-label col-md-1", @style= "width: 154px;text - align: left;" })
+                                @Html.Label("Despesa Financeira", htmlAttributes: new { @class = "control-label col-md-1", @style = "width: 154px;text-align: left;margin-left: 6px;" })
                                 <div class="col-md-1" style="text-align: left;margin-top: 6px;margin-left: -38px;">
-                                    @Html.CheckBoxFor(p => p.Order.DespesaFinanceira, new { @class = "", @style= "margin-left:18px;transform: scale(1.2);" })
+                                    @Html.CheckBoxFor(p => p.Order.DespesaFinanceira, new { @class = "", @style = "margin-left:18px;transform: scale(1.2);" })
                                 </div>
 
                             </div>
-                            <div class="form-group">
-
-                                @Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4">
-                                    @*@Html.EditorFor(model => model.Pedido.Status, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @Html.DropDownListFor(model => model.Order.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
-                                </div>
-
-                                @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4" style="align-content:flex-start">
-                                    @Html.DropDownListFor(model => model.Order.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
-                                </div>
-                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </a>
-                            </div>
 
                             <div class="form-group">
-                                @Html.Label("Contato", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.Order.ContactID, new SelectList(Model.Contacts, "Id", "ContatName"), htmlAttributes: new { @class = "selddl" })
-                                </div>
-                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
-                                    <i class="fa fa-plus" aria-hidden="false"></i>
-                                </a>
 
-
-                                @*@Html.Label("CFOP", htmlAttributes: new { @class = "col-md-1" })
-                                    <div class="col-md-5" style="align-content:flex-start">
-                                        @Html.DropDownListFor(model => model.Order.CFOP, Model.CFOP, htmlAttributes: new { @class = "selddl" })
+                                @*@Html.Label("Status", htmlAttributes: new { @class = "col-md-1" })
+                                    <div class="col-md-4">
+                                        @Html.DropDownListFor(model => model.Order.Status, Model.Status, htmlAttributes: new { @class = "selddl" })
                                     </div>*@
 
-                                <div style="margin-top: -25px;">
-                                    @Html.Label("Vendedor", htmlAttributes: new { @class = "col-md-1", @style = "right: -13px;" })
-                                    <div class="col-md-4">
-                                        @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
-                                    </div>
-                                </div>
-                                <a href='@Url.Action("ClientesEdit", "Cadastro")'>
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </a>
-                            </div>
+                                <div class="col-sm-1"></div>
 
-                            <div class="form-group">
-
-                                @Html.Label("Condição Pagto", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
+                                <div class="col-xs-1">
+                                    
                                 </div>
 
+
+                               
+
                             </div>
+
+
 
                             <div class="form-group">
                                 <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemPedido" style="font-size: 0.8em;float:right" id="btnAddItemPedido" value="Adicionar Item" />
@@ -222,55 +259,56 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                 </div>
             </div>
         </div>
-    </div><!-- BOX -->
+    </div>
+</div><!-- BOX -->
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        var editor;
+    var editor;
 
-        $(document).ready(function () {
-            // Load TimePicker plugin and callback all time and date pickers
-            LoadTimePickerScript(AllTimePickers);
-            // Create jQuery-UI tabs
-            $("#tabs").tabs();
-            $("#btnAvancar").click(function () {
-                var active = $("#tabs").tabs("option", "active");
-                $("#tabs").tabs("option", "active", active + 1);
-            });
-
-            $("#btnVoltar").click(function () {
-                var active = $("#tabs").tabs("option", "active");
-                $("#tabs").tabs("option", "active", active - 1);
-            });
-
-            // Sortable for elements
-            $(".sort").sortable({
-                items: "div.col-sm-2",
-                appendTo: 'div.box-content'
-            });
-            // Droppable for example of trash
-            $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
-            $('#trash').droppable({
-                drop: function (event, ui) {
-                    $(ui.draggable).remove();
-                }
-            });
-            var icons = {
-                header: "ui-icon-circle-arrow-e",
-                activeHeader: "ui-icon-circle-arrow-s"
-            };
-            // Make accordion feature of jQuery-UI
-            $("#accordion").accordion({ icons: icons });
-            // Create UI spinner
-            $("#ui-spinner").spinner();
-            // Add Drag-n-Drop to boxes
-
-
-            WinMove();
-
-            $(window).on('shown.bs.modal', function () {
-                //$('.modal-backdrop').removeClass();
-            })
+    $(document).ready(function () {
+        // Load TimePicker plugin and callback all time and date pickers
+        LoadTimePickerScript(AllTimePickers);
+        // Create jQuery-UI tabs
+        $("#tabs").tabs();
+        $("#btnAvancar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active + 1);
         });
 
-    </script>
+        $("#btnVoltar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active - 1);
+        });
+
+        // Sortable for elements
+        $(".sort").sortable({
+            items: "div.col-sm-2",
+            appendTo: 'div.box-content'
+        });
+        // Droppable for example of trash
+        $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
+        $('#trash').droppable({
+            drop: function (event, ui) {
+                $(ui.draggable).remove();
+            }
+        });
+        var icons = {
+            header: "ui-icon-circle-arrow-e",
+            activeHeader: "ui-icon-circle-arrow-s"
+        };
+        // Make accordion feature of jQuery-UI
+        $("#accordion").accordion({ icons: icons });
+        // Create UI spinner
+        $("#ui-spinner").spinner();
+        // Add Drag-n-Drop to boxes
+
+
+        WinMove();
+
+        $(window).on('shown.bs.modal', function () {
+            //$('.modal-backdrop').removeClass();
+        })
+    });
+
+</script>

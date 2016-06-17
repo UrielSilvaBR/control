@@ -1,4 +1,5 @@
 ﻿@using Control.UI.Models
+@using Control.Model.Entities
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,8 +62,6 @@
     <script src="~/scripts/jquery.maskMoney.js"></script>
     <script src="~/scripts/ModalLoading.js"></script>
 
-    <script src="~/scripts/jquery.mask.js"></script>
-    
     <!-- Includes Layout - Fim -->
 
     <script type="text/javascript">
@@ -146,6 +145,56 @@
 
     @RenderSection("top_modals", false)
 
+    <div class="modal fade" id="modal-cadastro-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Cliente</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                   @Html.Partial("~/Views/Shared/_AddCliente.cshtml", new ClienteViewModel())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-cadastro-vendedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Vendedor</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    @Html.Partial("~/Views/Shared/_AddVendedor.cshtml", new Vendor())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-cadastro-contato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Contato</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    @Html.Partial("~/Views/Shared/_AddContato.cshtml", new Contact())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -289,12 +338,12 @@
         <div class="row">
             <div id="sidebar-left" class="col-xs-2 col-sm-2">
                 <ul class="nav main-menu">
-                    <li>
+                    @*<li>
                         <a href="@Url.Action("Index", "Painel")">
                             <i class="fa fa-dashboard"></i>
                             <span class="hidden-xs">Painel</span>
                         </a>
-                    </li>
+                    </li>*@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle">
                             <i class="fa fa-shopping-cart"></i>
@@ -302,6 +351,8 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Propostas", "Create", "Pedido")</li>
+
+                            <li>@Html.ActionLink("Pedidos em Carteira", "Create", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>
                             <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
                             <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>

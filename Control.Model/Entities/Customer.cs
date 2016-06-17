@@ -54,5 +54,24 @@ namespace Control.Model.Entities
         public int? CommercialPolicy { get; set; }
         public DateTime? RegisterDate { get; set; }
         public DateTime? LastUpdate { get; set; }
+
+        [NotMapped]
+        public string CompanyNameOrder
+        {
+            get
+            {
+                long document = Convert.ToInt64(Document);
+
+                string cpfCnpj = CustomerType == CustomerType.Fisica ? String.Format(@"{0:000\.000\.000\-00}", document) : String.Format(@"{0:00\.000\.000\/0000\-00}", document);
+
+                if (Id > 0)
+                    return String.Format("{0} - {1} - {2}", CompanyName, ShortName, cpfCnpj);
+                else
+                    return CompanyName;
+            }
+        }
+
+        [ForeignKey("CustomerID")]
+        public virtual List<VendorsCustomer> Vendors { get; set; }
     }
 }

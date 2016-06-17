@@ -105,6 +105,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserRoles.cs" />
     <Compile Include="Entities\Vendor.cs" />
+    <Compile Include="Entities\VendorsCustomer.cs" />
     <Compile Include="Enums\Enumerations.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\CpfCnpj.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\Endereco.cs" />

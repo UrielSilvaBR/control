@@ -133,7 +133,8 @@ namespace Control.UI.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            
+            return RedirectToAction("Create", "Pedido");
         }
 
         public PartialViewResult LoggedUserPartial()

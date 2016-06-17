@@ -16,6 +16,7 @@ namespace Control.Model.Entities
         {
             Vendors = new List<Vendor>();
             Vendors.Add(ContactVendor);
+            RegisterDate = DateTime.Now;
         }
 
         [Key]

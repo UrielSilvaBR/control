@@ -227,6 +227,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cadastros\Cliente\Cliente.js" />
     <Content Include="Content\Cadastros\CondicaoPagamento\CondicaoPagamento.js" />
+    <Content Include="Content\Cadastros\Contato\Contato.js" />
+    <Content Include="Content\Cadastros\Vendedor\Vendedor.js" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\font-awesome.css" />
@@ -806,6 +808,10 @@
     <Content Include="Views\Compras\Recebimento.cshtml" />
     <Content Include="Views\Compras\Conferencia.cshtml" />
     <Content Include="Views\Compras\_ConferenciaListaProdutos.cshtml" />
+    <Content Include="Views\Shared\_AddCliente.cshtml" />
+    <Content Include="Views\Shared\_AddVendedor.cshtml" />
+    <Content Include="Views\Shared\_AddContato.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

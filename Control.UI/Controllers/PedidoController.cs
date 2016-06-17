@@ -39,7 +39,7 @@ namespace Control.UI.Controllers
 
         [HttpGet]
         public ActionResult Create(Models.PedidoViewModel Pedido)
-        {
+        {   
             return View(Pedido);
         }
 
@@ -58,8 +58,7 @@ namespace Control.UI.Controllers
                 retorno = context.Orders.Find(p => p.Id == OrderID);
                 model.Order = retorno;
                 model.Contacts = context.Contacts.Filter(p => p.CustomerID == model.Order.CustomerID).ToList();
-                model.Contacts.Insert(0, new Contact() { Id = 0, ContatName = "SELECIONE..." });
-                model.Vendors = context.Vendors.Filter(p => p.Id == model.Order.ContactOrder.VendorID).ToList();
+                model.Vendors = context.VendorsCustomer.Filter(p => p.CustomerID == model.Order.CustomerID).Select(p => p.Vendor).ToList();
             }
             catch (Exception ex)
             {
@@ -221,6 +220,20 @@ namespace Control.UI.Controllers
             }
         }
 
+        public JsonResult GetVendorsByCustomer(int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+                var vendorList = context.VendorsCustomer.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendor).ToList();
+                return Json(new { vendorList = vendorList });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
         public ActionResult GerarNotaFiscal(int OrderID)
         {
             try
@@ -289,5 +302,48 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
+
+        public ActionResult IncluirVendedor(Model.Entities.Vendor Vendor, int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+
+                context.Vendors.Create(Vendor);
+                context.SaveChanges();
+
+                context.VendorsCustomer.Create(new VendorsCustomer()
+                {
+                    CustomerID = CustomerID,
+                    VendorID = Vendor.Id
+                });
+
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", Vendor.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        public ActionResult IncluirContato(Model.Entities.Contact Contact, int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+
+                context.Contacts.Create(Contact);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", Contact.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
     }
 }
