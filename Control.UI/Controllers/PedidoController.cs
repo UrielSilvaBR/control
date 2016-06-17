@@ -135,7 +135,7 @@ namespace Control.UI.Controllers
             {
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=" + OrderID);
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
 
                 ViewBag.ToPDF = "0";
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");

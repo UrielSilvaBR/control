@@ -36,7 +36,7 @@ function ImprimirPedido() {
 
 function ExportarPDF(idPedido) {
 
-    alert('teste');
+    
     waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
 
     setTimeout(function () {
@@ -78,9 +78,11 @@ function FinalizarEnvioEmail(idPedido) {
 function ValidarConvertPedidoModal() {
         
     var idOrder = $('#hdOrderId').val();
-    alert('teste=>' + idOrder);
+    
     if (idOrder == 0) {
         ShowMessage('Não foi possivel gravar o pedido para esta proposta, tente novamente.', false);
         return false;
     }
+
+    return true;
 }

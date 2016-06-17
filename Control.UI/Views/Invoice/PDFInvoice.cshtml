@@ -1,28 +1,65 @@
 ﻿@using Control.UI.Models
-@model PedidoViewModel   
+@model PedidoViewModel
 @{
-    if (ViewBag.ToPDF != '1')
-    {
         ViewBag.Title = "Invoice";
-        Layout = "~/Views/Shared/_Layout.cshtml";
+        Layout = "";
+}
+    <!--Includes Layout - Begin-->
+
+<link href="/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<link href="~/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+<link href="/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="/plugins/xcharts/xcharts.min.css" rel="stylesheet">
+<link href="/plugins/select2/select2.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+        <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+    body {
+        background: #ffffff !important;
     }
-   
+</style>
+<!-- Includes Layout - Fim-->
+<!-- Includes Layout - Inicio-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
 
-}
+<script src="/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/scripts/bootstrap.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="~/scripts/jquery.validate.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.bootstrap.js"></script>
+<script src="~/scripts/methods_pt.js"></script>
+<script src="/plugins/justified-gallery/jquery.justifiedgallery.js"></script>
+<script src="~/plugins/tinymce/tinymce.min.js"></script>
+<script src="~/plugins/tinymce/jquery.tinymce.min.js"></script>
 
+<!-- All functions for this theme + document.ready processing -->
+<script src="/js/devoops.js"></script>
+
+<script src="~/plugins/datatables/jquery.dataTables.js"></script>
+<script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="~/plugins/datatables/TableTools.js"></script>
+<script src="~/plugins/datatables/TableTools_orig.js"></script>
+<script src="~/plugins/datatables/ZeroClipboard.js"></script>
+<script src="~/plugins/select2/select2.js"></script>
+
+<script src="~/scripts/control.js"></script>
+<script src="~/scripts/jquery.maskedinput.js"></script>
+<script src="~/scripts/jquery.maskMoney.js"></script>
+<script src="~/scripts/ModalLoading.js"></script>
 <script src="~/Content/Order/OrderReport.js"></script>
-@if (ViewBag.ToPDF != '1')
-{
-<div class="row">
-    <div id="breadcrumb" class="col-md-12">
-        <ol class="breadcrumb">
-            <li><a href="index.html">Vendas</a></li>
-            <li><a href="#">Proposta</a></li>
-            <li><a href="#">Relatório</a></li>
-        </ol>
-    </div>
-</div>
-}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -42,7 +79,7 @@
 
                     </div>
                     <div class="col-xs-6">
-                        <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" } )
+                        <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" })
                         <address>
                             <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
                             @Html.DisplayFor(Model => Model.Order.CustomerOrder.Document)<br>
@@ -90,7 +127,7 @@
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.Order.Items)
-                            {
+                                {
                                     <tr>
                                         <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
                                         <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
@@ -99,7 +136,7 @@
                                         <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
                                         <td>@Html.DisplayFor(modelItem => item.DeadlineItem)</td>
                                     </tr>
-                                        }
+                                            }
 
 
                                 <tr class="active">
@@ -167,47 +204,8 @@
                         </div>
                     </div>
                 </div>
-                @if (ViewBag.ToPDF != "1")
-                {
-                        <div class="clearfix"></div>
 
-                if (Model.Order.Validated == true)
-                {
-                    <div class="col-xs-12" style="margin-top: 45px">
-                        <div class="col-md-offset-5">
-                            
-                            <input type="button" id="btnImprimir"       value="Imprimir"        onclick="return ImprimirPedido();" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />*@
-                            <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />
-                            <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            <input type="button" id="btnPedido"         value="Gerar Pedido"          onclick="return AbrirModalPedido();" class="btn btn-primary" style="font-size: 0.8em;" />
-                            <input type="button" id="btnNovaProposta"   value="Nova Proposta"   onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-primary" style="font-size: 0.8em" />
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="col-xs-12" style="margin-top: 45px">
-                        <div class="col-md-offset-5">
-                            <input type="button" id="btnConfirmar" value="Confirmar" onclick="return ConfirmarPedido($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            <input type="button" value="Voltar" style="font-size: 0.8em" onclick="location.href='@Url.Action("Edit", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" />
-                        </div>
-                    </div>
-                }
-                }
-                        @*<div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
-                            <div class="col-xs-4">
-                                <a href='@Url.Action("PDFInvoice", new { InvoiceID = Model.Order.Id })' class="btn btn-default btn-label-left"><span><i class="fa fa-floppy-o"></i></span> Salvar pdf</a>
-                            </div>
-                            <div class="col-xs-4 col-xs-offset-4">
-                                <a href="#" class="btn btn-primary btn-label-left"><span><i class="fa fa-credit-card"></i></span> Imprimir</a>
-                            </div>
-                        </div>*@
-
-                </div>
             </div>
+        </div>
     </div>
 </div>
-
-
-

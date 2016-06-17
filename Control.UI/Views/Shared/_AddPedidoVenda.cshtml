@@ -2,7 +2,7 @@
 @model Order
 
 <!--Inicio-->
-@using (Ajax.BeginForm("ConverterPedido", new { Controller = "Pedido" }, new AjaxOptions { OnBegin = "ValidarConvertPedidoModal", OnSuccess = "FinalizarConverterPedido" }, new { @class = "form-horizontal" }))
+@using (Ajax.BeginForm("ConverterPedido", "Pedido", new AjaxOptions { OnBegin = "ValidarConvertPedidoModal", OnSuccess = "FinalizarConverterPedido" }, new { @class = "form-horizontal" }))
 {
     <div class="box-content">
 

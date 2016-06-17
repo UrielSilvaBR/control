@@ -815,6 +815,7 @@
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\Shared\_AddPedidoVenda.cshtml" />
     <Content Include="Views\Shared\_SendMailAttach.cshtml" />
+    <Content Include="Views\Invoice\PDFInvoice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
