@@ -73,8 +73,6 @@ $(document).ready(function () {
             $('#Order_Discount').attr('disabled', false);
     });
 
-   
-
 });
 
 function ObterListaContatoPorCliente(idCliente, defaultValue) {
@@ -161,15 +159,17 @@ function IniciarlizarCamposItemPedido() {
     $('#OrderProduct_UnitPrice').val(0);
     $('#OrderProduct_TotalPrice').val(0);
 
-    if (parseInt($('#OrderProduct_QuantityOrder').val()) == 0)
-        $('#OrderProduct_QuantityOrder').val(1);
-
     $('#OrderProduct_QuantityOrder').ForceNumericOnly();
 
-    if (parseInt($('#OrderProduct_DeadlineItem').val()) == 0)
-        $('#OrderProduct_DeadlineItem').val(0);
+    if ($('#OrderProduct_QuantityOrder').val() == "" || parseInt($('#OrderProduct_QuantityOrder').val() == 0))
+    {
+        $('#OrderProduct_QuantityOrder').val(1);
+    }
 
     $('#OrderProduct_DeadlineItem').ForceNumericOnly();
+
+    if ($('#OrderProduct_DeadlineItem').val() == "" || parseInt($('#OrderProduct_DeadlineItem').val()) == 0)
+        $('#OrderProduct_DeadlineItem').val(0);
 }
 
 function CalcularItemPedido(quantidade) {

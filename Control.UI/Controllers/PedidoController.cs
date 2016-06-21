@@ -25,15 +25,6 @@ namespace Control.UI.Controllers
             return View(Orders);
         }
 
-        public ActionResult Carteira()
-        {
-            context = new DALContext();
-
-            var Orders = context.Orders.All().Where(p=> p.Status == "PEDIDO - ABERTO").ToList();
-            ViewBag.Title = "CARTEIRA";
-            return View("Index", Orders);
-        }
-
         public ActionResult PropostasAbertas()
         {
             context = new DALContext();
@@ -433,5 +424,19 @@ namespace Control.UI.Controllers
             }
         }
 
+        public ActionResult Carteira()
+        {
+            context = new DALContext();
+            var Orders = context.Orders.Filter(p => p.Status == "PEDIDO - ABERTO").ToList();
+
+            var OrderProducts = new List<OrderProduct>();
+
+            Orders.ForEach(p =>
+            {
+                OrderProducts.AddRange(p.Items);
+            });
+
+            return View(OrderProducts);
+        }
     }
 }

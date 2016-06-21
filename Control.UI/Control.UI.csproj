@@ -816,6 +816,7 @@
     <Content Include="Views\Shared\_AddPedidoVenda.cshtml" />
     <Content Include="Views\Shared\_SendMailAttach.cshtml" />
     <Content Include="Views\Invoice\PDFInvoice.cshtml" />
+    <Content Include="Views\Pedido\Carteira.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

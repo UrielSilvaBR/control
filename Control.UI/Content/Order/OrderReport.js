@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    $(".show-sidebar").click();
 
+    $(".show-sidebar").click();
 
     var idPedidoInvoice = $('#hdOrderId').val();
 
@@ -10,7 +10,7 @@
 });
 
 function ConfirmarPedido(idPedido) {
-    
+
 
     waitingDialog.show('Proposta confirmada', { dialogSize: 'sm', progressType: 'success' });
 
@@ -29,7 +29,7 @@ function ConfirmarPedido(idPedido) {
 };
 
 function ImprimirPedido() {
-    
+
 
     var printContents = document.getElementById('dvPrintArea').innerHTML;
     var originalContents = document.body.innerHTML;
@@ -43,7 +43,7 @@ function ImprimirPedido() {
 
 function ExportarPDF(idPedido) {
 
-    
+
     waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
 
     setTimeout(function () {
@@ -60,13 +60,11 @@ function ExportarPDF(idPedido) {
     }, 1000);
 };
 
-function AbrirModalPedido(idPedido)
-{
+function AbrirModalPedido(idPedido) {
     $('#modal-converter-pedido').modal('show');
 }
 
-function AbrirModalEmail(idPedido)
-{
+function AbrirModalEmail(idPedido) {
     $('#modal-email-proposta').modal('show');
 }
 
@@ -83,9 +81,9 @@ function FinalizarEnvioEmail(idPedido) {
 }
 
 function ValidarConvertPedidoModal() {
-        
+
     var idOrder = $('#hdOrderId').val();
-    
+
     if (idOrder == 0) {
         ShowMessage('Não foi possivel gravar o pedido para esta proposta, tente novamente.', false);
         return false;

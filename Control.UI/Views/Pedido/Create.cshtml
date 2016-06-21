@@ -107,7 +107,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                             <div class="form-group">
 
                                 @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-10" style="width: 951px;">
+                                <div class="col-md-10">
                                     @Html.DropDownListFor(model => model.Order.CustomerID, new SelectList(Model.Customers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
                                 </div>
                                 <a href="javascript:void(0);" onclick="AbrirModalCadastroCliente();">
@@ -141,7 +141,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </a>*@
 
-                                <div class="col-xs-1" style="line-height:28px;margin-left: 81px;">
+                                <div class="col-xs-1" id="divVendedor" style="line-height:28px;margin-left: 77px;">
                                     @Html.Label("Vendedor", htmlAttributes: new { @class = "" })
                                 </div>
 
@@ -266,6 +266,16 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
 
     $(document).ready(function () {
 
+        $(".show-sidebar").click(function () {
+
+            var intMarginLeft = parseInt($('#divVendedor').attr('style').toString().split(':')[1]);
+
+            if (intMarginLeft == 77)
+                $('#divVendedor').attr('style', 'margin-left: 61px;');
+            else
+                $('#divVendedor').attr('style', 'margin-left: 77px;');
+
+        });
         $(".show-sidebar").click();
         // Load TimePicker plugin and callback all time and date pickers
         LoadTimePickerScript(AllTimePickers);
