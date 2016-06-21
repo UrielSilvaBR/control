@@ -215,13 +215,13 @@ namespace Control.UI.Controllers
                 {
                     
                     context = new DALContext(); 
+                    Pedido.PurchaseOrder.InsertDate = DateTime.Now;
+                    Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
 
                     if (Pedido.PurchaseOrder.Id > 0)
                         context.PurchaseOrders.Update(Pedido.PurchaseOrder);
                     else
                     {
-                        Pedido.PurchaseOrder.InsertDate = DateTime.Now;
-                        Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
                         context.PurchaseOrders.Create(Pedido.PurchaseOrder);
                     }
                     
@@ -235,6 +235,7 @@ namespace Control.UI.Controllers
                             PurchaseOrderId = (int)x["IdPedido"],
                             SequencialItem = (int)x["SequencialItem"],
                             QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                            QuantityDeliver = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                             ProductID = (int)x["ProductID"],
                             UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
                             ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
