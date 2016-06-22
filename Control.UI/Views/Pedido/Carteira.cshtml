@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<head>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+
+</head>
+
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
@@ -20,7 +26,7 @@
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
-                    <span></span>
+                    <span>Produtos em Carteira</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -36,93 +42,70 @@
                 <div class="no-move"></div>
             </div>
             <div class="box-content no-padding">
-                <div id="table_wrapperz">
-                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
-                        <thead>
-                            <tr>
-                                <th>
-                                    Código
-                                </th>
-                                <th>
-                                    Tipo
-                                </th>
-                                <th>
-                                    Descrição
-                                </th>
-                                <th>
-                                    Curso
-                                </th>
-                                <th>
-                                    Pedido do Cliente
-                                </th>
-                                <th>
-                                    Quant.
-                                </th>
-                                <th>
-                                    Data Pedido
-                                </th>
-                                <th>
-                                    Prazo Entrega
-                                </th>
-                                <th>
-                                    Observação
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                {
-                                    <tr>
-                                        @*<td>
-                                            <h4 style="color:red">
-                                                <a href='@Url.Action("ContatosEdit", "Cadastro", new { ContatoID = item.Id })'>
-                                                    <i class="fa fa-edit red"></i>
-                                                </a>
-                                                <a href='@Url.Action("ContatoDelete", "Cadastro", new { ContatoID = item.Id })'>
-                                                    <i class="fa fa-times-circle" style="color:red"></i>
 
-                                                </a>
-                                            </h4>
-                                        </td>*@
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ProductItem.ProductCode)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ProductItem.Model)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ProductItem.Name)
-                                        </td>
-                                        <td>
-                                           0
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Order.CustomerControlCode)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.QuantityOrder)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Order.OrderDate)
-                                        </td>
-                                        <td>
-                                            @{ string prazoEntrega = item.Order.OrderDate.AddDays(item.DeadlineItem).ToShortDateString();    }
-                                            @Html.DisplayFor(modelItem => prazoEntrega)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Order.Comments)
-                                        </td>
+                <br />
 
-                                    </tr>
-                                }
-                            }
+                <div class="form-group">
 
-                        </tbody>
+                    @Html.Label("Cliente", new { @class = "col-md-1", @style= "margin-top: 3px;" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("Cliente", new SelectList((List<Customer>)ViewData["CustomerList"], "Id", "CompanyName" ))
+                    </div>
 
-                    </table>
+
+                    @Html.Label("Produto", new { @class = "col-md-1", @style = "margin-top: 3px;" })
+                    <div class="col-md-4">
+                        @Html.DropDownList("Produto", new SelectList((List<Product>)ViewData["ProductList"], "Id", "Name"))
+                    </div>
+
                 </div>
+
+                <br />
+
+               
+                @Html.Partial("~/Views/Pedido/_ListCarteira.cshtml", Model)
+
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+
+    function AllTables() {
+        LoadSelect2Script(MakeSelect2);
+    }
+
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+
+            //var url = Url.Action("ActionName", "ControllerName")';
+            var url = '@Url.Action("ActionName", "ControllerName")';
+
+            //$(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Pedido/Create\"' />");
+            //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+        });
+    }
+
+
+    $(document).ready(function () {
+
+        $(".show-sidebar").click();
+
+        $('#Cliente').change(function () {
+            FiltrarCarteiraCliente($(this).val(), $('#Produto option:selected').val());
+        });
+
+        $('#Produto').change(function () {
+            FiltrarCarteiraProduto($('#Cliente option:selected').val(), $(this).val());
+        });
+
+        LoadDataTablesScripts(AllTables);
+
+    });
+
+</script>
