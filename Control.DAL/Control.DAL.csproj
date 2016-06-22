@@ -126,6 +126,7 @@
     <Compile Include="Repository\PurchaseOrderRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
     <Compile Include="Repository\RolesRepository.cs" />
+    <Compile Include="Repository\ShippingModeRepository.cs" />
     <Compile Include="Repository\StateRepository.cs" />
     <Compile Include="Repository\StockRepository.cs" />
     <Compile Include="Repository\StorageRepository.cs" />

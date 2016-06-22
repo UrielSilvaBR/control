@@ -164,6 +164,27 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 <div class="col-md-4">
                                     @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                                 </div>
+                                <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <!--Campos Modalidade de Transporte-->
+                                <div class="col-xs-1" id="divVendedor" style="line-height:28px;margin-left: 77px;">
+                                    @Html.Label("Transporte:", htmlAttributes: new { @class = "" })
+                                </div>
+                                <!--Adicionar Combo da Modalidade de transporte-->
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
                             </div>
 
                             @Html.HiddenFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })

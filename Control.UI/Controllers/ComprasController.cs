@@ -159,11 +159,21 @@ namespace Control.UI.Controllers
         {
             var model = new Control.UI.Models.PedidoCompraViewModel();
             context = new DALContext();
+            
             PurchaseOrder retorno = new PurchaseOrder();
             try
             {
-                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+                retorno = context.PurchaseOrders.All().Include("Items").ToList().Find(p => p.Id == OrderID);
+
                 model.PurchaseOrder = retorno;
+                model.PurchaseOrder.Items = retorno.Items;
+
+                foreach (var item in model.PurchaseOrder.Items)
+                {
+                    item.ProductItem = new Product();
+                    item.ProductItem = context.Products.Find(x => x.Id == item.ProductID);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -296,7 +306,7 @@ namespace Control.UI.Controllers
         public PartialViewResult GetOrderProducts(int OrderID)
         {
             context = new DALContext();
-            var OrderProducts = context.PurchaseOrderItem.Filter(p => p.PurchaseOrderId == OrderID).ToList();
+            var OrderProducts = context.PurchaseOrderItem.All().Include("ProductItem").Where(p => p.PurchaseOrderId == OrderID).ToList();
             return PartialView("_ListPurchaseOrdemItem", OrderProducts);
         }
 

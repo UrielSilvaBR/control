@@ -96,6 +96,7 @@
     <Compile Include="Entities\PurchaseOrder.cs" />
     <Compile Include="Entities\PurchaseOrderItem.cs" />
     <Compile Include="Entities\Roles.cs" />
+    <Compile Include="Entities\ShippingMode.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\Storage.cs" />
