@@ -107,7 +107,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                             <div class="form-group">
 
                                 @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
-                                <div class="col-md-10" style="width: 951px;">
+                                <div class="col-md-10">
                                     @Html.DropDownListFor(model => model.Order.CustomerID, new SelectList(Model.Customers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
                                 </div>
                                 <a href="javascript:void(0);" onclick="AbrirModalCadastroCliente();">
@@ -141,9 +141,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </a>*@
 
-                                <div class="col-sm-1"></div>
-
-                                <div class="col-xs-1" style="line-height:28px;margin-left: -13px;">
+                                <div class="col-xs-1" id="divVendedor" style="line-height:28px;margin-left: 77px;">
                                     @Html.Label("Vendedor", htmlAttributes: new { @class = "" })
                                 </div>
 
@@ -166,6 +164,27 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 <div class="col-md-4">
                                     @Html.DropDownListFor(model => model.Order.PaymentTermID, new SelectList(Model.PaymentTerms, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                                 </div>
+                                <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <!--Campos Modalidade de Transporte-->
+                                <div class="col-xs-1" id="divVendedor" style="line-height:28px;margin-left: 77px;">
+                                    @Html.Label("Transporte:", htmlAttributes: new { @class = "" })
+                                </div>
+                                <!--Adicionar Combo da Modalidade de transporte-->
+                                <div class="col-md-4">
+                                    @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                                <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
+                                <div class="pull-left">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
                             </div>
 
                             @Html.HiddenFor(p => p.Order.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
@@ -267,6 +286,18 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
     var editor;
 
     $(document).ready(function () {
+
+        $(".show-sidebar").click(function () {
+
+            var intMarginLeft = parseInt($('#divVendedor').attr('style').toString().split(':')[1]);
+
+            if (intMarginLeft == 77)
+                $('#divVendedor').attr('style', 'margin-left: 61px;');
+            else
+                $('#divVendedor').attr('style', 'margin-left: 77px;');
+
+        });
+        $(".show-sidebar").click();
         // Load TimePicker plugin and callback all time and date pickers
         LoadTimePickerScript(AllTimePickers);
         // Create jQuery-UI tabs

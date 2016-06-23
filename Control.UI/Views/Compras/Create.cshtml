@@ -47,15 +47,7 @@
                 CalcularItemPedido();
             });
 
-            var idPedido = $('#PurchaseOrder_Id').val();
-            if (idPedido == 0) {
-                $('#btnCadastrar').show();
-                $('#btnEditar').hide();
-            }
-            else {
-                $('#btnCadastrar').hide();
-                $('#btnEditar').show();
-            }
+         
 
             $('#itemPedidoDeCompra').on('hidden.bs.modal', function () {
                 LimparItemPedido();
@@ -245,26 +237,7 @@
 
                 waitingDialog.hide();
                 ShowMessage(mensagemRetorno, true);
-
-                //if (parseInt(idPedido) > 0) {
-                //    $.ajax({
-                //        url: '/Compras/GetOrderProducts',
-                //        data: { OrderID: idPedido },
-                //        type: 'GET',
-                //        success: function (result) {
-                //            $('#table_wrapperz_ItensPedido').html(result);
-                //        }
-                //    });
-                //}
-
-                if (idPedido == 0) {
-                    $('#btnCadastrar').show();
-                    $('#btnEditar').hide();
-                }
-                else {
-                    $('#btnCadastrar').hide();
-                    $('#btnEditar').show();
-                }
+                 
 
             }, 1000);
         }
@@ -652,9 +625,8 @@
                 @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
 
                 <div class="form-group">
-                    <div class="col-md-offset-5">
-                        <input type="submit" value="Alterar" onclick="return IniciarEdicaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnEditar" />
-                        <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                    <div class="col-md-offset-5"> 
+                        <input type="submit" value="Salvar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
                         <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Compras")'" />
                     </div>
                 </div>

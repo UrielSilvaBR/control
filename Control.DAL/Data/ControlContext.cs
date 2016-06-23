@@ -45,22 +45,27 @@ namespace Control.DAL.Data
         public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
 
         public DbSet<PaymentTerm> PaymentTerm { get; set; }
+        public DbSet<ShippingMode> ShippingModes { get; set; }
 
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+            // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         public ControlContext(DbConnection cn)
             : base(cn, true)
         {
-           // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+            // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
+            //this.Configuration.LazyLoadingEnabled = false;
         }
 
         public static ControlContext Create()
         {
-            return new ControlContext();
+
+            return new ControlContext();            
+            
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

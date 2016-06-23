@@ -238,6 +238,7 @@
     <Content Include="Content\img\warning.png" />
     <Content Include="Content\Invoice\Invoice.js" />
     <Content Include="Content\Order\Order.js" />
+    <Content Include="Content\Order\OrderReport.js" />
     <Content Include="Content\Site.css" />
     <Content Include="css\style.css" />
     <Content Include="css\style.min.css" />
@@ -812,6 +813,11 @@
     <Content Include="Views\Shared\_AddVendedor.cshtml" />
     <Content Include="Views\Shared\_AddContato.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\_AddPedidoVenda.cshtml" />
+    <Content Include="Views\Shared\_SendMailAttach.cshtml" />
+    <Content Include="Views\Invoice\PDFInvoice.cshtml" />
+    <Content Include="Views\Pedido\Carteira.cshtml" />
+    <Content Include="Views\Pedido\_ListCarteira.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

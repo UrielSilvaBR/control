@@ -159,11 +159,21 @@ namespace Control.UI.Controllers
         {
             var model = new Control.UI.Models.PedidoCompraViewModel();
             context = new DALContext();
+            
             PurchaseOrder retorno = new PurchaseOrder();
             try
             {
-                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+                retorno = context.PurchaseOrders.All().Include("Items").ToList().Find(p => p.Id == OrderID);
+
                 model.PurchaseOrder = retorno;
+                model.PurchaseOrder.Items = retorno.Items;
+
+                foreach (var item in model.PurchaseOrder.Items)
+                {
+                    item.ProductItem = new Product();
+                    item.ProductItem = context.Products.Find(x => x.Id == item.ProductID);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -215,13 +225,13 @@ namespace Control.UI.Controllers
                 {
                     
                     context = new DALContext(); 
+                    Pedido.PurchaseOrder.InsertDate = DateTime.Now;
+                    Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
 
                     if (Pedido.PurchaseOrder.Id > 0)
                         context.PurchaseOrders.Update(Pedido.PurchaseOrder);
                     else
                     {
-                        Pedido.PurchaseOrder.InsertDate = DateTime.Now;
-                        Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
                         context.PurchaseOrders.Create(Pedido.PurchaseOrder);
                     }
                     
@@ -235,6 +245,7 @@ namespace Control.UI.Controllers
                             PurchaseOrderId = (int)x["IdPedido"],
                             SequencialItem = (int)x["SequencialItem"],
                             QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                            QuantityDeliver = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                             ProductID = (int)x["ProductID"],
                             UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
                             ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
@@ -295,7 +306,7 @@ namespace Control.UI.Controllers
         public PartialViewResult GetOrderProducts(int OrderID)
         {
             context = new DALContext();
-            var OrderProducts = context.PurchaseOrderItem.Filter(p => p.PurchaseOrderId == OrderID).ToList();
+            var OrderProducts = context.PurchaseOrderItem.All().Include("ProductItem").Where(p => p.PurchaseOrderId == OrderID).ToList();
             return PartialView("_ListPurchaseOrdemItem", OrderProducts);
         }
 

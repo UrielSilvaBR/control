@@ -161,6 +161,8 @@ namespace Control.UI.Models
         public List<SelectListItem> Status { get; set; }
         public List<Model.Entities.PaymentTerm> PaymentTerms { get; set; }
 
+        public List<Model.Entities.ShippingMode> ShippingModes { get; set; }
+
         public PedidoViewModel()
         {
             context = new DALContext();
@@ -173,6 +175,9 @@ namespace Control.UI.Models
 
             PaymentTerms = context.PaymentTerms.All().OrderBy(p => p.Days).ToList();
             PaymentTerms.Insert(0, new PaymentTerm() { Id = 0, Description = "SELECIONE..." });
+
+            ShippingModes = context.ShippingModes.All().ToList();
+            ShippingModes.Insert(0, new ShippingMode() { Id = 0, Name = "SELECIONE..." });
 
             if (Order == null)
             {

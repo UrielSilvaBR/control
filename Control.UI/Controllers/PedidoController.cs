@@ -1,11 +1,14 @@
 ﻿using Control.DAL;
 using Control.Model.Entities;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SelectPdf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Control.UI.Controllers
 {
@@ -20,8 +23,17 @@ namespace Control.UI.Controllers
             context = new DALContext();
 
             var Orders = context.Orders.All().ToList();
-
+            ViewBag.Title = "Histórico de Pedidos";
             return View(Orders);
+        }
+
+        public ActionResult PropostasAbertas()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
+            ViewBag.Title = "PROPOSTAS ABERTAS";
+            return View("Index", Orders);
         }
 
         public ActionResult OrdersCustomer(int ClientID)
@@ -39,7 +51,7 @@ namespace Control.UI.Controllers
 
         [HttpGet]
         public ActionResult Create(Models.PedidoViewModel Pedido)
-        {   
+        {
             return View(Pedido);
         }
 
@@ -66,6 +78,74 @@ namespace Control.UI.Controllers
             }
 
             return View("Create", model);
+        }
+
+        public ActionResult ConfirmarProposta(int OrderID)
+        {
+            context = new DALContext();
+            Order retorno = new Order();
+
+            try
+            {
+                retorno = context.Orders.Find(p => p.Id == OrderID);
+                retorno.Validated = true;
+                context.SaveChanges();
+
+                return Content(String.Format("Proposta  número {0} atualizada com sucesso!", OrderID));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        public ActionResult ConverterPedido(Model.Entities.Order order, int OrderID)
+        {
+            context = new DALContext();
+            Order convertPedido = new Order();
+
+            try
+            {
+                convertPedido = context.Orders.Find(p => p.Id == OrderID);
+
+                convertPedido.Status = "PEDIDO";
+                convertPedido.CustomerControlCode = order.CustomerControlCode;
+
+                context.Orders.Update(convertPedido);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", order.CustomerControlCode));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        public ActionResult ExportarPDF(int OrderID)
+        {
+            try
+            {
+                HtmlToPdf converter = new HtmlToPdf();
+                ViewBag.ToPDF = "1";
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
+
+                ViewBag.ToPDF = "0";
+                //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
+                //doc.Close();
+                //doc.Save()
+
+                byte[] fileBytes = doc.Save();
+                string fileName = "proposta_" + OrderID.ToString() + ".pdf";
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+                //return Content(String.Format("Arquivo exportado.", OrderID));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+
         }
 
         #endregion
@@ -260,7 +340,7 @@ namespace Control.UI.Controllers
                 });
 
                 var invoice = new Invoice();
-                
+
                 invoice.InvoiceSerieID = context.InvoiceSeries.Find(p => p.Descricao == "NFSE").Id;
                 invoice.Numero = Order.Id;
                 invoice.DataEmissao = Order.OrderDate;
@@ -346,5 +426,68 @@ namespace Control.UI.Controllers
             }
         }
 
+        public ActionResult Carteira()
+        {
+            context = new DALContext();
+            var Orders = context.Orders.Filter(p => p.Status == "PEDIDO - ABERTO").ToList();
+
+            var OrderProducts = new List<OrderProduct>();
+
+            Orders.ForEach(p =>
+            {
+                OrderProducts.AddRange(p.Items);
+            });
+
+            var CustomerList = OrderProducts.Select(p => p.Order.CustomerOrder).Distinct().ToList();
+            var ProductList = OrderProducts.Select(p => p.ProductItem).Distinct().ToList();
+
+            CustomerList.Insert(0, new Customer() { Id = 0, CompanyName = "TODOS" });
+            ProductList.Insert(0, new Product() { Id = 0, Name = "TODOS" });
+
+            ViewData["CustomerList"] = CustomerList;
+            ViewData["ProductList"] = ProductList;
+
+            return View(OrderProducts);
+        }
+
+        public PartialViewResult GetProdutosCarteira(int CustomerID = 0, int ProductID = 0)
+        {
+            context = new DALContext();
+
+            var OrderCustomers = context.Orders.Filter(p => p.Status == "PEDIDO - ABERTO").ToList();
+
+            var Orders = OrderCustomers;
+
+            if (CustomerID > 0)
+                Orders = Orders.Where(p => p.CustomerID == CustomerID).ToList();
+
+            var OrderProducts = new List<OrderProduct>();
+
+            Orders.ForEach(p =>
+            {
+                OrderProducts.AddRange(p.Items);
+            });
+
+            if (ProductID > 0)
+                OrderProducts = OrderProducts.Where(p => p.ProductID == ProductID).ToList();
+
+            var ProductListFilter = OrderProducts.Select(p => new
+            {
+                Id = p.ProductItem.Id,
+                Name = p.ProductItem.Name
+            }).Distinct().ToList();
+
+            TempData["ProductListFilter"] = new JavaScriptSerializer().Serialize(ProductListFilter);
+
+            var CustomerListFilter = OrderCustomers.Select(p => new
+            {
+                Id = p.CustomerOrder.Id,
+                CompanyName = p.CustomerOrder.CompanyName
+            }).Distinct().ToList();
+
+            TempData["CustomerListFilter"] = new JavaScriptSerializer().Serialize(CustomerListFilter);
+
+            return PartialView("_ListCarteira", OrderProducts);
+        }
     }
 }

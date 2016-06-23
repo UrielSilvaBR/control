@@ -104,6 +104,31 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
+        public ActionResult InvoiceFile(int InvoiceID)
+        {
+            PedidoViewModel retorno = new PedidoViewModel();
+
+            context = new DALContext();
+            Order pedido = new Order();
+
+            try
+            {
+
+                pedido = context.Orders.Find(p => p.Id == InvoiceID);
+                ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
+                ViewBag.DataValidade = pedido.InsertDate.AddDays(15).ToShortDateString();
+
+                retorno.Order = pedido;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View("PDFInvoice", retorno);
+        }
+
         public ActionResult PDFInvoice(int InvoiceID)
         {
             PedidoViewModel retorno = new PedidoViewModel();
@@ -117,8 +142,8 @@ namespace Control.UI.Controllers
 
                 retorno.Order = pedido;
 
-                SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/Invoice?InvoiceID=" + InvoiceID.ToString());
+                //SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+                //SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + InvoiceID.ToString());
 
                 
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
@@ -129,7 +154,7 @@ namespace Control.UI.Controllers
                 throw ex;
             }
 
-            return View("Invoice", retorno);
+            return View("PDFInvoice", retorno);
         }
 
         [HttpPost]

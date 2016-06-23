@@ -47,6 +47,7 @@ namespace Control.DAL
         IRepository<PaymentTerm> PaymentTerms { get; }
 
         IRepository<VendorsCustomer> VendorsCustomer { get; }
+        IRepository<ShippingMode> ShippingModes { get; }
 
         bool Log(int code, string message, string user);
 

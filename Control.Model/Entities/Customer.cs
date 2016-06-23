@@ -49,11 +49,20 @@ namespace Control.Model.Entities
         public string Website { get; set; }
 
         [Display(Name = "CPF/CNPJ")]
-        public string Document { get; set; }
-        public decimal? Discount { get; set; }
-        public int? CommercialPolicy { get; set; }
+        public string Document { get; set; }        
         public DateTime? RegisterDate { get; set; }
         public DateTime? LastUpdate { get; set; }
+
+        public decimal? Discount { get; set; }
+        public int? CommercialPolicy { get; set; }
+
+        public int? PaymentTermId { get; set; }
+        [ForeignKey("PaymentTermId")]
+        public virtual PaymentTerm DefaultPaymentTerm { get; set; }
+
+        public int? ShippingId { get; set; }
+        [ForeignKey("ShippingId")]
+        public virtual PaymentTerm DefaultShipping { get; set; }
 
         [NotMapped]
         public string CompanyNameOrder

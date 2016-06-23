@@ -37,6 +37,6 @@ namespace Control.Model.Entities
         //Forgein Keys
         public int ProductID { get; set; }
         [ForeignKey("ProductID")]
-        public virtual Product ProductItem { get; set; }
+        public Product ProductItem { get; set; }
     }
 }

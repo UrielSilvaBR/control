@@ -15,49 +15,13 @@ namespace Control.Model.Entities
         [Key]
         [DataMember]
         public int Id { get; set; }
+
         public int OrderId { get; set; }
+
+        [ForeignKey("OrderId")]
+        public virtual Order Order { get; set; }
+
         public int SequencialItem { get; set; }
-
-        //private string _productName;
-        //public string ProductName
-        //{
-        //    get
-        //    {
-        //        if (ProductID > 0)
-        //            return ProductItem.Name;
-        //        else
-        //            return _productName;
-
-        //    } set { _productName = value; }
-        //}
-
-        //private string _productModel;
-        //public string ProductModel
-        //{
-        //    get
-        //    {
-        //        if (ProductID > 0)
-        //            return ProductItem.Model;
-        //        else
-        //            return _productModel;
-
-        //    }
-        //    set { _productModel = value; }
-        //}
-
-        //private string _description;
-        //public string Description
-        //{
-        //    get
-        //    {
-        //        if (ProductID > 0)
-        //            return ProductItem.Description;
-        //        else
-        //            return _description;
-
-        //    }
-        //    set { _description = value; }
-        //}
 
         [Display(Name ="Quantidade")]
         public decimal QuantityOrder { get; set; } 
