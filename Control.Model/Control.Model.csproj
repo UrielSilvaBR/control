@@ -104,6 +104,7 @@
     <Compile Include="Entities\TypeUnit.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserAdressBook.cs" />
     <Compile Include="Entities\UserRoles.cs" />
     <Compile Include="Entities\Vendor.cs" />
     <Compile Include="Entities\VendorsCustomer.cs" />

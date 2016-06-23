@@ -101,6 +101,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repository\AddressBookRepository.cs" />
     <Compile Include="Repository\BranchRepository.cs" />
     <Compile Include="Repository\CityRepository.cs" />
     <Compile Include="Repository\CompanyRepository.cs" />

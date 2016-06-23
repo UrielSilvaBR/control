@@ -19,3 +19,5 @@ http://weblogs.thinktecture.com/cnagel/2011/06/filter-and-display-data-with-aspn
 
 Exemplo Reformulacao Gtwave Site
 https://parall.ax/
+
+http://csharpbrasil.com.br/enviando-anexo-em-e-mail-com-aspnet/

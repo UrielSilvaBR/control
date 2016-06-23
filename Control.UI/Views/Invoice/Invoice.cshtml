@@ -132,16 +132,12 @@
                                 <td>
                                     <div class="col-xs-5 table table-bordered" >
                                         <ul type="0" style="text-align:justify; margin:10px 0 10px 10px; list-style:none;">
-                                            <li>@Html.DisplayFor(Model => Model.Order.PaymentTerm.Description)<br /></li>
+                                            <li>@Html.DisplayFor(Model => Model.Order.Shipping.Description)<br /></li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
                         </table>
-                        
-                        
-                        
-                        
                     </div>
 
                     <div class="col-xs-12">
@@ -162,6 +158,7 @@
                                 <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
                                 <li>Condições de pagamento acima de 21 dias possuem acréscimo de 2% de custo financeiro ao mês.</li>
                                 <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
+                                <li>Empresa optante pelo simples, de acordo com a  lei complementar 123/2006, anexo III.</li>
                             </ol>
                         </div>
                     </div>
@@ -175,17 +172,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-12">
-                        <strong>RETIRADA</strong><br />
-                        <div class="col-xs-10 table table-bordered">
-                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
-                                <li><input type="checkbox" /> FOB - Pago pelo Cliente</li>
-                                <li><input type="checkbox" /> CIF</li>
-
-
-                            </ul>
-                        </div>
-                    </div>
+                   
                 </div>
                 @if (ViewBag.ToPDF != "1")
                 {

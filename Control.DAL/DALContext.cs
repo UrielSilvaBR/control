@@ -43,6 +43,8 @@ namespace Control.DAL
         private IRepository<VendorsCustomer> _vendorsCustomer;
         private IRepository<ShippingMode> _shippingModes;
         private IRepository<Model.Entities.User> _users;
+        private IRepository<UserAdressBook> _adressBook;
+        
 
         public DALContext()
         {
@@ -347,7 +349,19 @@ namespace Control.DAL
                     _users = new UserRepository(dbContext);
                 return _users;
             }
-        }        
+        }
+
+        public IRepository<UserAdressBook> AddressBooks
+        {
+            get
+            {
+                if (_adressBook == null)
+                    _adressBook = new AddressBookRepository(dbContext);
+                return _adressBook;
+            }
+        }
+        
+
 
         public int SaveChanges()
         {

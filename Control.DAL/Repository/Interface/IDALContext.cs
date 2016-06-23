@@ -49,6 +49,7 @@ namespace Control.DAL
         IRepository<VendorsCustomer> VendorsCustomer { get; }
         IRepository<ShippingMode> ShippingModes { get; }
         IRepository<Model.Entities.User> Users { get; }
+        IRepository<UserAdressBook> AddressBooks { get; }
 
         bool Log(int code, string message, string user);
 

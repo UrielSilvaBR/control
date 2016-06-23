@@ -46,6 +46,7 @@ namespace Control.DAL.Data
 
         public DbSet<PaymentTerm> PaymentTerm { get; set; }
         public DbSet<ShippingMode> ShippingModes { get; set; }
+        public DbSet<UserAdressBook> AdressBooks { get; set; }
 
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
