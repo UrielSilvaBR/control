@@ -146,8 +146,8 @@
     @RenderSection("top_modals", false)
 
     <div class="modal fade" id="modal-cadastro-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
-        <div class="modal-dialog">
-            <div class="modal-content source-son">
+        <div class="modal-dialog" style="width: 65%;">
+            <div class="modal-content source-son" style="width: 945px;height: 610px;">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Cadastro de Cliente</h4>
@@ -155,8 +155,8 @@
                 <div class="modal-body modal-mensagem-alerta">
                    @Html.Partial("~/Views/Shared/_AddCliente.cshtml", new ClienteViewModel())
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                <div class="modal-footer" style="margin-top: -32px;">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal" style="margin-top: -5px;">Fechar</button>
                 </div>
             </div>
         </div>

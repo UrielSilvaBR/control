@@ -9,7 +9,7 @@
 <head>
 
     <script src="~/Content/Order/Order.js"></script>
-    <script src="~/Content/Cadastros/Cliente/Cliente.js"></script>
+    <script src="~/Content/Cadastros/Cliente/Cliente_Modal.js"></script>
     <script src="~/Content/Cadastros/Vendedor/Vendedor.js"></script>
     <script src="~/Content/Cadastros/Contato/Contato.js"></script>
 
@@ -117,8 +117,8 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
 
                             <div class="form-group">
 
-                                <div class="col-xs-1">
-                                    @Html.Label("Contato", htmlAttributes: new { @class = "", @style = "width: 80px;text-align:center" })
+                                <div class="col-md-1">
+                                    @Html.Label("Contato", htmlAttributes: new { @class = "", @*@style = "width: 80px;text-align:center"*@ })
                                 </div>
 
                                 <div class="col-md-4">

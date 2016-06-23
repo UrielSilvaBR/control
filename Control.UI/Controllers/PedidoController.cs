@@ -497,6 +497,23 @@ namespace Control.UI.Controllers
             }
         }
 
+        public ActionResult IncluirCliente(Model.Entities.Customer Customer)
+        {
+            try
+            {
+                context = new DALContext();
+
+                context.Customers.Create(Customer);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", Customer.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
         public ActionResult Carteira()
         {
             context = new DALContext();
