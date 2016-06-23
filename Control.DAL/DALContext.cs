@@ -42,6 +42,7 @@ namespace Control.DAL
         private IRepository<PaymentTerm> _paymentTerm;
         private IRepository<VendorsCustomer> _vendorsCustomer;
         private IRepository<ShippingMode> _shippingModes;
+        private IRepository<Model.Entities.User> _users;
 
         public DALContext()
         {
@@ -337,6 +338,16 @@ namespace Control.DAL
                 return _shippingModes;
             }
         }
+
+        public IRepository<Model.Entities.User> Users
+        {
+            get
+            {
+                if (_users == null)
+                    _users = new UserRepository(dbContext);
+                return _users;
+            }
+        }        
 
         public int SaveChanges()
         {
