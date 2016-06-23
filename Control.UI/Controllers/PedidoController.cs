@@ -52,6 +52,20 @@ namespace Control.UI.Controllers
         [HttpGet]
         public ActionResult Create(Models.PedidoViewModel Pedido)
         {
+            Model.Entities.User usuario = new Model.Entities.User();
+            context = new DALContext();
+
+            usuario = context.Users.All().SingleOrDefault(p => p.UserName == User.Identity.Name);
+
+            if (usuario.UserName == "vilo@ncc1701.com.br")
+            {
+                ViewBag.NomeLogado = "Vilo";
+            }
+            else
+            {
+                ViewBag.NomeLogado = "Uriel Silva";
+            }
+
             return View(Pedido);
         }
 

@@ -1,4 +1,5 @@
-﻿using Control.DAL.Data;
+﻿using Control.DAL;
+using Control.DAL.Data;
 using Control.Model.Entities;
 using Control.UI.Models;
 using Microsoft.AspNet.Identity;
@@ -17,8 +18,9 @@ namespace Control.UI.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IDALContext context;
 
-         public AccountController()
+        public AccountController()
         {
         }
 
@@ -139,6 +141,27 @@ namespace Control.UI.Controllers
 
         public PartialViewResult LoggedUserPartial()
         {
+            try
+            {
+                Model.Entities.User usuario = new Model.Entities.User();
+                context = new DALContext();
+
+                usuario = context.Users.All().SingleOrDefault(p => p.UserName == User.Identity.Name);
+
+                if (usuario.UserName == "vilo@ncc1701.com.br")
+                {
+                    ViewBag.NomeLogado = "Vilo";
+                }
+                else
+                {
+                    ViewBag.NomeLogado = "Uriel Silva";
+                }
+            }
+            catch (Exception ex)
+            {
+                return PartialView();
+            }
+
             return PartialView();
         }
 
