@@ -17,10 +17,16 @@ namespace Control.UI.Models
         public List<State> States { get; set; }
         public List<PaymentTerm> CondicoesPagamento { get; set; }
         public List<ShippingMode> ModolidadeTransporte { get; set; }
-        public List<ShippingMode> Vendedores { get; set; }
+        public List<Vendor> Vendedores { get; set; }
+
 
         public ClienteViewModel()
         {
+            if (Customer == null)
+            {
+                Customer = new Customer();
+            }
+
             context = new DALContext();
             Countries = context.Countries.All().OrderBy(p => p.Name).ToList();
             Cities = new List<City>();
@@ -33,10 +39,8 @@ namespace Control.UI.Models
             ModolidadeTransporte = context.ShippingModes.All().ToList();
             ModolidadeTransporte.Insert(0, new ShippingMode() { Id = 0, Name = "SELECIONE..." });
 
-            if (Customer == null)
-            {
-                Customer = new Customer();
-            }
+            Vendedores = context.VendorsCustomer.Filter(p => p.CustomerID == Customer.Id).Select(p => p.Vendor).ToList();
+            
         }
     }
 }

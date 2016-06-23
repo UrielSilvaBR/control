@@ -50,6 +50,9 @@ namespace Control.UI.Controllers
                 model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
                 model.Cities = context.Cities.Filter(p => p.StateId == model.Customer.AddressStateId).OrderBy(p => p.Name).ToList();
                 model.Cities.Insert(0, new City() { Id = 0, Name = "SELECIONE..." });
+
+                model.Vendedores = context.VendorsCustomer.Filter(p => p.CustomerID == ClientID).Select(p => p.Vendor).ToList();
+                model.Vendedores.Insert(0, new Vendor() { Id = 0, Name = "SELECIONE..." });
             }
 
             return View(model);
@@ -77,6 +80,7 @@ namespace Control.UI.Controllers
                 model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
 
                 model.Customer.ShippingId = model.Customer.ShippingId.HasValue && model.Customer.ShippingId.Value == 0 ? null : model.Customer.ShippingId;
+                model.Customer.VendorId = model.Customer.VendorId.HasValue && model.Customer.VendorId.Value == 0 ? null : model.Customer.VendorId;
 
                 if (model.Customer.Id > 0)
                 {
@@ -253,7 +257,7 @@ namespace Control.UI.Controllers
             }
             ViewBag.Message = "Contato cadastrado com sucesso.";
 
-            return RedirectToAction("Fornecedores");
+            return RedirectToAction("Contatos");
         }
 
         public ActionResult ContatoDelete(int? ContatoID)

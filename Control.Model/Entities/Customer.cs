@@ -65,6 +65,11 @@ namespace Control.Model.Entities
         [ForeignKey("ShippingId")]
         public virtual ShippingMode Shipping { get; set; }
 
+        [Display(Name = "Vendedor")]
+        public int? VendorId { get; set; }
+        [ForeignKey("VendorId")]
+        public virtual Vendor Vendor { get; set; }
+
         [NotMapped]
         public string CompanyNameOrder
         {

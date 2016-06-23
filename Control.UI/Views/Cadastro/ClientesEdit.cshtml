@@ -201,6 +201,17 @@
                             </div>
 
                         </div>
+
+
+                        <div class="form-group">
+
+                            @Html.LabelFor(p => p.Customer.VendorId, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(model => model.Customer.VendorId, new SelectList(Model.Vendedores, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                            </div>
+
+                        </div>
+
                     </fieldset>
                         
 

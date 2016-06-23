@@ -111,6 +111,11 @@ function ObterListaVendedorPorCliente(idCliente, defaultValue) {
               listVendor.append(new Option(item.Name, item.Id));
           });
 
+          if (result.vendorList.length > 0)
+              $('#hrefModalVendedor').attr('style', 'display:none');
+          else
+              $('#hrefModalVendedor').attr('style', 'display:block');
+
           if (defaultValue > 0)
               listVendor.select2().select2('val', defaultValue);
           else
@@ -374,7 +379,7 @@ function IniciarInclusaoPedido() {
 
     var idVendedor = $('#Order_VendorID').val();
     if (idVendedor == "0" || idVendedor == null) {
-        ShowMessage('É necessário selecionar o Vendedor!', false);
+        ShowMessage('É necessário selecionar </br>o Vendedor!', false);
         waitingDialog.hide();
         return false;
     }
@@ -908,6 +913,35 @@ function ValidarInclusaoCondicaoPagamentoModal() {
     }
 }
 
+function FinalizarInclusaoCliente(cliente) {
+
+    $('#modal-cadastro-cliente').modal('hide');
+
+    var id = cliente.split(';')[0];
+
+    var customerList = $.parseJSON(cliente.split(';')[1]);
+
+    var listCustomer = $("#Order_CustomerID");
+    listCustomer.empty();
+    listCustomer.append(new Option('SELECIONE...', '0'));
+    $.each(customerList, function (index, item) {
+        listCustomer.append(new Option(item.CompanyName, item.Id));
+    });
+
+    listCustomer.select2().select2('val', id);
+
+    ObterDefinicaoClienteParaProposta(id);
+
+    //$('#Description').val('');
+    //$('#ShortDescription').val('');
+    //$('#Days').val(0);
+    //$('#AliquotaModal').val(0);
+}
+
+function ValidarInclusaoCliente() {
+
+}
+
 // Metodo responsavel por Carregar todas as Definicoes de Cliente para criacao da Proposta
 // Definicoes: Contato, Vendedor, Condicao de Pagamento e Descontos previamente cadastrados.
 function ObterDefinicaoClienteParaProposta(idCliente) {
@@ -919,4 +953,9 @@ function ObterDefinicaoClienteParaProposta(idCliente) {
     ObterListaCondicaoPagamentoPorCliente(idCliente);
 
     ObterListaModalidadeTransporte(idCliente);
+
+    $('#hdnCustomerID_Contato_Modal').val(idCliente);
+    $('#hdnCustomerID_Vendedor_Modal').val(idCliente);
+    $('#hdnCustomerID_CondicaoPagamento_Modal').val(idCliente);
+
 }

@@ -320,7 +320,10 @@ namespace Control.UI.Controllers
             try
             {
                 context = new DALContext();
-                var vendorList = context.VendorsCustomer.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendor).ToList();
+                //var vendorList = context.VendorsCustomer.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendor).ToList();
+
+                var Customer = context.Customers.Find(p => p.Id == CustomerID);
+                var vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
                 return Json(new { vendorList = vendorList });
             }
             catch (Exception ex)
@@ -463,6 +466,12 @@ namespace Control.UI.Controllers
 
                 context.SaveChanges();
 
+                var Customer = context.Customers.Find(p => p.Id == CustomerID);
+
+                Customer.VendorId = Vendor.Id;
+                context.Customers.Update(Customer);
+                context.SaveChanges();
+
                 return Content(String.Format("{0}", Vendor.Id));
             }
             catch (Exception ex)
@@ -517,10 +526,22 @@ namespace Control.UI.Controllers
             {
                 context = new DALContext();
 
+                Customer.Document = Customer.Document.Replace(".", "").Replace("-", "").Replace("/", "");
+
                 context.Customers.Create(Customer);
                 context.SaveChanges();
 
-                return Content(String.Format("{0}", Customer.Id));
+                var CustomerList = context.Customers.All()
+                    .Select(p => new
+                    {
+                        p.Id,
+                        p.CompanyName
+                    })
+                    .OrderBy(p => p.CompanyName).ToList();
+
+                var CustomerListJSON = new JavaScriptSerializer().Serialize(CustomerList);
+
+                return Content(String.Format("{0};{1}", Customer.Id, CustomerListJSON));
             }
             catch (Exception ex)
             {

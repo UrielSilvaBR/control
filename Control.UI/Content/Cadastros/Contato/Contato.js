@@ -4,9 +4,9 @@
 
     $('#Contact_Mobile_Modal').mask('(99) 99999-9999');
 
-    $('#Order_CustomerID').change(function () {
-        $('#hdnCustomerID_Contato_Modal').val($(this).val());
-    });
+    //$('#Order_CustomerID').change(function () {
+    //    $('#hdnCustomerID_Contato_Modal').val($(this).val());
+    //});
 
     var idCliente = $('#Order_CustomerID').val();
 
