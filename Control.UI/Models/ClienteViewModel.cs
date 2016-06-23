@@ -15,6 +15,9 @@ namespace Control.UI.Models
         public List<Country> Countries { get; set; }
         public List<City> Cities { get; set; }
         public List<State> States { get; set; }
+        public List<PaymentTerm> CondicoesPagamento { get; set; }
+        public List<ShippingMode> ModolidadeTransporte { get; set; }
+        public List<ShippingMode> Vendedores { get; set; }
 
         public ClienteViewModel()
         {
@@ -24,7 +27,13 @@ namespace Control.UI.Models
             States = context.States.All().OrderBy(p => p.Name).ToList();
             States.Insert(0, new State() { Id = 0, Name = "SELECIONE..." });
 
-            if(Customer == null)
+            CondicoesPagamento = context.PaymentTerms.All().ToList();
+            CondicoesPagamento.Insert(0, new PaymentTerm() { Id = 0, Description = "SELECIONE..." });
+
+            ModolidadeTransporte = context.ShippingModes.All().ToList();
+            ModolidadeTransporte.Insert(0, new ShippingMode() { Id = 0, Name = "SELECIONE..." });
+
+            if (Customer == null)
             {
                 Customer = new Customer();
             }

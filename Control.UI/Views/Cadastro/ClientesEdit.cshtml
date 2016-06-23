@@ -184,60 +184,80 @@
                         </div>
                     </fieldset>
                     <fieldset>
-                        <legend>Contatos</legend>
+                        <legend>Condições Comerciais</legend>
 
                         <div class="form-group">
 
-                            @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-1">
-                                @Html.EditorFor(model => model.Customer.PhoneCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-                            </div>
-                            <div class="col-md-2">
-                                @Html.EditorFor(model => model.Customer.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                            @Html.Label("Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-3">
+                                @Html.DropDownListFor(model => model.Customer.AddressCountryId, new SelectList(Model.Countries, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
                             </div>
 
-                            @Html.Label("Fax", htmlAttributes: new { @class = "control-label col-md-1" })
+                            @Html.Label("Transporte", htmlAttributes: new { @class = "control-label col-md-1" })
                             <div class="col-md-3">
-                                @Html.EditorFor(model => model.Customer.PhoneFax, new { htmlAttributes = new { @class = "form-control" } })
-                                @*@Html.ValidationMessageFor(model => model.PhoneFax, "", new { @class = "text-danger" })*@
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-3">
-                                @Html.EditorFor(model => model.Customer.Email, new { htmlAttributes = new { @class = "form-control" } })
-                                @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                                @Html.DropDownListFor(model => model.Customer.AddressStateId, new SelectList(Model.States, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                @*@Html.ValidationMessageFor(model => model.AddressState, "", new { @class = "text-danger" })*@
                             </div>
 
-                            @Html.Label("Website", htmlAttributes: new { @class = "control-label col-md-1" })
-                            <div class="col-md-3">
-                                @Html.EditorFor(model => model.Customer.Website, new { htmlAttributes = new { @class = "form-control" } })
-                                @*@Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })*@
-                            </div>
                         </div>
                     </fieldset>
-                    <div class="form-group">
-                        <div class="col-md-offset-4 col-md-10">
+                        
+
+                        <fieldset>
+                            <legend>Contatos</legend>
+
+                            <div class="form-group">
+
+                                @Html.Label("Telefone", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.Customer.PhoneCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                </div>
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Customer.Phone, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                </div>
+
+                                @Html.Label("Fax", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Customer.PhoneFax, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.PhoneFax, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Email", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Customer.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                                </div>
+
+                                @Html.Label("Website", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Customer.Website, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-md-offset-4 col-md-10">
 
 
-                            <input type="submit" value="Cadastrar" class="btn btn-primary" id="btnCadastrar" />
+                                <input type="submit" value="Cadastrar" class="btn btn-primary" id="btnCadastrar" />
 
-                            <a href='@Url.Action("Clientes", "Cadastro")' style="text-decoration: none;">
-                                <input type="button" class="btn btn-primary" value="Clientes" />
-                            </a>
+                                <a href='@Url.Action("Clientes", "Cadastro")' style="text-decoration: none;">
+                                    <input type="button" class="btn btn-primary" value="Clientes" />
+                                </a>
 
 
-                            <a href='@Url.Action("OrdersCustomer", "Pedido", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
-                                <input type="button" class="btn btn-primary" value="Pedidos" />
-                            </a>
+                                <a href='@Url.Action("OrdersCustomer", "Pedido", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
+                                    <input type="button" class="btn btn-primary" value="Pedidos" />
+                                </a>
 
-                            <a href='@Url.Action("InvoicesCustomer", "Invoice", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
-                                <input type="button" class="btn btn-primary" value=" Nota Fiscal" />
-                            </a>
+                                <a href='@Url.Action("InvoicesCustomer", "Invoice", new { ClientID = Model.Customer.Id })' style="text-decoration: none;">
+                                    <input type="button" class="btn btn-primary" value=" Nota Fiscal" />
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
+</div>
                                 }
             <!--Fim-->
         </div>
