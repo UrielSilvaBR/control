@@ -166,24 +166,24 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 </div>
                                 <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
                                 <div class="pull-left">
-                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
+                                    <a href="javascript:void(0);" onclick="AbrirModalCadastroCondicaoPagamento();">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </a>
                                 </div>
                                 <!--Campos Modalidade de Transporte-->
                                 <div class="col-xs-1" id="divVendedor" style="line-height:28px;margin-left: 77px;">
-                                    @Html.Label("Transporte:", htmlAttributes: new { @class = "" })
+                                    @Html.Label("Transporte", htmlAttributes: new { @class = "" })
                                 </div>
                                 <!--Adicionar Combo da Modalidade de transporte-->
                                 <div class="col-md-4">
-                                    @Html.DropDownListFor(model => model.Order.VendorID, new SelectList(Model.Vendors, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                    @Html.DropDownListFor(model => model.Order.ShippingId, new SelectList(Model.ShippingModes, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
                                 </div>
                                 <!--Adicionar chamada javascript para Modal de alteração dos termos de pagamentos-->
-                                <div class="pull-left">
+                                @*<div class="pull-left">
                                     <a href="javascript:void(0);" onclick="AbrirModalCadastroVendedor();">
                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                     </a>
-                                </div>
+                                </div>*@
 
                             </div>
 

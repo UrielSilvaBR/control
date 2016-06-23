@@ -5,8 +5,8 @@ $(document).ready(function () {
 
     $('#btnAdicionarItemPedido').click(function () {
         AdicionarItemPedido();
-        
-       
+
+
     })
 
     $('#btnEditarItemPedido').click(function () {
@@ -60,8 +60,7 @@ $(document).ready(function () {
     if ($('#Order_DespesaFinanceira').is(':checked')) {
         $('#Order_Discount').attr('disabled', true);
     }
-    else
-    {
+    else {
         $('#Order_Discount').attr('disabled', false);
     }
 
@@ -119,6 +118,42 @@ function ObterListaVendedorPorCliente(idCliente, defaultValue) {
       });
 }
 
+function ObterListaCondicaoPagamentoPorCliente(idCliente, defaultValue) {
+    if (typeof defaultValue === 'undefined') { defaultValue = 0; }
+
+    $.post("/Pedido/GetPaymentTerms",
+    { CustomerID: idCliente },
+     function (result) {
+
+         var listPaymentTerm = $("#Order_PaymentTermID");
+         listPaymentTerm.empty();
+         listPaymentTerm.append(new Option('SELECIONE...', '0'));
+         $.each(result.paymentTermList, function (index, item) {
+             listPaymentTerm.append(new Option(item.Description, item.Id));
+         });
+
+         if (defaultValue > 0)
+             listPaymentTerm.select2().select2('val', defaultValue);
+         else if (result.paymentTermIDCustomer > 0)
+             listPaymentTerm.select2().select2('val', result.paymentTermIDCustomer);
+         else listPaymentTerm.select2().select2('val', listPaymentTerm.val());
+     });
+}
+
+function ObterListaModalidadeTransporte(idCliente)
+{
+    $.post("/Pedido/GetShippingModes",
+    { CustomerID: idCliente },
+    function (result) {
+
+        var listShippingMode = $("#Order_ShippingId");
+
+        if (result.shippingIDCustomer > 0)
+            listShippingMode.select2().select2('val', result.shippingIDCustomer);
+        else listShippingMode.select2().select2('val', 0);
+    });
+}
+
 function ObterListaVendedorPorContato(idContato) {
     $.post("/Pedido/GetVendorsByContact",
       { ContactID: idContato },
@@ -161,8 +196,7 @@ function IniciarlizarCamposItemPedido() {
 
     $('#OrderProduct_QuantityOrder').ForceNumericOnly();
 
-    if ($('#OrderProduct_QuantityOrder').val() == "" || parseInt($('#OrderProduct_QuantityOrder').val() == 0))
-    {
+    if ($('#OrderProduct_QuantityOrder').val() == "" || parseInt($('#OrderProduct_QuantityOrder').val() == 0)) {
         $('#OrderProduct_QuantityOrder').val(1);
     }
 
@@ -569,7 +603,7 @@ function AdicionarItemPedido() {
     quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#OrderProduct_UnitPrice').val();
     var quantidadeEntregue = $('#OrderProduct_QuantityDeliver').val();
-    
+
     //var desconto = $('#OrderProduct_ItemDiscount').val();
     var precoTotal = $('#OrderProduct_TotalPrice').val();
 
@@ -799,8 +833,7 @@ function AplicarDesconto(percentualDesconto) {
     $('#Order_TotalValue').val(valorTotal);
 }
 
-function AbrirModalCadastroCliente()
-{
+function AbrirModalCadastroCliente() {
     $('#modal-cadastro-cliente').modal('show');
 }
 
@@ -812,6 +845,10 @@ function AbrirModalCadastroContato() {
     $('#modal-cadastro-contato').modal('show');
 }
 
+function AbrirModalCadastroCondicaoPagamento() {
+    $('#modal-cadastro-condicao-pagamento').modal('show');
+}
+
 function FinalizarInclusaoVendedor(id) {
 
     $('#modal-cadastro-vendedor').modal('hide');
@@ -819,12 +856,10 @@ function FinalizarInclusaoVendedor(id) {
     ObterListaVendedorPorCliente($('#Order_CustomerID').val(), id);
 }
 
-function ValidarInclusaoVendedorModal()
-{
+function ValidarInclusaoVendedorModal() {
     var idCliente = $('#Order_CustomerID option:selected').val();
 
-    if(idCliente == 0)
-    {
+    if (idCliente == 0) {
         ShowMessage('Selecione o Cliente para cadastrar o Vendedor!', false);
         return false;
     }
@@ -835,6 +870,12 @@ function FinalizarInclusaoContato(id) {
     $('#modal-cadastro-contato').modal('hide');
 
     ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
+
+    $('#ContatName').val('');
+    $('#ContatRoleName').val('');
+    $('#Contact_Phone_Modal').val('');
+    $('#Contact_Mobile_Modal').val('');
+    $('#Email').val('');
 }
 
 function ValidarInclusaoContatoModal() {
@@ -846,11 +887,36 @@ function ValidarInclusaoContatoModal() {
     }
 }
 
+function FinalizarInclusaoCondicaoPagamento(id) {
+    $('#modal-cadastro-condicao-pagamento').modal('hide');
+
+    ObterListaCondicaoPagamentoPorCliente($('#Order_CustomerID').val(), id);
+
+    $('#Description').val('');
+    $('#ShortDescription').val('');
+    $('#Days').val(0);
+    $('#AliquotaModal').val(0);
+}
+
+function ValidarInclusaoCondicaoPagamentoModal() {
+
+    var idCliente = $('#Order_CustomerID option:selected').val();
+
+    if (idCliente == 0) {
+        ShowMessage('Selecione o Cliente para cadastrar a Condição de Pagamento!', false);
+        return false;
+    }
+}
+
 // Metodo responsavel por Carregar todas as Definicoes de Cliente para criacao da Proposta
 // Definicoes: Contato, Vendedor, Condicao de Pagamento e Descontos previamente cadastrados.
-function ObterDefinicaoClienteParaProposta(idCliente)
-{
+function ObterDefinicaoClienteParaProposta(idCliente) {
+
     ObterListaVendedorPorCliente(idCliente);
 
     ObterListaContatoPorCliente(idCliente);
+
+    ObterListaCondicaoPagamentoPorCliente(idCliente);
+
+    ObterListaModalidadeTransporte(idCliente);
 }

@@ -173,7 +173,7 @@ namespace Control.UI.Models
             Products = context.Products.All().OrderBy(p => p.Name).ToList();
             Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
 
-            PaymentTerms = context.PaymentTerms.All().OrderBy(p => p.Days).ToList();
+            PaymentTerms = context.PaymentTerms.Filter(p => p.IsActive).OrderBy(p => p.Days).ToList();
             PaymentTerms.Insert(0, new PaymentTerm() { Id = 0, Description = "SELECIONE..." });
 
             ShippingModes = context.ShippingModes.All().ToList();

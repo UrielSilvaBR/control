@@ -232,6 +232,24 @@
     </div>
     <!-- Uriel Modais - FIm -->
 
+    <div class="modal fade" id="modal-cadastro-condicao-pagamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Condição de Pagamento</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    @Html.Partial("~/Views/Shared/_AddCondicaoPagamento.cshtml", new PaymentTerm())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- Box de Mensagens de Alertas e Erros -->
     <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
         <div class="modal-dialog">

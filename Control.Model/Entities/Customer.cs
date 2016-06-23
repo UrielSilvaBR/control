@@ -56,13 +56,14 @@ namespace Control.Model.Entities
         public decimal? Discount { get; set; }
         public int? CommercialPolicy { get; set; }
 
+        [Display(Name = "Cond. Pagamento")]
         public int? PaymentTermId { get; set; }
         [ForeignKey("PaymentTermId")]
-        public virtual PaymentTerm DefaultPaymentTerm { get; set; }
+        public virtual PaymentTerm PaymentTerm { get; set; }
 
         public int? ShippingId { get; set; }
         [ForeignKey("ShippingId")]
-        public virtual PaymentTerm DefaultShipping { get; set; }
+        public virtual ShippingMode Shipping { get; set; }
 
         [NotMapped]
         public string CompanyNameOrder

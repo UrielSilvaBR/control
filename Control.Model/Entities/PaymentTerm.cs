@@ -23,7 +23,7 @@ namespace Control.Model.Entities
         [Display(Name ="Descrição")]
         public string Description { get; set; }
 
-        [Display(Name = "Código")]
+        [Display(Name = "Desc. Resumida")]
         public string ShortDescription { get; set; }
 
         [Display(Name = "Qtd. Dias")]

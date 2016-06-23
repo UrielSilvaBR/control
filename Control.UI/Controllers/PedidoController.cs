@@ -108,7 +108,7 @@ namespace Control.UI.Controllers
             {
                 convertPedido = context.Orders.Find(p => p.Id == OrderID);
 
-                convertPedido.Status = "PEDIDO";
+                convertPedido.Status = "PEDIDO - ABERTO";
                 convertPedido.CustomerControlCode = order.CustomerControlCode;
 
                 context.Orders.Update(convertPedido);
@@ -315,6 +315,54 @@ namespace Control.UI.Controllers
             }
         }
 
+        public JsonResult GetPaymentTerms(int CustomerID = 0)
+        {
+            try
+            {
+                context = new DALContext();
+                var paymentTermList = context.PaymentTerms.Filter(p => p.IsActive).OrderBy(p => p.Days).ToList();
+
+                var Customer = new Customer();
+                int paymentTermIDCustomer = 0;
+
+                if (CustomerID > 0)
+                {
+                    Customer = context.Customers.Find(p => p.Id == CustomerID);
+                    paymentTermIDCustomer = Customer.PaymentTermId.HasValue ? Customer.PaymentTermId.Value : 0;
+                }
+
+                return Json(new { paymentTermList = paymentTermList, paymentTermIDCustomer = paymentTermIDCustomer });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+        public JsonResult GetShippingModes(int CustomerID = 0)
+        {
+            try
+            {
+                context = new DALContext();
+                //var shippingModeList = context.ShippingModes.All().OrderBy(p => p.Name).ToList();
+
+                var Customer = new Customer();
+                int shippingIDCustomer = 0;
+
+                if (CustomerID > 0)
+                {
+                    Customer = context.Customers.Find(p => p.Id == CustomerID);
+                    shippingIDCustomer = Customer.ShippingId.HasValue ? Customer.ShippingId.Value : 0;
+                }
+
+                return Json(new { /*shippingModeList = shippingModeList,*/ shippingIDCustomer = shippingIDCustomer });
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
         public ActionResult GerarNotaFiscal(int OrderID)
         {
             try
@@ -419,6 +467,29 @@ namespace Control.UI.Controllers
                 context.SaveChanges();
 
                 return Content(String.Format("{0}", Contact.Id));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        public ActionResult IncluirCondicaoPagamento(Model.Entities.PaymentTerm PaymentTerm, int CustomerID)
+        {
+            try
+            {
+                context = new DALContext();
+
+                context.PaymentTerms.Create(PaymentTerm);
+
+                var Customer = context.Customers.Find(p => p.Id == CustomerID);
+                context.SaveChanges();
+
+                Customer.PaymentTermId = PaymentTerm.Id;
+                context.Customers.Update(Customer);
+                context.SaveChanges();
+
+                return Content(String.Format("{0}", PaymentTerm.Id));
             }
             catch (Exception ex)
             {

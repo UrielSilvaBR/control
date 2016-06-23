@@ -184,18 +184,19 @@
                         </div>
                     </fieldset>
                     <fieldset>
+                        
                         <legend>Condições Comerciais</legend>
 
                         <div class="form-group">
 
-                            @Html.Label("Pagamento", htmlAttributes: new { @class = "control-label col-md-2" })
+                            @Html.LabelFor(p => p.Customer.PaymentTermId, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-3">
-                                @Html.DropDownListFor(model => model.Customer.AddressCountryId, new SelectList(Model.Countries, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                @Html.DropDownListFor(model => model.Customer.PaymentTermId, new SelectList(Model.CondicoesPagamento, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                             </div>
 
                             @Html.Label("Transporte", htmlAttributes: new { @class = "control-label col-md-1" })
                             <div class="col-md-3">
-                                @Html.DropDownListFor(model => model.Customer.AddressStateId, new SelectList(Model.States, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
+                                @Html.DropDownListFor(model => model.Customer.ShippingId, new SelectList(Model.ModolidadeTransporte, "Id", "Name"), htmlAttributes: new { @class = "selddl" })
                                 @*@Html.ValidationMessageFor(model => model.AddressState, "", new { @class = "text-danger" })*@
                             </div>
 

@@ -818,6 +818,7 @@
     <Content Include="Views\Invoice\PDFInvoice.cshtml" />
     <Content Include="Views\Pedido\Carteira.cshtml" />
     <Content Include="Views\Pedido\_ListCarteira.cshtml" />
+    <Content Include="Views\Shared\_AddCondicaoPagamento.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

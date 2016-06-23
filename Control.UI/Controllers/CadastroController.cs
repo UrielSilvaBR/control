@@ -76,6 +76,8 @@ namespace Control.UI.Controllers
                 model.Customer.Document = model.Customer.Document.Replace(".", "").Replace("-", "").Replace("/", "");
                 model.Customer.ZipCode = model.Customer.ZipCode.Replace("-", "");
 
+                model.Customer.ShippingId = model.Customer.ShippingId.HasValue && model.Customer.ShippingId.Value == 0 ? null : model.Customer.ShippingId;
+
                 if (model.Customer.Id > 0)
                 {
                     context.Customers.Update(model.Customer);
