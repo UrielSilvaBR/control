@@ -65,6 +65,22 @@ function AbrirModalPedido(idPedido) {
 }
 
 function AbrirModalEmail(idPedido) {
+
+    waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
+
+    setTimeout(function () {
+        $.ajax({
+            url: '/Pedido/CarregarModalEmail',
+            data: { OrderID: idPedido },
+            type: 'POST',
+            success: function (result) {
+                waitingDialog.hide();
+                //ShowSuccess(result);
+                //window.location = '/Invoice/Invoice?InvoiceID=' + idPedido;
+            }
+        });
+    }, 1000);
+
     $('#modal-email-proposta').modal('show');
 }
 

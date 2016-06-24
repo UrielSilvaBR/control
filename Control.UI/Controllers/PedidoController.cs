@@ -572,6 +572,34 @@ namespace Control.UI.Controllers
 
             return View(OrderProducts);
         }
+        
+        public ActionResult CarregarModalEmail(int OrderID)
+        {
+            try
+            {
+                context = new DALContext();
+                List<UserAdressBook> Contatos = context.AddressBooks.Filter(p => p.Username == User.Identity.Name).ToList();
+
+                HtmlToPdf converter = new HtmlToPdf();
+                ViewBag.ToPDF = "1";
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
+
+                ViewBag.ToPDF = "0";
+                
+                byte[] fileBytes = doc.Save();
+                string fileName = "proposta_" + OrderID.ToString() + ".pdf";
+                return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+
+                
+
+                //return Content(String.Format("Arquivo exportado.", OrderID));
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+
+        }
 
         public PartialViewResult GetProdutosCarteira(int CustomerID = 0, int ProductID = 0)
         {

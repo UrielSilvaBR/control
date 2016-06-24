@@ -190,7 +190,9 @@
                                 0
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Order.CustomerControlCode)
+                                <a href='@Url.Action("ReportPedido", "Invoice", new { InvoiceID = item.Id } )'>
+                                    @Html.DisplayFor(modelItem => item.Order.CustomerControlCode)
+                                 </a>
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.QuantityOrder)

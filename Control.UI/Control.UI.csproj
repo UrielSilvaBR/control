@@ -752,6 +752,7 @@
     <Compile Include="Models\PedidoCompraViewModel.cs" />
     <Compile Include="Models\PedidoViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SendMailViewModel.cs" />
     <Compile Include="Models\UserPartialViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -820,6 +821,8 @@
     <Content Include="Views\Pedido\Carteira.cshtml" />
     <Content Include="Views\Pedido\_ListCarteira.cshtml" />
     <Content Include="Views\Shared\_AddCondicaoPagamento.cshtml" />
+    <Content Include="Views\Cadastro\ContatosEmailLista.cshtml" />
+    <Content Include="Views\Invoice\ReportPedido.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

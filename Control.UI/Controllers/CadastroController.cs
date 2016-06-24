@@ -199,6 +199,7 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
+
         public ActionResult ContatosEdit(int? ContatoID)
         {
             Contact model = new Contact();
@@ -639,6 +640,31 @@ namespace Control.UI.Controllers
             return RedirectToAction("CondicaoPagamento");
         }
 
+        #endregion
+
+        #region Contatos Email
+        public ActionResult ContatosEmailLista()
+        {
+            context = new DALContext();
+            List<UserAdressBook> retorno = new List<UserAdressBook>();
+            try
+            {
+                if (string.IsNullOrEmpty(User.Identity.Name))
+                {
+                    retorno = context.AddressBooks.All().ToList();
+                }
+                else
+                {
+                    retorno = context.AddressBooks.All().Where(p => p.Username.ToUpper().Contains(User.Identity.Name.ToUpper())).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
         #endregion
     }
 }

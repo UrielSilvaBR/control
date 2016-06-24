@@ -104,6 +104,31 @@ namespace Control.UI.Controllers
             return View(retorno);
         }
 
+        public ActionResult ReportPedido(int InvoiceID)
+        {
+            PedidoViewModel retorno = new PedidoViewModel();
+
+            context = new DALContext();
+            Order pedido = new Order();
+
+            try
+            {
+
+                pedido = context.Orders.Find(p => p.Id == InvoiceID);
+                ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
+                ViewBag.DataValidade = pedido.InsertDate.AddDays(15).ToShortDateString();
+
+                retorno.Order = pedido;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(retorno);
+        }
+
         public ActionResult InvoiceFile(int InvoiceID)
         {
             PedidoViewModel retorno = new PedidoViewModel();
