@@ -823,6 +823,7 @@
     <Content Include="Views\Shared\_AddCondicaoPagamento.cshtml" />
     <Content Include="Views\Cadastro\ContatosEmailLista.cshtml" />
     <Content Include="Views\Invoice\ReportPedido.cshtml" />
+    <Content Include="Views\Cadastro\ContatosEmailEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

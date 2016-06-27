@@ -58,6 +58,9 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
+        
+        
+
         public ActionResult FiltrarCliente(string FiltroCliente)
         {
             return RedirectToAction("Clientes");
@@ -664,6 +667,71 @@ namespace Control.UI.Controllers
             }
 
             return View(retorno);
+        }
+
+        public ActionResult ContatosEmailEdit(int? AddressBookID)
+        {
+            UserAdressBook model = new UserAdressBook();
+            model.Username = User.Identity.Name;
+
+            context = new DALContext();
+
+            if (AddressBookID > 0)
+            {
+                model = context.AddressBooks.Find(p => p.Id == AddressBookID);                
+            }
+
+            return View(model);
+        }
+
+        public ActionResult ContatosEmailSave(UserAdressBook model)
+        {
+            context = new DALContext();
+
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    model.Username = User.Identity.Name;
+
+                    if (model.Id > 0)
+                    {
+                        context.AddressBooks.Update(model);
+                    }
+                    else
+                    {
+                        context.AddressBooks.Create(model);
+                    }
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            ViewBag.Message = "Contato cadastrado com sucesso.";
+
+            return RedirectToAction("ContatosEmailLista");
+        }
+
+        public ActionResult ContatosEmailDelete(int? ContatoID)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var retorno = context.AddressBooks.Delete(p => p.Id == ContatoID);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            ViewBag.Message = "Contato excluído com sucesso.";
+
+            return RedirectToAction("ContatosEmailLista");
         }
         #endregion
     }
