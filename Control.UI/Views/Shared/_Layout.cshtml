@@ -222,7 +222,7 @@
                     <h4 class="modal-title" id="myModalLabel">Enviar Proposta por Email</h4>
                 </div>
                 <div class="modal-body modal-mensagem-alerta">
-                    @Html.Partial("~/Views/Shared/_SendMailAttach.cshtml", new Order())
+                    @Html.Partial("~/Views/Shared/_SendMailAttach.cshtml", new SendMailViewModel())
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>

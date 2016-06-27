@@ -21,7 +21,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             EnviarLoteRpsEnvio.LoteRps.Id = "A101";
             EnviarLoteRpsEnvio.LoteRps.NumeroLote = "101";
-            EnviarLoteRpsEnvio.LoteRps.Cnpj = "02390435000115";
+            EnviarLoteRpsEnvio.LoteRps.Cnpj = "02919862000148";
             EnviarLoteRpsEnvio.LoteRps.InscricaoMunicipal = "1301669";
             EnviarLoteRpsEnvio.LoteRps.QuantidadeRps = "1";
 
@@ -83,7 +83,7 @@ namespace Control.DAL.NFSe.Objects.Tests
             #region Prestador
 
             //EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02919862000148";
-            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02390435000115";
+            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.Cnpj = "02919862000148";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Prestador.InscricaoMunicipal = "1301669";
 
             #endregion
@@ -102,7 +102,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.DescEndereco = "R Luiz Antonio Burgain";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.Numero = "03";
-            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.Bairro = "Perus ";
+            EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.Bairro = "Perus";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.CodigoMunicipio = "3550308";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.Uf = "SP";
             EnviarLoteRpsEnvio.LoteRps.ListaRps.Rps.InfRps.Tomador.Endereco.Cep = "05203150";
@@ -126,7 +126,7 @@ namespace Control.DAL.NFSe.Objects.Tests
 
             var obj = Utility.Serialization.Deserialize<Model.NFSe.Xml.RecepcionarLoteRps.EnviarLoteRpsEnvio>(arquivoXml.OuterXml);
 
-            arquivoXml.InnerXml = Security.Security.AssinaturaDigital(arquivoXml.InnerXml, "InfRps", Security.Security.ObterCertificadoDigitalPorNome("MARIA APARECIDA NASCIMENTO"));
+            arquivoXml.InnerXml = Security.Security.AssinaturaDigital(arquivoXml.InnerXml, "InfRps", Security.Security.ObterCertificadoDigitalPorNome("N C C"));
 
             var objNotaFiscalDAL = new Control.DAL.NFSe.Objects.NotaFiscal();
 

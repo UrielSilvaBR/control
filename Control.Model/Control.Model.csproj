@@ -127,6 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Documentation\CERTIFICADO_NCC.p12" />
     <None Include="Documentation\NFSe\CERTIFICADO_TESTE_2015_2016.pfx" />
     <None Include="Documentation\NFSe\Erros-e-Alertas_V114.xls" />
     <None Include="Documentation\NFSe\Erros-e-Alertas_V115.xls" />
@@ -216,6 +217,10 @@
       <Project>{53eae4ef-78e0-4bd1-82eb-87069122a25c}</Project>
       <Name>Control.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Documentation\NFe\" />
+    <Folder Include="NFe\Xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
