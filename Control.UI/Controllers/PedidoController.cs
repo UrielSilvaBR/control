@@ -32,7 +32,7 @@ namespace Control.UI.Controllers
             context = new DALContext();
 
             var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
-            ViewBag.Title = "PROPOSTAS ABERTAS";
+            ViewBag.Title = "Propostas em Aberto";
             return View("Index", Orders);
         }
 
