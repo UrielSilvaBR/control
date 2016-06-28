@@ -17,7 +17,7 @@ namespace Control.DAL.NFSe.Objects
         {
              _wsNFSe = new br.com.ginfes.homologacao.ServiceGinfesImplService();
 
-            var certificado = Security.Security.ObterCertificadoDigitalPorNome("MARIA APARECIDA NASCIMENTO");
+            var certificado = Security.Security.ObterCertificadoDigitalPorNome("N C C");
 
             _wsNFSe.Url = ConfigurationManager.AppSettings["WsGinfes.ServiceGinfesImplService"];
             _wsNFSe.ClientCertificates.Add(certificado);
