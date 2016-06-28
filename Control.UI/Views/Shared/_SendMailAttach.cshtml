@@ -47,12 +47,10 @@
 
         </div>
 }
-<script type="text/javascript">
-    $('#ddlmail')
-       .on("change", function (e) {
-           // mostly used event, fired to the original element when the value changes
-           var val = $('#txtMail').val();
-           //alert("change val=" + e.val);
+@*<script type="text/javascript">
+    $('#ddlmail').select2()
+       .on("change", function (e) {           
+           var val = $('#txtMail').val();           
            $('#txtMail').val(val + e.val + "; ");
        })
-</script>
+</script>*@

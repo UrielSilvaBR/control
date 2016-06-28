@@ -226,6 +226,7 @@ namespace Control.UI.Controllers
                         context.OrdersProducts.Create(item);
                     }
 
+                    Pedido.Order.ShippingId = null;
                     if (Pedido.Order.Id > 0)
                         context.Orders.Update(Pedido.Order);
                     else

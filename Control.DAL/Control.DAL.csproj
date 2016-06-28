@@ -89,9 +89,9 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201606090259566_Initial.cs" />
-    <Compile Include="Migrations\201606090259566_Initial.Designer.cs">
-      <DependentUpon>201606090259566_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201606281221431_Reset.cs" />
+    <Compile Include="Migrations\201606281221431_Reset.Designer.cs">
+      <DependentUpon>201606281221431_Reset.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -213,12 +213,12 @@
     <None Include="Web References\servico.cidades\cidades.disco" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606090259566_Initial.resx">
-      <DependentUpon>201606090259566_Initial.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="NFe\Objects\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NFe\Objects\" />
+    <EmbeddedResource Include="Migrations\201606281221431_Reset.resx">
+      <DependentUpon>201606281221431_Reset.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -75,8 +75,8 @@ namespace Control.DAL.Data
 
                 case 7:
 
-                    //Conex�o de Natanael Silva - Desenvolvimento
-                    strConn = @"Server=tcp:ckl86ymzyx.database.windows.net,1433;Database=NFS_control;User ID=meiabandeirada@ckl86ymzyx;Password=j0t@qu3st;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+                    //Conexão  Amazon AWS
+                    strConn = @"Server=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Database=dbcontrol;User ID=user_control;Password=rD9zISSVTC;";
                     break;
             }
 
