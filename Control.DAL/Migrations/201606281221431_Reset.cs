@@ -3,10 +3,22 @@ namespace Control.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class final : DbMigration
+    public partial class Reset : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.UserAdressBook",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Username = c.String(),
+                        MailContactDescription = c.String(),
+                        MailContactName = c.String(),
+                        MailContactEmai = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.Branch",
                 c => new
@@ -121,14 +133,53 @@ namespace Control.DAL.Migrations
                         Email = c.String(),
                         Website = c.String(),
                         Document = c.String(),
-                        Discount = c.Decimal(precision: 18, scale: 2),
-                        CommercialPolicy = c.Int(),
                         RegisterDate = c.DateTime(),
                         LastUpdate = c.DateTime(),
+                        Discount = c.Decimal(precision: 18, scale: 2),
+                        CommercialPolicy = c.Int(),
+                        PaymentTermId = c.Int(),
+                        ShippingId = c.Int(),
+                        VendorId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.City", t => t.AddressCityId, cascadeDelete: true)
-                .Index(t => t.AddressCityId);
+                .ForeignKey("dbo.PaymentTerm", t => t.PaymentTermId)
+                .ForeignKey("dbo.ShippingMode", t => t.ShippingId)
+                .ForeignKey("dbo.Vendor", t => t.VendorId)
+                .Index(t => t.AddressCityId)
+                .Index(t => t.PaymentTermId)
+                .Index(t => t.ShippingId)
+                .Index(t => t.VendorId);
+            
+            CreateTable(
+                "dbo.PaymentTerm",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Description = c.String(),
+                        ShortDescription = c.String(),
+                        Days = c.Int(nullable: false),
+                        InsertDate = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                        Aliquota = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ShippingMode",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        isWeightCharged = c.Boolean(nullable: false),
+                        isVolumeCharged = c.Boolean(nullable: false),
+                        WeightPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        VolumePrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        WeightUnit = c.String(),
+                        VolumeUnit = c.String(),
+                        isClientCharged = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.Vendor",
@@ -140,6 +191,21 @@ namespace Control.DAL.Migrations
                         Active = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.VendorsCustomer",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerID = c.Int(nullable: false),
+                        VendorID = c.Int(nullable: false),
+                        InsertDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Vendor", t => t.VendorID, cascadeDelete: true)
+                .ForeignKey("dbo.Customer", t => t.CustomerID, cascadeDelete: true)
+                .Index(t => t.CustomerID)
+                .Index(t => t.VendorID);
             
             CreateTable(
                 "dbo.InvoiceItem",
@@ -288,16 +354,28 @@ namespace Control.DAL.Migrations
                         OrderTypeID = c.Int(nullable: false),
                         VendorID = c.Int(nullable: false),
                         ContactID = c.Int(nullable: false),
+                        PaymentTermID = c.Int(),
+                        ShippingId = c.Int(),
+                        DespesaFinanceira = c.Boolean(nullable: false),
+                        Validated = c.Boolean(nullable: false),
+                        AdminRoleAuthorized = c.Boolean(nullable: false),
+                        RegisteredBy = c.String(),
+                        CustomerControlCode = c.String(),
+                        ProposalMailList = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contact", t => t.ContactID, cascadeDelete: true)
                 .ForeignKey("dbo.Customer", t => t.CustomerID, cascadeDelete: true)
+                .ForeignKey("dbo.PaymentTerm", t => t.PaymentTermID)
+                .ForeignKey("dbo.PaymentTerm", t => t.ShippingId)
                 .ForeignKey("dbo.OrderType", t => t.OrderTypeID, cascadeDelete: true)
                 .ForeignKey("dbo.Vendor", t => t.VendorID, cascadeDelete: true)
                 .Index(t => t.CustomerID)
                 .Index(t => t.OrderTypeID)
                 .Index(t => t.VendorID)
-                .Index(t => t.ContactID);
+                .Index(t => t.ContactID)
+                .Index(t => t.PaymentTermID)
+                .Index(t => t.ShippingId);
             
             CreateTable(
                 "dbo.OrderProduct",
@@ -312,13 +390,14 @@ namespace Control.DAL.Migrations
                         ItemDiscount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Comments = c.String(),
                         TotalPrice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        DeadlineItem = c.Int(nullable: false),
                         ProductID = c.Int(),
                         TypeUnitID = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
                 .ForeignKey("dbo.Product", t => t.ProductID)
                 .ForeignKey("dbo.TypeUnit", t => t.TypeUnitID)
-                .ForeignKey("dbo.Order", t => t.OrderId, cascadeDelete: true)
                 .Index(t => t.OrderId)
                 .Index(t => t.ProductID)
                 .Index(t => t.TypeUnitID);
@@ -543,9 +622,11 @@ namespace Control.DAL.Migrations
             DropForeignKey("dbo.PurchaseOrderItem", "ProductID", "dbo.Product");
             DropForeignKey("dbo.Order", "VendorID", "dbo.Vendor");
             DropForeignKey("dbo.Order", "OrderTypeID", "dbo.OrderType");
-            DropForeignKey("dbo.OrderProduct", "OrderId", "dbo.Order");
+            DropForeignKey("dbo.Order", "ShippingId", "dbo.PaymentTerm");
+            DropForeignKey("dbo.Order", "PaymentTermID", "dbo.PaymentTerm");
             DropForeignKey("dbo.OrderProduct", "TypeUnitID", "dbo.TypeUnit");
             DropForeignKey("dbo.OrderProduct", "ProductID", "dbo.Product");
+            DropForeignKey("dbo.OrderProduct", "OrderId", "dbo.Order");
             DropForeignKey("dbo.Order", "CustomerID", "dbo.Customer");
             DropForeignKey("dbo.Order", "ContactID", "dbo.Contact");
             DropForeignKey("dbo.InvoiceTax", "InvoiceId", "dbo.Invoice");
@@ -556,6 +637,11 @@ namespace Control.DAL.Migrations
             DropForeignKey("dbo.Product", "ProductTypeUnitID", "dbo.TypeUnit");
             DropForeignKey("dbo.Contact", "VendorID", "dbo.Vendor");
             DropForeignKey("dbo.Contact", "CustomerID", "dbo.Customer");
+            DropForeignKey("dbo.VendorsCustomer", "CustomerID", "dbo.Customer");
+            DropForeignKey("dbo.VendorsCustomer", "VendorID", "dbo.Vendor");
+            DropForeignKey("dbo.Customer", "VendorId", "dbo.Vendor");
+            DropForeignKey("dbo.Customer", "ShippingId", "dbo.ShippingMode");
+            DropForeignKey("dbo.Customer", "PaymentTermId", "dbo.PaymentTerm");
             DropForeignKey("dbo.Customer", "AddressCityId", "dbo.City");
             DropForeignKey("dbo.City", "StateId", "dbo.State");
             DropForeignKey("dbo.State", "CountryId", "dbo.Country");
@@ -574,6 +660,8 @@ namespace Control.DAL.Migrations
             DropIndex("dbo.OrderProduct", new[] { "TypeUnitID" });
             DropIndex("dbo.OrderProduct", new[] { "ProductID" });
             DropIndex("dbo.OrderProduct", new[] { "OrderId" });
+            DropIndex("dbo.Order", new[] { "ShippingId" });
+            DropIndex("dbo.Order", new[] { "PaymentTermID" });
             DropIndex("dbo.Order", new[] { "ContactID" });
             DropIndex("dbo.Order", new[] { "VendorID" });
             DropIndex("dbo.Order", new[] { "OrderTypeID" });
@@ -584,6 +672,11 @@ namespace Control.DAL.Migrations
             DropIndex("dbo.Product", new[] { "ProductTypeUnitID" });
             DropIndex("dbo.InvoiceItem", new[] { "ProductID" });
             DropIndex("dbo.InvoiceItem", new[] { "InvoiceId" });
+            DropIndex("dbo.VendorsCustomer", new[] { "VendorID" });
+            DropIndex("dbo.VendorsCustomer", new[] { "CustomerID" });
+            DropIndex("dbo.Customer", new[] { "VendorId" });
+            DropIndex("dbo.Customer", new[] { "ShippingId" });
+            DropIndex("dbo.Customer", new[] { "PaymentTermId" });
             DropIndex("dbo.Customer", new[] { "AddressCityId" });
             DropIndex("dbo.Contact", new[] { "VendorID" });
             DropIndex("dbo.Contact", new[] { "CustomerID" });
@@ -613,7 +706,10 @@ namespace Control.DAL.Migrations
             DropTable("dbo.TypeUnit");
             DropTable("dbo.Product");
             DropTable("dbo.InvoiceItem");
+            DropTable("dbo.VendorsCustomer");
             DropTable("dbo.Vendor");
+            DropTable("dbo.ShippingMode");
+            DropTable("dbo.PaymentTerm");
             DropTable("dbo.Customer");
             DropTable("dbo.Contact");
             DropTable("dbo.Country");
@@ -621,6 +717,7 @@ namespace Control.DAL.Migrations
             DropTable("dbo.City");
             DropTable("dbo.Company");
             DropTable("dbo.Branch");
+            DropTable("dbo.UserAdressBook");
         }
     }
 }
