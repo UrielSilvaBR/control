@@ -127,7 +127,65 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Documentation\CERTIFICADO_NCC.p12" />
+    <None Include="Documentation\NFe\CERTIFICADO_NCC.p12" />
+    <None Include="Documentation\NFe\Manual_de_Orientacao_Contribuinte_v_6.00.pdf" />
+    <None Include="Documentation\NFe\Schemas\consReciNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\consSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\consStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\enviNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\inutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\leiauteConsSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\leiauteConsStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\leiauteInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\leiauteNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\nfe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\procInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\procNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\retConsReciNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\retConsSitNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\retConsStatServ_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\retEnviNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\retInutNFe_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\tiposBasico_v3.10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Documentation\NFe\Schemas\xmldsig-core-schema_v1.01.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Documentation\NFSe\CERTIFICADO_TESTE_2015_2016.pfx" />
     <None Include="Documentation\NFSe\Erros-e-Alertas_V114.xls" />
     <None Include="Documentation\NFSe\Erros-e-Alertas_V115.xls" />
@@ -219,7 +277,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Documentation\NFe\" />
     <Folder Include="NFe\Xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
