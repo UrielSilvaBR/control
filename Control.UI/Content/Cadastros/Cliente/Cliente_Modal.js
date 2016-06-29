@@ -23,6 +23,7 @@
             return;
 
         ObterEnderecoPorCEP(cep);
+        
     });
 
     $('#Customer_CompanyName_Modal').focus();
@@ -76,6 +77,11 @@ function ObterEnderecoPorCEP(cep) {
                 $("#Customer_AddressCityId_Modal").select2().select2("val", result.Cidade.Id);
                 $("#Customer_AddressStateId_Modal").select2().select2("val", result.Cidade.StateId);
 
+                waitingDialog.hide();
+                $('#modal-cadastro-cliente').modal('show');
+                $('#Customer_AddressNumber_Modal').focus();
+            },
+            error: function (request, status, error) {
                 waitingDialog.hide();
                 $('#modal-cadastro-cliente').modal('show');
                 $('#Customer_AddressNumber_Modal').focus();
