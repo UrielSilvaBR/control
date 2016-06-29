@@ -89,9 +89,9 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201606281221431_Reset.cs" />
-    <Compile Include="Migrations\201606281221431_Reset.Designer.cs">
-      <DependentUpon>201606281221431_Reset.cs</DependentUpon>
+    <Compile Include="Migrations\201606290335058_initial.cs" />
+    <Compile Include="Migrations\201606290335058_initial.Designer.cs">
+      <DependentUpon>201606290335058_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -216,8 +216,8 @@
     <Folder Include="NFe\Objects\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606281221431_Reset.resx">
-      <DependentUpon>201606281221431_Reset.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606290335058_initial.resx">
+      <DependentUpon>201606290335058_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
