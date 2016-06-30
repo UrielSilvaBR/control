@@ -533,6 +533,11 @@ namespace Control.UI.Controllers
                 //prod.MinimumStockAlert = 50;
                 prod.ProductTypeUnitID = 1;
 
+                if (string.IsNullOrEmpty(prod.DescriptionNCC))
+                {
+                    prod.DescriptionNCC = prod.Description;
+                }
+
                 if (prod.Id > 0)
                 {
                     context.Products.Update(prod);

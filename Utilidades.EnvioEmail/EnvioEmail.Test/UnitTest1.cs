@@ -18,9 +18,20 @@ namespace EnvioEmail.Test
 
                 throw;
             }
-            
+        }
 
-            
+        [TestMethod]
+        public void TestMethod2()
+        {
+            try
+            {
+                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate("urielbr@gmail.com", "teste envio Email", "Teste envio Email", AppDomain.CurrentDomain.BaseDirectory + "/anexos/arquivo.pdf");
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

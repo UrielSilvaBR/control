@@ -7,3 +7,11 @@ c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Envio
 c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
 c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
 c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.dll
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.pdb
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.dll
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.pdb
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
+D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb

@@ -223,6 +223,7 @@
     <Content Include="ajax\ui_icons.html" />
     <Content Include="ajax\ui_jquery-ui.html" />
     <Content Include="ajax\ui_progressbars.html" />
+    <Content Include="anexos\sign.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cadastros\Cliente\Cliente.js" />
@@ -657,6 +658,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="anexos\arquivo.pdf" />
     <None Include="Properties\PublishProfiles\ControlGtwave.pubxml" />
     <None Include="Properties\PublishProfiles\uriel.pubxml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
@@ -726,6 +728,7 @@
     <Content Include="scripts\modernizr-2.6.2.js" />
     <Content Include="scripts\select2.js" />
     <Content Include="scripts\select2.min.js" />
+    <Content Include="template\template_ncc.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
