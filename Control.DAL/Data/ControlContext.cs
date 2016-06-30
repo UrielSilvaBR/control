@@ -51,7 +51,7 @@ namespace Control.DAL.Data
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {
-             Database.SetInitializer(new DropCreateDatabaseAlways<ControlContext>());
+             //Database.SetInitializer(new DropCreateDatabaseAlways<ControlContext>());
             //this.Configuration.LazyLoadingEnabled = false;
         }
 
@@ -59,7 +59,7 @@ namespace Control.DAL.Data
             : base(cn, true)
         {
             // Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ControlContext>());
-            Database.SetInitializer(new DropCreateDatabaseAlways<ControlContext>());
+            //Database.SetInitializer(new DropCreateDatabaseAlways<ControlContext>());
             //this.Configuration.LazyLoadingEnabled = false;
         }
 

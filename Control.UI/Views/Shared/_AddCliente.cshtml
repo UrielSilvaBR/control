@@ -62,9 +62,9 @@
                         </div>
 
                         @Html.Label("CNPJ/CPF", htmlAttributes: new { @class = "control-label col-md-2", @id = "lblCnpjCpf_Modal" })
-                        <div class="col-md-3">
+                        <div class="col-md-3" id="divCPFCNPJ">
                             @Html.EditorFor(model => model.Customer.Document, new { htmlAttributes = new { @class = "form-control", @type = "text", @id = "Customer_Document_Modal" } })
-                            @*@Html.ValidationMessageFor(model => model.Document, "", new { @class = "text-danger" })*@
+                            @Html.ValidationMessageFor(model => model.Customer.Document, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <fieldset>

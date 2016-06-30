@@ -940,6 +940,15 @@ function FinalizarInclusaoCliente(cliente) {
 
 function ValidarInclusaoCliente() {
 
+    var quantidade = $('#Customer_Document_Modal').val();
+    if (quantidade == 0) {
+        $('#divCPFCNPJ').addClass('has-error');
+        $('#Customer_Document_Modal').focus();
+        return false;
+    }
+    else
+        $('#divCPFCNPJ').removeClass('has-error');
+
 }
 
 // Metodo responsavel por Carregar todas as Definicoes de Cliente para criacao da Proposta
