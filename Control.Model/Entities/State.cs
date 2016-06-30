@@ -31,8 +31,6 @@ namespace Control.Model.Entities
         [DataMember]
         public int IBGECode { get; set; }
 
-        [DataMember]
-        public string AliquotaICMS { get; set; }
 
         [NotMapped]
         public string StateName

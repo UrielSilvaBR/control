@@ -126,44 +126,55 @@ namespace Control.UI.Controllers
         public JsonResult GetAddressByCep(string cep)
         {
             var CEP = new DAL.CEP.Objects.CEP();
+            City objCityCEP = new City();
 
-            var objCityCEP = CEP.GetCityByCEP(cep);
-            objCityCEP.CEP = Utility.Serialization.Deserialize<Utility.CEP>(Utility.Utilities.GetXmlAddressByCEP(cep));
-            objCityCEP.Name = objCityCEP.CEP.Cidade.ToUpper();
-            objCityCEP.CEP.Bairro = objCityCEP.CEP.Bairro.ToUpper();
-
-            context = new DALContext();
-
-            bool cityExists = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode) == null ? false : true;
-
-            if (!cityExists)
+            try
             {
-                var objCity = new City()
+                objCityCEP = CEP.GetCityByCEP(cep);
+                objCityCEP.CEP = Utility.Serialization.Deserialize<Utility.CEP>(Utility.Utilities.GetXmlAddressByCEP(cep));
+                objCityCEP.Name = objCityCEP.CEP.Cidade.ToUpper();
+                objCityCEP.CEP.Bairro = objCityCEP.CEP.Bairro.ToUpper();
+
+                context = new DALContext();
+
+                bool cityExists = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode) == null ? false : true;
+
+                if (!cityExists)
                 {
-                    Name = objCityCEP.Name,
-                    CEPInicial = objCityCEP.CEPInicial,
-                    CEPFinal = objCityCEP.CEPFinal,
-                    IBGECode = objCityCEP.IBGECode,
-                    StateId = context.States.Find(p => p.UF.Trim().ToUpper() == objCityCEP.CEP.UF.Trim().ToUpper()).Id,
-                    CEP = objCityCEP.CEP
-                };
+                    var objCity = new City()
+                    {
+                        Name = objCityCEP.Name,
+                        CEPInicial = objCityCEP.CEPInicial,
+                        CEPFinal = objCityCEP.CEPFinal,
+                        IBGECode = objCityCEP.IBGECode,
+                        StateId = context.States.Find(p => p.UF.Trim().ToUpper() == objCityCEP.CEP.UF.Trim().ToUpper()).Id,
+                        CEP = objCityCEP.CEP
+                    };
 
-                context.Cities.Create(objCity);
-                context.SaveChanges();
+                    context.Cities.Create(objCity);
+                    context.SaveChanges();
 
-                var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
+                    var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
 
-                return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+                    return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    var objCity = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode);
+                    objCity.CEP = objCityCEP.CEP;
+
+                    var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
+
+                    return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var objCity = context.Cities.Find(p => p.IBGECode == objCityCEP.IBGECode);
-                objCity.CEP = objCityCEP.CEP;
-
-                var ListaCidades = context.Cities.All().OrderBy(p => p.Name).ToList();
-
-                return Json(new { Cidade = objCity, ListaCidades = ListaCidades }, JsonRequestBehavior.AllowGet);
+                throw ex;
+                //return Json(new { Cidade = "", ListaCidades = "" }, JsonRequestBehavior.AllowGet);
             }
+
+            
         }
 
         public JsonResult GetCitiesByState(int StateID)

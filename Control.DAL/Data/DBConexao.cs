@@ -51,6 +51,7 @@ namespace Control.DAL.Data
 
                     //Conex�o de produ��o Gtwave
                     //strConn = @"Data Source=192.99.149.206;Initial Catalog=control;Persist Security Info=True;User ID=userControl;Password=Ncc123";
+                    //strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=userdbControl;Password=Ncc123";
                     strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=userdbControl;Password=Ncc123";
                     //strConn = @"Data Source=127.0.0.1;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
@@ -76,8 +77,8 @@ namespace Control.DAL.Data
                 case 7:
 
                     //Conexão  Amazon AWS
-                    //strConn = @"Server=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Database=dbcontrol;User ID=user_control;Password=rD9zISSVTC;";
-                    strConn = @"Data Source=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
+                    strConn = @"Server=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Database=dbcontrol;User ID=user_control;Password=rD9zISSVTC;";
+                    //strConn = @"Data Source=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
             }
 
