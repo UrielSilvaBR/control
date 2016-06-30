@@ -44,7 +44,7 @@ namespace Control.DAL.Data
 
                 case 2:                    
                     //Local PC
-                    strConn = @"Server=.\SQLEXPRESS;Database=Control;Integrated Security=SSPI;";
+                    strConn = @"Server=Paulo-PC\SQLEXPRESS;Database=Control;Integrated Security=SSPI;";
                     break;
 
                 case 3:
