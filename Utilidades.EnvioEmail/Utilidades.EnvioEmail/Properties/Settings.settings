@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Utilidades.EnvioEmail.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="smtpUser" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">urielsilva@gtwave.com.br</Value>
+    </Setting>
+    <Setting Name="smtpPass" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Gtwave12</Value>
+    </Setting>
+    <Setting Name="smtpPort" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">587</Value>
+    </Setting>
+    <Setting Name="Destino" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">urielbr@gmail.com</Value>
+    </Setting>
+    <Setting Name="smtpServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mail.gtwave.com.br</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

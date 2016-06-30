@@ -1,0 +1,9 @@
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.pdb
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.pdb
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb
