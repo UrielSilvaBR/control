@@ -81,10 +81,14 @@
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
-                                <th colspan="7" style="text-align:right">Valor Total</th>
+                            @*<tr>
+                                <th colspan="7" rowspan="1" style="text-align:right">Subtotal (R$)</th>
                                 <th colspan="2"></th>
                             </tr>
+                            <tr>
+                                <th colspan="7" rowspan="1" style="text-align:right">Total Propostas Abertas (R$)</th>
+                                <th colspan="2"></th>
+                            </tr>*@
                         </tfoot>
                         <tbody>
                             @foreach (var item in Model)
@@ -234,9 +238,12 @@
                     }, 0 );
  
                 // Update footer
-                $(api.column(8).footer() ).html(
-                    'R$ ' + formatReal(pageTotal) + ' (R$ ' + formatReal(total) + ')'
-                );
+                //$(api.column(8).footer() ).html(
+                //    '' + formatReal(pageTotal) + ' (' + formatReal(total) + ')'
+                //);
+                var rowsFooter = $('#gdvPedidos').find('tfoot');
+                $(rowsFooter[0]).html('<tr><th colspan="7" rowspan="1" style="text-align:right;font-style: italic;">Subtotal (R$)</th><th colspan="2" style="text-align:center;font-style: italic;">' + formatReal(pageTotal) + '</th></tr><tr><th colspan="7" rowspan="1" style="text-align:right;font-style: italic;">Total Propostas Abertas (R$)</th><th colspan="2" style="text-align:center;font-style: italic;">' + formatReal(total) + '</th></tr>');
+                //$(rowsFooter[1]).html('');
             },
             "columnDefs": [{
                 "targets": 'no-sort',
