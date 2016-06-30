@@ -89,9 +89,13 @@
     <Compile Include="Data\ControlContext.cs" />
     <Compile Include="Data\DBConexao.cs" />
     <Compile Include="Data\IdentityConfig.cs" />
-    <Compile Include="Migrations\201606290335058_initial.cs" />
-    <Compile Include="Migrations\201606290335058_initial.Designer.cs">
-      <DependentUpon>201606290335058_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201606300400346_init.cs" />
+    <Compile Include="Migrations\201606300400346_init.Designer.cs">
+      <DependentUpon>201606300400346_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606300404337_teste.cs" />
+    <Compile Include="Migrations\201606300404337_teste.Designer.cs">
+      <DependentUpon>201606300404337_teste.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NFSe\Objects\NotaFiscal.cs" />
@@ -216,8 +220,11 @@
     <Folder Include="NFe\Objects\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201606290335058_initial.resx">
-      <DependentUpon>201606290335058_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606300400346_init.resx">
+      <DependentUpon>201606300400346_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606300404337_teste.resx">
+      <DependentUpon>201606300404337_teste.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

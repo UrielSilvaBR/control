@@ -215,6 +215,8 @@ namespace Control.UI.Controllers
                     Pedido.Order.OrderTypeID = 1;
                     Pedido.Order.Status = "PROPOSTA";
 
+                    Pedido.Order.ShippingId = Pedido.Order.ShippingId.HasValue && Pedido.Order.ShippingId.Value == 0 ? null : Pedido.Order.ShippingId;
+
                     context = new DALContext();
 
                     foreach (var item in Pedido.Order.Items.Where(p => p.OrderId > 0))
@@ -573,7 +575,7 @@ namespace Control.UI.Controllers
 
             return View(OrderProducts);
         }
-        
+
         public ActionResult CarregarModalEmail(int OrderID)
         {
             try
@@ -586,12 +588,12 @@ namespace Control.UI.Controllers
                 SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
 
                 ViewBag.ToPDF = "0";
-                
+
                 byte[] fileBytes = doc.Save();
                 string fileName = "proposta_" + OrderID.ToString() + ".pdf";
                 return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
 
-                
+
 
                 //return Content(String.Format("Arquivo exportado.", OrderID));
             }

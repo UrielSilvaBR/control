@@ -1,0 +1,6 @@
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll.config
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.pdb
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.dll
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.pdb
+c:\users\uriel\documents\visual studio 2015\Projects\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
