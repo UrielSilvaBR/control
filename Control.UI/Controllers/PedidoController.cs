@@ -41,8 +41,8 @@ namespace Control.UI.Controllers
         {
             context = new DALContext();
 
-            var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
-            ViewBag.Title = "Propostas em Aberto";
+            var Orders = context.Orders.All().Where(p => p.Status == "PEDIDO - ABERTO").ToList();
+            ViewBag.Title = "Pedidos em Aberto";
             return View("Index", Orders);
         }
 
