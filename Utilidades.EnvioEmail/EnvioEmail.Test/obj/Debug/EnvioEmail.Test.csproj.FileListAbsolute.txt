@@ -15,3 +15,12 @@ D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidad
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.pdb
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.pdb
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb

@@ -10,3 +10,9 @@ D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Ut
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.dll
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.pdb
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll.config
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.pdb
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.dll
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.pdb
