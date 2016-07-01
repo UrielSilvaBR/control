@@ -324,9 +324,13 @@ namespace Control.UI.Controllers
             {
                 context = new DALContext();
                 //var vendorList = context.VendorsCustomer.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendor).ToList();
+                var vendorList = new List<Vendor>();
 
                 var Customer = context.Customers.Find(p => p.Id == CustomerID);
-                var vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
+
+                if(Customer != null)
+                    vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
+
                 return Json(new { vendorList = vendorList });
             }
             catch (Exception ex)
