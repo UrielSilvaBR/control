@@ -69,13 +69,17 @@ namespace Utilidades.EnvioEmail
             string EmailTemplate = "";
             
 
-            LinkedResource inline = new LinkedResource(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\anexos\sign.png");
+            LinkedResource inline = new LinkedResource(@"D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\anexos\sign.png");
+                                                         
+            //LinkedResource inline = new LinkedResource(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\anexos\sign.png");
             inline.ContentId = Guid.NewGuid().ToString();
             string htmlBody = @"<img src='cid:" + inline.ContentId + @"'/>";
             
             
 
-            EmailTemplate = pegaArquivo(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\template\template_ncc.html");
+            //EmailTemplate = pegaArquivo(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\template\template_ncc.html");
+            EmailTemplate = pegaArquivo(@"D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\template\template_ncc.html");
+
             EmailTemplate = EmailTemplate.Replace("#conteudo#", body);
             EmailTemplate = EmailTemplate.Replace("#imgSign#", htmlBody);
 

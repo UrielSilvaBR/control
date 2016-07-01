@@ -79,17 +79,18 @@
                     <div class="form-group">
                         @Html.Label(string.Format(@"Unidade Medida"), htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.DropDownListFor(model => model.ProductTypeUnitID, new SelectList(ViewBag.Unidades, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
+                            @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
                             @Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })
                         </div>
                         @Html.Label("Preço", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id="txt_UnitPrice" } })
                             @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
                         </div>
                         @Html.Label("Custo", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_CostPrice" } })
                             @Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })
                         </div>
 
@@ -139,3 +140,33 @@
 
     </div><!--box-->
 </div><!--COL-->
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#txt_UnitPrice').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',
+            precision: 2,
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+
+        $('#txt_CostPrice').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',
+            precision: 2,
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+        
+
+    });
+</script>

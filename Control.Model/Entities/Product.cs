@@ -32,6 +32,7 @@ namespace Control.Model.Entities
         public decimal? UnitPrice { get; set; }
         public decimal? CostPrice { get; set; }
         public decimal? AliqICMS { get; set; }
+        public decimal? AliqIPI { get; set; }
 
         public decimal? MinimumStockAlert { get; set; }
         public string ImageURL { get; set; }

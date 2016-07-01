@@ -514,6 +514,8 @@ namespace Control.UI.Controllers
             {
                 model = context.Products.Find(p => p.Id == ProdutoID);
             }
+
+            ViewBag.Unidades = context.TypesUnities.All().ToList();
             return View(model);
         }
 
@@ -532,6 +534,11 @@ namespace Control.UI.Controllers
                 //prod.CombinedProduct = false;
                 //prod.MinimumStockAlert = 50;
                 prod.ProductTypeUnitID = 1;
+
+                if (prod.ProductTypeUnitID > 0)
+                {
+                    prod.UnitMeasure = prod.ProductUnit.Description;
+                }
 
                 if (string.IsNullOrEmpty(prod.DescriptionNCC))
                 {

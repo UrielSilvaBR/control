@@ -52,7 +52,7 @@ namespace Control.DAL.Data
                     //Conex�o de produ��o Gtwave
                     //strConn = @"Data Source=192.99.149.206;Initial Catalog=control;Persist Security Info=True;User ID=userControl;Password=Ncc123";
                     //strConn = @"Data Source=192.99.149.206;Initial Catalog=dbControl;Persist Security Info=True;User ID=userdbControl;Password=Ncc123";
-                    strConn = @"Data Source=192.99.149.206;Initial Catalog=ControlNovo;Persist Security Info=True;User ID=userNovo;Password=@Ncc123";
+                    strConn = @"Data Source=149.56.24.194;Initial Catalog=ControlNovo;Persist Security Info=True;User ID=userNovo;Password=@Ncc123";
                     //strConn = @"Data Source=127.0.0.1;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
 
