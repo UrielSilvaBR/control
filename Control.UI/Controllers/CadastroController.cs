@@ -537,7 +537,9 @@ namespace Control.UI.Controllers
 
                 if (prod.ProductTypeUnitID > 0)
                 {
-                    prod.UnitMeasure = prod.ProductUnit.Description;
+                    var unidade = context.TypesUnities.Find(p => p.Id == prod.ProductTypeUnitID).Description;
+
+                    prod.UnitMeasure = unidade;
                 }
 
                 if (string.IsNullOrEmpty(prod.DescriptionNCC))
