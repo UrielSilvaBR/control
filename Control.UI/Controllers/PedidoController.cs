@@ -36,6 +36,15 @@ namespace Control.UI.Controllers
             return View("Index", Orders);
         }
 
+        public ActionResult PedidosAbertos()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
+            ViewBag.Title = "Propostas em Aberto";
+            return View("Index", Orders);
+        }
+
         public ActionResult OrdersCustomer(int ClientID)
         {
             context = new DALContext();
