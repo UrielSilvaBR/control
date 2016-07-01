@@ -1,5 +1,6 @@
 ﻿using Control.DAL;
 using Control.Model.Entities;
+using Control.UI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SelectPdf;
@@ -28,6 +29,15 @@ namespace Control.UI.Controllers
         }
 
         public ActionResult PropostasAbertas()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
+            ViewBag.Title = "Propostas em Aberto";
+            return View("Index", Orders);
+        }
+
+        public ActionResult PedidosAbertos()
         {
             context = new DALContext();
 
@@ -606,6 +616,11 @@ namespace Control.UI.Controllers
                 return Content(ex.Message);
             }
 
+        }
+
+        public ActionResult EnviarEmailAttached(SendMailViewModel model)
+        {
+            return Content("Email Enviado com sucesso.");
         }
 
         public PartialViewResult GetProdutosCarteira(int CustomerID = 0, int ProductID = 0)
