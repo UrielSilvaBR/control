@@ -1,5 +1,6 @@
 ﻿using Control.DAL;
 using Control.Model.Entities;
+using Control.UI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SelectPdf;
@@ -33,6 +34,15 @@ namespace Control.UI.Controllers
 
             var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
             ViewBag.Title = "Propostas em Aberto";
+            return View("Index", Orders);
+        }
+
+        public ActionResult PedidosAbertos()
+        {
+            context = new DALContext();
+
+            var Orders = context.Orders.All().Where(p => p.Status == "PEDIDO - ABERTO").ToList();
+            ViewBag.Title = "Pedidos em Aberto";
             return View("Index", Orders);
         }
 
@@ -324,9 +334,13 @@ namespace Control.UI.Controllers
             {
                 context = new DALContext();
                 //var vendorList = context.VendorsCustomer.Filter(p => p.CustomerID == CustomerID).Select(p => p.Vendor).ToList();
+                var vendorList = new List<Vendor>();
 
                 var Customer = context.Customers.Find(p => p.Id == CustomerID);
-                var vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
+
+                if(Customer != null)
+                    vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
+
                 return Json(new { vendorList = vendorList });
             }
             catch (Exception ex)
@@ -602,6 +616,11 @@ namespace Control.UI.Controllers
                 return Content(ex.Message);
             }
 
+        }
+
+        public ActionResult EnviarEmailAttached(SendMailViewModel model)
+        {
+            return Content("Email Enviado com sucesso.");
         }
 
         public PartialViewResult GetProdutosCarteira(int CustomerID = 0, int ProductID = 0)

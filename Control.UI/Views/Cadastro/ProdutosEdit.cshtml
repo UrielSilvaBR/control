@@ -43,36 +43,37 @@
                     @Html.HiddenFor(model => model.Id)
 
                     <div class="form-group">
-                        @Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
+                        @*@Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-2">
                             @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                             @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
-                        </div>
-                        @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-2" })
+                        </div>*@
+                        @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-5">
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                        </div>
+                        @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-3">
+                            @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         @Html.Label("Marca", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-3">
                             @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })@
                         </div>
-                        @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-5">
-                            @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                        
+                    </div>*@
 
                     <div class="form-group">
                         @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-9">
                             @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
 
@@ -81,17 +82,38 @@
                         <div class="col-md-2">
                             @Html.DropDownListFor(model => model.ProductTypeUnitID, new SelectList(ViewBag.Unidades, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                             @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })
+                            @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
                         </div>
-                        @Html.Label("Preço", htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.Label("Preço Lista", htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id="txt_UnitPrice" } })
-                            @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ListPrice, new { htmlAttributes = new { @class = "form-control", @id="txt_Lista" } })
+                            @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
                         </div>
-                        @Html.Label("Custo", htmlAttributes: new { @class = "control-label col-md-1" })
+                        @Html.Label("IPI", htmlAttributes: new { @class = "control-label col-md-1" })
                         <div class="col-md-2">
-                            @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_CostPrice" } })
-                            @Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.AliqIPI, new { htmlAttributes = new { @class = "form-control", @id = "txt_IPI" } })
+                            @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label(string.Format(@"Markup"), htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Markup, new { htmlAttributes = new { @class = "form-control", @id = "txt_Markup" } })
+                            @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
+                        </div>
+                        @Html.Label("Preço Custo", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo" } })
+                            @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
+                        </div>
+                        @Html.Label("Preço Venda", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Unitario" } })
+                            @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
                         </div>
 
                     </div>
@@ -142,31 +164,98 @@
 </div><!--COL-->
 <script type="text/javascript">
     $(document).ready(function () {
-
-        $('#txt_UnitPrice').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            precision: 2,
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-
-        $('#txt_CostPrice').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            precision: 2,
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-        
-
+        CarregarMascaras();
+       
+        $('#txt_Lista').change(CalculaPreco);
+        $('#txt_IPI').change(CalculaPreco);
+        $('#txt_Markup').change(CalculaPreco);
     });
+
+    function CalculaPreco()
+    {
+        var strlista = $('#txt_Lista').val();
+        var strIPI = $('#txt_IPI').val();
+        var strMarkup = $('#txt_Markup').val();        
+
+        if (strlista == '' || strIPI == '' || strMarkup == '' || strlista == '0,00' || strIPI == '0,00' || strMarkup == '0,00') {
+            
+            return false;
+        }
+        var lista = parseFloat(strlista);
+                
+        var IPI = parseFloat(strIPI);
+        var Markup = parseFloat(strMarkup);
+        IPI = IPI / 100;
+        
+        var Custo = lista * (1 + IPI);
+        Custo = Custo * 0.6;
+        
+        Custo.toFixed(2);
+        Custo = Custo.toFixed(2);
+        Markup = Custo * Markup;
+        Markup.toFixed(2);
+        $('#txt_Custo').val(Custo * 100);
+        $('#txt_Unitario').val(Markup * 100);
+    }
+
+    function CarregarMascaras()
+    {
+        $('#txt_Lista').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',
+            precision: 2,
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+
+        $('#txt_Custo').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',
+            precision: 2,
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+
+        $('#txt_Unitario').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',
+            precision: 2,
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+
+        $('#txt_IPI').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',            
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+
+        $('#txt_Markup').maskMoney({
+            prefix: '',
+            allowZero: false,
+            allowNegative: false,
+            defaultZero: true,
+            thousands: '.',
+            decimal: ',',            
+            affixesStay: false,
+            symbolPosition: 'left'
+        });
+    }
 </script>

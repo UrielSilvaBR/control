@@ -47,10 +47,9 @@
 
         </div>
 }
-@*<script type="text/javascript">
-    $('#ddlmail').select2()
-       .on("change", function (e) {           
+<script type="text/javascript">
+    $('#ddlmail').on("change", function (e) {           
            var val = $('#txtMail').val();           
-           $('#txtMail').val(val + e.val + "; ");
+           $('#txtMail').val(val + e.val + ", ");
        })
-</script>*@
+</script>

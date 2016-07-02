@@ -30,9 +30,11 @@ namespace Control.Model.Entities
         public decimal? Weight { get; set; }
 
         public decimal? UnitPrice { get; set; }
+        public decimal? ListPrice { get; set; }
         public decimal? CostPrice { get; set; }
         public decimal? AliqICMS { get; set; }
         public decimal? AliqIPI { get; set; }
+        public decimal? Markup { get; set; }
 
         public decimal? MinimumStockAlert { get; set; }
         public string ImageURL { get; set; }
