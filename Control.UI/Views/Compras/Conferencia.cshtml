@@ -642,7 +642,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
 
                                 <div class="form-group  col-md-6">
                                     @Html.Label("Fornecedor")
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.ProviderPurchaseOrder.CompanyName, new { @class = "form-control", @readonly = "true" })
+                                    @Html.TextBoxFor(p => p.PurchaseOrder.ProviderPurchaseOrder.CompanyNameOrder, new { @class = "form-control", @readonly = "true" })
                                 </div>
 
 
@@ -654,7 +654,6 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                             </div>
                             <div class="row">
                                <div class="col-md-12"><br>
-                                   <hr>
                                     @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
                                     }
 
@@ -664,6 +663,7 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                                 <div class="form-group">
                                     <div class="col-md-offset-5">
                                         <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
+                                        <input type="button" value="Importar XML NFe" onclick="" class="btn btn-primary" style="font-size: 0.8em;" id="btnImportarXmlNFe" />
                                     </div>
                                 </div> 
 
@@ -683,40 +683,44 @@ new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclu
                              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                              <h4 class="modal-title" id="tituloItemPedido">Conferência Item</h4>
                         </div>
-                        <div class="modal-body" > 
+                        <div class="modal-body" style="padding: 25px 0px 15px 105px;" > 
                             
                             <input type="hidden" id="rowIndexItemPedido" />
                            
                             <div class="row">
-                                <div class="form-group col-md-12"> 
+                                <div class="form-group col-md-10"> 
                                     @Html.Label("Produto")
                                     @Html.DropDownListFor(p => p.PurchaseOrderItem.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlConfItemProduto", @readonly = "true" })
                                 </div> 
-                                <div class="form-group col-md-3">
-                                    @Html.Label("Qnt Pedido")
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control" , @readonly = "true" } })
-                                </div> 
-                                <div class="form-group col-md-4">
+                                </div>
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    @Html.Label("Qtd Pedido")
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                </div>
+                                <div class="form-group col-md-2">
                                     @Html.LabelFor(p => p.PurchaseOrderItem.UnitPrice)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.UnitPrice, new { htmlAttributes = new { @class = "form-control" , @type = "text" , @readonly = "true" } })
-                                </div> 
-                                <div class="form-group col-md-4">
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.UnitPrice, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                                </div>
+                                <div class="form-group col-md-2">
                                     @Html.LabelFor(p => p.PurchaseOrderItem.TotalPrice)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.TotalPrice, new { htmlAttributes = new { @class = "form-control" , @readonly = "true" } })
-                                 </div>
-                                <div class="form-group col-md-3">
-                                    @Html.LabelFor(p => p.PurchaseOrderItem.QuantityDeliver) 
+                                    @Html.EditorFor(p => p.PurchaseOrderItem.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(p => p.PurchaseOrderItem.QuantityDeliver)
                                     @Html.EditorFor(p => p.PurchaseOrderItem.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
-                                 </div>
-                                <div class="form-group col-md-3">
+                                </div>
+                                <div class="form-group col-md-2">
                                     @Html.LabelFor(p => p.PurchaseOrderItem.ItemDiscount)
                                     @Html.EditorFor(p => p.PurchaseOrderItem.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
-                                 </div>
-
                                 </div>
+
+                            </div>
+
                             </div>
                         <div class="modal-footer" >
                             <input type="submit" value="Salvar" class="btn btn-primary" style="font-size: 0.8em;" id="btnSalvarPuchaseOrderItem" />
+                            <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal" style="margin-top: 0px;">Fechar</button>
                         </div> 
                 </div>
             </div>

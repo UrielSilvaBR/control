@@ -22,7 +22,7 @@ namespace Control.UI.Controllers
         public ActionResult Recebimento()
         {
             context = new DALContext();
-            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_PENDENTE");
+            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_PENDENTE").ToList();
 
             return View(Orders);
         }
@@ -32,10 +32,9 @@ namespace Control.UI.Controllers
         {
             var model = new Control.UI.Models.PedidoCompraViewModel();
             context = new DALContext();
-            PurchaseOrder retorno = new PurchaseOrder();
             try
             {
-                retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
+                var retorno = context.PurchaseOrders.Find(p => p.Id == OrderID);
                 model.PurchaseOrder = retorno;
             }
             catch (Exception ex)
@@ -120,7 +119,7 @@ namespace Control.UI.Controllers
                     return Content("Ordem de compra inválida;0");
                 }
 
-                return Content( "Ordem de compra recedida com sucesso ! <br> Estoque Atualizado;" + Pedido.PurchaseOrder.Id.ToString());
+                return Content( "Ordem de compra recebida com<br> Sucesso ! <br> Estoque Atualizado!;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -129,13 +128,12 @@ namespace Control.UI.Controllers
         }
         #endregion
 
-
         #region Index
 
         public ActionResult Index()
         {
             context = new DALContext();
-            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_ABERTO");
+            var Orders = context.PurchaseOrders.Filter(p => p.Status == "PEDIDO_ABERTO").ToList();
 
             return View(Orders);
         }
@@ -245,7 +243,7 @@ namespace Control.UI.Controllers
                             PurchaseOrderId = (int)x["IdPedido"],
                             SequencialItem = (int)x["SequencialItem"],
                             QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
-                            QuantityDeliver = Convert.ToDecimal(x["QuantityOrder"].ToString()),
+                            QuantityDeliver = 0,
                             ProductID = (int)x["ProductID"],
                             UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
                             ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
@@ -271,7 +269,7 @@ namespace Control.UI.Controllers
                     return Content("Ordem  de Compra inválida;0");
                 }
 
-                return Content( "Ordem  de Compra salva com Sucesso;" + Pedido.PurchaseOrder.Id.ToString() );
+                return Content( "Ordem de Compra salva com <br>Sucesso!;" + Pedido.PurchaseOrder.Id.ToString() );
             }
             catch (Exception ex)
             {
@@ -280,7 +278,6 @@ namespace Control.UI.Controllers
         }
 
         #endregion
-
 
         [HttpGet]
         public ActionResult EnviarParaFonecedor(int OrderID)
@@ -325,7 +322,5 @@ namespace Control.UI.Controllers
 
             return View(retorno);
         }
-
-
     }
 }

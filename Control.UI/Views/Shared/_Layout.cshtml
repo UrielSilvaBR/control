@@ -142,7 +142,6 @@
     @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
     @Html.Partial("~/Views/Pedido/_AddOrderProduct.cshtml", new PedidoViewModel())
 
-
     @RenderSection("top_modals", false)
 
     <div class="modal fade" id="modal-cadastro-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -195,6 +194,25 @@
             </div>
         </div>
     </div>
+
+
+    @*<div class="modal fade" id="itemPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Adicionar Item Proposta</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    @Html.Partial("~/Views/Pedido/_AddItemProposta.cshtml", new PedidoViewModel())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
 
     <!-- Uriel Modais - Inicio -->
     <div class="modal fade" id="modal-converter-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
@@ -533,6 +551,7 @@
 
         $(document).ready(function () {
             //setInterval(atualizarDefinicao, 30000);
+            $(".show-sidebar").click();
             WinMove();
             atualizardefinicao();
             //$('#datatable-1').DataTable({

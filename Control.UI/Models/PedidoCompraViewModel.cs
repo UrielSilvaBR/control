@@ -32,19 +32,19 @@ namespace Control.UI.Models
 
             #region Metodos Temporarios (CFOP / Status)
 
-      
+
             #region Status
 
             Status = new List<SelectListItem>();
 
             SelectListItem stat3 = new SelectListItem() { Value = "PEDIDO_ABERTO", Text = "PEDIDO - ABERTO" };
             SelectListItem stat4 = new SelectListItem() { Value = "PEDIDO_PENDENTE", Text = "PEDIDO - PENDENTE" };
-            SelectListItem stat5 = new SelectListItem() { Value = "PEDIDO_ENTREGUE", Text = "PEDIDO - ENTREGUE" }; 
+            SelectListItem stat5 = new SelectListItem() { Value = "PEDIDO_ENTREGUE", Text = "PEDIDO - ENTREGUE" };
             SelectListItem stat7 = new SelectListItem() { Value = "CANCELADO", Text = "CANCELADO" };
 
             Status.Add(stat3);
             Status.Add(stat4);
-            Status.Add(stat5); 
+            Status.Add(stat5);
             Status.Add(stat7);
 
             #endregion

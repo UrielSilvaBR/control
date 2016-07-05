@@ -828,6 +828,7 @@
     <Content Include="Views\Cadastro\ContatosEmailLista.cshtml" />
     <Content Include="Views\Invoice\ReportPedido.cshtml" />
     <Content Include="Views\Cadastro\ContatosEmailEdit.cshtml" />
+    <Content Include="Views\Pedido\_AddItemProposta.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

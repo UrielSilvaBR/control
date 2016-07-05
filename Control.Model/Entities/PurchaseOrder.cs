@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 namespace Control.Model.Entities
 {
     [DataContract]
-   public class PurchaseOrder : IEntity
+    public class PurchaseOrder : IEntity
     {
         [Key]
-        [DataMember] 
+        [DataMember]
         public int Id { get; set; }
-         
-        public int? ProviderID { get; set; }
+
+        public int ProviderID { get; set; }
 
         //Alterei os relacionamentos dos metodos de ProviderPurchaseOrder e PurchaseOrderItems para desabilitar o lazyloading do EF 
         // removendo o virtual das propriedades
         [ForeignKey("ProviderID")]
-        public Provider ProviderPurchaseOrder { get; set; }
+        public virtual Provider ProviderPurchaseOrder { get; set; }
 
         [Display(Name = "Status")]
         public string Status { get; set; }
@@ -35,9 +35,9 @@ namespace Control.Model.Entities
         public decimal TotalValue { get; set; }
         [Display(Name = "Observação")]
         public string Comments { get; set; }
-        
+
         [ForeignKey("PurchaseOrderId")]
-        public List<PurchaseOrderItem> Items { get; set; }
+        public virtual List<PurchaseOrderItem> Items { get; set; }
 
 
     }

@@ -20,4 +20,12 @@ namespace Control.Model.Enums
         [Description("JURÍDICA")]
         Juridica = 2
     }
+
+    public enum ProviderType
+    {
+        [Description("FÍSICA")]
+        Fisica = 1,
+        [Description("JURÍDICA")]
+        Juridica = 2
+    }
 }

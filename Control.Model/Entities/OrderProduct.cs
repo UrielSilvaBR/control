@@ -23,7 +23,7 @@ namespace Control.Model.Entities
 
         public int SequencialItem { get; set; }
 
-        [Display(Name ="Quantidade")]
+        [Display(Name ="Qtd.")]
         public decimal QuantityOrder { get; set; } 
         public decimal? QuantityDeliver { get; set; }
         [Display(Name = "Valor Unitário")]
