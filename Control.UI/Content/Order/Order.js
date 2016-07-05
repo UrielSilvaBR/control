@@ -871,7 +871,7 @@ function ValidarInclusaoVendedorModal() {
 }
 
 function FinalizarInclusaoContato(id) {
-
+    alert('teste -> FinalizarInclusaoContato');
     $('#modal-cadastro-contato').modal('hide');
 
     ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
@@ -884,6 +884,8 @@ function FinalizarInclusaoContato(id) {
 }
 
 function ValidarInclusaoContatoModal() {
+
+    alert('teste -> ValidarInclusaoContatoModal');
     var idCliente = $('#Order_CustomerID option:selected').val();
 
     if (idCliente == 0) {
