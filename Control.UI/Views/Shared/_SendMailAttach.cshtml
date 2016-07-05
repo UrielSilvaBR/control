@@ -48,8 +48,38 @@
         </div>
 }
 <script type="text/javascript">
-    $('#ddlmail').on("change", function (e) {           
-           var val = $('#txtMail').val();           
-           $('#txtMail').val(val + e.val + ", ");
-       })
+    $(document).ready(function () {
+
+        $('#ddlmail').on("change", function (e) {
+            var val = $('#txtMail').val();
+            $('#txtMail').val(val + e.val + ", ");
+        })
+
+    });
+
+    function FinalizarInclusaoContato(id) {
+        alert('teste -> FinalizarInclusaoContato');
+        ShowMessage('É necessário selecionar o Cliente!' + id, false);
+        $('#modal-cadastro-contato').modal('hide');
+
+        ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
+
+        $('#ContatName').val('');
+        $('#ContatRoleName').val('');
+        $('#Contact_Phone_Modal').val('');
+        $('#Contact_Mobile_Modal').val('');
+        $('#Email').val('');
+    }
+
+    function ValidarInclusaoContatoModal() {
+
+        alert('teste -> ValidarInclusaoContatoModal');
+        var idCliente = $('#Order_CustomerID option:selected').val();
+
+        if (idCliente == 0) {
+            ShowMessage('Selecione o Cliente para cadastrar o Contato!', false);
+            return false;
+        }
+    }
+    
 </script>

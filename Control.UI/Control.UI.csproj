@@ -851,6 +851,10 @@
       <Project>{53eae4ef-78e0-4bd1-82eb-87069122a25c}</Project>
       <Name>Control.Utility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utilidades.EnvioEmail\Utilidades.EnvioEmail\Utilidades.EnvioEmail.csproj">
+      <Project>{478980a3-31d1-4d2c-ad29-339ec11e36b2}</Project>
+      <Name>Utilidades.EnvioEmail</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Utilidades.EnvioEmail;
 
 namespace Control.UI.Controllers
 {
@@ -621,6 +622,7 @@ namespace Control.UI.Controllers
         public ActionResult EnviarEmailAttached(SendMailViewModel model)
         {
             return Content("Email Enviado com sucesso.");
+            EmailHelper.
         }
 
         public PartialViewResult GetProdutosCarteira(int CustomerID = 0, int ProductID = 0)
