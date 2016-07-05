@@ -76,3 +76,6 @@ Control.DAL/Data/DBConexao.cs
 Control.DAL/_Control.DAL.csproj.orig
 Especificacao/Imagens/cadastro proposta.PNG
 Especificacao/Imagens/exemplo proposta.PNG
+/web.config
+/Utilidades.EnvioEmail
+/Control.UI/Properties/PublishProfiles
