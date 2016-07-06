@@ -601,9 +601,9 @@ function AdicionarItemPedido() {
         giCount = rowCount + 1;
 
 
-    var descricaoProduto = $('#ddlProdutoPedido option:selected').text().split('-')[0].trim();
-    var modeloProduto = $('#ddlProdutoPedido option:selected').text().split('-')[1].trim();
-    var NCM = $('#ddlProdutoPedido option:selected').text().split('-')[2].trim();
+    var descricaoProduto = $('#ddlProdutoPedido option:selected').text().split('|')[0].trim();
+    var modeloProduto = $('#ddlProdutoPedido option:selected').text().split('|')[1].trim();
+    var NCM = $('#ddlProdutoPedido option:selected').text().split('|')[2].trim();
     quantidade = parseFloat(quantidade).toFixed(2);
     quantidade = quantidade.replace(".", ",");
     var precoUnitario = $('#OrderProduct_UnitPrice').val();

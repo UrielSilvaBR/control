@@ -10,6 +10,8 @@ using Control.DAL.Data;
 using Control.Model.Entities;
 using Control.DAL;
 using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Xml;
 
 namespace Control.UI.Controllers
 {
@@ -321,6 +323,56 @@ namespace Control.UI.Controllers
             }
 
             return View(retorno);
+        }
+
+        [HttpPost]
+        public ActionResult UploadXmlNFe()
+        {
+            // Checking no of files injected in Request object  
+            if (Request.Files.Count > 0)
+            {
+                try
+                {
+                    //  Get all files from Request object  
+                    HttpFileCollectionBase files = Request.Files;
+                    for (int i = 0; i < files.Count; i++)
+                    {
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "Uploads/";  
+                        //string filename = Path.GetFileName(Request.Files[i].FileName);  
+
+                        HttpPostedFileBase file = files[i];
+                        string fname;
+
+                        // Checking for Internet Explorer  
+                        if (Request.Browser.Browser.ToUpper() == "IE" || Request.Browser.Browser.ToUpper() == "INTERNETEXPLORER")
+                        {
+                            string[] testfiles = file.FileName.Split(new char[] { '\\' });
+                            fname = testfiles[testfiles.Length - 1];
+                        }
+                        else
+                        {
+                            fname = file.FileName;
+                        }
+
+                        var xml = new XmlDocument();
+                        xml.Load(file.InputStream);
+
+                        // Get the complete folder path and store the file inside it.  
+                        fname = Path.Combine(Server.MapPath("~/Uploads/"), fname);
+                        file.SaveAs(fname);
+                    }
+                    // Returns message that successfully uploaded  
+                    return Json("Arquivo importado com Sucesso!");
+                }
+                catch (Exception ex)
+                {
+                    return Json("Ocorreu um erro. Detalhes do Erro: " + ex.Message);
+                }
+            }
+            else
+            {
+                return Json("Não existem arquivos selecionados.");
+            }
         }
     }
 }

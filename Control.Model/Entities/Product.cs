@@ -64,7 +64,7 @@ namespace Control.Model.Entities
             get
             {
                 if (Id > 0)
-                    return String.Format("{0} - {1} - {2}", Name, Model, NCMCode);
+                    return String.Format("{0} | {1} | {2}", Name, Model, NCMCode);
                 else
                     return Name;
             }

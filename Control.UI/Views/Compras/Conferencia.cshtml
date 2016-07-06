@@ -1,25 +1,23 @@
 ﻿@using Control.UI.Models
 @model PedidoCompraViewModel
-
 @{
     ViewBag.Title = "Conferencia";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <head>
-
     <script type="text/javascript">
 
         var giCount = 1;
         $(document).ready(function () {
 
+            $('#FileUpload1').hide();
+
             InicializarModalItemPedido();
- 
 
             $('#btnSalvarPuchaseOrderItem').click(function () {
                 EditarItemPedido();
             });
-             
+
             $("#ddlConfItemProduto").prop("disabled", true);
             $("#PurchaseOrder_ProviderID").prop("disabled", true);
 
@@ -50,6 +48,58 @@
                 LimparItemPedido();
             })
 
+            $('#FileUpload1').change(function () {
+
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#FileUpload1").get(0);
+                    var files = fileUpload.files;
+
+                    if (files.length == 0)
+                        return false;
+
+                    waitingDialog.show('Importando XML Nota Fiscal de Entrada!', { dialogSize: 'sm', progressType: 'success' });
+
+
+                    setTimeout(function () {
+
+                        // Create FormData object
+                        var fileData = new FormData();
+
+                        // Looping over all files and add it to FormData object
+                        for (var i = 0; i < files.length; i++) {
+                            fileData.append(files[i].name, files[i]);
+                        }
+
+                        // Adding one more key to FormData object
+                        fileData.append('username', 'Manas');
+
+                        $.ajax({
+                            url: '/Compras/UploadXmlNFe',
+                            type: "POST",
+                            contentType: false, // Not to set any content header
+                            processData: false, // Not to process data
+                            data: fileData,
+                            success: function (result) {
+                                waitingDialog.hide();
+                                alert(result);
+                                $('#FileUpload1').val("");
+                            },
+                            error: function (err) {
+                                waitingDialog.hide();
+                                alert(err.statusText);
+                            }
+                        });
+                    }, 2000);
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+
+            $('#btnImportarXmlNFe').click(function () {
+                $('#FileUpload1').click();
+            });
         });
 
         function LimparItemPedido() {
@@ -192,6 +242,8 @@
             var valorTotalPedido = $('#PurchaseOrder_TotalValue').val();
             if (valorTotalPedido == 0)
                 $('#PurchaseOrder_TotalValue').val(0);
+            else
+                $('#PurchaseOrder_TotalValue').val(valorTotalPedido);
 
             $("#PurchaseOrder_TotalValue").prop('readonly', true);
             $('#PurchaseOrderItem_TotalPrice').attr('disabled', true);
@@ -305,7 +357,7 @@
                     ProductID: arrayItens[i][2],
                     SequencialItem: arrayItens[i][4],
                     QuantityOrder: arrayItens[i][6],
-                    QuantityDeliver: arrayItens[i][7], 
+                    QuantityDeliver: arrayItens[i][7],
                     UnitPrice: arrayItens[i][8],
                     ItemDiscount: arrayItens[i][9],
                     TotalPrice: arrayItens[i][10]
@@ -444,7 +496,7 @@
 
             var items = gdvItens.fnGetData();
             item = items[rowIndex];
-             
+
 
             $("#ddlConfItemProduto").select2().select2("val", item[2]);
             var quantidade = parseInt(item[6]);
@@ -480,7 +532,7 @@
             gdvItens.fnUpdate(quantidadeEntregue, parseInt(rowIndex), 7);
 
             gdvItens.fnUpdate($('#PurchaseOrderItem_UnitPrice').val(), parseInt(rowIndex), 8);
-            gdvItens.fnUpdate($('#PurchaseOrderItem_ItemDiscount').val(), parseInt(rowIndex),9);
+            gdvItens.fnUpdate($('#PurchaseOrderItem_ItemDiscount').val(), parseInt(rowIndex), 9);
             gdvItens.fnUpdate($('#PurchaseOrderItem_TotalPrice').val(), parseInt(rowIndex), 10);
 
             AtualizarValorTotalPedido();
@@ -496,7 +548,7 @@
             $("#itemConferenciaEdit").modal('hide');
 
         }
-         
+
         function AtualizarSequencialItemPedido() {
             var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
             var arrayItens = gdvItens.fnGetData();
@@ -504,7 +556,7 @@
             for (var i = 0; i < arrayItens.length; i++) {
 
                 gdvItens.fnUpdate('<a href="javascript:void(0);" onclick="AbrirItemPedido(' + (i + 1) + ');"  ><i class="fa fa-pencil-square-o"  style="padding: 0px 8px;"></i></a>', i, 3);
-                 gdvItens.fnUpdate(i + 1, i, 5);
+                gdvItens.fnUpdate(i + 1, i, 5);
                 //giCount++;
             }
         }
@@ -535,7 +587,6 @@
             $('#PurchaseOrder_Discount').val(descontoTotalPedido);
         }
     </script>
-
     <style type="text/css">
         .form-horizontal .form-group {
             margin-right: 0px;
@@ -576,10 +627,7 @@
             padding: 10px;
         }
     </style>
-
 </head>
-
-
 
 <div class="row">
     <div id="breadcrumb" class="col-xs-12">
@@ -589,7 +637,6 @@
         </ol>
     </div>
 </div>
-
 
 <div class="row">
     <!-- BOX -->
@@ -614,181 +661,129 @@
             </div>
             <!-- conteudo -->
             <div class="box-content">
-                 
 
-                    @using (Ajax.BeginForm("SaveConferencia", new { Controller = "Compras" },
+                @using (Ajax.BeginForm("SaveConferencia", new { Controller = "Compras" },
 new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
-                    { 
-                            <div class="row">
-                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate)
-                                @Html.HiddenFor(model => model.PurchaseOrder.ProviderPurchaseOrder.Id)
+                {
+                    <div class="row">
+                        @Html.HiddenFor(model => model.PurchaseOrder.InsertDate)
+                        @Html.HiddenFor(model => model.PurchaseOrder.ProviderPurchaseOrder.Id)
+                        @*<div class="form-group col-md-3">
+                                @Html.LabelFor(model => model.PurchaseOrder.Id )
+                                @Html.EditorFor(p => p.PurchaseOrder.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                            </div>*@
 
-                                <div class="form-group col-md-3">
-                                    @Html.LabelFor(model => model.PurchaseOrder.Id )
-                                    @Html.EditorFor(p => p.PurchaseOrder.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    @Html.Label("Validade")
-                                    @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control", @readonly = "true" })
-                                   
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    @Html.Label("Valor Total")
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control", @readonly = "true" })
-                                </div>
-
-                                <div class="form-group  col-md-6">
-                                    @Html.Label("Fornecedor")
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.ProviderPurchaseOrder.CompanyNameOrder, new { @class = "form-control", @readonly = "true" })
-                                </div>
-
-
-                                <div class="form-group  col-md-3">
-                                    @Html.Label("Nota Fiscal")
-                                    @Html.TextBoxFor(p => p.PurchaseOrder.InvoiceNumber, new { @class = "form-control" })
-                                </div>
-
+                        <div class="form-group">
+                            @Html.Label("Fornecedor", htmlAttributes: new { @class = "col-md-1", @style = "margin-top: 3px;" })
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(p => p.PurchaseOrder.ProviderPurchaseOrder.CompanyNameOrder, new { @class = "form-control", @readonly = "true" })
                             </div>
-                            <div class="row">
-                               <div class="col-md-12"><br>
-                                    @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
-                                    }
+                        </div>
 
-                                    @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
-                                </div>
-                           </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-5">
-                                        <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
-                                        <input type="button" value="Importar XML NFe" onclick="" class="btn btn-primary" style="font-size: 0.8em;" id="btnImportarXmlNFe" />
-                                    </div>
-                                </div> 
+                        <div class="form-group">
+                            @Html.Label("Validade", htmlAttributes: new { @class = "col-md-1", @style = "margin-top: 3px;" })
+                            <div class="col-md-2">
+                                @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
+                                @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control", @readonly = "true" })
+                            </div>
+                        </div>
 
-                                } 
+                        <div class="form-group">
+                            @Html.Label("Valor Total", htmlAttributes: new { @class = "col-md-1", @style = "margin-top: 3px;" })
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control", @readonly = "true" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Nota Fiscal", htmlAttributes: new { @class = "col-md-1", @style = "margin-top: 3px;" })
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(p => p.PurchaseOrder.InvoiceNumber, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <br>
+                            @{ Html.RenderAction("ConferenciaGetListaProdtos", "Compras", new { OrderID = Model.PurchaseOrder.Id });
+                            }
+                            @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-5">
+                            <input type="submit" value="Receber Pedido" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnReceberPedido" />
+                            <input type="file" id="FileUpload1" />
+                            <input type="button" value="Importar XML NFe" onclick="" class="btn btn-primary" style="font-size: 0.8em;" id="btnImportarXmlNFe" />
+                        </div>
+                    </div>
+
+                                }
             </div>
         </div>
-    </div><!-- BOX -->
+    </div>
+</div><!-- BOX -->
+@*@section top_modals{
 
-    @section top_modals{
-
-        <div id="itemConferenciaEdit" class="modal fade" role="dialog">
-            <div class="modal-dialog modal-lg">
-                <!-- Modal content-->
-                <div class="modal-content">
-                         <div class="modal-header">
-                             
-                             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                             <h4 class="modal-title" id="tituloItemPedido">Conferência Item</h4>
-                        </div>
-                        <div class="modal-body" style="padding: 25px 0px 15px 105px;" > 
-                            
-                            <input type="hidden" id="rowIndexItemPedido" />
-                           
-                            <div class="row">
-                                <div class="form-group col-md-10"> 
-                                    @Html.Label("Produto")
-                                    @Html.DropDownListFor(p => p.PurchaseOrderItem.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlConfItemProduto", @readonly = "true" })
-                                </div> 
-                                </div>
-                            <div class="row">
-                                <div class="form-group col-md-2">
-                                    @Html.Label("Qtd Pedido")
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    @Html.LabelFor(p => p.PurchaseOrderItem.UnitPrice)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.UnitPrice, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    @Html.LabelFor(p => p.PurchaseOrderItem.TotalPrice)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.TotalPrice, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    @Html.LabelFor(p => p.PurchaseOrderItem.QuantityDeliver)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.QuantityDeliver, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-                                <div class="form-group col-md-2">
-                                    @Html.LabelFor(p => p.PurchaseOrderItem.ItemDiscount)
-                                    @Html.EditorFor(p => p.PurchaseOrderItem.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
-                                </div>
-
-                            </div>
-
-                            </div>
-                        <div class="modal-footer" >
-                            <input type="submit" value="Salvar" class="btn btn-primary" style="font-size: 0.8em;" id="btnSalvarPuchaseOrderItem" />
-                            <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal" style="margin-top: 0px;">Fechar</button>
-                        </div> 
-                </div>
-            </div>
-
-            
-        </div>  
-
+    }*@
+<script type="text/javascript">
+    // Run Select2 on element
+    function Select2Test() {
+        //  $("#Pedido_CustomerID").select2();
+        //  $("#Pedido_ContactID").select2();
+        //$(".selddl").select2();
     }
-    <script type="text/javascript">
-        // Run Select2 on element
-        function Select2Test() {
-            //  $("#Pedido_CustomerID").select2();
-            //  $("#Pedido_ContactID").select2();
-            //$(".selddl").select2();
-        }
 
-        var editor;
+    var editor;
 
-        $(document).ready(function () {
-            // Load TimePicker plugin and callback all time and date pickers
-            LoadTimePickerScript(AllTimePickers);
-            // Create jQuery-UI tabs
-            $("#tabs").tabs();
-            $("#btnAvancar").click(function () {
-                var active = $("#tabs").tabs("option", "active");
-                $("#tabs").tabs("option", "active", active + 1);
-            });
-
-            $("#btnVoltar").click(function () {
-                var active = $("#tabs").tabs("option", "active");
-                $("#tabs").tabs("option", "active", active - 1);
-            });
-
-            // Sortable for elements
-            $(".sort").sortable({
-                items: "div.col-sm-2",
-                appendTo: 'div.box-content'
-            });
-            // Droppable for example of trash
-            $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
-            $('#trash').droppable({
-                drop: function (event, ui) {
-                    $(ui.draggable).remove();
-                }
-            });
-            var icons = {
-                header: "ui-icon-circle-arrow-e",
-                activeHeader: "ui-icon-circle-arrow-s"
-            };
-            // Make accordion feature of jQuery-UI
-            $("#accordion").accordion({ icons: icons });
-            // Create UI spinner
-            $("#ui-spinner").spinner();
-            // Add Drag-n-Drop to boxes
-
-            // Load script of Select2 and run this
-            LoadSelect2Script(Select2Test);
-
-            //$("#Pedido_CustomerID").select2();
-            //$("#Pedido_ContactID").select2();
-
-
-
-            WinMove();
-
-            $(window).on('shown.bs.modal', function () {
-                $('.modal-backdrop').removeClass();
-            })
+    $(document).ready(function () {
+        // Load TimePicker plugin and callback all time and date pickers
+        LoadTimePickerScript(AllTimePickers);
+        // Create jQuery-UI tabs
+        $("#tabs").tabs();
+        $("#btnAvancar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active + 1);
         });
 
-    </script>
+        $("#btnVoltar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active - 1);
+        });
+
+        // Sortable for elements
+        $(".sort").sortable({
+            items: "div.col-sm-2",
+            appendTo: 'div.box-content'
+        });
+        // Droppable for example of trash
+        $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
+        $('#trash').droppable({
+            drop: function (event, ui) {
+                $(ui.draggable).remove();
+            }
+        });
+        var icons = {
+            header: "ui-icon-circle-arrow-e",
+            activeHeader: "ui-icon-circle-arrow-s"
+        };
+        // Make accordion feature of jQuery-UI
+        $("#accordion").accordion({ icons: icons });
+        // Create UI spinner
+        $("#ui-spinner").spinner();
+        // Add Drag-n-Drop to boxes
+
+        // Load script of Select2 and run this
+        LoadSelect2Script(Select2Test);
+
+        //$("#Pedido_CustomerID").select2();
+        //$("#Pedido_ContactID").select2();
+
+        WinMove();
+
+        //$(window).on('shown.bs.modal', function () {
+        //    $('.modal-backdrop').removeClass();
+        //})
+    });
+
+</script>

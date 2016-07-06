@@ -729,6 +729,7 @@
     <Content Include="scripts\select2.js" />
     <Content Include="scripts\select2.min.js" />
     <Content Include="template\template_ncc.html" />
+    <Content Include="Uploads\35160602545405000130550040003692521005210470-nfe.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -829,6 +830,7 @@
     <Content Include="Views\Invoice\ReportPedido.cshtml" />
     <Content Include="Views\Cadastro\ContatosEmailEdit.cshtml" />
     <Content Include="Views\Pedido\_AddItemProposta.cshtml" />
+    <Content Include="Views\Compras\_EditItemConferencia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
