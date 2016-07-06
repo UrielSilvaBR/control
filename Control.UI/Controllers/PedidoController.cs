@@ -621,6 +621,22 @@ namespace Control.UI.Controllers
 
         public ActionResult EnviarEmailAttached(SendMailViewModel model)
         {
+            try
+            {
+                string saudacao = "Bom dia.";
+
+                if (DateTime.Now.Hour >= 12)
+                    saudacao = "Boa Tarde.";                
+
+                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate("urielbr@gmail.com", 
+                    "teste envio Email", 
+                    saudacao +"<br /><br /> Segue a proposta solicitada. <br /><br />Atenciosamente,", AppDomain.CurrentDomain.BaseDirectory + "anexos\\arquivo.pdf", AppDomain.CurrentDomain.BaseDirectory);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
             return Content("Email Enviado com sucesso.");
         }
 

@@ -58,8 +58,8 @@
     });
 
     function FinalizarInclusaoContato(id) {
-        alert('teste -> FinalizarInclusaoContato');
-        ShowMessage('É necessário selecionar o Cliente!' + id, false);
+        
+        //ShowMessage('É necessário selecionar o Cliente!' + id, false);
         $('#modal-cadastro-contato').modal('hide');
 
         ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
@@ -73,7 +73,7 @@
 
     function ValidarInclusaoContatoModal() {
 
-        alert('teste -> ValidarInclusaoContatoModal');
+        
         var idCliente = $('#Order_CustomerID option:selected').val();
 
         if (idCliente == 0) {
