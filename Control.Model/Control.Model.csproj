@@ -109,6 +109,35 @@
     <Compile Include="Entities\Vendor.cs" />
     <Compile Include="Entities\VendorsCustomer.cs" />
     <Compile Include="Enums\Enumerations.cs" />
+    <Compile Include="NFe\Xml\procNFe\cobr.cs" />
+    <Compile Include="NFe\Xml\procNFe\COFINS.cs" />
+    <Compile Include="NFe\Xml\procNFe\COFINSAliq.cs" />
+    <Compile Include="NFe\Xml\procNFe\dest.cs" />
+    <Compile Include="NFe\Xml\procNFe\det.cs" />
+    <Compile Include="NFe\Xml\procNFe\dup.cs" />
+    <Compile Include="NFe\Xml\procNFe\emit.cs" />
+    <Compile Include="NFe\Xml\procNFe\enderDest.cs" />
+    <Compile Include="NFe\Xml\procNFe\enderEmit.cs" />
+    <Compile Include="NFe\Xml\procNFe\ICMS.cs" />
+    <Compile Include="NFe\Xml\procNFe\ICMS00.cs" />
+    <Compile Include="NFe\Xml\procNFe\ICMSTot.cs" />
+    <Compile Include="NFe\Xml\procNFe\ide.cs" />
+    <Compile Include="NFe\Xml\procNFe\imposto.cs" />
+    <Compile Include="NFe\Xml\procNFe\infAdic.cs" />
+    <Compile Include="NFe\Xml\procNFe\infNFe.cs" />
+    <Compile Include="NFe\Xml\procNFe\infProt.cs" />
+    <Compile Include="NFe\Xml\procNFe\IPI.cs" />
+    <Compile Include="NFe\Xml\procNFe\IPINT.cs" />
+    <Compile Include="NFe\Xml\procNFe\NFe.cs" />
+    <Compile Include="NFe\Xml\procNFe\nfeProc.cs" />
+    <Compile Include="NFe\Xml\procNFe\PIS.cs" />
+    <Compile Include="NFe\Xml\procNFe\PISAliq.cs" />
+    <Compile Include="NFe\Xml\procNFe\prod.cs" />
+    <Compile Include="NFe\Xml\procNFe\protNFe.cs" />
+    <Compile Include="NFe\Xml\procNFe\total.cs" />
+    <Compile Include="NFe\Xml\procNFe\transp.cs" />
+    <Compile Include="NFe\Xml\procNFe\transporta.cs" />
+    <Compile Include="NFe\Xml\procNFe\vol.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\CpfCnpj.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\Endereco.cs" />
     <Compile Include="NFSe\Xml\RecepcionarLoteRps\EnviarLoteRpsEnvio.cs" />
@@ -277,7 +306,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NFe\Xml\" />
+    <Folder Include="NFe\Xml\nfeAutorizacaoLote\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
