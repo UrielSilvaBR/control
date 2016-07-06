@@ -48,6 +48,9 @@ namespace Control.DAL.Data
         public DbSet<ShippingMode> ShippingModes { get; set; }
         public DbSet<UserAdressBook> AdressBooks { get; set; }
 
+        public DbSet<ProductProvider> ProductProviders { get; set; }
+        
+
         public ControlContext()
             : base(DBConexao.GetConnectionString(), throwIfV1Schema: false)
         {

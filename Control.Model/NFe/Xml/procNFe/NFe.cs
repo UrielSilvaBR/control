@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
-    class NFe
+    public class NFe
     {
+        public infNFe infNFe { get; set; }
+
     }
 }

@@ -117,6 +117,7 @@
     <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\OrderTypeRepository.cs" />
     <Compile Include="Repository\PaymentTermRepository.cs" />
+    <Compile Include="Repository\ProductProviderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\ProviderRepository.cs" />
     <Compile Include="Repository\PurchaseOrderItemRepository.cs" />

@@ -507,12 +507,12 @@ namespace Control.UI.Controllers
 
         public ActionResult ProdutosEdit(int? ProdutoID)
         {
-            Product model = new Product();
+            ProdutoViewModel model = new ProdutoViewModel();
             context = new DALContext();
 
             if (ProdutoID > 0)
             {
-                model = context.Products.Find(p => p.Id == ProdutoID);
+                model.Product = context.Products.Find(p => p.Id == ProdutoID);
             }
 
             ViewBag.Unidades = context.TypesUnities.All().ToList();

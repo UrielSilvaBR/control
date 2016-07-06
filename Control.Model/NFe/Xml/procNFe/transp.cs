@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
-    class transp
+    public class transp
     {
     }
 }

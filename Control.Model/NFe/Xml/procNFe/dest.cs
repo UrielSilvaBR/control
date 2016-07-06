@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
-    class dest
+    public class dest
     {
     }
 }

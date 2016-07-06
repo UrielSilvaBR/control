@@ -92,6 +92,7 @@
     <Compile Include="Entities\OrderType.cs" />
     <Compile Include="Entities\PaymentTerm.cs" />
     <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductProvider.cs" />
     <Compile Include="Entities\Provider.cs" />
     <Compile Include="Entities\PurchaseOrder.cs" />
     <Compile Include="Entities\PurchaseOrderItem.cs" />
