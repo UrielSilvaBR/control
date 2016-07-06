@@ -58,6 +58,9 @@ namespace Control.Model.Entities
         [ForeignKey("ProductTypeUnitID")]
         public virtual TypeUnit ProductUnit { get; set; }
 
+        [ForeignKey("ProductID")]
+        public virtual List<ProductProvider> ProductProviders { get; set; }
+
         [NotMapped]
         public string FullDescription
         {
