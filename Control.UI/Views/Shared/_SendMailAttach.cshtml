@@ -10,7 +10,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
        
 
-        <input type="hidden" id="hdnOrderID_ConvertPedido_Modal" name="ID" />
+        <input type="hidden" id="hdnOrderID_ConvertPedido_Modal" name="OrderID" />
             <div class="form-group">
                 @Html.Label("Selecionar Emails", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-8">
@@ -58,7 +58,7 @@
 
     function FinalizarInclusaoContato(id) {
         
-        ShowMessage('É necessário selecionar o Cliente!' + id, false);
+        ShowMessage('' + id, false);
         $('#modal-cadastro-contato').modal('hide');
 
         ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);

@@ -628,6 +628,7 @@ namespace Control.UI.Controllers
 
         }
 
+        //public ActionResult EnviarEmailAttached(SendMailViewModel model, int OrderID)
         public ActionResult EnviarEmailAttached(SendMailViewModel model)
         {
             try
@@ -639,7 +640,13 @@ namespace Control.UI.Controllers
 
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=6");
+
+                if (model.Order.Id > 0)
+                {
+                    doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
+                }
+                
 
                 ViewBag.ToPDF = "0";
 

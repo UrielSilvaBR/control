@@ -102,7 +102,7 @@ namespace Utilidades.EnvioEmail
             message.Subject = subject;
             message.IsBodyHtml = true;
             //message.Body = EmailTemplate;
-            message.To.Add(recipient + ", catiablack@hotmail.com, uriel@timepix.com.br");
+            message.To.Add(recipient + " catiablack@hotmail.com, uriel@timepix.com.br");
 
             if (attachmentFilename != null)
             {
