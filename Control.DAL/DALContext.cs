@@ -44,7 +44,8 @@ namespace Control.DAL
         private IRepository<ShippingMode> _shippingModes;
         private IRepository<Model.Entities.User> _users;
         private IRepository<UserAdressBook> _adressBook;
-        
+        private IRepository<ProductProvider> _productProvider;
+
 
         public DALContext()
         {
@@ -360,8 +361,16 @@ namespace Control.DAL
                 return _adressBook;
             }
         }
-        
 
+        public IRepository<ProductProvider> ProductProviders
+        {
+            get
+            {
+                if (_productProvider == null)
+                    _productProvider = new ProductProviderRepository(dbContext);
+                return _productProvider;
+            }
+        }
 
         public int SaveChanges()
         {

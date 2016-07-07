@@ -51,7 +51,7 @@ namespace Utilidades.EnvioEmail
             smtpClient.Send(message);
         }
 
-        public static void SendMailTemplate(string recipient, string subject, string body, string attachmentFilename)
+        public static void SendMailTemplate(string recipient, string subject, string body, string attachmentFilename, string local)
         {
             SmtpClient smtpClient = new SmtpClient();
             //NetworkCredential basicCredential = new NetworkCredential(ConfigurationManager.AppSettings["smtpUser"].ToString(), ConfigurationManager.AppSettings["smtpPass"].ToString());
@@ -67,9 +67,19 @@ namespace Utilidades.EnvioEmail
             smtpClient.Timeout = (60 * 5 * 1000);
 
             string EmailTemplate = "";
-            
 
-            LinkedResource inline = new LinkedResource(@"D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\anexos\sign.png");
+            string urlAssinatura = local + "anexos\\sign.png";
+            string urlTemplate = local + "template\\template_ncc.html";
+
+            if (!string.IsNullOrEmpty(local))
+            {
+                urlAssinatura = local + "anexos\\sign.png";
+                urlTemplate = local + "template\\template_ncc.html";
+
+
+            }
+
+            LinkedResource inline = new LinkedResource(urlAssinatura);
                                                          
             //LinkedResource inline = new LinkedResource(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\anexos\sign.png");
             inline.ContentId = Guid.NewGuid().ToString();
@@ -78,7 +88,7 @@ namespace Utilidades.EnvioEmail
             
 
             //EmailTemplate = pegaArquivo(@"D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\template\template_ncc.html");
-            EmailTemplate = pegaArquivo(@"D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\template\template_ncc.html");
+            EmailTemplate = pegaArquivo(urlTemplate);
 
             EmailTemplate = EmailTemplate.Replace("#conteudo#", body);
             EmailTemplate = EmailTemplate.Replace("#imgSign#", htmlBody);
