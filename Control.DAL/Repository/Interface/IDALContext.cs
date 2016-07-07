@@ -50,6 +50,7 @@ namespace Control.DAL
         IRepository<ShippingMode> ShippingModes { get; }
         IRepository<Model.Entities.User> Users { get; }
         IRepository<UserAdressBook> AddressBooks { get; }
+        IRepository<ProductProvider> ProductProviders { get; }
 
         bool Log(int code, string message, string user);
 

@@ -513,7 +513,10 @@ namespace Control.UI.Controllers
             if (ProdutoID > 0)
             {
                 model.Product = context.Products.Find(p => p.Id == ProdutoID);
+                model.ProviderID = model.Providers.Select(p => p.Id).First();
             }
+
+            model.AtualizarCodigoProdutoFornecedor();
 
             ViewBag.Unidades = context.TypesUnities.All().ToList();
             return View(model);
@@ -524,7 +527,7 @@ namespace Control.UI.Controllers
             return RedirectToAction("Produtos");
         }
 
-        public ActionResult ProdutosSave(Product prod)
+        public ActionResult ProdutosSave(ProdutoViewModel model)
         {
             context = new DALContext();
 
@@ -533,28 +536,48 @@ namespace Control.UI.Controllers
                 //prod.AliqICMS = 3;
                 //prod.CombinedProduct = false;
                 //prod.MinimumStockAlert = 50;
-                prod.ProductTypeUnitID = 1;
+                model.Product.ProductTypeUnitID = 1;
 
-                if (prod.ProductTypeUnitID > 0)
+                if (model.Product.ProductTypeUnitID > 0)
                 {
-                    var unidade = context.TypesUnities.Find(p => p.Id == prod.ProductTypeUnitID).Description;
+                    var unidade = context.TypesUnities.Find(p => p.Id == model.Product.ProductTypeUnitID).Description;
 
-                    prod.UnitMeasure = unidade;
+                    model.Product.UnitMeasure = unidade;
                 }
 
-                if (string.IsNullOrEmpty(prod.DescriptionNCC))
+                if (string.IsNullOrEmpty(model.Product.DescriptionNCC))
                 {
-                    prod.DescriptionNCC = prod.Description;
+                    model.Product.DescriptionNCC = model.Product.Description;
                 }
 
-                if (prod.Id > 0)
+                if (model.Product.Id > 0)
                 {
-                    context.Products.Update(prod);
+                    context.Products.Update(model.Product);
                 }
                 else
                 {
-                    context.Products.Create(prod);
+                    context.Products.Create(model.Product);
                 }
+
+                var productProvider = context.ProductProviders.Filter(p => p.ProductID == model.Product.Id && p.ProviderID == model.ProviderID).FirstOrDefault();
+
+                if (productProvider == null)
+                {
+                    productProvider = new ProductProvider()
+                    {
+                        Code = model.CodigoProdutoFornecedor,
+                        ProductID = model.Product.Id,
+                        ProviderID = model.ProviderID
+                    };
+
+                    context.ProductProviders.Create(productProvider);
+                }
+                else
+                {
+                    productProvider.Code = model.CodigoProdutoFornecedor;
+                    context.ProductProviders.Update(productProvider);
+                }
+
                 context.SaveChanges();
             }
             catch (Exception ex)

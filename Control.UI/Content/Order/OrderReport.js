@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $(".show-sidebar").click();
+    //$(".show-sidebar").click();
 
     var idPedidoInvoice = $('#hdOrderId').val();
 
