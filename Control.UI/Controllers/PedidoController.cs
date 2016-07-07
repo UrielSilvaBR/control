@@ -154,8 +154,10 @@ namespace Control.UI.Controllers
             {
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
+               //string path = HttpContext.Server.MapPath("/Invoice/InvoiceFile?InvoiceID=" + OrderID.ToString()); 
 
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + OrderID);
+                
                 ViewBag.ToPDF = "0";
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
                 //doc.Close();
@@ -628,7 +630,7 @@ namespace Control.UI.Controllers
 
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + OrderID);
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + OrderID);
 
                 ViewBag.ToPDF = "0";
 
@@ -659,12 +661,12 @@ namespace Control.UI.Controllers
 
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=6");
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
 
-                if (model.Order.Id > 0)
-                {
-                    doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
-                }
+                //if (model.Order.Id > 0)
+                //{
+                //    doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
+                //}
                 
 
                 ViewBag.ToPDF = "0";
