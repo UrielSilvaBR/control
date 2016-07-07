@@ -19,7 +19,8 @@ namespace Control.Model.NFe.Xml.procNFe
         public emit emit { get; set; }
         public dest dest { get; set; }
 
-        //public List<det> det { get; set; }
+        [XmlElement("det")]
+        public det[] det { get; set; }
 
         public total total { get; set; }
         public transp transp { get; set; }
@@ -31,8 +32,6 @@ namespace Control.Model.NFe.Xml.procNFe
             ide = new ide();
             emit = new emit();
             dest = new dest();
-
-            //det = new List<procNFe.det>();
 
             total = new total();
             transp = new transp();

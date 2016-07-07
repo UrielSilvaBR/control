@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
-    class imposto
+    public class imposto
     {
+
     }
 }

@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
-    class prod
+    public class prod
     {
+
+
     }
 }

@@ -370,12 +370,10 @@ namespace Control.UI.Controllers
                     var arquivoXml = new XmlDocument();
                     arquivoXml.Load(file.InputStream);
 
-                    //var objNFe = Utility.Serialization.Deserialize<Model.NFe.Xml.procNFe.nfeProc>(arquivoXml.OuterXml);
-
-                    string numeroNotaFiscal = arquivoXml.GetElementsByTagName("cNF").Item(0).InnerText;
+                    var objNFe = Utility.Serialization.Deserialize<Model.NFe.Xml.procNFe.nfeProc>(arquivoXml.OuterXml);
 
                     // Returns message that successfully uploaded  
-                    return Json(new { retorno = "Arquivo importado com Sucesso!", nf = numeroNotaFiscal });
+                    return Json(new { retorno = "Arquivo importado com Sucesso!", nf = objNFe.NFe.infNFe.ide.cNF });
                 }
                 catch (Exception ex)
                 {
