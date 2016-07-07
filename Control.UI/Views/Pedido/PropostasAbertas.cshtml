@@ -11,25 +11,6 @@
 
     <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 
-    <script type="text/javascript">
-
-
-        $(document).ready(function () {
-
-        });
-
-        function GerarNotaFiscal(idPedido) {
-
-            $.post("/Pedido/GerarNotaFiscal",
-            { OrderID: idPedido },
-            function (result) {
-                ShowMessage(result, true);
-                window.location = '/Invoice/Index';
-            });
-        }
-
-    </script>
-
 </head>
 
 <div class="row">
@@ -92,9 +73,6 @@
                                     Data Emissão
                                 </th>
                                 <th>
-                                    Nota Fiscal
-                                </th>
-                                <th>
                                     Valor
                                 </th>
                             </tr>
@@ -145,20 +123,6 @@
                                         <td>
                                             @{ string dataEmissao = item.OrderDate.ToShortDateString(); }
                                             @Html.DisplayFor(modelItem => dataEmissao)
-                                        </td>
-                                        <td style="text-align: center;">
-
-                                            @if (item.InvoiceNumber.HasValue)
-                                            {
-                                                string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
-                                                @Html.DisplayFor(modelItem => invoiceNumber)
-                                            }
-                                            else
-                                            {
-                                                <a href='javascript:void(0);' onclick="GerarNotaFiscal(@item.Id);">
-                                                    Gerar NF
-                                                </a>
-                                            }
                                         </td>
                                         <td>
                                             @{
@@ -234,35 +198,34 @@
                { "sName": "Tipo" },
                { "sName": "Vendedor" },
                { "sName": "DataEmissao" },
-               { "sName": "NotaFiscal" },
                { "sName": "Valor" },
             ],
-            "footerCallback": function (row, data, start, end, display) {
+            "footerCallback": function ( row, data, start, end, display ) {
                 var api = this.api(), data;
 
                 // Remove the formatting to get integer data for summation
-                var intVal = function (i) {
+                var intVal = function ( i ) {
                     return typeof i === 'string' ?
-                        i.replace(/[\.$,]/g, '') * 1 :
+                        i.replace(/[\.$,]/g, '')*1 :
                         typeof i === 'number' ?
                         i : 0;
                 };
 
                 // Total over all pages
                 total = api
-                    .column(8)
+                    .column(7)
                     .data()
-                    .reduce(function (a, b) {
+                    .reduce( function (a, b) {
                         return intVal(a) + intVal(b);
-                    }, 0);
+                    }, 0 );
 
                 // Total over this page
                 pageTotal = api
-                    .column(8, { page: 'current' })
+                    .column(7, { page: 'current'} )
                     .data()
-                    .reduce(function (a, b) {
+                    .reduce( function (a, b) {
                         return intVal(a) + intVal(b);
-                    }, 0);
+                    }, 0 );
 
                 // Update footer
                 //$(api.column(8).footer() ).html(

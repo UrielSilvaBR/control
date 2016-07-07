@@ -36,7 +36,7 @@ namespace Control.UI.Controllers
 
             var Orders = context.Orders.All().Where(p => p.Status == "PROPOSTA").ToList();
             ViewBag.Title = "Propostas em Aberto";
-            return View("Index", Orders);
+            return View(Orders);
         }
 
         public ActionResult PedidosAbertos()
@@ -451,7 +451,7 @@ namespace Control.UI.Controllers
 
                 var invoice = new Invoice();
 
-                invoice.InvoiceSerieID = context.InvoiceSeries.Find(p => p.Descricao == "NFSE").Id;
+                invoice.InvoiceSerieID = context.InvoiceSeries.Find(p => p.Descricao == "NFE").Id;
                 invoice.Numero = Order.Id;
                 invoice.DataEmissao = Order.OrderDate;
                 invoice.CustomerID = Order.CustomerID;
@@ -467,6 +467,7 @@ namespace Control.UI.Controllers
                 context.SaveChanges();
 
                 Order.InvoiceNumber = (int)invoice.Numero;
+                Order.Status = "PEDIDO - ENTREGUE";
                 context.Orders.Update(Order);
                 context.SaveChanges();
 

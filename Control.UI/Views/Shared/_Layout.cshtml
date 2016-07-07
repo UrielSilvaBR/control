@@ -427,9 +427,9 @@
                             <li>@Html.ActionLink("Propostas", "Create", "Pedido")</li>
                             
                             <li>@Html.ActionLink("Propostas em Aberto", "PropostasAbertas", "Pedido")</li>
-                            <li>@Html.ActionLink("Pedidos Abertos", "PedidosAbertos", "Pedido")</li>
+                            <li>@Html.ActionLink("Pedidos em Aberto", "PedidosAbertos", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos em Carteira", "Carteira", "Pedido")</li>
-                            <li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>
+                            @*<li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>*@
                             <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
                             <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>
                             <li>@Html.ActionLink("Tabela de Preços", "TabelaPrecos", "Vendas")</li>
@@ -487,7 +487,7 @@
                             <span class="hidden-xs">Faturamento</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Controle e Emissão de Notas Fiscais", "Create", "Invoice")</li>
+                            <li>@Html.ActionLink("Emissão de Notas Fiscais", "Create", "Invoice")</li>
                             <li>@Html.ActionLink("Integração SEFAZ (Secretária da Fazenda): Inclusão e Cancelamento de NF", "", "Financeiro")</li>
                             <li>@Html.ActionLink("Emissão de DANFE", "", "Financeiro")</li>
                             <li>@Html.ActionLink("Notas Fiscais Emitidas", "Index", "Invoice")</li>

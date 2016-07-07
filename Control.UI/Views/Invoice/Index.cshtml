@@ -27,7 +27,11 @@
                    ShowSuccess(result, true);
                });
         }
+        
+        function VisualizarDANFE(idNotaFiscal)
+        {
 
+        }
     </script>
 
 </head>
@@ -96,6 +100,9 @@
                                 <th>
                                     XML
                                 </th>
+                                <th>
+                                    DANFE
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,7 +116,7 @@
                                             </a>
                                         </td>
                                         <td style="text-align: center;">
-                                            <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id } )'>
+                                            <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id })'>
                                                 <i class="fa fa-times-circle" style="color:red"></i>
 
                                             </a>
@@ -143,7 +150,8 @@
                                             @Html.DisplayFor(modelItem => dataEmissao)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.InsertDate)
+                                            @{ string dataCriacao = item.InsertDate.ToString(); }
+                                            @Html.DisplayFor(modelItem => dataCriacao)
                                         </td>
                                         <td>
                                             @Html.ActionLink(item.CustomerInvoice.CompanyName, "ClientesEdit", "Cadastro", new { ClientID = item.CustomerID }, "")
@@ -153,6 +161,12 @@
                                                 <i class="fa fa-file-code-o" aria-hidden="true"></i>
                                             </a>
                                         </td>
+                                        <td style="text-align: center;">
+                                            <a href="javascript:void(0);" onclick="VisualizarDANFE(@item.Id);" )'>
+                                                <i class="fa fa-search" aria-hidden="true"></i>
+                                            </a>
+                                        </td>
+
                                     </tr>
                                                     }
                                                 }
@@ -210,6 +224,7 @@
                { "sName": "DataCriacao" },
                { "sName": "Cliente" },
                { "sName": "ArquivoXml" },
+               { "sName": "VisualizarDANFE" },
            ],
             "columnDefs": [{
                 "targets": 'no-sort',
