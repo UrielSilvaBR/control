@@ -253,6 +253,24 @@ namespace Control.UI.Controllers
                     {
                         p.ProductItem.QuantityCurrentStock -= p.QuantityOrder;
                         context.Products.Update(p.ProductItem);
+
+                        Storage EstoqueProduto = context.Storages.Find(q => q.ProductID == p.ProductID);
+                        if (EstoqueProduto != null)
+                        {
+                            EstoqueProduto.Quantity -= p.QuantityOrder;
+                            context.Storages.Update(EstoqueProduto);
+                        }
+                        else
+                        {
+                            EstoqueProduto = new Storage
+                            {
+                                ProductID = p.ProductID,
+                                Quantity = p.QuantityOrder,
+                                UpdateDate = DateTime.Now,
+
+                            };
+                            context.Storages.Create(EstoqueProduto);
+                        }
                     });
 
                     if (context.SaveChanges() > 0)

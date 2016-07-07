@@ -579,6 +579,25 @@ namespace Control.UI.Controllers
                     context.ProductProviders.Update(productProvider);
                 }
 
+
+                Storage EstoqueProduto = context.Storages.Find(q => q.ProductID == model.Product.Id);
+                if (EstoqueProduto != null)
+                {
+                    EstoqueProduto.Quantity += model.Product.QuantityCurrentStock.HasValue ? model.Product.QuantityCurrentStock.Value : 0;
+                    context.Storages.Update(EstoqueProduto);
+                }
+                else
+                {
+                    EstoqueProduto = new Storage
+                    {
+                        ProductID = model.Product.Id,
+                        Quantity = model.Product.QuantityCurrentStock.HasValue ? model.Product.QuantityCurrentStock.Value : 0,
+                        UpdateDate = DateTime.Now,
+
+                    };
+                    context.Storages.Create(EstoqueProduto);
+                }
+
                 context.SaveChanges();
             }
             catch (Exception ex)
