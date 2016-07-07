@@ -556,6 +556,7 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
+                    model.Product.QuantityCurrentStock = 0;
                     context.Products.Create(model.Product);
                 }
 
