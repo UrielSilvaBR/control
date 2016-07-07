@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 namespace Control.Model.NFe.Xml.procNFe
 {
+    [XmlRoot("EnviarLoteRpsEnvio")]
     public class nfeProc
     {
         [XmlAttribute("versao")]
@@ -15,5 +16,11 @@ namespace Control.Model.NFe.Xml.procNFe
         public NFe NFe { get; set; }
 
         public protNFe protNFe { get; set; }
+
+        public nfeProc()
+        {
+            NFe = new NFe();
+            protNFe = new protNFe();
+        }
     }
 }

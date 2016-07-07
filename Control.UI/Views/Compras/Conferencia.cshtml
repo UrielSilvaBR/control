@@ -85,6 +85,7 @@
                                 waitingDialog.hide();
                                 ShowMessage('Arquivo XML importado com <br>Sucesso!', true);
                                 $('#FileUpload1').val("");
+                                $('#PurchaseOrder_InvoiceNumber').val(result.nf);
                             },
                             error: function (err) {
                                 waitingDialog.hide();

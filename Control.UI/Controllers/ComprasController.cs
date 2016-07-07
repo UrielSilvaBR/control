@@ -110,7 +110,7 @@ namespace Control.UI.Controllers
                                 };
                                 context.Storages.Create(EstoqueProduto);
                             }
-                            //context.SaveChanges();
+                            context.SaveChanges();
                         }
 
                         Pedido.PurchaseOrder.Items.ForEach(p => 
@@ -334,6 +334,8 @@ namespace Control.UI.Controllers
         [HttpPost]
         public ActionResult UploadXmlNFe()
         {
+            HttpPostedFileBase file = null;
+
             // Checking no of files injected in Request object  
             if (Request.Files.Count > 0)
             {
@@ -346,7 +348,7 @@ namespace Control.UI.Controllers
                         //string path = AppDomain.CurrentDomain.BaseDirectory + "Uploads/";  
                         //string filename = Path.GetFileName(Request.Files[i].FileName);  
 
-                        HttpPostedFileBase file = files[i];
+                        file = files[i];
                         string fname;
 
                         // Checking for Internet Explorer  
@@ -360,15 +362,20 @@ namespace Control.UI.Controllers
                             fname = file.FileName;
                         }
 
-                        var xml = new XmlDocument();
-                        xml.Load(file.InputStream);
-
                         // Get the complete folder path and store the file inside it.  
                         fname = Path.Combine(Server.MapPath("~/Uploads/"), fname);
                         file.SaveAs(fname);
                     }
+
+                    var arquivoXml = new XmlDocument();
+                    arquivoXml.Load(file.InputStream);
+
+                    //var objNFe = Utility.Serialization.Deserialize<Model.NFe.Xml.procNFe.nfeProc>(arquivoXml.OuterXml);
+
+                    string numeroNotaFiscal = arquivoXml.GetElementsByTagName("cNF").Item(0).InnerText;
+
                     // Returns message that successfully uploaded  
-                    return Json("Arquivo importado com Sucesso!");
+                    return Json(new { retorno = "Arquivo importado com Sucesso!", nf = numeroNotaFiscal });
                 }
                 catch (Exception ex)
                 {
