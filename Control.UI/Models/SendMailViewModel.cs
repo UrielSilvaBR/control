@@ -17,6 +17,7 @@ namespace Control.UI.Models
         public List<UserAdressBook> ListaEmails { get; set; }
         public string LoggerUser { get; set; }
         public string NovoEmail { get; set; }
+        public string Assunto { get; set; }
 
         public SendMailViewModel()
         {

@@ -29,7 +29,7 @@ namespace Utilidades.EnvioEmail
             smtpClient.Timeout = (60 * 5 * 1000);
 
             message.From = fromAddress;
-            message.Subject = subject + ", catiablack@hotmail.com, uriel@timepix.com.br";
+            message.Subject = subject + ", urielbr@gmail.com.br";
             message.IsBodyHtml = false;
             message.Body = body;
             message.To.Add(recipient);

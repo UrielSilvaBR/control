@@ -66,7 +66,7 @@ function AbrirModalPedido(idPedido) {
 
 function AbrirModalEmail(idPedido) {
 
-    waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
+    //waitingDialog.show('Gerando Arquivo...', { dialogSize: 'sm', progressType: 'success' });
 
     setTimeout(function () {
         $.ajax({

@@ -30,9 +30,8 @@
             <div class="form-group">
 
                 @Html.Label("Assunto:", htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-8">
-                    <input type="text" class="form-control" id="txtAssunto" />
-                    
+                <div class="col-md-8">                    
+                    @Html.EditorFor(model => model.Assunto, new { htmlAttributes = new { @class = "form-control", @id = "txtAssunto" } })
                     
                 </div>
             </div>
@@ -59,7 +58,7 @@
 
     function FinalizarInclusaoContato(id) {
         
-        //ShowMessage('É necessário selecionar o Cliente!' + id, false);
+        ShowMessage('É necessário selecionar o Cliente!' + id, false);
         $('#modal-cadastro-contato').modal('hide');
 
         ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);

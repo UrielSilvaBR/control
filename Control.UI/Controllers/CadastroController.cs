@@ -524,9 +524,10 @@ namespace Control.UI.Controllers
             return RedirectToAction("Produtos");
         }
 
-        public ActionResult ProdutosSave(Product prod)
+        public ActionResult ProdutosSave(ProdutoViewModel produtoVM)
         {
             context = new DALContext();
+            Product prod = produtoVM.Product;
 
             try
             {

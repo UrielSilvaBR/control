@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using SelectPdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -626,16 +627,28 @@ namespace Control.UI.Controllers
                 string saudacao = "Bom dia.";
 
                 if (DateTime.Now.Hour >= 12)
-                    saudacao = "Boa Tarde.";                
+                    saudacao = "Boa Tarde.";
 
-                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate("urielbr@gmail.com", 
-                    "teste envio Email", 
-                    saudacao +"<br /><br /> Segue a proposta solicitada. <br /><br />Atenciosamente,", AppDomain.CurrentDomain.BaseDirectory + "anexos\\arquivo.pdf", AppDomain.CurrentDomain.BaseDirectory);
+                HtmlToPdf converter = new HtmlToPdf();
+                ViewBag.ToPDF = "1";
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
+
+                ViewBag.ToPDF = "0";
+
+                byte[] fileBytes = doc.Save();
+                string fileName = "proposta_" + model.Order.Id.ToString() + ".pdf";
+
+                FileStream fs = new FileStream(AppDomain.CurrentDomain.BaseDirectory + "anexos\\" + fileName, FileMode.OpenOrCreate);
+                fs.Write(fileBytes, 0, fileBytes.Length);
+                fs.Close();
+
+                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate(model.Order.ProposalMailList, model.Assunto,                    
+                    saudacao +"<br /><br /> Segue a proposta solicitada. <br /><br />Atenciosamente,", AppDomain.CurrentDomain.BaseDirectory + "anexos\\" + fileName, AppDomain.CurrentDomain.BaseDirectory);
             }
             catch (Exception ex)
             {
 
-                throw;
+                return Content("Não foi possível enviar o email. " +  ex.Message);
             }
             return Content("Email Enviado com sucesso.");
         }

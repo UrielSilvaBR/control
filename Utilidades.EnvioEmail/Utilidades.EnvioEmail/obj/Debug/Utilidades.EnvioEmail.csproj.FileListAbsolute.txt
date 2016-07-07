@@ -14,7 +14,6 @@ D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Deb
 D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.pdb
 D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.dll
 D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.pdb
-D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll.config
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.dll
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\Utilidades.EnvioEmail.pdb
@@ -26,3 +25,4 @@ F:\control-master\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\bin\Debug\
 F:\control-master\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.dll
 F:\control-master\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.pdb
 D:\Uriel\GitHub\Control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
+D:\HomeOffice\Github\control\Utilidades.EnvioEmail\Utilidades.EnvioEmail\obj\Debug\Utilidades.EnvioEmail.csprojResolveAssemblyReference.cache
