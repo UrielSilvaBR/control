@@ -12,33 +12,30 @@ namespace Control.UI.Models
         private IDALContext context;
 
         public Product Product { get; set; }
-        public List<ProductProvider> ProductProviders { get; set; }
+        public List<Provider> Providers { get; set; }
 
         public int ProviderID { get; set; }
 
-        public long  CodeProductProvider
+        public long CodigoProdutoFornecedor { get; set; }
+
+        public void AtualizarCodigoProdutoFornecedor()
         {
-            get
-            {
-                if (ProductProviders != null)
-                {
-                    var ProductProvider = ProductProviders.Where(p => p.ProviderID == ProviderID && p.ProductID == Product.Id).FirstOrDefault();
-                    return ProductProvider != null && ProductProvider.Code.HasValue ? ProductProvider.Code.Value : 0;
-                }
-                else
-                    return 0;
-            }
+            context = new DALContext();
+            var providerProduct = context.ProductProviders.Filter(p => p.ProviderID == ProviderID && p.ProductID == Product.Id).FirstOrDefault();
+
+            if (providerProduct == null)
+                CodigoProdutoFornecedor = 0;
+            else
+                CodigoProdutoFornecedor = providerProduct.Code.HasValue ? providerProduct.Code.Value : 0;
         }
 
         public ProdutoViewModel()
         {
-            if (ProductProviders == null)
-                ProductProviders = new List<ProductProvider>();
+            if (Product == null)
+                Product = new Product();
 
             context = new DALContext();
-
-
-
+            Providers = context.Providers.All().OrderBy(p => p.CompanyName).ToList();
         }
     }
 }

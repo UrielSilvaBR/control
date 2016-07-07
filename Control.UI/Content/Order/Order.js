@@ -339,6 +339,7 @@ function InicializarCamposReadOnly() {
     $("#Order_TotalValue").prop('readonly', true);
     $('#OrderProduct_TotalPrice').attr('disabled', true);
     $('#OrderProduct_UnitPrice').attr('disabled', true);
+    $('#OrderProduct_ProductItem_QuantityCurrentStock').attr('disabled', true);
 
 }
 
@@ -535,6 +536,7 @@ function ObterValorUnitarioProduto(idProduto) {
     ObterProduto(idProduto, function (produto) {
         $('#OrderProduct_UnitPrice').val(produto.UnitPrice.toFixed(2));
         $('#OrderProduct_TotalPrice').val(produto.UnitPrice.toFixed(2));
+        $('#OrderProduct_ProductItem_QuantityCurrentStock').val(produto.QuantityCurrentStock);
         CalcularItemPedido($('#OrderProduct_QuantityOrder').val());
     });
 }

@@ -207,6 +207,8 @@ namespace Control.UI.Controllers
         {
             try
             {
+                context = new DALContext();
+
                 if (ModelState.IsValid)
                 {
                     var arrayItensPedido = JArray.Parse(itensPedido);
@@ -217,6 +219,7 @@ namespace Control.UI.Controllers
                         SequencialItem = (int)x["SequencialItem"],
                         QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                         ProductID = (int)x["ProductID"],
+                        ProductItem = context.Products.Find((int)x["ProductID"]),
                         UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
                         DeadlineItem = (int)x["DeadlineItem"],
                         ItemDiscount = 0,
@@ -228,8 +231,6 @@ namespace Control.UI.Controllers
                     Pedido.Order.Status = "PROPOSTA";
 
                     Pedido.Order.ShippingId = Pedido.Order.ShippingId.HasValue && Pedido.Order.ShippingId.Value == 0 ? null : Pedido.Order.ShippingId;
-
-                    context = new DALContext();
 
                     foreach (var item in Pedido.Order.Items.Where(p => p.OrderId > 0))
                         context.OrdersProducts.Update(item);
@@ -247,6 +248,12 @@ namespace Control.UI.Controllers
                         context.Orders.Create(Pedido.Order);
 
                     bool pedidoExiste = Pedido.Order.Id > 0;
+
+                    Pedido.Order.Items.ForEach(p =>
+                    {
+                        p.ProductItem.QuantityCurrentStock -= p.QuantityOrder;
+                        context.Products.Update(p.ProductItem);
+                    });
 
                     if (context.SaveChanges() > 0)
                     {
@@ -340,7 +347,8 @@ namespace Control.UI.Controllers
 
                 var Customer = context.Customers.Find(p => p.Id == CustomerID);
 
-                if(Customer != null)
+
+                if (Customer != null)
                     vendorList = context.Vendors.Filter(p => p.Id == (Customer.VendorId.HasValue ? Customer.VendorId.Value : 0)).ToList();
 
                 return Json(new { vendorList = vendorList });
@@ -648,6 +656,7 @@ namespace Control.UI.Controllers
             catch (Exception ex)
             {
 
+              
                 return Content("Não foi possível enviar o email. " +  ex.Message);
             }
             return Content("Email Enviado com sucesso.");

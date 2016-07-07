@@ -62,7 +62,6 @@ namespace Control.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     context = new DALContext();
 
                     if (Pedido.PurchaseOrder.Id > 0)
@@ -84,13 +83,15 @@ namespace Control.UI.Controllers
                             QuantityOrder = Convert.ToDecimal(x["QuantityOrder"].ToString()),
                             QuantityDeliver = Convert.ToDecimal(x["QuantityDeliver"].ToString()),
                             ProductID = (int)x["ProductID"],
+                            ProductItem = context.Products.Find((int)x["ProductID"]),
                             UnitPrice = Convert.ToDecimal(x["UnitPrice"].ToString()),
                             ItemDiscount = Convert.ToDecimal(x["ItemDiscount"].ToString()),
                             TotalPrice = Convert.ToDecimal(x["TotalPrice"].ToString())
                         }).ToList();
 
 
-                        foreach (var item in Pedido.PurchaseOrder.Items) { 
+                        foreach (var item in Pedido.PurchaseOrder.Items) {
+
                             context.PurchaseOrderItem.Update(item); 
                             Storage EstoqueProduto = context.Storages.Find(p => p.ProductID == item.ProductID);
                             if (EstoqueProduto != null)
@@ -109,11 +110,16 @@ namespace Control.UI.Controllers
                                 };
                                 context.Storages.Create(EstoqueProduto);
                             }
-                            context.SaveChanges();
+                            //context.SaveChanges();
                         }
-                        
-                        context.SaveChanges();
 
+                        Pedido.PurchaseOrder.Items.ForEach(p => 
+                        {
+                            p.ProductItem.QuantityCurrentStock += p.QuantityDeliver;
+                            context.Products.Update(p.ProductItem);
+                        });
+
+                        context.SaveChanges();
                     }
                 }
                 else
@@ -121,7 +127,7 @@ namespace Control.UI.Controllers
                     return Content("Ordem de compra inválida;0");
                 }
 
-                return Content( "Ordem de compra recebida com<br> Sucesso ! <br> Estoque Atualizado!;" + Pedido.PurchaseOrder.Id.ToString());
+                return Content("Ordem de compra recebida com<br> Sucesso ! <br> Estoque Atualizado!;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
