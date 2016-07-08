@@ -5,7 +5,10 @@
     var idPedidoInvoice = $('#hdOrderId').val();
 
     if (idPedidoInvoice > 0)
+    {
         $('#hdnOrderID_ConvertPedido_Modal').val($('#hdOrderId').val());
+        $('#hdnOrderID_Mail_Modal').val($('#hdOrderId').val());
+    }
 
 });
 
