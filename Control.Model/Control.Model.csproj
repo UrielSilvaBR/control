@@ -110,6 +110,7 @@
     <Compile Include="Entities\Vendor.cs" />
     <Compile Include="Entities\VendorsCustomer.cs" />
     <Compile Include="Enums\Enumerations.cs" />
+    <Compile Include="NFe\Xml\nfeAutorizacaoLote\enviNFe.cs" />
     <Compile Include="NFe\Xml\procNFe\cobr.cs" />
     <Compile Include="NFe\Xml\procNFe\COFINS.cs" />
     <Compile Include="NFe\Xml\procNFe\COFINSAliq.cs" />
@@ -306,9 +307,7 @@
       <Name>Control.Utility</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NFe\Xml\nfeAutorizacaoLote\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
