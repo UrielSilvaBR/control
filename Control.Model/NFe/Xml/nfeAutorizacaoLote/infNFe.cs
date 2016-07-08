@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
 {
-    class infNFe
+    public class infNFe
     {
+
+
+
+
     }
 }

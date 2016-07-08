@@ -42,5 +42,15 @@ namespace Control.DAL.Properties {
                 return ((string)(this["Control_DAL_servico_cidades_cidades"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico2.asmx")]
+        public string Control_DAL_nfe_homologacao_nfestatusservico2_NfeStatusServico2 {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfestatusservico2_NfeStatusServico2"]));
+            }
+        }
     }
 }
