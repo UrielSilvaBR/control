@@ -110,6 +110,7 @@
     <Compile Include="Entities\Vendor.cs" />
     <Compile Include="Entities\VendorsCustomer.cs" />
     <Compile Include="Enums\Enumerations.cs" />
+    <Compile Include="Enums\NFe.cs" />
     <Compile Include="NFe\Xml\nfeAutorizacaoLote\enviNFe.cs" />
     <Compile Include="NFe\Xml\nfeAutorizacaoLote\infNFe.cs" />
     <Compile Include="NFe\Xml\nfeAutorizacaoLote\NFe.cs" />

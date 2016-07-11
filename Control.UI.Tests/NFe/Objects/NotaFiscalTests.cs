@@ -47,7 +47,7 @@ namespace Control.DAL.NFe.Objects.Tests
             objConsultaStatusServico.xServ = "STATUS";
 
             var objNFeDAL = new DAL.NFe.Objects.NFe();
-            var x = objNFeDAL.ConsultarStatusServicoNFe(objConsultaStatusServico);
+            var retornoNFe = objNFeDAL.ConsultarStatusServicoNFe(objConsultaStatusServico);
 
             Assert.Fail();
         }

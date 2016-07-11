@@ -52,5 +52,65 @@ namespace Control.DAL.Properties {
                 return ((string)(this["Control_DAL_nfe_homologacao_nfestatusservico2_NfeStatusServico2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeautorizacao.asmx")]
+        public string Control_DAL_nfe_homologacao_nfeAutorizacaoLote_NfeAutorizacao {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfeAutorizacaoLote_NfeAutorizacao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao.asmx")]
+        public string Control_DAL_nfe_homologacao_nfeRetAutorizacaoLote_NfeRetAutorizacao {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfeRetAutorizacaoLote_NfeRetAutorizacao"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao2.asmx")]
+        public string Control_DAL_nfe_homologacao_nfeInutilizacaoNF2_NfeInutilizacao2 {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfeInutilizacaoNF2_NfeInutilizacao2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsulta2.asmx")]
+        public string Control_DAL_nfe_homologacao_nfeConsultaNF2_NfeConsulta2 {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfeConsultaNF2_NfeConsulta2"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/recepcaoevento.asmx")]
+        public string Control_DAL_nfe_homologacao_nfeRecepcaoEvento_RecepcaoEvento {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_nfeRecepcaoEvento_RecepcaoEvento"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro2.asmx")]
+        public string Control_DAL_nfe_homologacao_consultaCadastro2_CadConsultaCadastro2 {
+            get {
+                return ((string)(this["Control_DAL_nfe_homologacao_consultaCadastro2_CadConsultaCadastro2"]));
+            }
+        }
     }
 }
