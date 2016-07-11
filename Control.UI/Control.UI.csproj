@@ -236,6 +236,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\img\calendar.png" />
+    <Content Include="Content\img\check_gif.gif" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\img\sort.png" />
     <Content Include="Content\img\warning.png" />
@@ -836,6 +837,7 @@
     <Content Include="Views\Cadastro\_AddFornecedorProduto.cshtml" />
     <Content Include="Views\Compras\_AddItemPurchaseOrder.cshtml" />
     <Content Include="Views\Pedido\PropostasAbertas.cshtml" />
+    <Content Include="Views\Invoice\StatusServicoNFe.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
