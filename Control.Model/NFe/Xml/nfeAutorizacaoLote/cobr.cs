@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
 {
-    public class NFe
+    public class cobr
     {
-        public infNFe infNFe { get; set; }
+        public dup dup { get; set; }
 
-        public NFe()
+        public cobr()
         {
-            infNFe = new infNFe();
+            dup = new dup();
         }
     }
 }
