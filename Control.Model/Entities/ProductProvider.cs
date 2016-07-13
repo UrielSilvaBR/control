@@ -25,6 +25,8 @@ namespace Control.Model.Entities
 
         public long? Code { get; set; }
 
+        public DateTime InsertDate { get; set; }
+
         [NotMapped]
         public string NameProvider
         {

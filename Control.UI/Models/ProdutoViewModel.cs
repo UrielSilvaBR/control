@@ -13,6 +13,7 @@ namespace Control.UI.Models
 
         public Product Product { get; set; }
         public List<Provider> Providers { get; set; }
+        public List<ProductProvider> ProductProviders { get; set; }
 
         public int ProviderID { get; set; }
 
@@ -36,6 +37,7 @@ namespace Control.UI.Models
 
             context = new DALContext();
             Providers = context.Providers.All().OrderBy(p => p.CompanyName).ToList();
+            
         }
     }
 }

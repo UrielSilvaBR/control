@@ -1,4 +1,5 @@
 ﻿@using Control.UI.Models
+@using Control.Model.Enums
 @model ProdutoViewModel
 
 <div class="row">
@@ -33,177 +34,244 @@
 
                 <div class="no-move"></div>
             </div>
-            <!--Inicio-->
-            @using (Html.BeginForm("ProdutosSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
-            {
-                <div class="box-content">
 
-                    @Html.AntiForgeryToken()
-                    @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-                    @Html.HiddenFor(model => model.Product.Id)
+            <div class="box-content">
 
-                    <div class="form-group">
-                        @*@Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
-                            @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
-                        </div>*@
-                        @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-5">
-                            @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                <div id="tabs">
+                    <!--Inicio-->
+                    @using (Html.BeginForm("ProdutosSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        <ul>
+                            <li><a href="#tabs-1"> Dados Produto </a></li>
+                            <li><a href="#tabs-2"> Fornecedores </a></li>
+                        </ul>
+
+                        <div id="tabs-1">
+
+                            @Html.AntiForgeryToken()
+                            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+                            @Html.HiddenFor(model => model.Product.Id)
+
+                            <div class="form-group">
+                                @*@Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
+                                    <div class="col-md-2">
+                                        @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                        @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                                    </div>*@
+                                @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-3">
+                                    @Html.EditorFor(model => model.Product.Model, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                                    @Html.Label("Marca", htmlAttributes: new { @class = "control-label col-md-1" })
+                                    <div class="col-md-3">
+                                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })@
+                                    </div>
+
+                                </div>*@
+
+                            <div class="form-group">
+                                @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Product.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label(string.Format(@"Unidade Medida"), htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.DropDownListFor(model => model.Product.ProductTypeUnitID, new SelectList(ViewBag.Unidades, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
+                                    @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("Preço Lista", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.ListPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Lista" } })
+                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("IPI", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.AliqIPI, new { htmlAttributes = new { @class = "form-control", @id = "txt_IPI" } })
+                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label(string.Format(@"Markup"), htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.Markup, new { htmlAttributes = new { @class = "form-control", @id = "txt_Markup" } })
+                                    @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
+                                    @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("Preço Custo", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo" } })
+                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("Preço Venda", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Unitario" } })
+                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.Label("Estoque Min", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.MinimumStockAlert, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Product.MinimumStockAlert, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.Label("Aliq. ICMS", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.AliqICMS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Product.AliqICMS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                @Html.Label("NCM", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.NCMCode, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+
+                                @Html.Label("Descrição NCC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-5">
+                                    @Html.EditorFor(model => model.Product.DescriptionNCC, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <br />
+                            <div class="form-group">
+                                <div class="col-md-offset-5 col-md-10">
+                                    <input type="submit" value="Cadastrar" class="btn btn-primary" style="font-size: 0.8em;" />
+                                    <a href='@Url.Action("Produtos", "Cadastro")'>
+                                        <i class="btn btn-primary">Voltar</i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-3">
-                            @Html.EditorFor(model => model.Product.Model, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })*@
+
+                        <div id="tabs-2">
+
+                            <div class="form-group">
+                                @Html.Label("Fornecedor", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-8">
+                                    @Html.DropDownListFor(p => p.ProviderID, new SelectList(Model.Providers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Código Produto", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.CodigoProdutoFornecedor, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                </div>
+                            </div>
+                            <div id="table_wrapperz">
+                                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Fornecedor
+                                            </th>
+                                            <th>
+                                                Apelido
+                                            </th>
+                                            <th>
+                                                Cód. Produto
+                                            </th>
+                                            <th>CNPJ/CPF</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.ProductProviders)
+                                        {
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Provider.CompanyName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Provider.ShortName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Code)
+                                                    </td>
+                                                    <td>
+                                                        @{
+                                                            long CPF = Convert.ToInt64(item.Provider.Document);
+                                                            string CPFFormatado = String.Format(@"{0:000\.000\.000\-00}", CPF);
+
+                                                            long CNPJ = Convert.ToInt64(item.Provider.Document);
+                                                            string CNPJFormatado = String.Format(@"{0:00\.000\.000\/0000\-00}", CNPJ);
+
+                                                            string CNPJCPF = item.Provider.ProviderType == ProviderType.Fisica ? CPFFormatado : CNPJFormatado;
+                                                        }
+
+                                                        @Html.DisplayFor(modelItem => CNPJCPF)
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+
+                                </table>
+                            </div>
                         </div>
-                    </div>
-
-                    @*<div class="form-group">
-                        @Html.Label("Marca", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-3">
-                            @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })@
-                        </div>
-                        
-                    </div>*@
-
-                    <div class="form-group">
-                        @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-9">
-                            @Html.EditorFor(model => model.Product.Description, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label(string.Format(@"Unidade Medida"), htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.DropDownListFor(model => model.Product.ProductTypeUnitID, new SelectList(ViewBag.Unidades, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
-                            @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
-                        </div>
-                        @Html.Label("Preço Lista", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.ListPrice, new { htmlAttributes = new { @class = "form-control", @id="txt_Lista" } })
-                            @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
-                        </div>
-                        @Html.Label("IPI", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.AliqIPI, new { htmlAttributes = new { @class = "form-control", @id = "txt_IPI" } })
-                            @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
-                        </div>
-
-                    </div>
-
-
-                    <div class="form-group">
-                        @Html.Label(string.Format(@"Markup"), htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.Markup, new { htmlAttributes = new { @class = "form-control", @id = "txt_Markup" } })
-                            @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
-                            @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
-                        </div>
-                        @Html.Label("Preço Custo", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo" } })
-                            @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
-                        </div>
-                        @Html.Label("Preço Venda", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Unitario" } })
-                            @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
-                        </div>
-
-                    </div>
-
-                    <div class="form-group">
-                        
-                        @Html.Label("Estoque Min", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.MinimumStockAlert, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.MinimumStockAlert, "", new { @class = "text-danger" })
-                        </div>
-
-                        @Html.Label("Aliq. ICMS", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.AliqICMS, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Product.AliqICMS, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-
-                        @Html.Label("NCM", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.Product.NCMCode, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-
-                        @Html.Label("Descrição NCC", htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-5">
-                            @Html.EditorFor(model => model.Product.DescriptionNCC, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        @Html.Label("Fornecedor", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-6">
-                            @Html.DropDownListFor(p => p.ProviderID, new SelectList(Model.Providers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
-                        </div>
-
-                        @Html.Label("Código", htmlAttributes: new { @class = "control-label col-md-1" })
-                        <div class="col-md-2">
-                            @Html.EditorFor(model => model.CodigoProdutoFornecedor, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-
-                    </div>
-
-                    <br />
-                    <div class="form-group">
-                        <div class="col-md-offset-5 col-md-10">
-                            <input type="submit" value="Cadastrar" class="btn btn-primary" />
-                            <a href='@Url.Action("Produtos", "Cadastro")'>
-                                <i class="btn btn-primary">Voltar</i>
-                            </a>
-                        </div>
-                    </div>
-
+                    }
                 </div>
-            }
+            </div>
             <!--Fim-->
         </div>
-
     </div><!--box-->
 </div><!--COL-->
 <script type="text/javascript">
     $(document).ready(function () {
         CarregarMascaras();
-       
+
         $('#txt_Lista').change(CalculaPreco);
         $('#txt_IPI').change(CalculaPreco);
         $('#txt_Markup').change(CalculaPreco);
+
+        $("#tabs").tabs();
+
     });
 
-    function CalculaPreco()
-    {
+    function CalculaPreco() {
         var strlista = $('#txt_Lista').val();
         var strIPI = $('#txt_IPI').val();
-        var strMarkup = $('#txt_Markup').val();        
+        var strMarkup = $('#txt_Markup').val();
 
         if (strlista == '' || strIPI == '' || strMarkup == '' || strlista == '0,00' || strIPI == '0,00' || strMarkup == '0,00') {
-            
+
             return false;
         }
         var lista = parseFloat(strlista);
-                
+
         var IPI = parseFloat(strIPI);
         var Markup = parseFloat(strMarkup);
         IPI = IPI / 100;
-        
+
         var Custo = lista * (1 + IPI);
         Custo = Custo * 0.6;
-        
+
         Custo.toFixed(2);
         Custo = Custo.toFixed(2);
         Markup = Custo * Markup;
@@ -212,8 +280,7 @@
         $('#txt_Unitario').val(Markup * 100);
     }
 
-    function CarregarMascaras()
-    {
+    function CarregarMascaras() {
         $('#txt_Lista').maskMoney({
             prefix: '',
             allowZero: false,
@@ -256,7 +323,7 @@
             allowNegative: false,
             defaultZero: true,
             thousands: '.',
-            decimal: ',',            
+            decimal: ',',
             affixesStay: false,
             symbolPosition: 'left'
         });
@@ -267,7 +334,7 @@
             allowNegative: false,
             defaultZero: true,
             thousands: '.',
-            decimal: ',',            
+            decimal: ',',
             affixesStay: false,
             symbolPosition: 'left'
         });

@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="CEP\Objects\CEPTests.cs" />
     <Compile Include="Controllers\EstoqueControllerTest.cs" />
+    <Compile Include="NFe\Objects\NFeTests.cs" />
     <Compile Include="NFe\Objects\NotaFiscalTests.cs" />
     <Compile Include="NFSe\Objects\NotaFiscalTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

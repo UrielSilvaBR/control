@@ -13,14 +13,7 @@ namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
         public string versao { get; set; }
 
         [XmlAttribute("Id")]
-        public string Id
-        {
-            get
-            {
-                return GerarChaveAcessoNFe();
-            }
-            set { }
-        }
+        public string Id { get; set; }
 
         public ide ide { get; set; }
         public emit emit { get; set; }
@@ -45,24 +38,24 @@ namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
             infAdic = new infAdic();
         }
 
-        public string GerarChaveAcessoNFe()
+        public void GerarChaveAcessoNFe()
         {
             string chaveNFe = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}",
-                emit.enderEmit.UF,
+                emit.enderEmit.UF.PadLeft(2, '0'),
                 ide.dhEmi.ToString("yyMM"),
-                emit.CNPJ,
-                ide.mod,
-                ide.serie,
+                emit.CNPJ.PadLeft(14, '0'),
+                ide.mod.PadLeft(2, '0'),
+                ide.serie.PadLeft(3, '0'),
                 ide.nNF.PadLeft(9, '0'),
                 ide.tpEmis,
-                Utility.Utilities.GetRandomNumber(8));
+                ide.cNF.PadLeft(8, '0'));
 
-            chaveNFe = String.Format("{0}{1}", chaveNFe, CalculoDV(chaveNFe));
+            chaveNFe = String.Format("NFe{0}{1}", chaveNFe, CalculoDV(chaveNFe));
 
-            return chaveNFe;
+            Id = chaveNFe;
         }
 
-        public string CalculoDV(string chaveNFe)
+        private string CalculoDV(string chaveNFe)
         {
             string chaveInvertida = Utility.Utilities.ReverseString(chaveNFe);
             int[] t = { 2, 3, 4, 5, 6, 7, 8, 9 };

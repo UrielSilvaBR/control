@@ -514,9 +514,10 @@ namespace Control.UI.Controllers
             {
                 model.Product = context.Products.Find(p => p.Id == ProdutoID);
                 model.ProviderID = model.Providers.Select(p => p.Id).First();
+                model.ProductProviders = context.ProductProviders.Filter(p => p.ProductID == ProdutoID).ToList();
             }
 
-            model.AtualizarCodigoProdutoFornecedor();
+            //model.AtualizarCodigoProdutoFornecedor();
 
             ViewBag.Unidades = context.TypesUnities.All().ToList();
             return View(model);
@@ -560,25 +561,24 @@ namespace Control.UI.Controllers
                     context.Products.Create(model.Product);
                 }
 
-                var productProvider = context.ProductProviders.Filter(p => p.ProductID == model.Product.Id && p.ProviderID == model.ProviderID).FirstOrDefault();
+                //var productProvider = context.ProductProviders.Filter(p => p.ProductID == model.Product.Id && p.ProviderID == model.ProviderID).FirstOrDefault();
 
-                if (productProvider == null)
-                {
-                    productProvider = new ProductProvider()
-                    {
-                        Code = model.CodigoProdutoFornecedor,
-                        ProductID = model.Product.Id,
-                        ProviderID = model.ProviderID
-                    };
+                //if (productProvider == null)
+                //{
+                //    productProvider = new ProductProvider()
+                //    {
+                //        Code = model.CodigoProdutoFornecedor,
+                //        ProductID = model.Product.Id,
+                //        ProviderID = model.ProviderID
+                //    };
 
-                    context.ProductProviders.Create(productProvider);
-                }
-                else
-                {
-                    productProvider.Code = model.CodigoProdutoFornecedor;
-                    context.ProductProviders.Update(productProvider);
-                }
-
+                //    context.ProductProviders.Create(productProvider);
+                //}
+                //else
+                //{
+                //    productProvider.Code = model.CodigoProdutoFornecedor;
+                //    context.ProductProviders.Update(productProvider);
+                //}
 
                 Storage EstoqueProduto = context.Storages.Find(q => q.ProductID == model.Product.Id);
                 if (EstoqueProduto != null)

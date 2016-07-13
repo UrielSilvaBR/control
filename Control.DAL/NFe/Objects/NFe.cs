@@ -44,8 +44,37 @@ namespace Control.DAL.NFe.Objects
             return Utility.Serialization.Deserialize<Model.NFe.Xml.nfeStatusServico.retConsStatServ>(retStatServNFe.OuterXml);
         }
 
+        /// <summary>
+        /// Emitir Nota Fiscal Eletrônica
+        /// </summary>
+        /// <param name="enviNFe"></param>
+        /// <returns></returns>
+        public Model.NFe.Xml.nfeAutorizacaoLote.retEnviNFe.retEnviNFe EmitirNFe(Model.NFe.Xml.nfeAutorizacaoLote.enviNFe.enviNFe enviNFe)
+        {
+            enviNFe.versao = _NFeProxy.Versao;
+            enviNFe.NFe.infNFe.versao = _NFeProxy.Versao;
 
+            var arquivoXml = Utility.Serialization.Serialize(enviNFe);
 
+            var arquivoXmlNFe = new XmlDocument();
+            arquivoXmlNFe.LoadXml(arquivoXml);
+            Utility.Utilities.RemoveNamespaceAttributes(arquivoXmlNFe);
+
+            var nfeAutorizacaoLote = new DAL.nfe.homologacao.nfeAutorizacaoLote.NfeAutorizacao();
+
+            nfeAutorizacaoLote.ClientCertificates.Add(_NFeProxy.CertificadoDigital);
+            nfeAutorizacaoLote.nfeCabecMsgValue = new nfe.homologacao.nfeAutorizacaoLote.nfeCabecMsg();
+
+            nfeAutorizacaoLote.nfeCabecMsgValue.cUF = _NFeProxy.UF;
+            nfeAutorizacaoLote.nfeCabecMsgValue.versaoDados = _NFeProxy.Versao;
+
+            //var retAutorizacaoLoteNFe = nfeAutorizacaoLote.nfeAutorizacaoLote(arquivoXmlNFe);
+
+            var retAutorizacaoLoteNFe = new Model.NFe.Xml.nfeAutorizacaoLote.retEnviNFe.retEnviNFe();
+
+            //return Utility.Serialization.Deserialize<Model.NFe.Xml.nfeAutorizacaoLote.retEnviNFe.retEnviNFe>(retAutorizacaoLoteNFe.OuterXml);
+            return retAutorizacaoLoteNFe;
+        }
 
         /// <summary>
         /// Gerar DANFE a partir do Arquivo Xml da NFe

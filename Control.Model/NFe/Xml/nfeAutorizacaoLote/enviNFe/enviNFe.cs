@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
     [Serializable]
-    [XmlRoot("enviNFe")]
+    [XmlRoot("enviNFe", Namespace = "http://www.portalfiscal.inf.br/nfe")]
     public class enviNFe
     {
         [XmlAttribute("versao")]
@@ -17,6 +17,7 @@ namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
         public string idLote { get; set; }
         public string indSinc { get; set; }
 
+        [XmlElement("NFe", Namespace = "http://www.portalfiscal.inf.br/nfe")]
         public NFe NFe { get; set; }
 
         public enviNFe()
