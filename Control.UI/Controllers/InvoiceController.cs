@@ -240,5 +240,24 @@ namespace Control.UI.Controllers
         {
             return Content("É necessário o Certificado Digital para assinar o XML da Nota Fiscal!");
         }
+
+        public ActionResult StatusServicoNFe()
+        {
+            var objNFe = new DAL.NFe.Objects.NFe();
+
+            var objConsultaStatusServico = new Model.NFe.Xml.nfeStatusServico.consStatServ();
+            objConsultaStatusServico.cUF = "35";
+            objConsultaStatusServico.tpAmb = "2";
+            objConsultaStatusServico.versao = "3.10";
+            objConsultaStatusServico.xServ = "STATUS";
+
+            var retornoStatusServico = objNFe.ConsultarStatusServicoNFe(objConsultaStatusServico);
+
+            var listaStatusServico = new List<Model.NFe.Xml.nfeStatusServico.retConsStatServ>();
+
+            listaStatusServico.Add(retornoStatusServico);
+
+            return View(listaStatusServico);
+        }
     }
 }

@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
 {
-    public class NFe
+    public class vol
     {
-        public infNFe infNFe { get; set; }
-
-        public NFe()
-        {
-            infNFe = new infNFe();
-        }
+        public string qVol { get; set; }
+        public string esp { get; set; }
+        public string pesoL { get; set; }
+        public string pesoB { get; set; }
     }
 }

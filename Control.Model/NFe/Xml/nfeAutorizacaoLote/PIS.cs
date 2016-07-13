@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
 {
-    public class NFe
+    public class PIS
     {
-        public infNFe infNFe { get; set; }
+        public PISAliq PISAliq { get; set; }
 
-        public NFe()
+        public PIS()
         {
-            infNFe = new infNFe();
+            PISAliq = new PISAliq();
         }
     }
 }

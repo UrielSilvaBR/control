@@ -17,5 +17,11 @@ namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
         public string idLote { get; set; }
         public string indSinc { get; set; }
 
+        public NFe NFe { get; set; }
+
+        public enviNFe()
+        {
+            NFe = new NFe();
+        }
     }
 }

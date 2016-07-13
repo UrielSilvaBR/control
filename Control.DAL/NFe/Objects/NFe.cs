@@ -52,9 +52,9 @@ namespace Control.DAL.NFe.Objects
         {
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create("http://www.webdanfe.com.br/danfe/GeraDanfe.php");
 
-            string parametroPost = String.Format("arquivoXml={0}", arquivoXml);
+            string postData = String.Format("arquivoXml={0}", arquivoXml);
 
-            byte[] postBytes = Encoding.UTF8.GetBytes(parametroPost);
+            byte[] postBytes = Encoding.UTF8.GetBytes(postData);
 
             Request.Method = "POST";
             Request.ContentType = "application/x-www-form-urlencoded";

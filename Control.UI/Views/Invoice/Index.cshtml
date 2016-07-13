@@ -73,9 +73,9 @@
                     <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvNotaFiscal" style="overflow: scroll !important;">
                         <thead>
                             <tr>
-                                <th class="no-sort"></th>
+                                @*<th class="no-sort"></th>
                                 <th></th>
-                                <th></th>
+                                <th></th>*@
                                 <th>
                                     Número
                                 </th>
@@ -110,7 +110,7 @@
                             {
                                 {
                                     <tr>
-                                        <td style="text-align: center;">
+                                        @*<td style="text-align: center;">
                                             <a href='@Url.Action("Edit", "Invoice", new { InvoiceID = item.Id })'>
                                                 <i class="fa fa-edit red"></i>
                                             </a>
@@ -125,8 +125,7 @@
                                             <a href='@Url.Action("ConsultarNFSe", "Invoice", new { InvoiceID = item.Id })'>
                                                 <i class="fa fa-check color5"></i>
                                             </a>
-                                        </td>
-
+                                        </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Numero)
                                         </td>
@@ -203,7 +202,7 @@
 
     function TableNotaFiscal() {
         $('#gdvNotaFiscal').dataTable({
-            "aaSorting": [[8, "desc"]],
+            "aaSorting": [[5, "desc"]],
             "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
             "sPaginationType": "bootstrap",
             "oLanguage": {
@@ -213,9 +212,9 @@
                 "scrollX": 200
             },
             "aoColumns": [
-               { "sName": "EditarNotaFiscal"},
-               { "sName": "ExcluirNotaFiscal" },
-               { "sName": "GerarNotaFiscal" },
+               //{ "sName": "EditarNotaFiscal"},
+               //{ "sName": "ExcluirNotaFiscal" },
+               //{ "sName": "GerarNotaFiscal" },
                { "data": "Numero" },
                { "sName": "Serie" },
                { "sName": "Valor" },

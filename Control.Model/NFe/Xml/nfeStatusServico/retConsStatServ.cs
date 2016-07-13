@@ -14,12 +14,12 @@ namespace Control.Model.NFe.Xml.nfeStatusServico
         [XmlAttribute("versao")]
         public string versao { get; set; }
         
-        public string tpAmb { get; set; }
+        public int tpAmb { get; set; }
         public string verAplic { get; set; }
-        public string cStat { get; set; }
+        public int cStat { get; set; }
         public string xMotivo { get; set; }
-        public string cUF { get; set; }
-        public string dhRecbto { get; set; }
+        public int cUF { get; set; }
+        public DateTime dhRecbto { get; set; }
         public string tMed { get; set; }
     }
 }

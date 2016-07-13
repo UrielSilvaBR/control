@@ -141,6 +141,36 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\nfe.homologacao.consultaCadastro2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\nfe.homologacao.nfeAutorizacaoLote\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\nfe.homologacao.nfeConsultaNF2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\nfe.homologacao.nfeInutilizacaoNF2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\nfe.homologacao.nfeRecepcaoEvento\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\nfe.homologacao.nfeRetAutorizacaoLote\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\nfe.homologacao.nfestatusservico2\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,6 +197,36 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\br.com.ginfes.homologacao\ServiceGinfesImplService.wsdl" />
+    <None Include="Web References\nfe.homologacao.consultaCadastro2\cadconsultacadastro2.wsdl" />
+    <None Include="Web References\nfe.homologacao.consultaCadastro2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\nfe.homologacao.nfeAutorizacaoLote\nfeautorizacao.wsdl" />
+    <None Include="Web References\nfe.homologacao.nfeAutorizacaoLote\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\nfe.homologacao.nfeConsultaNF2\nfeconsulta2.wsdl" />
+    <None Include="Web References\nfe.homologacao.nfeConsultaNF2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\nfe.homologacao.nfeInutilizacaoNF2\nfeinutilizacao2.wsdl" />
+    <None Include="Web References\nfe.homologacao.nfeInutilizacaoNF2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\nfe.homologacao.nfeRecepcaoEvento\recepcaoevento.wsdl" />
+    <None Include="Web References\nfe.homologacao.nfeRecepcaoEvento\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\nfe.homologacao.nfeRetAutorizacaoLote\nferetautorizacao.wsdl" />
+    <None Include="Web References\nfe.homologacao.nfeRetAutorizacaoLote\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\nfe.homologacao.nfestatusservico2\nfestatusservico2.wsdl" />
     <None Include="Web References\nfe.homologacao.nfestatusservico2\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -221,6 +281,61 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Control_DAL_br_com_ginfes_homologacao_ServiceGinfesImplService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.consultaCadastro2\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/cadconsultacadastro2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_consultaCadastro2_CadConsultaCadastro2</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeautorizacao.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.nfeAutorizacaoLote\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeautorizacao.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfeAutorizacaoLote_NfeAutorizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsulta2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.nfeConsultaNF2\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeconsulta2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfeConsultaNF2_NfeConsulta2</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.nfeInutilizacaoNF2\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/nfeinutilizacao2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfeInutilizacaoNF2_NfeInutilizacao2</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.nfeRetAutorizacaoLote\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/nferetautorizacao.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfeRetAutorizacaoLote_NfeRetAutorizacao</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/nfestatusservico2.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\nfe.homologacao.nfestatusservico2\</RelPath>
@@ -232,12 +347,41 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfestatusservico2_NfeStatusServico2</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://homologacao.nfe.fazenda.sp.gov.br/ws/recepcaoevento.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\nfe.homologacao.nfeRecepcaoEvento\</RelPath>
+      <UpdateFromURL>https://homologacao.nfe.fazenda.sp.gov.br/ws/recepcaoevento.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Control_DAL_nfe_homologacao_nfeRecepcaoEvento_RecepcaoEvento</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\servico.cidades\cidades.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\nfe.homologacao.nfestatusservico2\nfestatusservico2.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.nfeAutorizacaoLote\nfeautorizacao.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.nfeRetAutorizacaoLote\nferetautorizacao.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.nfeInutilizacaoNF2\nfeinutilizacao2.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.nfeConsultaNF2\nfeconsulta2.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.nfeRecepcaoEvento\recepcaoevento.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\nfe.homologacao.consultaCadastro2\cadconsultacadastro2.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
