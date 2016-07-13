@@ -44,6 +44,9 @@ namespace Control.DAL.NFe.Objects
             return Utility.Serialization.Deserialize<Model.NFe.Xml.nfeStatusServico.retConsStatServ>(retStatServNFe.OuterXml);
         }
 
+
+
+
         /// <summary>
         /// Gerar DANFE a partir do Arquivo Xml da NFe
         /// </summary>

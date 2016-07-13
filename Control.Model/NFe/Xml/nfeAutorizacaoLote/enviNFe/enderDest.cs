@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
-    public class enderEmit
+    public class enderDest
     {
         public string xLgr { get; set; }
         public string nro { get; set; }

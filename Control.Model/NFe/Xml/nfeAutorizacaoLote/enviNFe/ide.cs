@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
     public class ide
     {
@@ -15,7 +15,7 @@ namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
         public string mod { get; set; }
         public string serie { get; set; }
         public string nNF { get; set; }
-        public string dhEmi { get; set; }
+        public DateTime dhEmi { get; set; }
         public string dhSaiEnt { get; set; }
         public string tpNF { get; set; }
         public string idDest { get; set; }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.Extensions
 {
-    public class IPINT
+    public static class Extensoes
     {
-        public string CST { get; set; }
+        
+
     }
 }

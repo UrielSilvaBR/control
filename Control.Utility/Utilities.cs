@@ -185,5 +185,23 @@ namespace Control.Utility
             readStream.Close();
             writeStream.Close();
         }
+
+        public static string GetRandomNumber(int length)
+        {
+            var random = new Random(DateTime.Now.Millisecond);
+
+            Int64 randomNumber = random.Next();
+
+            return randomNumber.ToString().Length > length ? randomNumber.ToString().Substring(0, length) : randomNumber.ToString().PadLeft(length, '0');
+        }
+
+        public static string ReverseString(string stringEntrada)
+        {
+            char[] arrChar = stringEntrada.ToCharArray();
+            Array.Reverse(arrChar);
+            string invertida = new String(arrChar);
+
+            return invertida;
+        }
     }
 }

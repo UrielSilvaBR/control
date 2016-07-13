@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
-    public class COFINSAliq
+    public class PISAliq
     {
         public string CST { get; set; }
         public string vBC { get; set; }
-        public string pCOFINS { get; set; }
-        public string vCOFINS { get; set; }
+        public string pPIS { get; set; }
+        public string vPIS { get; set; }
     }
 }

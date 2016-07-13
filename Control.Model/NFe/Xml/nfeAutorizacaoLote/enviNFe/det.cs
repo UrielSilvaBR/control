@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
     public class det
     {

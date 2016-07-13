@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Control.Model.NFe.Xml.nfeAutorizacaoLote
+namespace Control.Model.NFe.Xml.nfeAutorizacaoLote.enviNFe
 {
-    public class pag
+    public class IPINT
     {
+        public string CST { get; set; }
     }
 }
