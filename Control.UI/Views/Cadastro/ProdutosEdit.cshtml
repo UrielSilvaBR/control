@@ -119,6 +119,13 @@
                                     @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
                                 </div>
+
+                                @Html.Label(string.Format(@"Desconto"), htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.ListPriceDiscount, new { htmlAttributes = new { @class = "form-control", @id = "txt_ListDiscount" } })
+                                    
+                                </div>
+
                                 @Html.Label("Preço Custo", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo" } })

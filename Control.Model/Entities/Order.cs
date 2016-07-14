@@ -76,5 +76,6 @@ namespace Control.Model.Entities
         public string RegisteredBy { get; set; } //login/nome usuario criador
         public string CustomerControlCode { get; set; }
         public string ProposalMailList { get; set; }
+        public bool isIntegral { get; set; }
     }
 }
