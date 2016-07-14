@@ -57,20 +57,20 @@ $(document).ready(function () {
         LimparItemPedido();
     })
 
-    if ($('#Order_DespesaFinanceira').is(':checked')) {
-        $('#Order_Discount').attr('disabled', true);
-    }
-    else {
-        $('#Order_Discount').attr('disabled', false);
-    }
+    //if ($('#Order_DespesaFinanceira').is(':checked')) {
+    //    $('#Order_Discount').attr('disabled', true);
+    //}
+    //else {
+    //    $('#Order_Discount').attr('disabled', false);
+    //}
 
-    $("#Order_DespesaFinanceira").change(function () {
-        if (this.checked) {
-            $('#Order_Discount').attr('disabled', true);
-        }
-        else
-            $('#Order_Discount').attr('disabled', false);
-    });
+    //$("#Order_DespesaFinanceira").change(function () {
+    //    if (this.checked) {
+    //        $('#Order_Discount').attr('disabled', true);
+    //    }
+    //    else
+    //        $('#Order_Discount').attr('disabled', false);
+    //});
 
 });
 
