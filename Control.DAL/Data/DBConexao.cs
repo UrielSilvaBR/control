@@ -80,10 +80,11 @@ namespace Control.DAL.Data
                     strConn = @"Server=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Database=dbcontrol;User ID=user_control;Password=rD9zISSVTC;";
                     //strConn = @"Data Source=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
-                case 8:
 
-                    // Conexao Microsoft Azure
-                    strConn = @"Server=tcp:ncc-control-dbserver.database.windows.net,1433;Database=ncc_control;User ID=usr_control@ncc-control-dbserver;Password=j0t@qu3st;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
+                case 8:
+                    //Conexão  Azure
+                    strConn = @"Server=tcp:ncc-control-dbserver.database.windows.net,1433;Database=ncc_control;User ID=usr_control@ncc-control-dbserver;Password=j0t@qu3st;Trusted_Connection=False;Encrypt=True;";
+                    //strConn = @"Data Source=tcp:dbcontrol.c8mvu5tmbsns.us-west-2.rds.amazonaws.com,1433;Initial Catalog=dbControl;Persist Security Info=True;User ID=nfs_control;Password=vDy20v3#";
                     break;
             }
 
