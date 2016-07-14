@@ -33,11 +33,14 @@ namespace Control.UI.Models
         public ProdutoViewModel()
         {
             if (Product == null)
+            {
                 Product = new Product();
+                ProductProviders = new List<ProductProvider>();
+            }
 
             context = new DALContext();
             Providers = context.Providers.All().OrderBy(p => p.CompanyName).ToList();
-            
+            Providers.Insert(0, new Provider() { Id = 0, CompanyName = "SELECIONE..." });
         }
     }
 }

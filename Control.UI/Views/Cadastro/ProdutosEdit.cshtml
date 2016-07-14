@@ -2,6 +2,10 @@
 @using Control.Model.Enums
 @model ProdutoViewModel
 
+<head>
+    <script src="~/Content/Cadastros/Produto/Produto.js"></script>
+</head>
+
 <div class="row">
     <div id="breadcrumb" class="col-md-12">
         <ol class="breadcrumb">
@@ -18,7 +22,7 @@
             <div class="box-header">
                 <div class="box-name">
                     <i class="fa fa-pencil"></i>
-                    <span>Adicionar Produtos</span>
+                    <span>Cadastro de Produtos</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
@@ -133,13 +137,13 @@
                                 @Html.Label("Estoque Min", htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.MinimumStockAlert, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Product.MinimumStockAlert, "", new { @class = "text-danger" })
+                                    @*@Html.ValidationMessageFor(model => model.Product.MinimumStockAlert, "", new { @class = "text-danger" })*@
                                 </div>
 
                                 @Html.Label("Aliq. ICMS", htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.AliqICMS, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Product.AliqICMS, "", new { @class = "text-danger" })
+                                    @*@Html.ValidationMessageFor(model => model.Product.AliqICMS, "", new { @class = "text-danger" })*@
                                 </div>
                             </div>
 
@@ -182,161 +186,22 @@
                                     @Html.EditorFor(model => model.CodigoProdutoFornecedor, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                 </div>
                             </div>
-                            <div id="table_wrapperz">
-                                <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
-                                    <thead>
-                                        <tr>
-                                            <th>
-                                                Fornecedor
-                                            </th>
-                                            <th>
-                                                Apelido
-                                            </th>
-                                            <th>
-                                                Cód. Produto
-                                            </th>
-                                            <th>CNPJ/CPF</th>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.ProductProviders)
-                                        {
-                                            {
-                                                <tr>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Provider.CompanyName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Provider.ShortName)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Code)
-                                                    </td>
-                                                    <td>
-                                                        @{
-                                                            long CPF = Convert.ToInt64(item.Provider.Document);
-                                                            string CPFFormatado = String.Format(@"{0:000\.000\.000\-00}", CPF);
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-4">
+                                    <input type="button" id="btnAddFornecedorProduto" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;" />
+                                </div>
 
-                                                            long CNPJ = Convert.ToInt64(item.Provider.Document);
-                                                            string CNPJFormatado = String.Format(@"{0:00\.000\.000\/0000\-00}", CNPJ);
-
-                                                            string CNPJCPF = item.Provider.ProviderType == ProviderType.Fisica ? CPFFormatado : CNPJFormatado;
-                                                        }
-
-                                                        @Html.DisplayFor(modelItem => CNPJCPF)
-                                                    </td>
-                                                </tr>
-                                            }
-                                        }
-
-                                    </tbody>
-
-                                </table>
                             </div>
+
+                            @{ Html.RenderAction("GetProductProviders", "Cadastro", new { ProductID = Model.Product.Id }); }
+
+                            
                         </div>
-                    }
+                                                            }
                 </div>
             </div>
             <!--Fim-->
         </div>
     </div><!--box-->
 </div><!--COL-->
-<script type="text/javascript">
-    $(document).ready(function () {
-        CarregarMascaras();
-
-        $('#txt_Lista').change(CalculaPreco);
-        $('#txt_IPI').change(CalculaPreco);
-        $('#txt_Markup').change(CalculaPreco);
-
-        $("#tabs").tabs();
-
-    });
-
-    function CalculaPreco() {
-        var strlista = $('#txt_Lista').val();
-        var strIPI = $('#txt_IPI').val();
-        var strMarkup = $('#txt_Markup').val();
-
-        if (strlista == '' || strIPI == '' || strMarkup == '' || strlista == '0,00' || strIPI == '0,00' || strMarkup == '0,00') {
-
-            return false;
-        }
-        var lista = parseFloat(strlista);
-
-        var IPI = parseFloat(strIPI);
-        var Markup = parseFloat(strMarkup);
-        IPI = IPI / 100;
-
-        var Custo = lista * (1 + IPI);
-        Custo = Custo * 0.6;
-
-        Custo.toFixed(2);
-        Custo = Custo.toFixed(2);
-        Markup = Custo * Markup;
-        Markup.toFixed(2);
-        $('#txt_Custo').val(Custo * 100);
-        $('#txt_Unitario').val(Markup * 100);
-    }
-
-    function CarregarMascaras() {
-        $('#txt_Lista').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            precision: 2,
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-
-        $('#txt_Custo').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            precision: 2,
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-
-        $('#txt_Unitario').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            precision: 2,
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-
-        $('#txt_IPI').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-
-        $('#txt_Markup').maskMoney({
-            prefix: '',
-            allowZero: false,
-            allowNegative: false,
-            defaultZero: true,
-            thousands: '.',
-            decimal: ',',
-            affixesStay: false,
-            symbolPosition: 'left'
-        });
-    }
-</script>

@@ -12,6 +12,11 @@ namespace Control.Model.Entities
     [DataContract]
     public class ProductProvider : IEntity
     {
+        public ProductProvider()
+        {
+            InsertDate = DateTime.Now;
+        }
+
         [Key]
         [DataMember]
         public int Id { get; set; }
@@ -26,6 +31,8 @@ namespace Control.Model.Entities
         public long? Code { get; set; }
 
         public DateTime InsertDate { get; set; }
+
+        public bool IsActive { get; set; }
 
         [NotMapped]
         public string NameProvider

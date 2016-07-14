@@ -43,13 +43,7 @@
                             <tr>
                                 <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
                                 <th>
-                                    Código
-                                </th>
-                                <th>
                                     Produto
-                                </th>
-                                <th>
-                                    Marca
                                 </th>
                                 <th>
                                     Modelo
@@ -61,7 +55,7 @@
                                     Unidade
                                 </th>
                                 <th>
-                                    Preço Unitario
+                                    Preço Unitário
                                 </th>
                                
                                 <th>
@@ -71,9 +65,11 @@
                                     ICMS
                                 </th>
                                 <th>
-                                    Estoque Min
+                                    Estoque Mín.
                                 </th>
-
+                                <th>
+                                    Qtd. Estoque
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,17 +89,8 @@
                                             </h4>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ProductCode)
-                                        </td>
-                                        <td>
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Brand) 
-                                        </td>
-                                        @*<td>
-                                                @Html.DisplayFor(modelItem => item.AddressNumber)
-                                            </td>*@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Model)
                                         </td>
@@ -122,9 +109,11 @@
                                         <td>
                                             @Html.DisplayFor(modelItem => item.AliqICMS)
                                         </td>
-                                      
                                         <td>
                                             @Html.DisplayFor(modelItem => item.MinimumStockAlert)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuantityCurrentStock)
                                         </td>
                                       
                                     </tr>

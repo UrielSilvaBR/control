@@ -58,8 +58,8 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
-        
-        
+
+
 
         public ActionResult FiltrarCliente(string FiltroCliente)
         {
@@ -174,7 +174,7 @@ namespace Control.UI.Controllers
                 //return Json(new { Cidade = "", ListaCidades = "" }, JsonRequestBehavior.AllowGet);
             }
 
-            
+
         }
 
         public JsonResult GetCitiesByState(int StateID)
@@ -553,11 +553,12 @@ namespace Control.UI.Controllers
 
                 if (model.Product.Id > 0)
                 {
+                    model.Product.QuantityCurrentStock = model.Product.QuantityCurrentStock.HasValue ? model.Product.QuantityCurrentStock.Value : 0;
                     context.Products.Update(model.Product);
                 }
                 else
                 {
-                    model.Product.QuantityCurrentStock = 0;
+                    model.Product.QuantityCurrentStock = model.Product.QuantityCurrentStock.HasValue ? model.Product.QuantityCurrentStock.Value : 0;
                     context.Products.Create(model.Product);
                 }
 
@@ -627,6 +628,62 @@ namespace Control.UI.Controllers
 
             return RedirectToAction("Produtos");
         }
+
+        public PartialViewResult GetProductProviders(int ProductID)
+        {
+            try
+            {
+                context = new DALContext();
+                var ProductProviders = context.ProductProviders.Filter(p => p.ProductID == ProductID).ToList();
+                return PartialView("_ListFornecedorProduto", ProductProviders);
+            }
+            catch (Exception ex)
+            {
+                return PartialView("_ListFornecedorProduto", ex.Message);
+            }
+        }
+
+        public JsonResult VerificarVinculoFornecedorProduto(int ProviderID, int ProductID)
+        {
+            try
+            {
+                context = new DALContext();
+
+                bool vinculoExiste = context.ProductProviders.Filter(p => p.ProductID == ProductID && p.ProviderID == ProviderID).Count() > 0;
+
+                return Json(vinculoExiste);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+        public JsonResult VincularFornecedorProduto(int ProviderID, int ProductID, long codigoProdutoFornecedor)
+        {
+            try
+            {
+                context = new DALContext();
+
+                var objProductProvider = new ProductProvider()
+                {
+                    ProductID = ProductID,
+                    ProviderID = ProviderID,
+                    Code = codigoProdutoFornecedor,
+                    IsActive = true
+                };
+
+                context.ProductProviders.Create(objProductProvider);
+                context.SaveChanges();
+
+                return Json(new { erro = false });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { erro = true, msg = ex.Message });
+            }
+        }
+
         #endregion
 
         #region CFOP
@@ -746,7 +803,7 @@ namespace Control.UI.Controllers
 
             if (AddressBookID > 0)
             {
-                model = context.AddressBooks.Find(p => p.Id == AddressBookID);                
+                model = context.AddressBooks.Find(p => p.Id == AddressBookID);
             }
 
             return View(model);

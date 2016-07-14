@@ -121,7 +121,7 @@ namespace Control.Security
 
             //Pega o certificado para o usuario logado na máquina
             //O certificado deve ser instalado pelo usuario que será configurado para a aplicacao no IIS
-            X509Store listCertificados = new X509Store(StoreLocation.CurrentUser);
+            X509Store listCertificados = new X509Store(StoreLocation.LocalMachine);
 
             listCertificados.Open(OpenFlags.IncludeArchived);
 
