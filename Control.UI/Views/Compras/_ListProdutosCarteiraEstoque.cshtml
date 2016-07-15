@@ -69,7 +69,15 @@
                     <th>
                         Modelo
                     </th>
-                   
+                    <th>
+                        Un. Medida
+                    </th>
+                    <th>
+                        Valor Unitário
+                    </th>
+                    <th>
+                       NCM
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +91,15 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Product.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.UnitMeasure)
+                            </td>
+                            <td>@{ string valorUnitario = item.Product.UnitPrice.HasValue ? item.Product.UnitPrice.Value.ToString("N") : "0,00"; }
+                                @Html.DisplayFor(modelItem => valorUnitario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.NCMCode)
                             </td>
                            
                         </tr>

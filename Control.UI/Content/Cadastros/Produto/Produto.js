@@ -12,6 +12,12 @@
         AdicionarFornecedorProduto();
     });
 
+    $('#btnAlterarFornecedorProduto').click(function () {
+
+
+
+    });
+
 });
 
 function CalculaPreco() {
@@ -207,4 +213,6 @@ function ExcluirFornecedorProduto(id)
         });
     });
 }
+
+
 

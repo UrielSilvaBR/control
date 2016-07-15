@@ -276,10 +276,10 @@ namespace Control.UI.Controllers
                 }
                 else
                 {
-                    return Content("Ordem  de Compra inválida;0");
+                    return Content("Ordem de Compra inválida;0");
                 }
 
-                return Content("Ordem de Compra salva com <br>Sucesso!;" + Pedido.PurchaseOrder.Id.ToString());
+                return Content("Ordem de Compra salva <br>com Sucesso!;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -413,7 +413,7 @@ namespace Control.UI.Controllers
 
                 int[] idProduto = ListaProdutosPendenteCompra.Select(p => p.Id).Distinct().ToArray();
 
-                var ListaProdutosPendentes = context.ProductProviders.Filter(p => idProduto.Contains(p.Id)).ToList();
+                var ListaProdutosPendentes = context.ProductProviders.Filter(p => idProduto.Contains(p.ProductID)).ToList();
 
                 var ListaProdutosCarteiraEstoque = ListaProdutosPendentes.Select(p => new ProdutoCarteiraEstoqueViewModel()
                 {

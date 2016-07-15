@@ -28,6 +28,7 @@ namespace Control.Model.Entities
         [ForeignKey("ProviderID")]
         public virtual Provider Provider { get; set; }
 
+        [Display(Name ="Código Forn.")]
         public long? Code { get; set; }
 
         public DateTime InsertDate { get; set; }

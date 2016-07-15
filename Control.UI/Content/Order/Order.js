@@ -5,8 +5,6 @@ $(document).ready(function () {
 
     $('#btnAdicionarItemPedido').click(function () {
         AdicionarItemPedido();
-
-
     })
 
     $('#btnEditarItemPedido').click(function () {
