@@ -837,11 +837,14 @@
     <Content Include="Views\Cadastro\ContatosEmailEdit.cshtml" />
     <Content Include="Views\Pedido\_AddItemProposta.cshtml" />
     <Content Include="Views\Compras\_EditItemConferencia.cshtml" />
-    <Content Include="Views\Cadastro\_EditFornecedorProduto.cshtml" />
     <Content Include="Views\Compras\_AddItemPurchaseOrder.cshtml" />
     <Content Include="Views\Pedido\PropostasAbertas.cshtml" />
     <Content Include="Views\Invoice\StatusServicoNFe.cshtml" />
     <Content Include="Views\Cadastro\_ListFornecedorProduto.cshtml" />
+    <Content Include="Views\Compras\ProdutosPendentes.cshtml" />
+    <Content Include="Views\Compras\ProdutosCarteiraEstoque.cshtml" />
+    <Content Include="Views\Compras\_ListProdutosCarteiraEstoque.cshtml" />
+    <Content Include="Views\Cadastro\_EditFornecedorProduto.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

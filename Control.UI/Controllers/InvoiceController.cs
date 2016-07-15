@@ -238,7 +238,7 @@ namespace Control.UI.Controllers
         [HttpPost]
         public ActionResult GerarArquivoXml(int InvoiceID)
         {
-            return Content("É necessário o Certificado Digital para assinar o XML da Nota Fiscal!");
+            return Content("É necessário o Certificado Digital para <br>assinar o XML da Nota Fiscal!");
         }
 
         public ActionResult StatusServicoNFe()

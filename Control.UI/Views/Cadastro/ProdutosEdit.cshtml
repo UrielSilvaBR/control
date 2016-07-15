@@ -1,5 +1,6 @@
-﻿@using Control.UI.Models
+﻿@using Control.Model.Entities
 @using Control.Model.Enums
+@using Control.UI.Models
 @model ProdutoViewModel
 
 <head>
@@ -203,7 +204,31 @@
 
                             @{ Html.RenderAction("GetProductProviders", "Cadastro", new { ProductID = Model.Product.Id }); }
 
-                            
+                            @section top_modals
+                            {
+                            <div class="modal fade" id="modal-editar-fornecedor-produto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content source-son">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Editar Vínculo Produto -> Fornecedor</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            @Html.Partial("~/Views/Cadastro/_EditFornecedorProduto.cshtml", new ProductProvider())
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            }
+
+
                         </div>
                                                             }
                 </div>

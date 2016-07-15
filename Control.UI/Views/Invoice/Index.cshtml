@@ -24,13 +24,13 @@
             $.post("/Invoice/GerarArquivoXml",
                { InvoiceID: idNotaFiscal },
                function (result) {
-                   ShowSuccess(result, true);
+                   ShowMessage(result);
                });
         }
         
         function VisualizarDANFE(idNotaFiscal)
         {
-
+            ShowMessage('Nota Fiscal ' + idNotaFiscal + ' ainda não foi integrada no SEFAZ!');
         }
     </script>
 

@@ -23,6 +23,9 @@ namespace Control.Model.Entities
 
         public int ProductID { get; set; }
 
+        [ForeignKey("ProductID")]
+        public virtual Product Product { get; set; }
+
         public int ProviderID { get; set; }
 
         [ForeignKey("ProviderID")]

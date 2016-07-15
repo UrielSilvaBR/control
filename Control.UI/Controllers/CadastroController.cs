@@ -684,6 +684,28 @@ namespace Control.UI.Controllers
             }
         }
 
+        public JsonResult ExcluirVinculoFornecedorProduto(int ProductProviderID)
+        {
+            try
+            {
+                context = new DALContext();
+
+                var productProvider = context.ProductProviders.Find(p => p.Id == ProductProviderID);
+
+                if (productProvider == null)
+                    throw new Exception("Vínculo não encontrado!");
+
+                context.ProductProviders.Delete(productProvider);
+                context.SaveChanges();
+
+                return Json(new { erro = false, msg = "Vínculo excluído com Sucesso!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { erro = true, msg = ex.Message });
+            }
+        }
+
         #endregion
 
         #region CFOP

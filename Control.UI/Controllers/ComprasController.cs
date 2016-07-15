@@ -90,9 +90,10 @@ namespace Control.UI.Controllers
                         }).ToList();
 
 
-                        foreach (var item in Pedido.PurchaseOrder.Items) {
+                        foreach (var item in Pedido.PurchaseOrder.Items)
+                        {
 
-                            context.PurchaseOrderItem.Update(item); 
+                            context.PurchaseOrderItem.Update(item);
                             Storage EstoqueProduto = context.Storages.Find(p => p.ProductID == item.ProductID);
                             if (EstoqueProduto != null)
                             {
@@ -113,7 +114,7 @@ namespace Control.UI.Controllers
                             context.SaveChanges();
                         }
 
-                        Pedido.PurchaseOrder.Items.ForEach(p => 
+                        Pedido.PurchaseOrder.Items.ForEach(p =>
                         {
                             p.ProductItem.QuantityCurrentStock += p.QuantityDeliver;
                             context.Products.Update(p.ProductItem);
@@ -165,7 +166,7 @@ namespace Control.UI.Controllers
         {
             var model = new Control.UI.Models.PedidoCompraViewModel();
             context = new DALContext();
-            
+
             PurchaseOrder retorno = new PurchaseOrder();
             try
             {
@@ -179,7 +180,7 @@ namespace Control.UI.Controllers
                     item.ProductItem = new Product();
                     item.ProductItem = context.Products.Find(x => x.Id == item.ProductID);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -229,8 +230,8 @@ namespace Control.UI.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
-                    context = new DALContext(); 
+
+                    context = new DALContext();
                     Pedido.PurchaseOrder.InsertDate = DateTime.Now;
                     Pedido.PurchaseOrder.Status = "PEDIDO_ABERTO";
 
@@ -240,10 +241,10 @@ namespace Control.UI.Controllers
                     {
                         context.PurchaseOrders.Create(Pedido.PurchaseOrder);
                     }
-                    
+
                     if (context.SaveChanges() > 0)
                     {
-                    
+
                         var arrayItensPedido = JArray.Parse(itensPedido);
                         Pedido.PurchaseOrder.Items = ((JArray)arrayItensPedido).Select(x => new Model.Entities.PurchaseOrderItem
                         {
@@ -269,7 +270,7 @@ namespace Control.UI.Controllers
                         }
 
                         context.SaveChanges();
-                        
+
                     }
                 }
                 else
@@ -277,7 +278,7 @@ namespace Control.UI.Controllers
                     return Content("Ordem  de Compra inválida;0");
                 }
 
-                return Content( "Ordem de Compra salva com <br>Sucesso!;" + Pedido.PurchaseOrder.Id.ToString() );
+                return Content("Ordem de Compra salva com <br>Sucesso!;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {
@@ -291,7 +292,7 @@ namespace Control.UI.Controllers
         public ActionResult EnviarParaFonecedor(int OrderID)
         {
             context = new DALContext();
-            
+
             PurchaseOrder purchaseOrder = context.PurchaseOrders.Find(p => p.Id == OrderID);
             purchaseOrder.Status = "PEDIDO_PENDENTE";
             context.PurchaseOrders.Update(purchaseOrder);
@@ -383,6 +384,41 @@ namespace Control.UI.Controllers
             else
             {
                 return Json("Não existem arquivos selecionados.");
+            }
+        }
+
+        public ActionResult ProdutosPendentes()
+        {
+            try
+            {
+                context = new DALContext();
+
+                var ListaProdutosPendentes = context.Products.Filter(p => p.QuantityCurrentStock < 0).ToList();
+                return View(ListaProdutosPendentes);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
+            }
+        }
+
+        public ActionResult ProdutosCarteiraEstoque()
+        {
+            try
+            {
+                context = new DALContext();
+
+                var ListaProdutosPendenteCompra = context.Products.Filter(p => p.QuantityCurrentStock < 0).ToList();
+
+                int[] idProduto = ListaProdutosPendenteCompra.Select(p => p.Id).Distinct().ToArray();
+
+                var ListaProdutosPendentes = context.ProductProviders.Filter(p => idProduto.Contains(p.Id)).ToList();
+
+                return View(ListaProdutosPendentes);
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message);
             }
         }
     }

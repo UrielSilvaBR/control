@@ -151,3 +151,41 @@ function AdicionarFornecedorProduto() {
     });
 }
 
+function ExcluirFornecedorProduto(id)
+{
+    var idProduto = $('#Product_Id').val();
+
+    if (idProduto == 0)
+    {
+        ShowMessage('Produto ainda não cadastrado!');
+        return;
+    }
+
+    ShowConfirmation("Deseja realmente remover o Vínculo?", function () {
+
+        $.post("/Cadastro/ExcluirVinculoFornecedorProduto",
+        { ProductProviderID: id },
+            function (result) {
+                        
+                if(!result.erro)
+                {
+                    ShowSuccess(result.msg);
+
+                    $.ajax({
+                        url: '/Cadastro/GetProductProviders',
+                        data: { ProductID: idProduto },
+                        type: 'GET',
+                        success: function (lista) {
+                            $('#table_wrapperz_FornecedorProduto').html(lista);
+                        }
+                    });
+                }
+                else
+                {
+                    ShowMessage(result.msg);
+                }
+
+        });
+    });
+}
+
