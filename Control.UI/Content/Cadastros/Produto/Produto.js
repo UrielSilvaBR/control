@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    CarregarMascaras();
+    //CarregarMascaras();
 
     $('#txt_Lista').change(CalculaPreco);
     $('#txt_IPI').change(CalculaPreco);
@@ -18,8 +18,9 @@ function CalculaPreco() {
     var strlista = $('#txt_Lista').val();
     var strIPI = $('#txt_IPI').val();
     var strMarkup = $('#txt_Markup').val();
+    var strListDiscount = $('#txt_ListDiscount').val();
 
-    if (strlista == '' || strIPI == '' || strMarkup == '' || strlista == '0,00' || strIPI == '0,00' || strMarkup == '0,00') {
+    if (strlista == '' ||  strMarkup == '' || strlista == '0,00' || strMarkup == '0,00') {
 
         return false;
     }
@@ -27,17 +28,34 @@ function CalculaPreco() {
 
     var IPI = parseFloat(strIPI);
     var Markup = parseFloat(strMarkup);
-    IPI = IPI / 100;
+    var discount = parseFloat(strListDiscount);
+
+    if (IPI == 0) {
+        alert("IPI Zerado");
+    }
+    else
+    { 
+        IPI = IPI / 100;
+    }
+
+    if (discount == 0) {
+        alert("discount Zerado");
+        discount = 1;
+    }
+    else {
+        discount = discount / 100;
+        alert(discount)
+    } 
 
     var Custo = lista * (1 + IPI);
-    Custo = Custo * 0.6;
+    Custo = Custo * discount;
 
-    Custo.toFixed(2);
+    
     Custo = Custo.toFixed(2);
     Markup = Custo * Markup;
-    Markup.toFixed(2);
-    $('#txt_Custo').val(Custo * 100);
-    $('#txt_Unitario').val(Markup * 100);
+    Markup = Markup.toFixed(2);
+    $('#txt_Custo').val(Custo);
+    $('#txt_Unitario').val(Markup);
 }
 
 function CarregarMascaras() {
@@ -48,7 +66,7 @@ function CarregarMascaras() {
         defaultZero: true,
         thousands: '.',
         decimal: ',',
-        precision: 2,
+        //precision: 2,
         affixesStay: false,
         symbolPosition: 'left'
     });
@@ -60,7 +78,7 @@ function CarregarMascaras() {
         defaultZero: true,
         thousands: '.',
         decimal: ',',
-        precision: 2,
+        //precision: 2,
         affixesStay: false,
         symbolPosition: 'left'
     });
@@ -72,18 +90,18 @@ function CarregarMascaras() {
         defaultZero: true,
         thousands: '.',
         decimal: ',',
-        precision: 2,
+        //precision: 2,
         affixesStay: false,
         symbolPosition: 'left'
     });
 
     $('#txt_IPI').maskMoney({
         prefix: '',
-        allowZero: false,
+        allowZero: true,
         allowNegative: false,
         defaultZero: true,
         thousands: '.',
-        decimal: ',',
+        //decimal: ',',
         affixesStay: false,
         symbolPosition: 'left'
     });

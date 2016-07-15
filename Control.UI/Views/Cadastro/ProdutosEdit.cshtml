@@ -63,12 +63,12 @@
                                         @Html.EditorFor(model => model.ProductCode, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
                                         @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
                                     </div>*@
-                                @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.Label("Produto", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
                                 <div class="col-md-5">
                                     @Html.EditorFor(model => model.Product.Name, new { htmlAttributes = new { @class = "form-control" } })
                                     @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
                                 </div>
-                                @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.Label("Modelo", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
                                 <div class="col-md-3">
                                     @Html.EditorFor(model => model.Product.Model, new { htmlAttributes = new { @class = "form-control" } })
                                     @*@Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })*@
@@ -84,85 +84,86 @@
 
                                 </div>*@
 
-                            <div class="form-group">
-                                @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1" })
+                            @*<div class="form-group">
+                                @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
                                 <div class="col-md-9">
                                     @Html.EditorFor(model => model.Product.Description, new { htmlAttributes = new { @class = "form-control" } })
-                                    @*@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })*@
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
-                            </div>
+                            </div>*@
 
                             <div class="form-group">
-                                @Html.Label(string.Format(@"Unidade Medida"), htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.Label(string.Format(@"Medida"), htmlAttributes: new { @class = "control-label col-md-1" , @style = "padding-right:1px" })
                                 <div class="col-md-2">
                                     @Html.DropDownListFor(model => model.Product.ProductTypeUnitID, new SelectList(ViewBag.Unidades, "Id", "Description"), htmlAttributes: new { @class = "selddl" })
                                     @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
                                     @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
                                 </div>
-                                @Html.Label("Preço Lista", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.ListPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Lista" } })
-                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
-                                </div>
-                                @Html.Label("IPI", htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.AliqIPI, new { htmlAttributes = new { @class = "form-control", @id = "txt_IPI" } })
-                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
-                                </div>
 
-                            </div>
-
-
-                            <div class="form-group">
-                                @Html.Label(string.Format(@"Markup"), htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.Markup, new { htmlAttributes = new { @class = "form-control", @id = "txt_Markup" } })
-                                    @*@Html.EditorFor(model => model.UnitMeasure, new { htmlAttributes = new { @class = "form-control" } })*@
-                                    @*@Html.ValidationMessageFor(model => model.UnitMeasure, "", new { @class = "text-danger" })*@
-                                </div>
-
-                                @Html.Label(string.Format(@"Desconto"), htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.ListPriceDiscount, new { htmlAttributes = new { @class = "form-control", @id = "txt_ListDiscount" } })
-                                    
-                                </div>
-
-                                @Html.Label("Preço Custo", htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo" } })
-                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
-                                </div>
-                                @Html.Label("Preço Venda", htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-2">
-                                    @Html.EditorFor(model => model.Product.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Unitario" } })
-                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                @Html.Label("Estoque Min", htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.Label("Estoque Min", htmlAttributes: new { @class = "col-md-1" , @style = "padding-right:1px" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.MinimumStockAlert, new { htmlAttributes = new { @class = "form-control" } })
                                     @*@Html.ValidationMessageFor(model => model.Product.MinimumStockAlert, "", new { @class = "text-danger" })*@
                                 </div>
 
-                                @Html.Label("Aliq. ICMS", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.Label("Aliq. ICMS", htmlAttributes: new { @class = "col-md-1", @style = "padding-right:1px" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.AliqICMS, new { htmlAttributes = new { @class = "form-control" } })
                                     @*@Html.ValidationMessageFor(model => model.Product.AliqICMS, "", new { @class = "text-danger" })*@
                                 </div>
+
+                                
+
                             </div>
 
                             <div class="form-group">
+                                @Html.Label("Preço Lista", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.ListPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Lista", @style = "padding-right:1px" } })
+                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
+                                </div>
 
-                                @Html.Label("NCM", htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.Label(string.Format(@"Desconto"), htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.ListPriceDiscount, new { htmlAttributes = new { @class = "form-control", @id = "txt_ListDiscount" } })
+
+                                </div>
+
+                                @Html.Label("IPI", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.AliqIPI, new { htmlAttributes = new { @class = "form-control", @id = "txt_IPI" } })
+                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label(string.Format(@"Markup"), htmlAttributes: new { @class = "col-md-1", @style = "padding-right:1px" })
+                                <div class="col-md-2" >
+                                    @Html.EditorFor(model => model.Product.Markup, new { htmlAttributes = new { @class = "form-control", @style = "padding-right:1px", @id = "txt_Markup" } })
+                                </div>
+                                @Html.Label("Preço Custo", htmlAttributes: new { @class = "col-md-1" , @style = "padding-right:1px" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.CostPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Custo", @style = "margin:1px" } })
+                                    @*@Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })*@
+                                </div>
+                                @Html.Label("Preço Venda", htmlAttributes: new { @class = "col-md-1" , @style = "padding-right:1px" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Product.UnitPrice, new { htmlAttributes = new { @class = "form-control", @id = "txt_Unitario", @style = "margin:1px" } })
+                                    @*@Html.ValidationMessageFor(model => model.CostPrice, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-group">
+
+                                @Html.Label("NCM", htmlAttributes: new { @class = "control-label col-md-1", @style = "padding-right:1px" })
                                 <div class="col-md-2">
                                     @Html.EditorFor(model => model.Product.NCMCode, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
 
-                                @Html.Label("Descrição NCC", htmlAttributes: new { @class = "control-label col-md-2" })
+                                @Html.Label("Descrição NCC", htmlAttributes: new { @class = "control-label col-md-2", @style = "padding-right:1px" })
                                 <div class="col-md-5">
                                     @Html.EditorFor(model => model.Product.DescriptionNCC, new { htmlAttributes = new { @class = "form-control" } })
                                 </div>
