@@ -12,6 +12,7 @@ using Control.DAL;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Xml;
+using Control.UI.Models;
 
 namespace Control.UI.Controllers
 {
@@ -414,7 +415,13 @@ namespace Control.UI.Controllers
 
                 var ListaProdutosPendentes = context.ProductProviders.Filter(p => idProduto.Contains(p.Id)).ToList();
 
-                return View(ListaProdutosPendentes);
+                var ListaProdutosCarteiraEstoque = ListaProdutosPendentes.Select(p => new ProdutoCarteiraEstoqueViewModel()
+                {
+                    Product = context.Products.Find(q => q.Id == p.ProductID),
+                    ProductProvider = p
+                }).ToList();
+
+                return View(ListaProdutosCarteiraEstoque);
             }
             catch (Exception ex)
             {

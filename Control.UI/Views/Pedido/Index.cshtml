@@ -23,8 +23,20 @@
             $.post("/Pedido/GerarNotaFiscal",
             { OrderID: idPedido },
             function (result) {
-                ShowMessage(result, true);
-                window.location = '/Invoice/Index';
+
+                var retorno = result.split(';');
+
+                if (retorno.indexOf("ERRO") > -1)
+                {
+                    ShowMessage(retorno[1]);
+                    return;
+                }
+                else
+                {
+                    ShowSuccess(retorno[0]);
+                    window.location = '/Invoice/Index';
+                }
+                
             });
         }
 

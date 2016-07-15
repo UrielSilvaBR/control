@@ -156,6 +156,7 @@ function AdicionarFornecedorProduto() {
                             data: { ProductID: idProduto },
                             type: 'GET',
                             success: function (lista) {
+                                ShowSuccess('Vínculo realizado com <br> Sucesso!');
                                 $('#table_wrapperz_FornecedorProduto').html(lista);
                                 $("#ProviderID").select2().select2("val", '0');
                                 $('#CodigoProdutoFornecedor').val('0');

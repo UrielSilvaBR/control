@@ -184,6 +184,8 @@ function LimparItemPedido() {
     $('#OrderProduct_DeadlineItem').val(0);
     $('#OrderProduct_QuantityDeliver').val(0);
     $('#OrderProduct_TotalPrice').val(0);
+    $('#OrderProduct_ProductItem_QuantityCurrentStock').val(0);
+
 }
 
 function InicializarModalItemPedido() {
@@ -546,6 +548,7 @@ function ObterProduto(idProduto, produto) {
     if (idProduto == 0) {
         $('#OrderProduct_UnitPrice').val(0);
         $('#OrderProduct_TotalPrice').val(0);
+        $('#OrderProduct_ProductItem_QuantityCurrentStock').val(0);
         return;
     }
 
@@ -660,6 +663,10 @@ function AbrirItemPedido(indiceLinha) {
     $('#btnAdicionarItemPedido').attr('style', 'display:none');
 
     $("#ddlProdutoPedido").select2().select2("val", item[2]);
+
+    ObterProduto(item[2], function (produto) {
+        $('#OrderProduct_ProductItem_QuantityCurrentStock').val(produto.QuantityCurrentStock);
+    });
 
     var quantidade = parseInt(item[9]);
     $('#OrderProduct_QuantityOrder').val(quantidade);

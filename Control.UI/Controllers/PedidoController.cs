@@ -307,7 +307,11 @@ namespace Control.UI.Controllers
             {
                 context = new DALContext();
                 var objProduct = context.Products.Find(p => p.Id == ProductID);
-                return Json(objProduct);
+
+                decimal UnitPrice = objProduct.UnitPrice.HasValue ? objProduct.UnitPrice.Value : 0;
+                decimal QuantityCurrentStock = objProduct.QuantityCurrentStock.HasValue ? objProduct.QuantityCurrentStock.Value : 0;
+
+                return Json(new { UnitPrice, QuantityCurrentStock });
             }
             catch (Exception ex)
             {
@@ -434,6 +438,26 @@ namespace Control.UI.Controllers
                 context = new DALContext();
                 var Order = context.Orders.Find(p => p.Id == OrderID);
 
+                int[] idProduto = Order.Items.Select(p => p.ProductID.Value).Distinct().ToArray();
+
+                var ListaProdutos = context.Products.Filter(p => idProduto.Contains(p.Id)).ToList();
+
+                var ListaProdutosOrder = Order.Items
+                    .Join(ListaProdutos,
+                    Items => Items.ProductID,
+                    Prod => Prod.Id,
+                    (Items, Prod) => new
+                    {
+                       QuantidadePedido = Items.QuantityOrder,
+                       QuantidadeEstoqueAtual = Prod.QuantityCurrentStock
+                    }).ToList();
+
+                ListaProdutosOrder.ForEach(p =>
+                {
+                    if (p.QuantidadePedido > p.QuantidadeEstoqueAtual)
+                        throw new Exception("Não foi possível emitir a Nota Fiscal!<br>Pedido possui Itens sem Estoque!");
+                });
+
                 var invoiceItems = new List<InvoiceItem>();
 
                 Order.Items.ForEach(p =>
@@ -477,7 +501,7 @@ namespace Control.UI.Controllers
             }
             catch (Exception ex)
             {
-                return Content(ex.Message);
+                return Content(String.Format("ERRO;{0}", ex.Message));
             }
         }
 
