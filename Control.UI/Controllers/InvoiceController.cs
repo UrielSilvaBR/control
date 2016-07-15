@@ -94,6 +94,16 @@ namespace Control.UI.Controllers
                 ViewBag.DataValidade = pedido.InsertDate.AddDays(15).ToShortDateString();
                  
                 retorno.Order = pedido;
+
+                if (pedido.Discount > 0)
+                {
+                    decimal percent = pedido.Discount / 100;
+                    percent = 1 - percent;
+                    foreach (var item in pedido.Items)
+                    {
+                        item.TotalPrice = item.TotalPrice * percent;
+                    }
+                }
                 
             }
             catch (Exception ex)
@@ -170,9 +180,19 @@ namespace Control.UI.Controllers
                 //SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
                 //SelectPdf.PdfDocument doc = converter.ConvertUrl("http://localhost:13161/Invoice/InvoiceFile?InvoiceID=" + InvoiceID.ToString());
 
-                
+
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
                 //doc.Close();
+
+                if (pedido.Discount > 0)
+                {
+                    decimal percent = pedido.Discount / 100;
+                    percent = 1 - percent;
+                    foreach (var item in pedido.Items)
+                    {
+                        item.TotalPrice = item.TotalPrice * percent;
+                    }
+                }
             }
             catch (Exception ex)
             {

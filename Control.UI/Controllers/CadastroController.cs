@@ -616,6 +616,7 @@ namespace Control.UI.Controllers
 
             try
             {
+                context.Storages.Delete(p => p.ProductID == ProdutoID);
                 var retorno = context.Products.Delete(p => p.Id == ProdutoID);
             }
             catch (Exception ex)

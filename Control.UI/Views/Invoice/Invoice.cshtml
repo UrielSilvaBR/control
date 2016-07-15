@@ -149,7 +149,12 @@
                                 <li>Na confirmação do Pedido, favor informar o número desta proposta.</li>
                                 <li>O prazo de entrega informado nesta proposta é em dias corridos, sujeito a alteração no momento do fechamento do pedido de venda.                                 </li>
                                 <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
-                                <li>Condições de pagamento acima de 21 dias possuem acréscimo de 2% de custo financeiro ao mês.</li>
+                                
+                                @if (Model.Order.DespesaFinanceira)
+                                {
+                                    <li>Condições de pagamento acima de 21 dias possuem acréscimo das tarifas bancárias de financiamento.</li>
+                                }
+                                
                                 <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
                                 <li>Empresa optante pelo simples, de acordo com a  lei complementar 123/2006, anexo III.</li>
                             </ol>
@@ -174,8 +179,8 @@
                         <div class="col-md-offset-4">
                             
                             <input type="button" id="btnImprimir"       value="Imprimir"        onclick="return ImprimirPedido();" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />*@
-                            <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />
+                            @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
+    <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />*@
                             <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
                             <input type="button" id="btnPedido"         value="Gerar Pedido"          onclick="return AbrirModalPedido();" class="btn btn-primary" style="font-size: 0.8em;" />
                             <input type="button" id="btnNovaProposta"   value="Nova Proposta"   onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-primary" style="font-size: 0.8em" />

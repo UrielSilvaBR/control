@@ -5,6 +5,7 @@
     $('#txt_Lista').change(CalculaPreco);
     $('#txt_IPI').change(CalculaPreco);
     $('#txt_Markup').change(CalculaPreco);
+    $('#txt_ListDiscount').change(CalculaPreco);
 
     $("#tabs").tabs();
 
@@ -19,15 +20,15 @@ function CalculaPreco() {
     var strIPI = $('#txt_IPI').val();
     var strMarkup = $('#txt_Markup').val();
     var strListDiscount = $('#txt_ListDiscount').val();
-
-    if (strlista == '' ||  strMarkup == '' || strlista == '0,00' || strMarkup == '0,00') {
+    
+    if (strlista == '' ||   strlista == '0,00' ) {
 
         return false;
     }
     var lista = parseFloat(strlista);
 
     var IPI = parseFloat(strIPI);
-    var Markup = parseFloat(strMarkup);
+    
     var discount = parseFloat(strListDiscount);
 
     if (IPI == 0) {
@@ -52,9 +53,20 @@ function CalculaPreco() {
 
     
     Custo = Custo.toFixed(2);
+
+    if (Custo == 'NaN') {
+        Custo = 0;
+    }
+    $('#txt_Custo').val(Custo);
+
+    if (strMarkup == '' || strMarkup == '0,00') {
+        return false;
+    }
+    var Markup = parseFloat(strMarkup);
+
     Markup = Custo * Markup;
     Markup = Markup.toFixed(2);
-    $('#txt_Custo').val(Custo);
+    
     $('#txt_Unitario').val(Markup);
 }
 
