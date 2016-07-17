@@ -1,0 +1,279 @@
+﻿@using Control.UI.Models
+@model PedidoCompraViewModel
+
+@{
+    ViewBag.Title = "Pedido de Compras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <script src="~/Content/Purchase/Purchase.js"></script>
+
+    <style type="text/css">
+        .form-horizontal .form-group {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        #modal-sucesso .modal-body {
+            min-height: 146px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/message-success.png') no-repeat 40px 27px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+        #modal-erro-cenprot .modal-body {
+            min-height: 146px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/warning.png') no-repeat 40px 27px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+        #modal-sucesso .modal-dialog {
+            width: 495px;
+            margin: 130px 475px;
+        }
+
+        #modal-erro-cenprot .modal-dialog {
+            width: 495px;
+            margin: 130px 475px;
+        }
+
+        #modal-erro-cenprot, #modal-sucesso .modal-footer {
+            border-top: 0px solid #e5e5e5;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Compras</a></li>
+            <li><a href="#">Pedido de Compras</a></li>
+            <li><a href="#">Adicionar</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <!-- BOX -->
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Cadastro Pedido de Compra</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <!-- conteudo -->
+            <div class="box-content">
+
+                @using (Ajax.BeginForm("Save", new { Controller = "Compras" },
+        new AjaxOptions { OnBegin = "IniciarInclusaoPedido", OnSuccess = "FinalizarInclusaoPedido", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreatePedido" }))
+                {
+
+                    <div class="row">
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.PurchaseOrder.Id, htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @Html.HiddenFor(model => model.PurchaseOrder.InsertDate)
+                                @Html.EditorFor(p => p.PurchaseOrder.Id, new { htmlAttributes = new { @class = "form-control", @type = "text", @readonly = "true" } })
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            @Html.Label("Fornecedor", htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            @Html.Label("Validade", htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @{ DateTime dataEmissao = Model.PurchaseOrder.ValidateDate; }
+                                @Html.TextBoxFor(p => p.PurchaseOrder.ValidateDate, new { @Value = dataEmissao == DateTime.MinValue ? DateTime.Now.ToShortDateString() : dataEmissao.ToShortDateString(), @class = "datepicker form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.Label("Valor Total", htmlAttributes: new { @class = "control-label col-md-1" })
+                            <div class="col-md-2">
+                                @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+
+                        @*<div class="form-group col-md-3">
+                                @Html.Label("Valor Total")
+                                @Html.TextBoxFor(p => p.PurchaseOrder.TotalValue, new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                @Html.Label("Fornecedor")
+                                @Html.DropDownListFor(model => model.PurchaseOrder.ProviderID, new SelectList(Model.Providers, "Id", "CompanyNameOrder"), htmlAttributes: new { @class = "selddl" })
+                            </div>*@
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <input type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#itemPedidoDeCompra" id="btnAddItemPedido" value="Adicionar Item" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @{ Html.RenderAction("GetOrderProducts", "Compras", new { OrderID = Model.PurchaseOrder.Id });
+                            }
+                        </div>
+                    </div>
+
+                    @Html.Hidden("itensPedido", "", new { id = "itensPedido" });
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-5">
+                                        <input type="submit" value="Salvar" onclick="return IniciarInclusaoPedido();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                        <input type="button" class="btn btn-primary" style="font-size: 0.8em" value="Pedidos" onclick="location.href='@Url.Action("Index", "Compras")'" />
+                                    </div>
+                                </div>
+
+                                }
+            </div>
+        </div>
+    </div>
+</div><!-- BOX -->
+
+@section top_modals{
+
+<div id="itemPedidoDeCompra" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="tituloItemPedido">Adicionar Item</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="hidden" id="rowIndexItemPedido" />
+                        @Html.Label("Produto")
+                        @Html.DropDownListFor(p => p.PurchaseOrderItem.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedidoDeCompra" })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(p => p.PurchaseOrderItem.UnitPrice)
+                        @Html.EditorFor(p => p.PurchaseOrderItem.UnitPrice, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(p => p.PurchaseOrderItem.QuantityOrder)
+                        @Html.EditorFor(p => p.PurchaseOrderItem.QuantityOrder, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(p => p.PurchaseOrderItem.ItemDiscount)
+                        @Html.EditorFor(p => p.PurchaseOrderItem.ItemDiscount, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                    <div class="form-group col-md-3">
+                        @Html.LabelFor(p => p.PurchaseOrderItem.TotalPrice)
+                        @Html.EditorFor(p => p.PurchaseOrderItem.TotalPrice, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="submit" value="Adicionar" class="btn btn-primary" style="font-size: 0.8em;float:right;" id="btnAdicionarItemPedidoDeCompra" />
+                <input type="submit" value="Alterar" class="btn btn-primary" style="font-size: 0.8em;float:right;" id="btnEditarItemPedidoDeCompra" />
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@*<script type="text/javascript">
+    // Run Select2 on element
+    //function Select2Test() {
+    //  $("#Pedido_CustomerID").select2();
+    //  $("#Pedido_ContactID").select2();
+    //    $(".selddl").select2();
+    //}
+
+    var editor;
+
+    $(document).ready(function () {
+        // Load TimePicker plugin and callback all time and date pickers
+        LoadTimePickerScript(AllTimePickers);
+        // Create jQuery-UI tabs
+        $("#tabs").tabs();
+        $("#btnAvancar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active + 1);
+        });
+
+        $("#btnVoltar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active - 1);
+        });
+
+        // Sortable for elements
+        $(".sort").sortable({
+            items: "div.col-sm-2",
+            appendTo: 'div.box-content'
+        });
+        // Droppable for example of trash
+        $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
+        $('#trash').droppable({
+            drop: function (event, ui) {
+                $(ui.draggable).remove();
+            }
+        });
+        var icons = {
+            header: "ui-icon-circle-arrow-e",
+            activeHeader: "ui-icon-circle-arrow-s"
+        };
+        // Make accordion feature of jQuery-UI
+        $("#accordion").accordion({ icons: icons });
+        // Create UI spinner
+        $("#ui-spinner").spinner();
+        // Add Drag-n-Drop to boxes
+
+        // Load script of Select2 and run this
+        LoadSelect2Script(Select2Test);
+
+        //$("#Pedido_CustomerID").select2();
+        //$("#Pedido_ContactID").select2();
+
+
+
+        WinMove();
+
+        $(window).on('shown.bs.modal', function () {
+            //$('.modal-backdrop').removeClass();
+        })
+    });
+
+</script>*@

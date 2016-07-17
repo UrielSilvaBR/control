@@ -1,0 +1,190 @@
+﻿@using Control.UI.Models
+@model PedidoViewModel
+@{
+    if (ViewBag.ToPDF != '1')
+    {
+        ViewBag.Title = "Invoice";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+}
+
+<script src="~/Content/Order/OrderReport.js"></script>
+@if (ViewBag.ToPDF != '1')
+{
+    <div class="row">
+        <div id="breadcrumb" class="col-md-12">
+            <ol class="breadcrumb">
+                <li><a href="index.html">Vendas</a></li>
+                <li><a href="#">Pedidos</a></li>
+                <li><a href="#">Relatório</a></li>
+            </ol>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <div id="dvPrintArea">
+                    <div class="col-xs-12" style="margin-bottom:30px">
+                        <table class="col-xs-12">
+                            <tr>
+                                <td align="left" class="col-xs-4"><img src="~/img/logo.JPG" /></td>
+                                <td align="center" class="col-xs-4"><h3 class="invoice-header">PEDIDO @Html.DisplayFor(Model => Model.Order.CustomerControlCode)</h3></td>
+                                
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" })
+                        <address>
+                            <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.Document)<br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressStreet) , @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressNumber) @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressComplement) <br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.Name), @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.State.Name)  - @Html.DisplayFor(Model => Model.Order.CustomerOrder.ZipCode)<br>
+                            <abbr title="Phone">Tel:</abbr> @Html.DisplayFor(Model => Model.Order.CustomerOrder.Phone)
+                        </address>
+                        <address>
+                            <strong>Contato: @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatRoleName) <br />
+                            Tel: @Html.DisplayFor(Model => Model.Order.ContactOrder.Phone) <br />
+                            <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.ContactOrder.Email)</a>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>NCC EQUIPAMENTOS INDUSTRIAIS</strong><br>
+                            Rua Jo&atilde;o Guerra, 271 - Macuco<br>
+                            Santos/SP - CEP 11015-131<br>
+                            <abbr title="Phone"></abbr> Tel: 13 3232-8909
+                        </address>
+                        <address>
+                            <strong>Vendedor: @Html.DisplayFor(Model => Model.Order.VendorOrder.Name)</strong><br>
+                            Tel: 13 3232-8909<br />
+                            @*<a href="mailto:#">@Html.DisplayFor(Model => Model.Order.VendorOrder.Name)&#64;ncc.com.br</a>*@
+                        </address>
+                        <address>
+                            <strong>Analista: Uriel Silva @Html.DisplayFor(Model => Model.Order.RegisteredBy)</strong><br>
+                        </address>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <br />
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ITEMS</th>
+                                    <th>NCM</th>
+                                    <th>QUANTIDADE</th>
+                                    <th>PRECO UNITARIO</th>
+                                    <th>TOTAL</th>
+                                    <th>PRAZO ENTREGA (Dias)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order.Items)
+                                {
+                                    <tr>
+                                        <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                                        <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                                        <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DeadlineItem)</td>
+                                    </tr>
+                                            }
+
+
+                                <tr class="active">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) </b></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @*<small>* VAT included</small>*@
+                    </div>
+
+                    <div class="col-xs-12">
+                        <table class="col-xs-12">
+                            <tr>
+                                <td class="col-xs-5"><strong>CONDIÇÕES PAGAMENTO</strong><br /></td>
+                                <td class="col-xs-5"><strong style="margin-left:20px">RETIRADA</strong><br /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-xs-5 table table-bordered" style="margin-right:5px">
+                                        <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                            <li>@Html.DisplayFor(Model => Model.Order.PaymentTerm.Description)<br /></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-xs-5 table table-bordered">
+                                        <ul type="0" style="text-align:justify; margin:10px 0 10px 10px; list-style:none;">
+                                            <li>@Html.DisplayFor(Model => Model.Order.Shipping.Description)<br /></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="col-xs-12">
+                        <strong>OBSERVAÇÕES</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                <li>@Html.DisplayFor(Model => Model.Order.Comments)<br /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                @if (ViewBag.ToPDF != "1")
+                {
+                    <div class="clearfix"></div>
+
+                    //if (Model.Order.Validated == true)
+                    //{
+                        <div class="col-xs-12" style="margin-top: 45px">
+                            <div class="col-md-offset-5">
+
+                                <input type="button" id="btnImprimir" value="Imprimir" onclick="" class="btn btn-primary" style="font-size: 0.8em;" />
+                                @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />*@
+                                <input type="button" id="Emitir NF" value="Gerar Arquivo" onclick="" class="btn btn-primary" style="font-size: 0.8em;" />
+                                <input type="button" id="Cancelar Pedido" value="Enviar Email" onclick="" class="btn btn-primary" style="font-size: 0.8em;" />
+                                
+                            </div>
+                        </div>
+                    @*}
+                    else
+                    {
+                        <div class="col-xs-12" style="margin-top: 45px">
+                            <div class="col-md-offset-5">
+                                <input type="button" id="btnConfirmar" value="Confirmar" onclick="return ConfirmarPedido($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;" />
+                                <input type="button" value="Voltar" style="font-size: 0.8em" onclick="location.href='@Url.Action("Edit", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    }*@
+                }
+                @*<div class="col-xs-6 col-xs-offset-6" style="margin-top: 45px">
+                        <div class="col-xs-4">
+                            <a href='@Url.Action("PDFInvoice", new { InvoiceID = Model.Order.Id })' class="btn btn-default btn-label-left"><span><i class="fa fa-floppy-o"></i></span> Salvar pdf</a>
+                        </div>
+                        <div class="col-xs-4 col-xs-offset-4">
+                            <a href="#" class="btn btn-primary btn-label-left"><span><i class="fa fa-credit-card"></i></span> Imprimir</a>
+                        </div>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,123 @@
+﻿@using Control.Model.Entities
+@using Control.Model.Enums
+@model List<ProductProvider>
+
+
+<style type="text/css">
+
+    .table-datatable img
+    {
+        width: 16px;
+    }
+
+</style>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#gdvFornecedorProduto').dataTable({
+            "aaSorting": [[6, "asc"]],
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado"
+            },
+            "bAutoWidth": false,
+            "aoColumns": [
+            { "Name": "IdFornecedorProduto" },
+            { "Name": "EditarItem", "sWidth": "10px", "sClass": "center" },
+            { "Name": "ExcluirItem", "sWidth": "10px", "sClass": "center" },
+            { "Name": "RazaoSocial" },
+            { "Name": "CNPJ" },
+            { "Name": "CodigoProduto" },
+            { "Name": "DataInclusao" },
+            { "Name": "Habilitado" }
+            ],
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }, { "sClass": "center", "aTargets": [1, 2] }]
+        });
+
+        $('#gdvFornecedorProduto_filter').hide();
+        //$('#gdvFornecedorProduto_info').hide();
+        $('#gdvFornecedorProduto_length').hide();
+
+        $('table#gdvFornecedorProduto input[type=checkbox]').attr('disabled', 'true');
+    });
+</script>
+
+<div id="table_wrapperz_FornecedorProduto">
+    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvFornecedorProduto" style="overflow: scroll !important;">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>
+                    Razão Social
+                </th>
+                <th>CNPJ</th>
+                <th>
+                    Código Produto
+                </th>
+                <th>Data/Hora Inclusão</th>
+                <th>Habilitado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td style="text-align: center;">
+                            <a href="javascript:void(0);" onclick="" data-toggle="modal" data-target="#modal-editar-fornecedor-produto">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="javascript:void(0);" onclick="ExcluirFornecedorProduto('@item.Id');">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provider.CompanyName)
+                        </td>
+                        <td>
+                            @{
+                                long CPF = Convert.ToInt64(item.Provider.Document);
+                                string CPFFormatado = String.Format(@"{0:000\.000\.000\-00}", CPF);
+
+                                long CNPJ = Convert.ToInt64(item.Provider.Document);
+                                string CNPJFormatado = String.Format(@"{0:00\.000\.000\/0000\-00}", CNPJ);
+
+                                string CNPJCPF = item.Provider.ProviderType == ProviderType.Fisica ? CPFFormatado : CNPJFormatado;
+                            }
+
+                            @Html.DisplayFor(modelItem => CNPJCPF)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Code)
+                        </td>
+
+                        <td>
+                            @{string dataInclusao = item.InsertDate.ToString(); }
+                            @Html.DisplayFor(modelItem => dataInclusao)
+                        </td>
+                        <td style="text-align: center;">
+                            @if (item.IsActive)
+                            {
+                                <img src="~/Content/img/1468536117_Circle_Green.png" />
+                            }
+                            else
+                            {
+                                <img src="~/Content/img/1468536134_Circle_Red.png" />
+                            }
+
+                        </td>
+
+                    </tr>
+                                    }
+                                }
+
+        </tbody>
+
+    </table>
+</div>

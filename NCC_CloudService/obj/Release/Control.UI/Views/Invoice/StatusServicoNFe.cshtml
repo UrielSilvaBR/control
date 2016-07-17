@@ -1,0 +1,101 @@
+﻿@using Control.Model.NFe.Xml.nfeStatusServico
+@model List<retConsStatServ>
+
+@{
+    ViewBag.Title = "StatusServicoNFe";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Faturamento</a></li>
+            <li><a href="#">Consulta Status Serviço NFe</a></li>
+        </ol>
+    </div>
+</div>
+
+<!--Teste-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Consulta Status Serviço NFe</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <div id="table_wrapperz">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Motivo
+                                </th>
+                                <th>
+                                    Versão
+                                </th>
+                                <th>
+                                    Ambiente
+                                </th>
+                                <th>
+                                    UF
+                                </th>
+                                <th>
+                                    Data Consulta
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.cStat)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.xMotivo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.versao)
+                                        </td>
+                                        <td>
+                                            @{ string ambiente = item.tpAmb == 1 ? "Produção" : "Homologação";  }
+                                            @Html.DisplayFor(modelItem => ambiente)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.cUF)
+                                        </td>
+                                        <td>
+                                            @{ var dataConsulta = item.dhRecbto.ToString(); }
+                                            @Html.DisplayFor(modelItem => dataConsulta)
+                                        </td>
+                                    </tr>
+                                                    }
+                                                }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    -->

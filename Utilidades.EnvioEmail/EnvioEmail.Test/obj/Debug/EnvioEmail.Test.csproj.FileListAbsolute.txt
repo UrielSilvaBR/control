@@ -40,3 +40,12 @@ C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debu
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
 C:\inetpub\wwwroot\control-master\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.dll
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\EnvioEmail.Test.pdb
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.dll
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Utilidades.EnvioEmail.pdb
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.csprojResolveAssemblyReference.cache
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.dll
+C:\Users\Natanael\Source\Repositorio\control\Utilidades.EnvioEmail\EnvioEmail.Test\obj\Debug\EnvioEmail.Test.pdb

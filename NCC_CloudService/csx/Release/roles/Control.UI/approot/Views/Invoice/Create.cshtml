@@ -1,0 +1,249 @@
+﻿@using Control.UI.Models
+@model InvoiceViewModel
+
+@{
+    ViewBag.Title = "Cadastro de Nota Fiscal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/datatables/TableTools.js"></script>
+    <script src="~/plugins/datatables/TableTools_orig.js"></script>
+    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/Content/Invoice/Invoice.js"></script>
+
+    <style type="text/css">
+        .form-horizontal .form-group {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+        }
+
+        #modal-sucesso .modal-body {
+            min-height: 127px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/message-success.png') no-repeat 40px 5px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+
+
+        #modal-sucesso .modal-dialog {
+            width: 600px;
+            margin: 130px 475px;
+        }
+
+        #modal-sucesso .modal-footer {
+            border-top: 0px solid #e5e5e5;
+            padding: 10px;
+        }
+    </style>
+
+</head>
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Faturamento</a></li>
+            <li><a href="#">Controle e Emissão de Nota Fiscal</a></li>
+            <li><a href="#">Cadastrar</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <!-- BOX -->
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Cadastro de Nota Fiscal</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <!-- conteudo -->
+            <div class="box-content">
+
+                <div id="tabs">
+
+                    @using (Ajax.BeginForm("Save", new { Controller = "Invoice" },
+                    new AjaxOptions { OnBegin = "IniciarInclusaoNotaFiscal", OnSuccess = "FinalizarInclusaoNotaFiscal", OnFailure = "ShowHTTPException" }, new { @class = "form-horizontal", @id = "frmCreateInvoice" }))
+                    {
+                        <ul>
+                            <li><a href="#tabs-1"> Dados Cadastrais </a></li>
+                        </ul>
+                        <div id="tabs-1">
+                            <!--Tab Dados Cadastrais-->
+
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.Numero)
+                                @Html.LabelFor(model => model.Invoice.Numero, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(p => p.Invoice.Numero, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.Valor)
+                                @Html.LabelFor(p => p.Invoice.Valor, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.Invoice.Valor, new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationMessageFor(p => p.Invoice.DataEmissao)
+                                @Html.LabelFor(p => p.Invoice.DataEmissao, htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(p => p.Invoice.DataEmissao, new { @Value = DateTime.Now.ToString("dd/MM/yyyy"), @class = "datepicker form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Série", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-2" style="align-content:flex-start">
+                                    @Html.DropDownListFor(p => p.Invoice.InvoiceSerieID, new SelectList(Model.Series, "Id", "Descricao"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+
+                                @Html.Label("Cliente", htmlAttributes: new { @class = "col-md-1" })
+                                <div class="col-md-5 style=" align-content:flex-start">
+                                    @Html.DropDownListFor(p => p.Invoice.CustomerID, new SelectList(Model.Customers, "Id", "CompanyName"), htmlAttributes: new { @class = "selddl" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" data-toggle="modal" data-target="#itemNotaFiscal" style="font-size: 0.8em;float:right" id="btnAddItemNotaFiscal" value="Adicionar Item" />
+                        </div>
+
+                        Html.RenderPartial("_ListInvoiceItem", Model);
+
+                        @Html.Hidden("itensNotaFiscal", "", new { id = "itensNotaFiscal" });
+
+                        <div class="form-group">
+                            <div class="col-md-offset-5">
+                                @*<input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnVoltar" value="Voltar" />
+                                    <input type="button" class="btn btn-primary" style="font-size: 0.8em;" id="btnAvancar" value="Avançar" />*@
+                                <input type="submit" value="Cadastrar" onclick="return IniciarInclusaoNotaFiscal();" class="btn btn-primary" style="font-size: 0.8em;" id="btnCadastrar" />
+                                @*<input type="button" value="Teste" class="btn btn-primary" id="btnTeste" style="font-size: 0.8em;" />*@
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div><!-- BOX -->
+
+<script type="text/javascript">
+
+    var editor;
+
+    $(document).ready(function () {
+        // Load TimePicker plugin and callback all time and date pickers
+        LoadTimePickerScript(AllTimePickers);
+        // Create jQuery-UI tabs
+        $("#tabs").tabs();
+        $("#btnAvancar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active + 1);
+        });
+
+        $("#btnVoltar").click(function () {
+            var active = $("#tabs").tabs("option", "active");
+            $("#tabs").tabs("option", "active", active - 1);
+        });
+
+        // Sortable for elements
+        $(".sort").sortable({
+            items: "div.col-sm-2",
+            appendTo: 'div.box-content'
+        });
+        // Droppable for example of trash
+        $(".drop div.col-sm-2").draggable({ containment: '.dropbox' });
+        $('#trash').droppable({
+            drop: function (event, ui) {
+                $(ui.draggable).remove();
+            }
+        });
+        var icons = {
+            header: "ui-icon-circle-arrow-e",
+            activeHeader: "ui-icon-circle-arrow-s"
+        };
+        // Make accordion feature of jQuery-UI
+        $("#accordion").accordion({ icons: icons });
+        // Create UI spinner
+        $("#ui-spinner").spinner();
+        // Add Drag-n-Drop to boxes
+
+        $('.datepicker').datepicker({
+            setDate: new Date(),
+            onSelect: function (date) {
+                $(this).valid();
+            },
+            dateFormat: 'dd/mm/yy',
+            language: 'pt',
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+            dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+            dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+            monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior',
+            showOn: "button",
+            buttonImage: "../content/img/calendar.png",
+            buttonImageOnly: true
+        });
+
+        //$("#Pedido_CustomerID").select2();
+        //$("#Pedido_ContactID").select2();
+
+        WinMove();
+
+        $('#btnAddItemNotaFiscal').click(function () {
+
+        })
+
+        $(window).on('shown.bs.modal', function () {
+            //$('.modal-backdrop').removeClass();
+        })
+
+        $('#gdvItensNotaFiscal').dataTable({
+            "oLanguage": {
+                "sEmptyTable": "Nenhum registro encontrado"
+            },
+            "aoColumns": [
+            { "Name": "Id" },
+            { "Name": "IdProduto" },
+            { "Name": "SequencialItem" },
+            { "Name": "DescricaoProduto" },
+            { "Name": "Quantidade" },
+            { "Name": "ValorUnitario" },
+            { "Name": "Desconto" },
+            { "Name": "ValorTotal" },
+            ],
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1] }]
+        });
+
+        $('#gdvItensNotaFiscal_filter').hide();
+        //$('#gdvItensNotaFiscal_info').hide();
+        $('#gdvItensNotaFiscal_length').hide();
+    });
+
+</script>

@@ -1,0 +1,111 @@
+﻿@using Control.UI.Models
+@model List<ProdutoCarteiraEstoqueViewModel>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var table = $('#gdvPedidosCateira').DataTable({
+            "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+            "columnDefs": [
+                { "visible": false, "targets": 0 }
+            ],
+            "order": [[0, 'asc']],
+            "displayLength": 25,
+            "oLanguage": {
+                "sInfo": "Exibindo registros de _START_ &agrave; _END_ de _TOTAL_ ",
+                "sEmptyTable": "Nenhum registro encontrado",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+            },
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(0, { page: 'current' }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="9" style="color:steelblue;cursor:pointer;font-style: italic;">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            }
+        });
+
+        // Order by the grouping
+        $('#gdvPedidosCateira tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            }
+            else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+
+        $('.dataTables_filter').hide();
+        $('.dataTables_length').hide();
+        $('.dataTables_info').hide();
+
+    });
+
+</script>
+<div class="form-group">
+    <div id="table_wrapperz_Carteira">
+        <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvPedidosCateira" style="overflow: scroll !important;width:100%;">
+            <thead>
+                <tr>
+                    <th>Fornecedor</th>
+                    <th>
+                        Produto
+                    </th>
+                    <th>
+                        Modelo
+                    </th>
+                    <th>
+                        Un. Medida
+                    </th>
+                    <th>
+                        Valor Unitário
+                    </th>
+                    <th>
+                       NCM
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.ProductProvider.Provider.CompanyName )</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Name )
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.UnitMeasure)
+                            </td>
+                            <td>@{ string valorUnitario = item.Product.UnitPrice.HasValue ? item.Product.UnitPrice.Value.ToString("N") : "0,00"; }
+                                @Html.DisplayFor(modelItem => valorUnitario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.NCMCode)
+                            </td>
+                           
+                        </tr>
+                                        }
+                                    }
+            </tbody>
+        </table>
+    </div>
+</div>

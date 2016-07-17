@@ -1,0 +1,281 @@
+﻿@using Control.Model.Entities
+@model IEnumerable<Order>
+@{
+    ViewBag.Title = "Pedidos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <link href="~/Content/Site.css" rel="stylesheet" />
+
+</head>
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Vendas</a></li>
+            <li><a href="#">Pedidos</a></li>
+            @*<li><a href="#">Edição</a></li>*@
+        </ol>
+    </div>
+</div>
+
+<!--Teste-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Notas Fiscais Emitidas</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <div id="table_wrapperz">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Contato
+                                </th>                                
+                                <th>
+                                    Tipo
+                                </th>
+                                <th>
+                                    Vendedor
+                                </th>
+                                <th>
+                                    Data Emissão
+                                </th>
+                                <th>
+                                    Valor
+                                </th>
+                                <th>
+                                    NF
+                                </th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                {
+                                    <tr>
+                                        <td>
+                                            <h4 style="color:red;    margin-left: 35px;">
+                                                <a href='@Url.Action("Edit", "Invoice", new { InvoiceID = item.Id })'>
+                                                    <i class="fa fa-edit red"></i>
+                                                </a>
+                                                <a href='@Url.Action("Delete", "Invoice", new { InvoiceID = item.Id } )'>
+                                                    <i class="fa fa-times-circle" style="color:red"></i>
+
+                                                </a>
+                                                <a href='@Url.Action("ConsultarNFSe", "Invoice", new { InvoiceID = item.Id })'>
+                                                    <i class="fa fa-check color5"></i>
+                                                </a>
+
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CustomerOrder.CompanyName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ContactOrder.ContatName)
+                                        </td>
+                                       
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TypeOrder.Description)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.VendorOrder.Name)
+                                        </td>
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.Status)
+                                        </td>*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InsertDate)
+                                        </td>
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.OrderDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UpdateDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Comments)
+                                        </td>*@
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.CFOP)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Discount)
+                                        </td>*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.TotalValue)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                        </td>
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.InvoiceStatus)
+                                        </td>*@
+                                    </tr>
+                                                    }
+                                                }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    -->
+
+<script type="text/javascript">
+    // Run Datables plugin and create 3 variants of settings
+    function AllTables() {
+        TestTable1();
+        LoadSelect2Script(MakeSelect2);
+    }
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+
+            //var url = Url.Action("ActionName", "ControllerName")';
+            var url = '@Url.Action("ActionName", "ControllerName")';
+
+            $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Invoice/Create\"' />");
+            //$(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+            //$(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ClientesEdit\"' />");
+        });
+    }
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
+
+        // Add Drag-n-Drop feature
+        WinMove();
+    });
+</script>
+
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactOrder.ContatName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerOrder.CompanyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeOrder.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VendorOrder.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsertDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CFOP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalValue)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InvoiceStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactOrder.ContatName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerOrder.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeOrder.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VendorOrder.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsertDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CFOP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalValue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InvoiceStatus)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>*@

@@ -1,0 +1,138 @@
+﻿@using Control.Model.Entities
+@using Control.Model.Enums
+@using Control.UI.Models
+@using Control.Utility
+@model PaymentTerm
+
+<head>
+
+    <script src="~/scripts/jquery.maskedinput.js"></script>
+    <script src="~/Content/Cadastros/CondicaoPagamento/CondicaoPagamento.js"></script>
+
+
+    <style type="text/css">
+        .col-md-1 {
+            margin-top: 0px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            var CustomerID = $('#PaymentTerm_Id').val();
+
+            if (CustomerID > 0)
+                $('#btnCadastrar').val('Alterar');
+            else
+                $('#btnCadastrar').val('Cadastrar');
+        });
+
+    </script>
+
+</head>
+
+<div class="row">
+    <div id="breadcrumb" class="col-md-12">
+        <ol class="breadcrumb">
+            <li><a href="index.html">Cadastro</a></li>
+            <li><a href="#">Condição de Pagamento</a></li>
+            <li><a href="#">Cadastrar</a></li>
+        </ol>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <i class="fa fa-pencil"></i>
+                    <span>Adicionar Nova Condição de Pagamento</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+
+                <div class="no-move"></div>
+            </div>
+
+            <!--Inicio-->
+            @using (Html.BeginForm("CondicaoPagamentoSave", "Cadastro", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="box-content">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="form-group">
+                        @Html.Label("Descrição", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })*@
+                        </div>
+
+                        @Html.Label("Descrição Resumida", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ShortDescription, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.ValidationMessageFor(model => model.AddressStreet, "", new { @class = "text-danger" })*@
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.Label("Qtd. Dias", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Days, new { htmlAttributes = new { @class = "form-control", @type="text" } })
+                            @*@Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })*@
+                        </div>
+
+                        @Html.Label("Ativa", htmlAttributes: new { @class = "control-label col-md-1" })
+                        <div class="col-md-1" style="text-align: left;margin-top: 5px;">
+                            @Html.CheckBoxFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.ValidationMessageFor(model => model.AddressStreet, "", new { @class = "text-danger" })*@
+                        </div>
+
+                        @Html.Label("Alíquota (%)", htmlAttributes: new { @class = "control-label col-md-2", @style= "margin-left: 6px;" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.Aliquota, new { htmlAttributes = new { @class = "form-control", @type="text" } })
+                            @*@Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })*@
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="form-group">
+                        <div class="col-md-offset-4 col-md-10">
+
+                            <input type="submit" value="Cadastrar" class="btn btn-primary" id="btnCadastrar" />
+
+                            <a href='@Url.Action("CondicaoPagamento", "Cadastro")' style="text-decoration: none;">
+                                <input type="button" class="btn btn-primary" value="Condição Pagamento" />
+                            </a>
+
+                            @*<a href='@Url.Action("OrdersCustomer", "Pedido", new { ClientID = Model.Id })' style="text-decoration: none;">
+                                    <input type="button" class="btn btn-primary" value="Pedidos" />
+                                </a>
+
+                                <a href='@Url.Action("InvoicesCustomer", "Invoice", new { ClientID = Model.Id })' style="text-decoration: none;">
+                                    <input type="button" class="btn btn-primary" value=" Nota Fiscal" />
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--Fim-->
+        </div>
+
+    </div><!--box-->
+</div><!--row-->

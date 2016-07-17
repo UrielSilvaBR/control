@@ -1,0 +1,275 @@
+﻿@using Control.Model.Entities
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Produtos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Cadastros</a></li>
+            <li><a href="#">Produtos</a></li>
+            @*<li><a href="#">Edição</a></li>*@
+        </ol>
+    </div>
+</div>
+
+<!--Teste-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Cadastro de Produtos</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <div id="table_wrapperz">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1" style="overflow: scroll !important;">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                                <th>
+                                    Produto
+                                </th>
+                                <th>
+                                    Modelo
+                                </th>
+                                @*<th>
+                                    Descrição
+                                </th>*@
+                                <th>
+                                    Unidade
+                                </th>
+                                <th>
+                                    Preço Unitário
+                                </th>
+                               
+                                <th>
+                                    Preço Custo
+                                </th>
+                                <th>
+                                    ICMS
+                                </th>
+                                <th>
+                                    Estoque Mín.
+                                </th>
+                                <th>
+                                    Qtd. Estoque
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                {
+                                    <tr>
+                                        <td>
+                                            <h4 style="color:red">
+                                                <a href='@Url.Action("ProdutosEdit", "Cadastro", new { ProdutoID = item.Id })'>
+                                                    <i class="fa fa-edit red"></i>
+                                                </a>
+                                                <a href='@Url.Action("ProdutoDelete", "Cadastro", new { ProdutoID = item.Id })'>
+                                                    <i class="fa fa-times-circle" style="color:red"></i>
+
+                                                </a>
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Model)
+                                        </td>
+                                        @*<td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>*@
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UnitMeasure)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.UnitPrice)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CostPrice)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AliqICMS)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.MinimumStockAlert)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.QuantityCurrentStock)
+                                        </td>
+                                      
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    -->
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductUnit.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lenght)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AliqICMS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinimumStockAlert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CombinedProduct)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductUnit.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Model)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Width)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lenght)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AliqICMS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinimumStockAlert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImageURL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CombinedProduct)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>*@
+
+<script type="text/javascript">
+// Run Datables plugin and create 3 variants of settings
+function AllTables(){
+	TestTable1();
+	LoadSelect2Script(MakeSelect2);
+}
+function MakeSelect2(){
+	$('select').select2();
+	$('.dataTables_filter').each(function(){
+	    $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');
+
+	    //var url = Url.Action("ActionName", "ControllerName")';
+	    var url = '@Url.Action("ActionName", "ControllerName")';
+
+	    $(this).append("<input type='button' value='Adicionar' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ProdutosEdit\"' />");
+	    $(this).append("<input type='button' value='Imprimir ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ProdutosEdit\"' />");
+	    $(this).append("<input type='button' value='Exportar ' style='margin-right:10px' class='btn btn-default' onclick='location.href=\"/Cadastro/ProdutosEdit\"' />");
+	});
+}
+$(document).ready(function() {
+	// Load Datatables and run plugin on tables
+    LoadDataTablesScripts(AllTables);
+
+	// Add Drag-n-Drop feature
+	WinMove();
+});
+</script>
