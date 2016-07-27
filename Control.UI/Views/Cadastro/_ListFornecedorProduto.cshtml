@@ -29,6 +29,7 @@
             { "Name": "RazaoSocial" },
             { "Name": "CNPJ" },
             { "Name": "CodigoProduto" },
+            { "Name": "ModeloFabricante" },
             { "Name": "DataInclusao" },
             { "Name": "Habilitado" }
             ],
@@ -56,6 +57,9 @@
                 <th>CNPJ</th>
                 <th>
                     Código Produto
+                </th>
+                <th>
+                    Modelo Fabricante
                 </th>
                 <th>Data/Hora Inclusão</th>
                 <th>Habilitado</th>
@@ -96,7 +100,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Code)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModelProvider)
+                        </td>
                         <td>
                             @{string dataInclusao = item.InsertDate.ToString(); }
                             @Html.DisplayFor(modelItem => dataInclusao)

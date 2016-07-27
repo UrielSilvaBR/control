@@ -18,6 +18,7 @@ namespace Control.UI.Models
         public int ProviderID { get; set; }
 
         public long CodigoProdutoFornecedor { get; set; }
+        public string ModeloFabricante { get; set; }
 
         public void AtualizarCodigoProdutoFornecedor()
         {
@@ -29,6 +30,18 @@ namespace Control.UI.Models
             else
                 CodigoProdutoFornecedor = providerProduct.Code.HasValue ? providerProduct.Code.Value : 0;
         }
+
+        public void AtualizarModeloFabricante()
+        {
+            context = new DALContext();
+            var providerProduct = context.ProductProviders.Filter(p => p.ProviderID == ProviderID && p.ProductID == Product.Id).FirstOrDefault();
+
+            if (providerProduct == null)
+                ModeloFabricante = "";
+            else
+                ModeloFabricante = providerProduct.ModelProvider;
+        }
+
 
         public ProdutoViewModel()
         {

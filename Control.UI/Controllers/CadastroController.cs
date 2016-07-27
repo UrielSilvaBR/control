@@ -660,7 +660,7 @@ namespace Control.UI.Controllers
             }
         }
 
-        public JsonResult VincularFornecedorProduto(int ProviderID, int ProductID, long codigoProdutoFornecedor)
+        public JsonResult VincularFornecedorProduto(int ProviderID, int ProductID, long codigoProdutoFornecedor, string modeloFabricante)
         {
             try
             {
@@ -671,7 +671,8 @@ namespace Control.UI.Controllers
                     ProductID = ProductID,
                     ProviderID = ProviderID,
                     Code = codigoProdutoFornecedor,
-                    IsActive = true
+                    IsActive = true,
+                    ModelProvider = modeloFabricante
                 };
 
                 context.ProductProviders.Create(objProductProvider);

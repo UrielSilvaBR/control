@@ -149,6 +149,8 @@ function AdicionarFornecedorProduto() {
     var idFornecedor = $('#ProviderID option:selected').val();
     var idProduto = $('#Product_Id').val();
     var codigoProdutoFornecedor = $('#CodigoProdutoFornecedor').val();
+    var modeloFabricante = $('#ModeloFabricante').val();
+
 
     if (idFornecedor == 0)
     {
@@ -164,7 +166,7 @@ function AdicionarFornecedorProduto() {
         }
         else {
             $.post("/Cadastro/VincularFornecedorProduto",
-            { ProviderID: idFornecedor, ProductID: idProduto, codigoProdutoFornecedor: codigoProdutoFornecedor },
+            { ProviderID: idFornecedor, ProductID: idProduto, codigoProdutoFornecedor: codigoProdutoFornecedor, modeloFabricante: modeloFabricante },
                 function (result) {
 
                     if (!result.erro) {
@@ -178,6 +180,7 @@ function AdicionarFornecedorProduto() {
                                 $('#table_wrapperz_FornecedorProduto').html(lista);
                                 $("#ProviderID").select2().select2("val", '0');
                                 $('#CodigoProdutoFornecedor').val('0');
+                                $('#ModeloFabricante').val('');
                             }
                         });
                     }

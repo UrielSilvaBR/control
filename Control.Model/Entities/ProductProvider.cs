@@ -35,6 +35,8 @@ namespace Control.Model.Entities
 
         public bool IsActive { get; set; }
 
+        public string ModelProvider { get; set; }
+
         [NotMapped]
         public string NameProvider
         {

@@ -440,12 +440,12 @@
                             <li>@Html.ActionLink("Pedidos em Aberto", "PedidosAbertos", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos em Carteira", "Carteira", "Pedido")</li>
                             @*<li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>*@
-                            <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
-                            <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>
-                            <li>@Html.ActionLink("Tabela de Preços", "TabelaPrecos", "Vendas")</li>
-                            <li>@Html.ActionLink("Disponibilidade Produtos", "ConsultaEstoque", "Vendas")</li>
+                            @*<li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>*@
+                            @*<li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>*@
+                            @*<li>@Html.ActionLink("Tabela de Preços", "TabelaPrecos", "Vendas")</li>*@
+                            @*<li>@Html.ActionLink("Disponibilidade Produtos", "ConsultaEstoque", "Vendas")</li>*@
                             <li>@Html.ActionLink("Histórico Pedidos", "Index", "Pedido")</li>
-                            <li>@Html.ActionLink("Vendas por Periodo", "ListaPedidos", "Vendas")</li>
+                            @*<li>@Html.ActionLink("Vendas por Periodo", "ListaPedidos", "Vendas")</li>*@
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -454,15 +454,15 @@
                             <span class="hidden-xs">Compras</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Solicitação de Materiais", "SolicitacaoMateriais", "Compras")</li>
+                            @*<li>@Html.ActionLink("Solicitação de Materiais", "SolicitacaoMateriais", "Compras")</li>*@
                             <li>@Html.ActionLink("Pedido de Compras", "", "Compras")</li>
                             <li>@Html.ActionLink("Conferência e Recebimento de Mercadorias", "Recebimento", "Compras")</li>
-                            <li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>
+                            @*<li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>*@
                             <li>@Html.ActionLink("Produtos Pendentes", "ProdutosPendentes", "Compras")</li>
                             <li>@Html.ActionLink("Produtos em Carteira - Estoque", "ProdutosCarteiraEstoque", "Compras")</li>
-                            <li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>
-                            <li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>
-                            <li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>
+                            @*<li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>*@
+                            @*<li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>*@
+                            @*<li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>*@
                             <li>@Html.ActionLink("Listagem de Pedidos", "", "Compras")</li>
                         </ul>
                     </li>
@@ -472,10 +472,10 @@
                             <span class="hidden-xs">Estoque</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Cadastro de Movimentação Estoque", "MovimentacaoEstoque", "Estoque")</li>
+                            @*<li>@Html.ActionLink("Cadastro de Movimentação Estoque", "MovimentacaoEstoque", "Estoque")</li>
                             <li>@Html.ActionLink("Importação de produtos de NFe Entrada", "ImportacaoNFE", "Estoque")</li>
                             <li>@Html.ActionLink("Baixa de Produtos (RMA, Perda, Defeito, Composição)", "BaixaProdutos", "Estoque")</li>
-                            <li>@Html.ActionLink("Inventário de Produtos", "Inventario Produtos", "Estoque")</li>
+                            <li>@Html.ActionLink("Inventário de Produtos", "Inventario Produtos", "Estoque")</li>*@
                             <li>@Html.ActionLink("Consulta Estoque", "ConsultaEstoque", "Estoque")</li>
                         </ul>
                     </li>
@@ -485,12 +485,12 @@
                             <span class="hidden-xs">Financeiro</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Fluxo de Caixa", "FluxoCaixa", "Financeiro")</li>
+                            @*<li>@Html.ActionLink("Fluxo de Caixa", "FluxoCaixa", "Financeiro")</li>
                             <li>@Html.ActionLink("Visualizar Documentos Fiscais", "VisualizarDocumentos", "Financeiro")</li>
-                            <li>@Html.ActionLink("Contas a Pagar / Receber", "", "Financeiro")</li>
-                            <li>@Html.ActionLink("Controle Conta Corrente / Conciliação Bancária", "ExtratoBancario", "Financeiro")</li>
-                            <li>@Html.ActionLink("Fluxo de Caixa", "", "Financeiro")</li>
-                            <li>@Html.ActionLink("Movimento Financeiro por período", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Contas a Pagar / Receber", "", "Financeiro")</li>*@
+                            <li>@Html.ActionLink("Conciliação Bancária", "ExtratoBancario", "Financeiro")</li>
+                            @*<li>@Html.ActionLink("Fluxo de Caixa", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Movimento Financeiro por período", "", "Financeiro")</li>*@
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -500,10 +500,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>@Html.ActionLink("Emissão de Notas Fiscais", "Create", "Invoice")</li>
-                            <li>@Html.ActionLink("Integração SEFAZ (Secretária da Fazenda): Inclusão e Cancelamento de NF", "", "Financeiro")</li>
-                            <li>@Html.ActionLink("Emissão de DANFE", "", "Financeiro")</li>
+                            @*<li>@Html.ActionLink("Integração SEFAZ (Secretária da Fazenda): Inclusão e Cancelamento de NF", "", "Financeiro")</li>*@
+                            @*<li>@Html.ActionLink("Emissão de DANFE", "", "Financeiro")</li>*@
                             <li>@Html.ActionLink("Notas Fiscais Emitidas", "Index", "Invoice")</li>
-                            <li>@Html.ActionLink("Status Integração SEFAZ", "", "Financeiro")</li>
+                            @*<li>@Html.ActionLink("Status Integração SEFAZ", "", "Financeiro")</li>*@
                             <li>@Html.ActionLink("Status Serviço NFe", "StatusServicoNFe", "Invoice")</li>
 
 
