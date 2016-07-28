@@ -915,7 +915,7 @@ function ValidarInclusaoCondicaoPagamentoModal() {
     var idCliente = $('#Order_CustomerID option:selected').val();
 
     if (idCliente == 0) {
-        ShowMessage('Selecione o Cliente para cadastrar a Condição de Pagamento!', false);
+        ShowMessage('Selecione o Cliente para cadastrar a <br>Condição de Pagamento!', false);
         return false;
     }
 }

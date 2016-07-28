@@ -22,6 +22,8 @@ namespace Control.UI.Models
         {
             context = new DALContext();
             Providers = context.Providers.All().OrderBy(p => p.ShortName).ToList();
+            Providers.Insert(0, new Provider() { Id = 0, CompanyName = "SELECIONE..." });
+
             Products = context.Products.All().OrderBy(p => p.Name).ToList();
             Products.Insert(0, new Product() { Id = 0, Name = "SELECIONE..." });
             if (PurchaseOrder == null)

@@ -270,6 +270,7 @@
     <Content Include="Content\img\1468536134_Circle_Red.png" />
     <Content Include="Content\img\bg-mensagem-erro.jpg" />
     <Content Include="Content\img\calendar.png" />
+    <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\message-success.png" />
     <Content Include="Content\img\sort.png" />
     <Content Include="Content\img\warning.png" />
