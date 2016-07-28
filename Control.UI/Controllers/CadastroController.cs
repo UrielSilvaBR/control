@@ -750,8 +750,6 @@ namespace Control.UI.Controllers
             return View(model);
         }
 
-
-
         public ActionResult CondicaoPagamentoSave(PaymentTerm PaymentTerm)
         {
             context = new DALContext();
@@ -797,6 +795,27 @@ namespace Control.UI.Controllers
             ViewBag.Message = "Condição de Pagamento excluída com sucesso.";
 
             return RedirectToAction("CondicaoPagamento");
+        }
+
+        public JsonResult ObterCalculoAliquota(int quantidadeDias)
+        {
+            context = new DALContext();
+
+            try
+            {
+                var objCondicaoPagamento = context.PaymentTerms.Find(p => p.Days == 30);
+
+                if (objCondicaoPagamento == null)
+                    return Json(new { erro = false, aliquota = 0 });
+
+                decimal percentualAliquota = (quantidadeDias * objCondicaoPagamento.Aliquota) / objCondicaoPagamento.Days;
+
+                return Json(new { erro = false, aliquota = percentualAliquota }); 
+            }
+            catch (Exception ex)
+            {
+                return Json(new { erro = true, msg = ex.Message });
+            }
         }
 
         #endregion
