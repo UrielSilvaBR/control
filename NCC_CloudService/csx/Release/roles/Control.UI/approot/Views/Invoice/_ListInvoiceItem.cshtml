@@ -1,0 +1,35 @@
+﻿@using Control.UI.Models
+@model InvoiceViewModel
+
+<div id="table_wrapperz">
+    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvItensNotaFiscal">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor Unitário</th>
+                <th>Desconto</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Invoice.Items)
+            {
+                <tr>
+                    <td style="display:none">@Html.HiddenFor(modelItem => item.Id)</td>
+                    <td style="display:none">@Html.HiddenFor(modelItem => item.ProductID)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SequencialItem)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductItem.Name)</td>
+                    <td> @Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                    <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                    <td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>
+                    <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

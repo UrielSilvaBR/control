@@ -1,0 +1,216 @@
+﻿@using Control.UI.Models
+@model PedidoViewModel
+@{
+        ViewBag.Title = "Invoice";
+        Layout = "";
+}
+    <!--Includes Layout - Begin-->
+
+<link href="/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+<link href="~/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+<link href="/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+<link href="/plugins/xcharts/xcharts.min.css" rel="stylesheet">
+<link href="/plugins/select2/select2.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<link href="~/Content/font-awesome.css" rel="stylesheet" />
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+        <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+<![endif]-->
+
+<style type="text/css">
+    body {
+        background: #ffffff !important;
+    }
+</style>
+<!-- Includes Layout - Fim-->
+<!-- Includes Layout - Inicio-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!--<script src="http://code.jquery.com/jquery.js"></script>-->
+
+<script src="/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="~/scripts/bootstrap.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="~/scripts/jquery.validate.js"></script>
+<script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/scripts/jquery.validate.unobtrusive.bootstrap.js"></script>
+<script src="~/scripts/methods_pt.js"></script>
+<script src="/plugins/justified-gallery/jquery.justifiedgallery.js"></script>
+<script src="~/plugins/tinymce/tinymce.min.js"></script>
+<script src="~/plugins/tinymce/jquery.tinymce.min.js"></script>
+
+<!-- All functions for this theme + document.ready processing -->
+<script src="/js/devoops.js"></script>
+
+<script src="~/plugins/datatables/jquery.dataTables.js"></script>
+<script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+<script src="~/plugins/datatables/TableTools.js"></script>
+<script src="~/plugins/datatables/TableTools_orig.js"></script>
+<script src="~/plugins/datatables/ZeroClipboard.js"></script>
+<script src="~/plugins/select2/select2.js"></script>
+
+<script src="~/scripts/control.js"></script>
+<script src="~/scripts/jquery.maskedinput.js"></script>
+<script src="~/scripts/jquery.maskMoney.js"></script>
+<script src="~/scripts/ModalLoading.js"></script>
+<script src="~/Content/Order/OrderReport.js"></script>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-content">
+                <div id="dvPrintArea">
+                    <div class="col-xs-12" style="margin-bottom:30px">
+                        <table class="col-xs-12">
+                            <tr>
+                                <td align="left" class="col-xs-4"><img src="~/img/logo.JPG" /></td>
+                                <td align="center" class="col-xs-4"><h3 class="invoice-header">PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3></td>
+                                <td align="right" class="col-xs-4">
+                                    Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
+                                    Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <b>Solicitante:</b>@Html.HiddenFor(Model => Model.Order.Id, new { @id = "hdOrderId" })
+                        <address>
+                            <strong>@Html.DisplayFor(Model => Model.Order.CustomerOrder.CompanyName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.Document)<br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressStreet) , @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressNumber) @Html.DisplayFor(Model => Model.Order.CustomerOrder.AddressComplement) <br>
+                            @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.Name), @Html.DisplayFor(Model => Model.Order.CustomerOrder.City.State.Name)  - @Html.DisplayFor(Model => Model.Order.CustomerOrder.ZipCode)<br>
+                            <abbr title="Phone">Tel:</abbr> @Html.DisplayFor(Model => Model.Order.CustomerOrder.Phone)
+                        </address>
+                        <address>
+                            <strong>Contato: @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatName)</strong><br>
+                            @Html.DisplayFor(Model => Model.Order.ContactOrder.ContatRoleName) <br />
+                            Tel: @Html.DisplayFor(Model => Model.Order.ContactOrder.Phone) <br />
+                            <a href="mailto:#">@Html.DisplayFor(Model => Model.Order.ContactOrder.Email)</a>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>NCC EQUIPAMENTOS INDUSTRIAIS</strong><br>
+                            Rua Jo&atilde;o Guerra, 271 - Macuco<br>
+                            Santos/SP - CEP 11015-131<br>
+                            <abbr title="Phone"></abbr> Tel: 13 3232-8909
+                        </address>
+                        <address>
+                            <strong>Vendedor: @Html.DisplayFor(Model => Model.Order.VendorOrder.Name)</strong><br>
+                            Tel: 13 3232-8909<br />
+                            @*<a href="mailto:#">@Html.DisplayFor(Model => Model.Order.VendorOrder.Name)&#64;ncc.com.br</a>*@
+                        </address>
+                        <address>
+                            <strong>Analista: Uriel Silva @Html.DisplayFor(Model => Model.Order.RegisteredBy)</strong><br>
+                        </address>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <br />
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ITEMS</th>
+                                    <th>NCM</th>
+                                    <th>QUANTIDADE</th>
+                                    <th>PRECO UNITARIO</th>
+                                    <th>TOTAL</th>
+                                    <th>PRAZO ENTREGA (Dias)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order.Items)
+                                {
+                                    <tr>
+                                        <td class="m-ticker"><b>@Html.DisplayFor(modelItem => item.ProductItem.Name)</b><span>@Html.DisplayFor(modelItem => item.ProductItem.Model)</span></td>
+                                        <td>@Html.DisplayFor(modelItem => item.ProductItem.NCMCode)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.QuantityOrder)</td>
+                                        <td>@{ string unitPrice = item.UnitPrice.ToString("N");  } @Html.DisplayFor(modelItem => unitPrice)</td>
+                                        <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.DeadlineItem)</td>
+                                    </tr>
+                                            }
+
+
+                                <tr class="active">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>@{ string Price = Model.Order.TotalValue.ToString("N");  } @Html.DisplayFor(Model => Price) <sup>*</sup></b></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @*<small>* VAT included</small>*@
+                    </div>
+
+                    <div class="col-xs-12">
+                        <table class="col-xs-12">
+                            <tr>
+                                <td class="col-xs-5"><strong>CONDIÇÕES PAGAMENTO</strong><br /></td>
+                                <td class="col-xs-5"><strong style="margin-left:20px">RETIRADA</strong><br /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="col-xs-5 table table-bordered" style="margin-right:5px">
+                                        <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                            <li>@Html.DisplayFor(Model => Model.Order.PaymentTerm.Description)<br /></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="col-xs-5 table table-bordered">
+                                        <ul type="0" style="text-align:justify; margin:10px 0 10px 10px; list-style:none;">
+                                            <li>@Html.DisplayFor(Model => Model.Order.Shipping.Description)<br /></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>CONDIÇÕES DE FORNECIMENTO</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ol type="1" style="text-align:justify; margin:10px">
+                                <li>Valor mínimo para faturamento a prazo: R$ 500,00. </li>
+                                <li>Os preços mencionados nesta proposta estão sujeitos a alterações após o vencimento da data de validade.</li>
+                                <li>Não serão aceitos cancelamentos e/ou devoluções de produtos já encomendados.</li>
+                                <li>Na confirmação do Pedido, favor informar o número desta proposta.</li>
+                                <li>O prazo de entrega informado nesta proposta é em dias corridos, sujeito a alteração no momento do fechamento do pedido de venda.                              </li>
+                                <li>Os impostos informados nesta proposta são os vigentes no momento de sua emissão, podendo ser alterados sem aviso prévio na data do faturamento conforme legislação tributária.</li>
+
+                                @if (Model.Order.DespesaFinanceira)
+                                {
+                                    <li>Condições de pagamento acima de 21 dias possuem acréscimo das tarifas bancárias de financiamento.</li>
+                                }
+                                <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
+                                <li>Empresa optante pelo simples, de acordo com a  lei complementar 123/2006, anexo III.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12">
+                        <strong>OBSERVAÇÕES</strong><br />
+                        <div class="col-xs-10 table table-bordered">
+                            <ul type="0" style="text-align:justify; margin:10px; list-style:none;">
+                                <li>@Html.DisplayFor(Model => Model.Order.Comments)<br /></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                  
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

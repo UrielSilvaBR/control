@@ -1,0 +1,23 @@
+﻿Criando uma aplicação MVC do Zero
+http://kristianguevara.net/creating-your-asp-net-mvc-5-application-from-scratch-for-beginners-using-entity-framework-6-and-identity-with-crud-functionalities/
+http://www.techjunkieblog.com/2015/04/aspnet-mvc-5-create-aspnet-mvc-5-empty.html
+
+Configuração Identity
+http://stackoverflow.com/questions/19460386/how-can-i-change-the-table-names-when-using-visual-studio-2013-aspnet-identity
+http://pluralsight.com/training/Player?author=scott-allen&name=aspdotnet-mvc5-fundamentals-m3-identity&mode=live&clip=0&course=aspdotnet-mvc5-fundamentalsz
+
+Curso Video identity with MVC 5
+http://pluralsight.com/training/Player?author=scott-allen&name=aspdotnet-mvc5-fundamentals-m3-identity&mode=live&clip=0&course=aspdotnet-mvc5-fundamentals
+
+http://www.asp.net/mvc/overview/security
+
+
+Partial Views with AJax
+http://www.devmedia.com.br/asp-net-mvc-e-ajax-atualizando-o-conteudo-de-partial-views-via-jquery/26232
+
+http://weblogs.thinktecture.com/cnagel/2011/06/filter-and-display-data-with-aspnet-mvc-part-2partial-views-and-jquery.html
+
+Exemplo Reformulacao Gtwave Site
+https://parall.ax/
+
+http://csharpbrasil.com.br/enviando-anexo-em-e-mail-com-aspnet/

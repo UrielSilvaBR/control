@@ -1,0 +1,28 @@
+﻿@using Control.UI.Models
+@using Control.Model.Entities
+@model PedidoViewModel
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12">
+        <div class="box">
+            <form>
+                <!--Inicio-->
+                <div class="box-content">
+
+                    <input type="hidden" id="rowIndexItemPedido" />
+
+                    <div class="form-group">
+
+                        @Html.Label("Produto", htmlAttributes: new { @class = "col-md-1" })
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(p => p.OrderProduct.ProductID, new SelectList(Model.Products, "Id", "FullDescription"), htmlAttributes: new { @class = "selddl", @id = "ddlProdutoPedido" })
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div><!--box-->
+</div><!--row-->

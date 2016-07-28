@@ -1,0 +1,73 @@
+﻿@using Control.UI.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <title>NCC Control</title>
+    <meta name="description" content="Sistema de Controle de Vendas - NCC Equipamentos Industriais">
+    <meta name="author" content="Gtwave soluções em tecnologia">
+    <meta name="keyword" content="keywords">
+    <link href="../plugins/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link href="../css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+            <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div id="page-login" class="row">
+            <div class="col-xs-12 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="text-right">                    
+                    @Html.ActionLink("cadastrar usuário", "Register", new { @class = "txt-default"})
+                </div>
+
+                <div class="box">
+                    <div class="box-content">
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+                        <div class="text-center">
+                            <h3 class="page-header">NCC Control Login</h3>
+                        </div>
+                        
+                        <div class="form-group">
+                            @Html.AntiForgeryToken()
+                            
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.Label("Manter Logado")
+                        </div>
+                            <div class="text-center">                                
+                                <input type="submit" value="Entrar" class="btn btn-primary" />
+                            </div>
+}
+                        </div>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

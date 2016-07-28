@@ -1,0 +1,84 @@
+﻿@using Control.UI.Models
+@model SendMailViewModel
+
+<!--Inicio-->
+@using (Ajax.BeginForm("EnviarEmailAttached", new { Controller = "Pedido" }, new AjaxOptions { OnBegin = "ValidarInclusaoContatoModal", OnSuccess = "FinalizarInclusaoContato(data)" }, new { @class = "form-horizontal" }))
+{
+    <div class="box-content">
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+       
+
+        <input type="hidden" id="hdnOrderID_ConvertPedido_Modal" name="OrderID" />
+            <div class="form-group">
+                @Html.Label("Selecionar Emails", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.NovoEmail, new SelectList(Model.ListaEmails, "MailContactEmai", "MailContactName"), htmlAttributes: new { @class = "selddl", @id = "ddlmail" })
+                    @Html.ValidationMessageFor(model => model.NovoEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+
+                @Html.Label("Para:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.Order.ProposalMailList, new { htmlAttributes = new { @class = "form-control", @id = "txtMail" } })
+                    @Html.ValidationMessageFor(model => model.Order.ProposalMailList, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                @Html.Label("Assunto:", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-8">                    
+                    @Html.EditorFor(model => model.Assunto, new { htmlAttributes = new { @class = "form-control", @id = "txtAssunto" } })
+                    
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-10">
+                    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#ddlmail').on("change", function (e) {
+            var val = $('#txtMail').val();
+            $('#txtMail').val(val + e.val + ", ");
+        })
+
+    });
+
+    function FinalizarInclusaoContato(id) {
+        
+        ShowMessage('' + id, false);
+        $('#modal-cadastro-contato').modal('hide');
+
+        ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
+
+        $('#ContatName').val('');
+        $('#ContatRoleName').val('');
+        $('#Contact_Phone_Modal').val('');
+        $('#Contact_Mobile_Modal').val('');
+        $('#Email').val('');
+    }
+
+    function ValidarInclusaoContatoModal() {
+
+        
+        var idCliente = $('#Order_CustomerID option:selected').val();
+
+        if (idCliente == 0) {
+            ShowMessage('Selecione o Cliente para cadastrar o Contato!', false);
+            return false;
+        }
+    }
+    
+</script>
