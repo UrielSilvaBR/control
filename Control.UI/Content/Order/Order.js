@@ -632,7 +632,8 @@ function AdicionarItemPedido() {
         precoUnitario,
         prazoEntrega,
         //desconto,
-        precoTotal
+        precoTotal,
+        precoUnitario
     ]);
 
     var tr = gdvItens.fnGetNodes(indiceLinhaAdicionada);
@@ -640,7 +641,8 @@ function AdicionarItemPedido() {
 
     giCount++;
 
-    AtualizarValorTotalPedido();
+    AplicarDesconto($('#Order_Discount').val());
+    //AtualizarValorTotalPedido();
 
     $('#gdvItensPedido_filter').hide();
     //$('#gdvItensPedido_info').hide();
@@ -669,7 +671,7 @@ function AbrirItemPedido(indiceLinha) {
     var quantidade = parseInt(item[9]);
     $('#OrderProduct_QuantityOrder').val(quantidade);
 
-    $('#OrderProduct_UnitPrice').val(item[10]);
+    $('#OrderProduct_UnitPrice').val(item[13]);
     //$('#OrderProduct_ItemDiscount').val(item[9]);
     $('#OrderProduct_DeadlineItem').val(item[11]);
     $('#OrderProduct_TotalPrice').val(item[12]);
@@ -688,9 +690,9 @@ function EditarItemPedido() {
     var rowIndex = $('#rowIndexItemPedido').val();
 
     gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').val(), parseInt(rowIndex), 2);
-    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('-')[0].trim(), parseInt(rowIndex), 6);
-    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('-')[1].trim(), parseInt(rowIndex), 7);
-    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('-')[2].trim(), parseInt(rowIndex), 8);
+    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('|')[0].trim(), parseInt(rowIndex), 6);
+    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('|')[1].trim(), parseInt(rowIndex), 7);
+    gdvItens.fnUpdate($('#ddlProdutoPedido option:selected').text().split('|')[2].trim(), parseInt(rowIndex), 8);
 
     var quantidade = parseFloat($('#OrderProduct_QuantityOrder').val()).toFixed(2);
     quantidade = quantidade.replace(".", ",");
@@ -699,8 +701,10 @@ function EditarItemPedido() {
     //gdvItens.fnUpdate($('#OrderProduct_ItemDiscount').val(), parseInt(rowIndex), 9);
     gdvItens.fnUpdate($('#OrderProduct_DeadlineItem').val(), parseInt(rowIndex), 11);
     gdvItens.fnUpdate($('#OrderProduct_TotalPrice').val(), parseInt(rowIndex), 12);
+    gdvItens.fnUpdate($('#OrderProduct_UnitPrice').val(), parseInt(rowIndex), 13);
 
-    AtualizarValorTotalPedido();
+    AplicarDesconto($('#Order_Discount').val());
+    //AtualizarValorTotalPedido();
     gdvItens.fnDraw();
 
     LimparItemPedido();
@@ -743,7 +747,8 @@ function ExcluirItemPedido(indiceLinha) {
             else {
                 gdvItens.fnDeleteRow(rowIndex);
                 AtualizarSequencialItemPedido();
-                AtualizarValorTotalPedido();
+                //AtualizarValorTotalPedido();
+                AplicarDesconto($('#Order_Discount').val());
                 giCount--;
             }
 
@@ -826,6 +831,19 @@ function IncluirNotaFiscal(idPedido) {
     }, 1000);
 }
 
+function getMoney(str) {
+    return parseInt(str.replace(/[\D]+/g, ''));
+}
+
+function formatReal(int) {
+    var tmp = int + '';
+    tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+    if (tmp.length > 6)
+        tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+    return tmp;
+}
+
 function AplicarDesconto(percentualDesconto) {
 
     AtualizarValorTotalPedido(false);
@@ -843,6 +861,40 @@ function AplicarDesconto(percentualDesconto) {
     valorTotal = valorTotal.toString().replace(".", "");
 
     $('#Order_TotalValue').val(valorTotal);
+
+    //Atualizar Valores Itens apos Desconto
+
+    var gdvItens = $('#gdvItensPedido').dataTable();
+
+    var arrayItens = gdvItens.fnGetData();
+
+    var valorUnitarioItem = 0;
+    var valorTotalItem = 0;
+    var valorUnitarioItemComDesconto = 0;
+    var valorTotalItemComDesconto = 0;
+    var quantidadeItem = 0;
+
+    for (var i = 0; i < arrayItens.length; i++) {
+
+        valorUnitarioItem = arrayItens[i][13];
+        valorUnitarioItem = valorUnitarioItem.replace("R$", "").replace(",", "").replace(".", "").trim();
+        //valorUnitarioItem = parseFloat(valorUnitarioItem) / 100;
+
+        valorUnitarioItemComDesconto = valorUnitarioItem - (valorUnitarioItem * (parseFloat(percentualDesconto).toFixed(2) / 100));
+        valorUnitarioItemComDesconto = valorUnitarioItemComDesconto.toString().replace(".", "").replace(",", "");
+
+        gdvItens.fnUpdate(formatReal(valorUnitarioItemComDesconto), parseInt(i), 10);
+
+        quantidadeItem = arrayItens[i][9];
+        quantidadeItem = quantidadeItem.replace(",", "").replace(".", "").trim();
+        quantidadeItem = parseFloat(quantidadeItem) / 100;
+
+        valorTotalItem = valorUnitarioItemComDesconto * quantidadeItem;
+       
+        gdvItens.fnUpdate(formatReal(valorTotalItem), parseInt(i), 12);
+    }
+
+    AtualizarValorTotalPedido(false);
 }
 
 function AbrirModalCadastroCliente() {
