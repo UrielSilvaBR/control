@@ -47,10 +47,13 @@
                                     Produto
                                 </th>
                                 <th>
+                                    Modelo
+                                </th>
+                                <th>
                                     Quantidade
                                 </th>
                                 <th>
-                                   Data Alteração
+                                   Data Atualização
                                 </th> 
                             </tr>
                         </thead>
@@ -61,6 +64,9 @@
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.ProductUnit.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProductUnit.DescriptionNCC)
                                         </td>
                                         <td>
                                            @Html.DisplayFor(modelItem => item.Quantity)

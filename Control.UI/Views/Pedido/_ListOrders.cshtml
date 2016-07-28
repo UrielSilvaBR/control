@@ -29,8 +29,9 @@
                 { "Name": "PrazoEntrega" },
                 //{ "Name": "Desconto" },
                 { "Name": "ValorTotal" },
+                { "Name": "ValorUnitarioItem" },
                 ],
-                "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2] }, { "sClass": "center", "aTargets": [5]}]
+                "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 1, 2, 13] }, { "sClass": "center", "aTargets": [5]}]
             });
 
             $('#gdvItensPedido_filter').hide();
@@ -60,6 +61,7 @@
                 <th>Prazo Entrega</th>
                 @*<th>Desconto</th>*@
                 <th>Valor Total</th>
+                <th>Valor Unitário Item</th>
             </tr>
         </thead>
         <tbody>
@@ -89,6 +91,7 @@
                     <td> @Html.DisplayFor(modelItem => item.DeadlineItem)</td>
                     @*<td>@{ string discount = item.ItemDiscount.ToString("N");} @Html.DisplayFor(modelItem => discount)</td>*@
                     <td>@{ string totalPrice = item.TotalPrice.ToString("N");} @Html.DisplayFor(modelItem => totalPrice)</td>
+                    <td>@{ string unitPriceItem = item.UnitPrice.ToString("N");} @Html.DisplayFor(modelItem => unitPriceItem)</td>
                 </tr>
                         }
         </tbody>
