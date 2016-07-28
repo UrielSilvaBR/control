@@ -8,7 +8,7 @@
         var table = $('#gdvPedidosCateira').DataTable({
             "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
             "columnDefs": [
-                { "visible": false, "targets": 0 }
+                { "visible": false, "targets": 1 }
             ],
             "order": [[0, 'asc']],
             "displayLength": 25,
@@ -27,7 +27,7 @@
                 var rows = api.rows({ page: 'current' }).nodes();
                 var last = null;
 
-                api.column(0, { page: 'current' }).data().each(function (group, i) {
+                api.column(1, { page: 'current' }).data().each(function (group, i) {
                     if (last !== group) {
                         $(rows).eq(i).before(
                             '<tr class="group"><td colspan="9" style="color:steelblue;cursor:pointer;font-style: italic;">' + group + '</td></tr>'
@@ -76,7 +76,7 @@
                         Valor Unitário
                     </th>
                     <th>
-                       NCM
+                       Quantidade
                     </th>
                 </tr>
             </thead>
@@ -85,12 +85,12 @@
                 {
                     {
                         <tr>
-                            <td>@Html.DisplayFor(modelItem => item.ProductProvider.Provider.CompanyName )</td>
+                            <td>@Html.DisplayFor(modelItem => item.ProductProvider.Provider.CompanyName)</td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Product.Name )
+                                @Html.DisplayFor(modelItem => item.Product.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Product.Model)
+                                @Html.DisplayFor(modelItem => item.Product.DescriptionNCC)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Product.UnitMeasure)
@@ -99,7 +99,8 @@
                                 @Html.DisplayFor(modelItem => valorUnitario)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Product.NCMCode)
+                                @{ decimal quantidadePendenteCompra = item.Product.QuantityCurrentStock.Value * -1; }
+                                @Html.DisplayFor(modelItem => quantidadePendenteCompra)
                             </td>
                            
                         </tr>

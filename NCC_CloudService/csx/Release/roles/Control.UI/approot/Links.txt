@@ -21,3 +21,5 @@ Exemplo Reformulacao Gtwave Site
 https://parall.ax/
 
 http://csharpbrasil.com.br/enviando-anexo-em-e-mail-com-aspnet/
+
+http://www.macoratti.net/15/10/mvc_roles1.htm
