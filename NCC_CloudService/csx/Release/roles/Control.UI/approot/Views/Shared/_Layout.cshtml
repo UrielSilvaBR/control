@@ -1,0 +1,592 @@
+﻿@using Control.UI.Models
+@using Control.Model.Entities
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCC Control</title>
+    <meta name="description" content="description">
+    <meta name="author" content="Gtwave soluções em Tecnologia">
+
+    <script src="/plugins/jquery/jquery-2.1.0.min.js"></script>
+    <script src="/Scripts/modernizr-2.6.2.js"></script>
+
+    <!--Includes Layout - Begin-->
+
+    <link href="/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+    <link href="/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+    <link href="/plugins/fullcalendar/fullcalendar.css" rel="stylesheet">
+    <link href="/plugins/xcharts/xcharts.min.css" rel="stylesheet">
+    <link href="/plugins/select2/select2.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="http://getbootstrap.com/docs-assets/js/html5shiv.js"></script>
+            <script src="http://getbootstrap.com/docs-assets/js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Includes Layout - Fim-->
+    <!-- Includes Layout - Inicio-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!--<script src="http://code.jquery.com/jquery.js"></script>-->
+
+    <script src="/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="~/scripts/bootstrap.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/scripts/jquery.validate.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.bootstrap.js"></script>
+    <script src="~/scripts/methods_pt.js"></script>
+    <script src="/plugins/justified-gallery/jquery.justifiedgallery.js"></script>
+    <script src="~/plugins/tinymce/tinymce.min.js"></script>
+    <script src="~/plugins/tinymce/jquery.tinymce.min.js"></script>
+
+    <!-- All functions for this theme + document.ready processing -->
+    <script src="/js/devoops.js"></script>
+
+    <script src="~/plugins/datatables/jquery.dataTables.js"></script>
+    <script src=" ~/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/plugins/datatables/TableTools.js"></script>
+    <script src="~/plugins/datatables/TableTools_orig.js"></script>
+    <script src="~/plugins/datatables/ZeroClipboard.js"></script>
+    <script src="~/plugins/select2/select2.js"></script>
+
+    <script src="~/scripts/control.js"></script>
+    <script src="~/scripts/jquery.maskedinput.js"></script>
+    <script src="~/scripts/jquery.maskMoney.js"></script>
+    <script src="~/scripts/ModalLoading.js"></script>
+
+    <!-- Includes Layout - Fim -->
+
+    <script type="text/javascript">
+
+        function Select2Test() {
+
+            $(".selddl").select2();
+        }
+
+        $(document).ready(function () {
+            LoadSelect2Script(Select2Test);
+        });
+
+    </script>
+
+    <style type="text/css">
+        p.modalsucesso {
+            margin: 0 0 10px;
+            word-break: break-all;
+            text-align: center;
+            margin-left: 0px !important;
+            font-weight: bold;
+        }
+
+        #modal-sucesso .modal-body {
+            min-height: 146px;
+            color: #074981;
+            padding: 50px 50px 0px 200px;
+            background: url('../../Content/img/message-success.png') no-repeat 40px 27px;
+            font-size: 18px;
+            font-family: Segoe UI Light;
+        }
+
+        .dataTables_empty {
+            text-align: center;
+        }
+
+        .form-group .form-control, .form-group .input-group {
+            margin-bottom: 0px;
+        }
+
+        .col-md-1 {
+            width: 8.333333333333332%;
+            text-align: right;
+            margin-top: 2px;
+        }
+
+        .select2-container .select2-choice {
+            height: 28px;
+        }
+
+        .form-control {
+            height: 28px;
+            padding: 2px 12px;
+        }
+
+        .field-validation-error {
+            position: absolute;
+            margin-left: 280px;
+            margin-top: 2px;
+        }
+
+        .ui-datepicker-trigger {
+            position: absolute;
+            margin-top: -25px;
+            margin-left: 157px;
+            cursor: pointer;
+        }
+
+        .modal {
+            overflow-y: hidden;
+        }
+
+        .modal-sm {
+            margin-left: 575px;
+        }
+
+        .fa-plus {
+            margin-top: 7px;
+        }
+
+        .modal-mensagem-alerta {
+            min-height: 153px;
+            padding: 25px 50px 0px 0px;
+            color: #074981;
+            background: url(../../Content/img/bg-mensagem-erro.jpg) no-repeat 35px 30px;
+        }
+
+            .modal-body h3, .modal-mensagem-alerta h3 {
+                font-weight: bold;
+                font-size: 20px;
+                margin-left: 200px;
+            }
+
+            .modal-body p, #modal-erro-login .modal-body p, .modal-mensagem-alerta p {
+                font-weight: normal;
+                font-size: 20px;
+                margin-left: 200px;
+                word-break: break-all;
+            }
+    </style>
+</head>
+<body>
+    @Html.Partial("~/Views/Invoice/_AddInvoiceItem.cshtml", new InvoiceViewModel())
+    @Html.Partial("~/Views/Pedido/_AddOrderProduct.cshtml", new PedidoViewModel())
+    @*@Html.Partial("~/Views/Compras/_EditItemConferencia.cshtml", new PedidoCompraViewModel())
+        @Html.Partial("~/Views/Compras/_AddItemPurchaseOrder.cshtml", new PedidoCompraViewModel())*@
+
+    @RenderSection("top_modals", false)
+
+    <div class="modal fade" id="modal-cadastro-cliente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog" style="width: 65%;">
+            <div class="modal-content source-son" style="width: 945px;height: 610px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_AddCliente.cshtml", new ClienteViewModel())
+                </div>
+                <div class="modal-footer" style="margin-top: -32px;">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal" style="margin-top: -5px;">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-cadastro-vendedor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Vendedor</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_AddVendedor.cshtml", new Vendor())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-cadastro-contato" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Contato</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_AddContato.cshtml", new Contact())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Uriel Modais - Inicio -->
+    <div class="modal fade" id="modal-converter-pedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Incluir Pedido de Venda</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_AddPedidoVenda.cshtml", new Order())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-email-proposta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Enviar Proposta por Email</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_SendMailAttach.cshtml", new SendMailViewModel())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Uriel Modais - FIm -->
+
+    <div class="modal fade" id="modal-cadastro-condicao-pagamento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Cadastro de Condição de Pagamento</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Partial("~/Views/Shared/_AddCondicaoPagamento.cshtml", new PaymentTerm())
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Box de Mensagens de Alertas e Erros -->
+    <div class="modal fade" id="modal-erro-cenprot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    @*<h3 style="text-align:center;position: relative;top: -35px;font-weight:bold">Atenção!</h3>
+                        <p class="modalsucesso">&nbsp;</p>*@
+                    <h3 style="text-align: center;">Atenção!</h3>
+                    <br />
+                    <p>&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-sucesso" tabindex="-1" role="dialog" aria-labelledby="myModalSucessoLabel" aria-hidden="true" style="z-index: 9999;">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalSucessoLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="modalsucesso">&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-confirmar" style="font-size: 0.99em;" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Box de Confirmações -->
+    <div class="modal fade" id="modal-confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalConfirmacoesLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content source-son">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalConfirmacoesLabel">NCC - Control</h4>
+                </div>
+                <div class="modal-body modal-mensagem-alerta">
+                    <h3 style="text-align: center;">Atenção!</h3>
+                    <br />
+                    <p>&nbsp;</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnConfirmNo" type="button" class="btn btn-primary btn-confirmar" data-dismiss="modal">Não</button>
+                    <button id="btnConfirmYes" type="button" class="btn btn-primary btn-confirmar">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Header Begin -->
+    <!--Start Header-->
+    <div id="screensaver">
+        <canvas id="canvas"></canvas>
+        <i class="fa fa-lock" id="screen_unlock"></i>
+    </div>
+    <div id="modalbox">
+        <div class="devoops-modal">
+            <div class="devoops-modal-header">
+                <div class="modal-header-name">
+                    <span>Basic table</span>
+                </div>
+                <div class="box-icons">
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="devoops-modal-inner">
+            </div>
+            <div class="devoops-modal-bottom">
+            </div>
+
+            <!--
+
+                    <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                        --->
+        </div>
+    </div>
+    <header class="navbar">
+        <div class="container-fluid expanded-panel">
+            <div class="row">
+                <div id="logo" class="col-xs-12 col-sm-2">
+                    <a href="index.html">NCC - Control</a>
+                </div>
+                <div id="top-panel" class="col-xs-12 col-sm-10">
+                    <div class="row">
+                        <div class="col-xs-8 col-sm-4">
+                            <a href="#" class="show-sidebar">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <div id="search">
+                                <input type="text" placeholder="pesquisar" />
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </div>
+                        <div id="dvLoggedUser">
+
+                            @Html.Partial("~/Views/Account/LoggedUserPartial.cshtml")
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--Header End -->
+    <!--
+                           Movimento Financeiro: Últimos lançamentos
+                           Contas a Pagar/Receber
+                           Envio de alertas de sistema via Email
+                           Recebimento de mercadorias
+                           Consultar pedidos/propostas
+                           Agrupar pedidos e solicitações por Projeto
+                           Visualizar Projetos
+                           -->
+    <!--Start Container-->
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div id="sidebar-left" class="col-xs-2 col-sm-2">
+                <ul class="nav main-menu">
+                    @*<li>
+                            <a href="@Url.Action("Index", "Painel")">
+                                <i class="fa fa-dashboard"></i>
+                                <span class="hidden-xs">Painel</span>
+                            </a>
+                        </li>*@
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span class="hidden-xs">Vendas</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Propostas", "Create", "Pedido")</li>
+
+                            <li>@Html.ActionLink("Propostas em Aberto", "PropostasAbertas", "Pedido")</li>
+                            <li>@Html.ActionLink("Pedidos em Aberto", "PedidosAbertos", "Pedido")</li>
+                            <li>@Html.ActionLink("Pedidos em Carteira", "Carteira", "Pedido")</li>
+                            @*<li>@Html.ActionLink("Pedidos", "Index", "Pedido")</li>*@
+                            <li>@Html.ActionLink("Controle de Visitas", "Visitas", "Vendas")</li>
+                            <li>@Html.ActionLink("Clientes", "Propostas", "Vendas")</li>
+                            <li>@Html.ActionLink("Tabela de Preços", "TabelaPrecos", "Vendas")</li>
+                            <li>@Html.ActionLink("Disponibilidade Produtos", "ConsultaEstoque", "Vendas")</li>
+                            <li>@Html.ActionLink("Histórico Pedidos", "Index", "Pedido")</li>
+                            <li>@Html.ActionLink("Vendas por Periodo", "ListaPedidos", "Vendas")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa  fa-crosshairs"></i>
+                            <span class="hidden-xs">Compras</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Solicitação de Materiais", "SolicitacaoMateriais", "Compras")</li>
+                            <li>@Html.ActionLink("Pedido de Compras", "", "Compras")</li>
+                            <li>@Html.ActionLink("Conferência e Recebimento de Mercadorias", "Recebimento", "Compras")</li>
+                            <li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>
+                            <li>@Html.ActionLink("Produtos Pendentes", "ProdutosPendentes", "Compras")</li>
+                            <li>@Html.ActionLink("Produtos em Carteira - Estoque", "ProdutosCarteiraEstoque", "Compras")</li>
+                            <li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>
+                            <li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>
+                            <li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>
+                            <li>@Html.ActionLink("Listagem de Pedidos", "", "Compras")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-qrcode"></i>
+                            <span class="hidden-xs">Estoque</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Cadastro de Movimentação Estoque", "MovimentacaoEstoque", "Estoque")</li>
+                            <li>@Html.ActionLink("Importação de produtos de NFe Entrada", "ImportacaoNFE", "Estoque")</li>
+                            <li>@Html.ActionLink("Baixa de Produtos (RMA, Perda, Defeito, Composição)", "BaixaProdutos", "Estoque")</li>
+                            <li>@Html.ActionLink("Inventário de Produtos", "Inventario Produtos", "Estoque")</li>
+                            <li>@Html.ActionLink("Consulta Estoque", "ConsultaEstoque", "Estoque")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-money"></i>
+                            <span class="hidden-xs">Financeiro</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Fluxo de Caixa", "FluxoCaixa", "Financeiro")</li>
+                            <li>@Html.ActionLink("Visualizar Documentos Fiscais", "VisualizarDocumentos", "Financeiro")</li>
+                            <li>@Html.ActionLink("Contas a Pagar / Receber", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Controle Conta Corrente / Conciliação Bancária", "ExtratoBancario", "Financeiro")</li>
+                            <li>@Html.ActionLink("Fluxo de Caixa", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Movimento Financeiro por período", "", "Financeiro")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-barcode"></i>
+                            <span class="hidden-xs">Faturamento</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Emissão de Notas Fiscais", "Create", "Invoice")</li>
+                            <li>@Html.ActionLink("Integração SEFAZ (Secretária da Fazenda): Inclusão e Cancelamento de NF", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Emissão de DANFE", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Notas Fiscais Emitidas", "Index", "Invoice")</li>
+                            <li>@Html.ActionLink("Status Integração SEFAZ", "", "Financeiro")</li>
+                            <li>@Html.ActionLink("Status Serviço NFe", "StatusServicoNFe", "Invoice")</li>
+
+
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="hidden-xs">Cadastro</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Clientes", "Clientes", "Cadastro")</li>
+                            <li>@Html.ActionLink("Fornecedores", "Fornecedores", "Cadastro")</li>
+                            <li>@Html.ActionLink("Produtos", "Produtos", "Cadastro")</li>
+                            <li>@Html.ActionLink("Vendedores", "Vendedores", "Cadastro")</li>
+                            <li>@Html.ActionLink("Contatos", "Contatos", "Cadastro")</li>
+                            <li>@Html.ActionLink("Condição de Pagamento", "CondicaoPagamento", "Cadastro")</li>
+                            <li>@Html.ActionLink("Contatos Email", "ContatosEmailLista", "Cadastro")</li>
+                            <!--<li>Html.ActionLink("Cadastro de “Prospects” (Funil de Vendas)", "Prospects", "Cadastro")</li>-->
+                            <!--<li>Html.ActionLink("CFOP", "CFOP", "Cadastro")</li>-->
+                            <!--<li><a class="ajax-link" href="ajax/maps.html">OpenStreetMap</a></li>
+                            <li><a class="ajax-link" href="ajax/map_fullscreen.html">Fullscreen map</a></li>-->
+                        </ul>
+                    </li>
+                    <!-- Menus não utilizados - End-->
+                </ul>
+            </div>
+            <!--Start Content-->
+            <div id="content" class="col-xs-12 col-sm-10">
+                @*<div class="preloader">
+                        <img src="img/devoops_getdata.gif" class="devoops-getdata" alt="preloader" />
+                    </div>*@
+                @RenderBody()
+                @*<div id="ajax-content">
+
+                    </div>*@
+                @*<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>*@
+            </div>
+            <!--End Content-->
+        </div>
+
+
+
+    </div>
+    <!--End Container-->
+
+    <script type="text/javascript">
+
+        function atualizardefinicao() {
+            $.ajax(
+            {
+                type: 'get',
+                url: '/account/loggeduserpartial',
+                datatype: 'html',
+                cache: false,
+                async: true,
+                success: function (data) {
+                    $('#dvloggeduser').html(data);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            //setInterval(atualizarDefinicao, 30000);
+            $(".show-sidebar").click();
+            //WinMove();
+            atualizardefinicao();
+            //$('#datatable-1').DataTable({
+            //    "language": {
+            //        "lengthMenu": "Display _MENU_ records per page",
+            //        "zeroRecords": "Nothing found - sorry",
+            //        "info": "Showing page _PAGE_ of _PAGES_",
+            //        "infoEmpty": "No records available",
+            //        "infoFiltered": "(filtered from _MAX_ total records)"
+            //    }
+            //});
+
+            //$('#datatable-1_wrapper').DataTable({
+            //    "scrollY": 200,
+            //    "scrollX": 200
+            //});
+        });
+
+    </script>
+</body>
+</html>

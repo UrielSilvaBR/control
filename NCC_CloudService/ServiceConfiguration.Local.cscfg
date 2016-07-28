@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="NCC_CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2015-04.2.6">
+  <Role name="Control.UI">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="URLSite" value="http://localhost:88/control/" />
+      <Setting name="Conexao" value="3" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" value="65d29cd6-bfc0-44ed-8ee2-cc16980824e9" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>

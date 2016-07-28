@@ -1,0 +1,219 @@
+﻿@using Control.Model.Entities
+@model List<OrderProduct>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        var table = $('#gdvPedidosCateira').DataTable({
+            "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+            "columnDefs": [
+                { "visible": false, "targets": 2 }
+            ],
+            "order": [[2, 'asc']],
+            "displayLength": 25,
+            "oLanguage": {
+                "sInfo": "Exibindo registros de _START_ &agrave; _END_ de _TOTAL_ ",
+                "sEmptyTable": "Nenhum registro encontrado",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+            },
+            "drawCallback": function (settings) {
+                var api = this.api();
+                var rows = api.rows({ page: 'current' }).nodes();
+                var last = null;
+
+                api.column(2, { page: 'current' }).data().each(function (group, i) {
+                    if (last !== group) {
+                        $(rows).eq(i).before(
+                            '<tr class="group"><td colspan="9" style="color:steelblue;cursor:pointer;font-style: italic;">' + group + '</td></tr>'
+                        );
+
+                        last = group;
+                    }
+                });
+            }
+        });
+
+        // Order by the grouping
+        $('#gdvPedidosCateira tbody').on('click', 'tr.group', function () {
+            var currentOrder = table.order()[0];
+            if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                table.order([2, 'desc']).draw();
+            }
+            else {
+                table.order([2, 'asc']).draw();
+            }
+        });
+
+        $('.dataTables_filter').hide();
+        $('.dataTables_length').hide();
+        $('.dataTables_info').hide();
+
+    });
+
+
+    function FiltrarCarteiraCliente(idCliente, IdProduto) {
+        $.post("/Pedido/GetProdutosCarteira",
+            { CustomerID: idCliente, ProductID: IdProduto },
+                function (result) {
+                    $('#table_wrapperz_Carteira').html(result);
+
+                    var produtos = $.parseJSON($('#lstProdutos').val());
+
+                    $.each(produtos, function (index, value) {
+                        
+                        var listProducts = $("#Produto");
+                        var idProduto = listProducts.val();
+
+                        listProducts.empty();
+                        listProducts.append(new Option('TODOS', '0'));
+                        $.each(produtos, function (index, item) {
+                            listProducts.append(new Option(item.Name, item.Id));
+                        });
+
+                        if (idProduto > 0)
+                            listProducts.select2().select2('val', idProduto);
+                        else
+                            listProducts.select2().select2('val', listProducts.val());
+                        
+                    });
+
+                });
+    }
+
+    function FiltrarCarteiraProduto(idCliente, IdProduto) {
+        $.post("/Pedido/GetProdutosCarteira",
+            { CustomerID: idCliente, ProductID: IdProduto },
+                function (result) {
+                    $('#table_wrapperz_Carteira').html(result);
+
+                    var clientes = $.parseJSON($('#lstClientes').val());
+
+                    $.each(clientes, function (index, value) {
+
+                        var listCustomers = $("#Cliente");
+                        var idCliente = listCustomers.val();
+                        
+                        listCustomers.empty();
+                        listCustomers.append(new Option('TODOS', '0'));
+                        $.each(clientes, function (index, item) {
+                            listCustomers.append(new Option(item.CompanyName, item.Id));
+                        });
+
+                        if (idCliente > 0)
+                            listCustomers.select2().select2('val', idCliente);
+                        else
+                            listCustomers.select2().select2('val', listCustomers.val());
+                    });
+
+                });
+    }
+
+</script>
+
+<div class="form-group">
+    <div id="table_wrapperz_Carteira">
+
+        @Html.Hidden("ListaProdutos", TempData["ProductListFilter"], new { @id="lstProdutos" })
+        @Html.Hidden("ListaClientes", TempData["CustomerListFilter"], new { @id = "lstClientes" })
+
+        <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvPedidosCateira" style="overflow: scroll !important;width:100%;">
+            <thead>
+                <tr>
+                    <th>
+                        Código
+                    </th>
+                    <th>
+                        Tipo
+                    </th>
+                    <th>
+                        Cliente
+                    </th>
+                    <th>
+                        Descrição
+                    </th>
+                    <th>
+                        Curso
+                    </th>
+                    <th>
+                        Pedido do Cliente
+                    </th>
+                    <th>
+                        Quant.
+                    </th>
+                    <th>
+                        Data Pedido
+                    </th>
+                    <th>
+                        Prazo Entrega
+                    </th>
+                    <th>
+                        Observação
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    {
+                        <tr>
+                            @*<td>
+                                    <h4 style="color:red">
+                                        <a href='@Url.Action("ContatosEdit", "Cadastro", new { ContatoID = item.Id })'>
+                                            <i class="fa fa-edit red"></i>
+                                        </a>
+                                        <a href='@Url.Action("ContatoDelete", "Cadastro", new { ContatoID = item.Id })'>
+                                            <i class="fa fa-times-circle" style="color:red"></i>
+
+                                        </a>
+                                    </h4>
+                                </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductItem.ProductCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductItem.Model)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.CustomerOrder.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ProductItem.Name)
+                            </td>
+                            <td>
+                                0
+                            </td>
+                            <td>
+                                <a href='@Url.Action("ReportPedido", "Invoice", new { InvoiceID = item.Id } )'>
+                                    @Html.DisplayFor(modelItem => item.Order.CustomerControlCode)
+                                 </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.QuantityOrder)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.OrderDate)
+                            </td>
+                            <td>
+                                @{ string prazoEntrega = item.Order.OrderDate.AddDays(item.DeadlineItem).ToShortDateString();    }
+                                @Html.DisplayFor(modelItem => prazoEntrega)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Order.Comments)
+                            </td>
+
+                        </tr>
+                                        }
+                                    }
+
+            </tbody>
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,170 @@
+﻿@using Control.Model.Entities
+@using Control.Model.Enums
+@using Control.Utility
+@model IEnumerable<PurchaseOrder>
+@{
+    ViewBag.Title = "Conferência e Recebimento de Mercadorias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div id="breadcrumb" class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="#">Compras</a></li>
+            <li><a href="#">Conferência e Recebimento de Mercadorias</a></li>
+        </ol>
+    </div>
+</div>
+
+<!--Teste-->
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-name">
+                    <span>Pedidos de compras</span>
+                </div>
+                <div class="box-icons">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="expand-link">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+                <div class="no-move"></div>
+            </div>
+            <div class="box-content no-padding">
+                <div id="table_wrapperz">
+                    <table class="table table-bordered table-striped table-hover table-heading table-datatable" id="gdvPedidos" style="overflow: scroll !important;">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th>
+                                    Pedido
+                                </th>
+                                <th>
+                                    Fornecedor
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Validade
+                                </th>
+                                <th>
+                                    NotaFiscal
+                                </th>
+                                <th>
+                                    Valor
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <a href='@Url.Action("Conferencia", "Compras", new { OrderID = item.Id } )'>
+                                            Conferência
+                                        </a>
+                                    </td> 
+                                    <td style="text-align: center;">
+                                        <a href='@Url.Action("Delete", "Compras", new { OrderID = item.Id } )'>
+                                            <i class="fa fa-times-circle" style="color:red"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProviderPurchaseOrder.CompanyName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>
+                                    <td>
+                                        @{ string dataEmissao = item.ValidateDate.ToShortDateString(); }
+                                        @Html.DisplayFor(modelItem => dataEmissao)
+                                    </td>
+                                    <td>
+                                        @{
+                                            string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
+                                        }
+                                        @Html.DisplayFor(modelItem => invoiceNumber)
+                                    </td>
+                                    <td>
+                                        @{
+                                            string totalValue = item.TotalValue.ToString("C");
+                                        }
+                                        @Html.DisplayFor(modelItem => totalValue)
+                                    </td>
+                                </tr>
+                                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    -->
+
+<script type="text/javascript">
+    // Run Datables plugin and create 3 variants of settings
+    function AllTables() {
+        TablePedidos();
+        LoadSelect2Script(MakeSelect2);
+    }
+
+    function MakeSelect2() {
+        $('select').select2();
+        $('.dataTables_filter').each(function () {
+            $(this).find('label input[type=text]').attr('placeholder', 'Pesquisar');      
+        });
+    }
+
+    function TablePedidos() {
+        $('#gdvPedidos').dataTable({
+            "aaSorting": [[8, "desc"]],
+            "sDom": "<'box-content'<'col-sm-6'f><'col-sm-6 text-right'l><'clearfix'>>rt<'box-content'<'col-sm-6'i><'col-sm-6 text-right'p><'clearfix'>>",
+            "sPaginationType": "bootstrap",
+            "oLanguage": {
+                "sSearch": "",
+                "sLengthMenu": '_MENU_',
+                "scrollY": 200,
+                "scrollX": 200
+            },
+            "aoColumns": [
+               { "sName": "EditarPedido" },
+               { "sName": "ExcluirPedido" },
+               { "sName": "Pedido" },
+               { "sName": "Fornecedor" },
+               { "sName": "Status" },
+               { "sName": "Validade" },
+               { "sName": "NotaFiscal" },
+               { "sName": "Valor" }
+            ],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false,
+                "order": []
+            }]
+        });
+    }
+
+    $(document).ready(function () {
+        // Load Datatables and run plugin on tables
+        LoadDataTablesScripts(AllTables);
+
+        // Add Drag-n-Drop feature
+        WinMove();
+
+    });
+</script>
