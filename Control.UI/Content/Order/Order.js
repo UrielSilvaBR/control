@@ -881,6 +881,7 @@ function AplicarDesconto(percentualDesconto) {
         //valorUnitarioItem = parseFloat(valorUnitarioItem) / 100;
 
         valorUnitarioItemComDesconto = valorUnitarioItem - (valorUnitarioItem * (parseFloat(percentualDesconto).toFixed(2) / 100));
+        valorUnitarioItemComDesconto = parseFloat(valorUnitarioItemComDesconto / 100).toFixed(2)
         valorUnitarioItemComDesconto = valorUnitarioItemComDesconto.toString().replace(".", "").replace(",", "");
 
         gdvItens.fnUpdate(formatReal(valorUnitarioItemComDesconto), parseInt(i), 10);
