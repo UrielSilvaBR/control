@@ -28,7 +28,7 @@
     </Endpoints>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Noel\Source\Repos\control\NCC_CloudService\rcf\Release\Control.UIContent\" />
+        <SourceDirectory path="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\rcf\Release\Control.UIContent\" />
       </Content>
     </Contents>
   </WebRole>

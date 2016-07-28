@@ -225,9 +225,8 @@ function FinalizarInclusaoPedido(pedido) {
         waitingDialog.hide();
         ShowMessage(mensagemRetorno, true);
 
-    }, 1000);
 
-    window.location = '/Compras';
+    }, 1000);
 }
 
 function IniciarEdicaoPedido() {

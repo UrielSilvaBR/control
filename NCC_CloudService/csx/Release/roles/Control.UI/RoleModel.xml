@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Control.UI" version="2.9.6499.5" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
+<RoleModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Control.UI" version="2.9.6499.4" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition">
   <Runtime>
     <EntryPoint>
       <NetFxEntryPoint assemblyName="Control.UI.dll" targetFrameworkVersion="v4.0" />
@@ -15,14 +15,14 @@
     <Property name="SetConfiguration" value="Configuration=Release" />
     <Property name="SetPlatform" value="Platform=AnyCPU" />
     <Property name="RoleTargetFramework" value="v4.5.2" />
-    <Property name="OutputDir" value="C:\Users\Noel\Source\Repos\control\NCC_CloudService\obj\Release\Control.UI\" />
+    <Property name="OutputDir" value="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\obj\Release\Control.UI\" />
     <Property name="EntryPoint" value="Control.UI.dll" />
-    <Property name="SourceDir" value="C:\Users\Noel\Source\Repos\control\Control.UI\" />
-    <Property name="SitePhysicalPath" value="C:\Users\Noel\Source\Repos\control\NCC_CloudService\obj\Release\Control.UI\" />
+    <Property name="SourceDir" value="C:\Users\Natanael\Source\Repositorio\control\Control.UI\" />
+    <Property name="SitePhysicalPath" value="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\obj\Release\Control.UI\" />
     <Property name="TargetRuntimeVersion" value="v4.0" />
   </Properties>
   <Sites>
-    <Site name="Web" physicalDirectory="C:\Users\Noel\Source\Repos\control\NCC_CloudService\obj\Release\Control.UI\">
+    <Site name="Web" physicalDirectory="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\obj\Release\Control.UI\">
       <Bindings>
         <Binding name="Endpoint1" endpointName="Endpoint1" />
       </Bindings>

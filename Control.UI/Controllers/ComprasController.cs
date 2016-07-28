@@ -99,7 +99,6 @@ namespace Control.UI.Controllers
                             if (EstoqueProduto != null)
                             {
                                 EstoqueProduto.Quantity += item.QuantityDeliver;
-                                EstoqueProduto.UpdateDate = DateTime.Now;
                                 context.Storages.Update(EstoqueProduto);
                             }
                             else
@@ -130,7 +129,7 @@ namespace Control.UI.Controllers
                     return Content("Ordem de compra inválida;0");
                 }
 
-                return Content("Ordem de compra recebida com Sucesso! <br> Estoque Atualizado!;" + Pedido.PurchaseOrder.Id.ToString());
+                return Content("Ordem de compra recebida com<br> Sucesso ! <br> Estoque Atualizado!;" + Pedido.PurchaseOrder.Id.ToString());
             }
             catch (Exception ex)
             {

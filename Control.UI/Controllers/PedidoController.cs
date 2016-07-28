@@ -8,8 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Utilidades.EnvioEmail;
 
 namespace Control.UI.Controllers
 {
@@ -152,10 +154,10 @@ namespace Control.UI.Controllers
             {
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                //string path = HttpContext.Server.MapPath("/Invoice/InvoiceFile?InvoiceID=" + OrderID.ToString()); 
+               //string path = HttpContext.Server.MapPath("/Invoice/InvoiceFile?InvoiceID=" + OrderID.ToString()); 
 
                 SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + OrderID);
-
+                
                 ViewBag.ToPDF = "0";
                 //doc.Save(System.Web.HttpContext.Current.Response, false, "test.pdf");
                 //doc.Close();
@@ -446,24 +448,15 @@ namespace Control.UI.Controllers
                     Prod => Prod.Id,
                     (Items, Prod) => new
                     {
-                        QuantidadePedido = Items.QuantityOrder,
-                        QuantidadeEstoqueAtual = Prod.QuantityCurrentStock,
-                        Produto = Prod
+                       QuantidadePedido = Items.QuantityOrder,
+                       QuantidadeEstoqueAtual = Prod.QuantityCurrentStock
                     }).ToList();
 
-                bool produtoSemEstoque = false;
-                var listaProdutosSemEstoque = new List<string>();
                 ListaProdutosOrder.ForEach(p =>
                 {
                     if (p.QuantidadePedido > p.QuantidadeEstoqueAtual)
-                    {
-                        produtoSemEstoque = true;
-                        listaProdutosSemEstoque.Add(p.Produto.Name);
-                    }
+                        throw new Exception("Não foi possível emitir a Nota Fiscal!<br>Pedido possui Itens sem Estoque!");
                 });
-
-                if (produtoSemEstoque)
-                    throw new Exception(String.Format("Não foi possível emitir a Nota Fiscal!<br>O Pedido contém Produtos sem Estoque!;{0}", JsonConvert.SerializeObject(listaProdutosSemEstoque.Select(p => p).Distinct().ToList())));
 
                 var invoiceItems = new List<InvoiceItem>();
 
@@ -698,7 +691,7 @@ namespace Control.UI.Controllers
                 //{
                 //    doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
                 //}
-
+                
 
                 ViewBag.ToPDF = "0";
 
@@ -709,14 +702,14 @@ namespace Control.UI.Controllers
                 fs.Write(fileBytes, 0, fileBytes.Length);
                 fs.Close();
 
-                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate(model.Order.ProposalMailList, model.Assunto,
-                    saudacao + "<br /><br /> Segue a proposta solicitada. <br /><br />Atenciosamente,", AppDomain.CurrentDomain.BaseDirectory + "anexos\\" + fileName, AppDomain.CurrentDomain.BaseDirectory);
+                Utilidades.EnvioEmail.EmailHelper.SendMailTemplate(model.Order.ProposalMailList, model.Assunto,                    
+                    saudacao +"<br /><br /> Segue a proposta solicitada. <br /><br />Atenciosamente,", AppDomain.CurrentDomain.BaseDirectory + "anexos\\" + fileName, AppDomain.CurrentDomain.BaseDirectory);
             }
             catch (Exception ex)
             {
 
-
-                return Content("Não foi possível enviar o email. " + ex.Message);
+              
+                return Content("Não foi possível enviar o email. " +  ex.Message);
             }
             return Content("Email Enviado com sucesso.");
         }

@@ -15,7 +15,6 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="URLSite" value="http://localhost:88/control/" />
       <Setting name="Conexao" value="3" />
-      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" value="65d29cd6-bfc0-44ed-8ee2-cc16980824e9" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

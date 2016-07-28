@@ -2,10 +2,10 @@
 
     //CarregarMascaras();
 
-    $('#txt_Lista').focusout(function () { CalculaPreco(); });
-    $('#txt_IPI').focusout(function () { CalculaPreco(); });
-    $('#txt_Markup').focusout(function () { CalculaPreco(); });
-    $('#txt_ListDiscount').focusout(function () { CalculaPreco(); });
+    $('#txt_Lista').change(CalculaPreco);
+    $('#txt_IPI').change(CalculaPreco);
+    $('#txt_Markup').change(CalculaPreco);
+    $('#txt_ListDiscount').change(CalculaPreco);
 
     $("#tabs").tabs();
 
@@ -38,7 +38,7 @@ function CalculaPreco() {
     var discount = parseFloat(strListDiscount);
 
     if (IPI == 0) {
-        //alert("IPI Zerado");
+        alert("IPI Zerado");
     }
     else
     { 
@@ -46,25 +46,24 @@ function CalculaPreco() {
     }
 
     if (discount == 0) {
-        //alert("discount Zerado");
-        //discount = 1;
+        alert("discount Zerado");
+        discount = 1;
     }
     else {
         discount = discount / 100;
-        //alert(discount)
+        alert(discount)
     } 
 
     var Custo = lista * (1 + IPI);
+    Custo = Custo * discount;
 
-    if(discount > 0)
-        Custo = Custo - (Custo * discount);
     
     Custo = Custo.toFixed(2);
 
     if (Custo == 'NaN') {
         Custo = 0;
     }
-    $('#txt_Custo').val(Custo.toString().replace(".", ","));
+    $('#txt_Custo').val(Custo);
 
     if (strMarkup == '' || strMarkup == '0,00') {
         return false;
@@ -74,7 +73,7 @@ function CalculaPreco() {
     Markup = Custo * Markup;
     Markup = Markup.toFixed(2);
     
-    $('#txt_Unitario').val(Markup.toString().replace(".", ","));
+    $('#txt_Unitario').val(Markup);
 }
 
 function CarregarMascaras() {
@@ -150,8 +149,6 @@ function AdicionarFornecedorProduto() {
     var idFornecedor = $('#ProviderID option:selected').val();
     var idProduto = $('#Product_Id').val();
     var codigoProdutoFornecedor = $('#CodigoProdutoFornecedor').val();
-    var modeloFabricante = $('#ModeloFabricante').val();
-
 
     if (idFornecedor == 0)
     {
@@ -167,7 +164,7 @@ function AdicionarFornecedorProduto() {
         }
         else {
             $.post("/Cadastro/VincularFornecedorProduto",
-            { ProviderID: idFornecedor, ProductID: idProduto, codigoProdutoFornecedor: codigoProdutoFornecedor, modeloFabricante: modeloFabricante },
+            { ProviderID: idFornecedor, ProductID: idProduto, codigoProdutoFornecedor: codigoProdutoFornecedor },
                 function (result) {
 
                     if (!result.erro) {
@@ -181,7 +178,6 @@ function AdicionarFornecedorProduto() {
                                 $('#table_wrapperz_FornecedorProduto').html(lista);
                                 $("#ProviderID").select2().select2("val", '0');
                                 $('#CodigoProdutoFornecedor').val('0');
-                                $('#ModeloFabricante').val('');
                             }
                         });
                     }
@@ -230,32 +226,5 @@ function ExcluirFornecedorProduto(id)
     });
 }
 
-function SalvarProduto()
-{
-    var ncm = $('#Product_NCMCode').val();
 
-    if (ncm == '' || ncm == "0")
-    {
-        ShowMessage('NCM é obrigatório! <br>Favor informar o NCM do Produto.');
-        return false;
-    }
-    else
-    {
-        $('#frmCadastroProduto').submit();
-    }
-}
 
-function AbrirVinculoFornecedorProduto(indiceLinha)
-{
-    var gdvItens = $('#gdvFornecedorProduto').dataTable();
-
-    var rowIndex = indiceLinha - 1;
-
-    var items = gdvItens.fnGetData();
-    item = items[rowIndex];
-
-    $('#Provider_CompanyName').val(item[3]);
-    $('#Code').val(item[5]);
-    $('#ModelProvider').val(item[6]);
-    $('#IsActive').prop('checked', item[9] == "1" ? true : false);
-}

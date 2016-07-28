@@ -13,6 +13,7 @@
 
     <script type="text/javascript">
 
+
         $(document).ready(function () {
 
         });
@@ -24,15 +25,10 @@
             function (result) {
 
                 var retorno = result.split(';');
-                var listaProdutoSemEstoque = '';
 
                 if (retorno.indexOf("ERRO") > -1)
                 {
-                    $.each($.parseJSON(retorno[2]), function (index, value) {
-                        listaProdutoSemEstoque += '• ' + value + '<br>';
-                    });
-
-                    ShowMessage(retorno[1] + '<br><br>Produtos:<br><br>' + listaProdutoSemEstoque + '<br>');
+                    ShowMessage(retorno[1]);
                     return;
                 }
                 else

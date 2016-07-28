@@ -76,9 +76,6 @@
                         Valor Unitário
                     </th>
                     <th>
-                        Preço Custo
-                    </th>
-                    <th>
                        Quantidade
                     </th>
                 </tr>
@@ -101,10 +98,6 @@
                             <td>@{ string valorUnitario = item.Product.UnitPrice.HasValue ? item.Product.UnitPrice.Value.ToString("N") : "0,00"; }
                                 @Html.DisplayFor(modelItem => valorUnitario)
                             </td>
-                            <td>
-                                @{ string precoCusto = item.Product.CostPrice.HasValue ? item.Product.CostPrice.Value.ToString("N") : "0,00"; }
-                                @Html.DisplayFor(modelItem => precoCusto)
-                        </td>
                             <td>
                                 @{ decimal quantidadePendenteCompra = item.Product.QuantityCurrentStock.Value * -1; }
                                 @Html.DisplayFor(modelItem => quantidadePendenteCompra)

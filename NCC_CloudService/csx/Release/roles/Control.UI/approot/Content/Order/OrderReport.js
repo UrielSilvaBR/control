@@ -90,11 +90,7 @@ function AbrirModalEmail(idPedido) {
 function FinalizarConverterPedido() {
 
     $('#modal-converter-pedido').modal('hide');
-    ShowSuccess('Pedido Gerado!');
-
-    setTimeout(function () {
-        window.location = '/Pedido/PedidosAbertos';
-    }, 1000);
+    ShowSuccess('Pedido Cadastrado.');
 }
 
 function FinalizarEnvioEmail(idPedido) {
