@@ -31,9 +31,10 @@
             { "Name": "CodigoProduto" },
             { "Name": "ModeloFabricante" },
             { "Name": "DataInclusao" },
-            { "Name": "Habilitado" }
+            { "Name": "Habilitado" },
+            { "Name": "HabilitadoValor" }
             ],
-            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0] }, { "sClass": "center", "aTargets": [1, 2] }]
+            "aoColumnDefs": [{ "bVisible": false, "aTargets": [0, 9] }, { "sClass": "center", "aTargets": [1, 2] }]
         });
 
         $('#gdvFornecedorProduto_filter').hide();
@@ -63,6 +64,7 @@
                 </th>
                 <th>Data/Hora Inclusão</th>
                 <th>Habilitado</th>
+                <th>HabilitadoValor</th>
             </tr>
         </thead>
         <tbody>
@@ -72,7 +74,7 @@
                     <tr>
                         <td>@Html.DisplayFor(modelItem => item.Id)</td>
                         <td style="text-align: center;">
-                            <a href="javascript:void(0);" onclick="" data-toggle="modal" data-target="#modal-editar-fornecedor-produto">
+                            <a href="javascript:void(0);" onclick="AbrirVinculoFornecedorProduto('@item.Sequencial');" data-toggle="modal" data-target="#modal-editar-fornecedor-produto">
                                 <i class="fa fa-pencil-square-o"></i>
                             </a>
                         </td>
@@ -118,7 +120,10 @@
                             }
 
                         </td>
-
+                        <td>
+                            @{int habilitado = item.IsActive ? 1 : 0; }
+                            @Html.DisplayFor(modelItem => habilitado)
+                        </td>
                     </tr>
                                     }
                                 }

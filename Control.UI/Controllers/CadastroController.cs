@@ -636,6 +636,13 @@ namespace Control.UI.Controllers
             {
                 context = new DALContext();
                 var ProductProviders = context.ProductProviders.Filter(p => p.ProductID == ProductID).ToList();
+
+                int i = 0;
+                ProductProviders.ForEach(p =>
+                {
+                    p.Sequencial = ++i;
+                });
+
                 return PartialView("_ListFornecedorProduto", ProductProviders);
             }
             catch (Exception ex)

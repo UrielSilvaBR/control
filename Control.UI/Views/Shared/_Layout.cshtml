@@ -434,8 +434,7 @@
                             <span class="hidden-xs">Vendas</span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li>@Html.ActionLink("Propostas", "Create", "Pedido")</li>
-
+                            <li>@Html.ActionLink("Nova Proposta", "Create", "Pedido")</li>
                             <li>@Html.ActionLink("Propostas em Aberto", "PropostasAbertas", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos em Aberto", "PedidosAbertos", "Pedido")</li>
                             <li>@Html.ActionLink("Pedidos em Carteira", "Carteira", "Pedido")</li>
@@ -455,11 +454,11 @@
                         </a>
                         <ul class="dropdown-menu">
                             @*<li>@Html.ActionLink("Solicitação de Materiais", "SolicitacaoMateriais", "Compras")</li>*@
-                            <li>@Html.ActionLink("Pedido de Compras", "", "Compras")</li>
-                            <li>@Html.ActionLink("Conferência e Recebimento de Mercadorias", "Recebimento", "Compras")</li>
-                            @*<li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>*@
                             <li>@Html.ActionLink("Produtos Pendentes", "ProdutosPendentes", "Compras")</li>
-                            <li>@Html.ActionLink("Produtos em Carteira - Estoque", "ProdutosCarteiraEstoque", "Compras")</li>
+                            @*<li>@Html.ActionLink("Produtos em Carteira - Estoque", "ProdutosCarteiraEstoque", "Compras")</li>*@
+                            <li>@Html.ActionLink("Pedido de Compras", "", "Compras")</li>
+                            <li>@Html.ActionLink("Conferência e Recebimento", "Recebimento", "Compras")</li>
+                            @*<li>@Html.ActionLink("Entrada de Notas Fiscais", "EntradaNotasFiscais", "Compras")</li>*@
                             @*<li>@Html.ActionLink("Baixa de Pedidos de Compras", "BaixaPedidos", "Compras")</li>*@
                             @*<li>@Html.ActionLink("Histórico de Compras", "Historico", "Compras")</li>*@
                             @*<li>@Html.ActionLink("Evolução de Preços por Produto", "PrecoporProduto", "Compras")</li>*@

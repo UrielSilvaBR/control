@@ -300,7 +300,7 @@ namespace Control.UI.Controllers
 
             context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Recebimento");
         }
 
         public JsonResult GetProducts(int ProductID)
@@ -388,22 +388,22 @@ namespace Control.UI.Controllers
             }
         }
 
+        //public ActionResult ProdutosPendentes()
+        //{
+        //    try
+        //    {
+        //        context = new DALContext();
+
+        //        var ListaProdutosPendentes = context.Products.Filter(p => p.QuantityCurrentStock < 0).ToList();
+        //        return View(ListaProdutosPendentes);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Content(ex.Message);
+        //    }
+        //}
+
         public ActionResult ProdutosPendentes()
-        {
-            try
-            {
-                context = new DALContext();
-
-                var ListaProdutosPendentes = context.Products.Filter(p => p.QuantityCurrentStock < 0).ToList();
-                return View(ListaProdutosPendentes);
-            }
-            catch (Exception ex)
-            {
-                return Content(ex.Message);
-            }
-        }
-
-        public ActionResult ProdutosCarteiraEstoque()
         {
             try
             {
@@ -421,7 +421,7 @@ namespace Control.UI.Controllers
                     ProductProvider = p
                 }).ToList();
 
-                return View(ListaProdutosCarteiraEstoque);
+                return View("ProdutosCarteiraEstoque", ListaProdutosCarteiraEstoque);
             }
             catch (Exception ex)
             {

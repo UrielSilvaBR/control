@@ -38,6 +38,9 @@ namespace Control.Model.Entities
         public string ModelProvider { get; set; }
 
         [NotMapped]
+        public int Sequencial { get; set; }
+
+        [NotMapped]
         public string NameProvider
         {
             get
