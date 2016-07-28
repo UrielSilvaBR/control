@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NCC_CloudService" generation="1" functional="0" release="0" Id="c4b86aec-eaec-4ddc-822c-256b6719e29c" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NCC_CloudService" generation="1" functional="0" release="0" Id="f9f5086f-370f-42f6-a4b3-b86aeed0c17e" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="NCC_CloudServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -72,7 +72,7 @@
       </maps>
       <components>
         <groupHascomponents>
-          <role name="Control.UI" generation="1" functional="0" release="0" software="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\csx\Release\roles\Control.UI" entryPoint="base\x64\WaHostBootstrapper.exe" parameters="base\x64\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
+          <role name="Control.UI" generation="1" functional="0" release="0" software="C:\Users\Noel\Source\Repos\control\NCC_CloudService\csx\Release\roles\Control.UI" entryPoint="base\x86\WaHostBootstrapper.exe" parameters="base\x86\WaIISHost.exe " memIndex="-1" hostingEnvironment="frontendadmin" hostingEnvironmentVersion="2">
             <componentports>
               <inPort name="Endpoint1" protocol="http" portRanges="80" />
             </componentports>
@@ -103,9 +103,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="2b845a14-4da1-4dd0-a7d9-b6b3e20f5952" ref="Microsoft.RedDog.Contract\ServiceContract\NCC_CloudServiceContract@ServiceDefinition">
+    <implementation Id="fcbab416-235f-470a-8618-50a1de1ed25f" ref="Microsoft.RedDog.Contract\ServiceContract\NCC_CloudServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="ade7440b-ecdb-4ee8-be48-cfc5e986fe18" ref="Microsoft.RedDog.Contract\Interface\Control.UI:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="c0c5edb1-a763-4d70-bd3c-3bf8ee8b412e" ref="Microsoft.RedDog.Contract\Interface\Control.UI:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/NCC_CloudService/NCC_CloudServiceGroup/Control.UI:Endpoint1" />
           </inPort>

@@ -21,13 +21,14 @@
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" />
       <Setting name="URLSite" />
       <Setting name="Conexao" />
+      <Setting name="APPINSIGHTS_INSTRUMENTATIONKEY" />
     </ConfigurationSettings>
     <Endpoints>
       <InputEndpoint name="Endpoint1" protocol="http" port="80" />
     </Endpoints>
     <Contents>
       <Content destination=".\">
-        <SourceDirectory path="C:\Users\Natanael\Source\Repositorio\control\NCC_CloudService\rcf\Debug\Control.UIContent\" />
+        <SourceDirectory path="C:\Users\Noel\Source\Repos\control\NCC_CloudService\rcf\Debug\Control.UIContent\" />
       </Content>
     </Contents>
   </WebRole>
