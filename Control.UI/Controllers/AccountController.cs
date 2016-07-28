@@ -97,6 +97,7 @@ namespace Control.UI.Controllers
         public ActionResult Register()
         {
             HttpContext.Session["culture"] = "fr-FR";
+            //ViewBag.Name = new SelectList(context.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -113,7 +114,12 @@ namespace Control.UI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //Atribui o Peril ao usuário
+                    await this.UserManager.AddToRoleAsync(user.Id, model.Email);
+                    //termina aqui
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link

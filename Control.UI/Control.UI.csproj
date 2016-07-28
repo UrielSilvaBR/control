@@ -848,6 +848,8 @@
     <Content Include="Views\Compras\ProdutosCarteiraEstoque.cshtml" />
     <Content Include="Views\Compras\_ListProdutosCarteiraEstoque.cshtml" />
     <Content Include="Views\Cadastro\_EditFornecedorProduto.cshtml" />
+    <Content Include="Views\Account\UserRoles.cshtml" />
+    <Content Include="Views\Account\CreateRole.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

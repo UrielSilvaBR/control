@@ -134,6 +134,7 @@
     <Compile Include="Repository\TypeUnitRepository.cs" />
     <Compile Include="Repository\UnitRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Repository\UserRoleRepository.cs" />
     <Compile Include="Repository\VendorRepository.cs" />
     <Compile Include="Repository\VendorsCustomerRepository.cs" />
     <Compile Include="Web References\br.com.ginfes.homologacao\Reference.cs">
