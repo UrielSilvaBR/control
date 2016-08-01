@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NCC_CloudService" generation="1" functional="0" release="0" Id="5ff93ef8-59b6-4a3c-95e0-8a471233ca15" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
+<serviceModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="NCC_CloudService" generation="1" functional="0" release="0" Id="d410eeae-e0b5-4a63-865a-2e0d0863fc81" dslVersion="1.2.0.0" xmlns="http://schemas.microsoft.com/dsltools/RDSM">
   <groups>
     <group name="NCC_CloudServiceGroup" generation="1" functional="0" release="0">
       <componentports>
@@ -103,9 +103,9 @@
     </group>
   </groups>
   <implements>
-    <implementation Id="76a66bf6-9c42-4449-b6f5-a0fefbdb2008" ref="Microsoft.RedDog.Contract\ServiceContract\NCC_CloudServiceContract@ServiceDefinition">
+    <implementation Id="731be2bf-fa2d-4195-9810-8c2d2b635489" ref="Microsoft.RedDog.Contract\ServiceContract\NCC_CloudServiceContract@ServiceDefinition">
       <interfacereferences>
-        <interfaceReference Id="88a178b9-7853-4b4a-ae62-73622b22f32e" ref="Microsoft.RedDog.Contract\Interface\Control.UI:Endpoint1@ServiceDefinition">
+        <interfaceReference Id="6bd743c9-a0fe-4488-b712-a1689384c870" ref="Microsoft.RedDog.Contract\Interface\Control.UI:Endpoint1@ServiceDefinition">
           <inPort>
             <inPortMoniker name="/NCC_CloudService/NCC_CloudServiceGroup/Control.UI:Endpoint1" />
           </inPort>
