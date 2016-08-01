@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilidades.EnvioEmail", "Ut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnvioEmail.Test", "Utilidades.EnvioEmail\EnvioEmail.Test\EnvioEmail.Test.csproj", "{9C7A1087-FCCC-4921-BD92-D0A37807519B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicrosoftAzure1", "MicrosoftAzure1\MicrosoftAzure1.csproj", "{22FE202A-FA86-4640-BED3-4453DEF13009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{9C7A1087-FCCC-4921-BD92-D0A37807519B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C7A1087-FCCC-4921-BD92-D0A37807519B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C7A1087-FCCC-4921-BD92-D0A37807519B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FE202A-FA86-4640-BED3-4453DEF13009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FE202A-FA86-4640-BED3-4453DEF13009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FE202A-FA86-4640-BED3-4453DEF13009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FE202A-FA86-4640-BED3-4453DEF13009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
