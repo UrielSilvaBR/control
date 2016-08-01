@@ -53,7 +53,7 @@
     <div id="breadcrumb" class="col-xs-12">
         <ol class="breadcrumb">
             <li><a href="#">Vendas</a></li>
-            <li><a href="#">Propostas</a></li>
+            <li><a href="#">@{ string tituloPaginaBreadCrumb = String.IsNullOrEmpty(Model.Order.CustomerControlCode) ? "Propostas" : "Pedidos";  }  @tituloPaginaBreadCrumb</a></li>
             <li><a href="#">Cadastrar</a></li>
         </ol>
     </div>
@@ -65,7 +65,7 @@
         <div class="box">
             <div class="box-header">
                 <div class="box-name">
-                    <span>Cadastro de Propostas</span>
+                   <span>@{ string tituloPagina = String.IsNullOrEmpty(Model.Order.CustomerControlCode) ? "Cadastro de Propostas" : "Cadastro de Pedidos";  }  @tituloPagina</span>
                 </div>
                 <div class="box-icons">
                     <a class="collapse-link">
