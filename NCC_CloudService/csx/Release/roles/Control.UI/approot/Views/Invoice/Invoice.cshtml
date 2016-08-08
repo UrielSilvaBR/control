@@ -6,7 +6,7 @@
         ViewBag.Title = "Invoice";
         Layout = "~/Views/Shared/_Layout.cshtml";
     }
-   
+
 
 }
 
@@ -32,7 +32,7 @@
                         <table class="col-xs-12">
                             <tr>
                                 <td align="left" class="col-xs-4"><img src="~/img/logo.JPG" /></td>
-                                <td align="center" class="col-xs-4"><h3 class="invoice-header">PROPOSTA #@Html.DisplayFor(Model => Model.Order.Id)</h3></td>
+                                <td align="center" class="col-xs-4"><h3 class="invoice-header">@{ string tituloRelatorio = String.IsNullOrEmpty(Model.Order.CustomerControlCode) ? String.Format("PROPOSTA #{0}", Model.Order.Id) : String.Format("PEDIDO #{0}", Model.Order.CustomerControlCode);  }  @tituloRelatorio</h3></td>
                                 <td align="right" class="col-xs-4">
                                     Data Emissão: @Html.DisplayFor(Model => Model.Order.InsertDate)<br />
                                     Data Validade: @Html.Raw(ViewBag.DataValidade)<br />
@@ -152,7 +152,7 @@
                                 
                                 @if (Model.Order.DespesaFinanceira)
                                 {
-                                    <li>Condições de pagamento acima de 21 dias possuem acréscimo das tarifas bancárias de financiamento.</li>
+                                    <li>Condições de pagamento acima de 21 dias possuem acréscimo das tarifas bancárias de financiamento de @{ string aliquotaCondicaoPagamento = Model.Order.PaymentTerm.Aliquota.ToString("N"); }@aliquotaCondicaoPagamento%.</li>
                                 }
                                 
                                 <li>Os produtos da NCC possuem um ano de garantia, a conta da data de emissão da nota fiscal desde que não seja evidenciada má utilização dos mesmos.</li>
@@ -182,8 +182,14 @@
                             @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
     <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />*@
                             <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
-                            <input type="button" id="btnPedido"         value="Gerar Pedido"          onclick="return AbrirModalPedido();" class="btn btn-primary" style="font-size: 0.8em;" />
+                            
+                            @if (String.IsNullOrEmpty(Model.Order.CustomerControlCode))
+                            {
+                                <input type="button" id="btnPedido" value="Gerar Pedido" onclick="return AbrirModalPedido();" class="btn btn-primary" style="font-size: 0.8em;" />
+                            }
+                            
                             <input type="button" id="btnNovaProposta"   value="Nova Proposta"   onclick="location.href='@Url.Action("Create", "Pedido")'" class="btn btn-primary" style="font-size: 0.8em" />
+                            <input type="button" id="" value="Pedidos" onclick="location.href='@Url.Action("Index", "Pedido")'" class="btn btn-primary" style="font-size: 0.8em" />
                         </div>
                     </div>
                 

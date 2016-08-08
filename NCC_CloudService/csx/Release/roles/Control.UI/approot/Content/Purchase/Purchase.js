@@ -179,6 +179,13 @@ function IniciarInclusaoPedido() {
         return;
     }
 
+    var idFornecedor = $('#PurchaseOrder_ProviderID option:selected').val();
+
+    if (idFornecedor == 0) {
+        ShowMessage('Selecione o Fornecedor para cadastrar o Pedido de Compra!', true);
+        return false;
+    }
+
     var gdvItens = $('#gdvItensPedidoDeCompras').dataTable();
 
     var Items = new Array();
@@ -225,8 +232,9 @@ function FinalizarInclusaoPedido(pedido) {
         waitingDialog.hide();
         ShowMessage(mensagemRetorno, true);
 
-
     }, 1000);
+
+    window.location = '/Compras';
 }
 
 function IniciarEdicaoPedido() {

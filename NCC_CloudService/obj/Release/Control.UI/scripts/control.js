@@ -1,4 +1,6 @@
 ﻿var originalVal = $.fn.val;
+//Binder do ajax para exibir animação de loading.
+var loadingAjax = $('.loading').hide();
 
 $(document).ready(function () {
     $('.datepicker').datepicker({
@@ -20,6 +22,8 @@ $(document).ready(function () {
         buttonImage: "../content/img/calendar.png",
         buttonImageOnly: true
     });
+
+    SetAjaxLoading(true);
 });
 
 $.fn.val = function (value) {
@@ -363,3 +367,14 @@ Number.prototype.format = function (n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 };
+
+function SetAjaxLoading(setter) {
+    if (setter) {
+        $(document).ajaxStart(function () { $('.loading').show(); })
+            .ajaxStop(function () { $('.loading').hide(); });
+    }
+    else {
+        $(document).unbind("ajaxStart")
+            .unbind("ajaxStop");
+    }
+}

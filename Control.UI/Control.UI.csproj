@@ -25,6 +25,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <ApplicationInsightsResourceId>/subscriptions/cf7d042c-93f2-45b9-9146-3d3e3942a0c8/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/Control.UI</ApplicationInsightsResourceId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -881,6 +882,7 @@
     <Content Include="Views\Cadastro\_EditFornecedorProduto.cshtml" />
     <Content Include="Views\Account\UserRoles.cshtml" />
     <Content Include="Views\Account\CreateRole.cshtml" />
+    <Content Include="Service References\Application Insights\ConnectedService.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -909,6 +911,9 @@
       <Project>{478980a3-31d1-4d2c-ad29-339ec11e36b2}</Project>
       <Name>Utilidades.EnvioEmail</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
