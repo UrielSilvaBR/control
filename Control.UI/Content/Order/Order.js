@@ -434,6 +434,14 @@ function FinalizarInclusaoPedido(pedido) {
         waitingDialog.hide();
         ShowMessage(mensagemRetorno, true);
 
+        if (typeof idPedido === 'undefined') { idPedido = ''; }
+
+        if (idPedido == '')
+        {
+            ShowMessage('Não foi possível gerar o Pedido!');
+            return false;
+        }
+
         window.location = '/Invoice/Invoice?InvoiceID=' + idPedido;
 
         if (parseInt(idPedido) > 0) {

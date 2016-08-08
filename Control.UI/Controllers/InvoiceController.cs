@@ -90,6 +90,10 @@ namespace Control.UI.Controllers
             {
                 
                 pedido = context.Orders.Find(p => p.Id == InvoiceID);
+
+                if (pedido == null)
+                    return RedirectToAction("Index");
+
                 ViewBag.Cliente = pedido.CustomerOrder.CompanyName;
                 ViewBag.DataValidade = pedido.InsertDate.AddDays(15).ToShortDateString();
                  
