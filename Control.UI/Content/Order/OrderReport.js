@@ -84,6 +84,7 @@ function AbrirModalEmail(idPedido) {
         });
     }, 1000);
 
+    $('#hdnOrderIDEmail').val(idPedido);
     $('#modal-email-proposta').modal('show');
 }
 
@@ -95,12 +96,6 @@ function FinalizarConverterPedido() {
     setTimeout(function () {
         window.location = '/Pedido/PedidosAbertos';
     }, 1000);
-}
-
-function FinalizarEnvioEmail(idPedido) {
-
-    $('#modal-email-proposta').modal('hide');
-    //incluir rotina envio email
 }
 
 function ValidarConvertPedidoModal() {

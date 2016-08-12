@@ -2,7 +2,7 @@
 @model SendMailViewModel
 
 <!--Inicio-->
-@using (Ajax.BeginForm("EnviarEmailAttached", new { Controller = "Pedido" }, new AjaxOptions { OnBegin = "ValidarInclusaoContatoModal", OnSuccess = "FinalizarInclusaoContato(data)" }, new { @class = "form-horizontal" }))
+@using (Ajax.BeginForm("EnviarEmailAttached", new { Controller = "Pedido" }, new AjaxOptions { OnBegin = "IniciarEnvioEmail", OnSuccess = "FinalizarEnvioEmail" }, new { @class = "form-horizontal" }))
 {
     <div class="box-content">
 
@@ -10,7 +10,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
        
 
-        <input type="hidden" id="hdnOrderID_ConvertPedido_Modal" name="OrderID" />
+        <input type="hidden" id="hdnOrderIDEmail" name="OrderID" />
             <div class="form-group">
                 @Html.Label("Selecionar Emails", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-8">
@@ -40,7 +40,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-5 col-md-10">
-                    <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                    <input type="submit" value="Enviar" class="btn btn-primary" />
                 </div>
             </div>
 
@@ -53,32 +53,44 @@
             var val = $('#txtMail').val();
             $('#txtMail').val(val + e.val + ", ");
         })
-
     });
 
-    function FinalizarInclusaoContato(id) {
-        
-        ShowMessage('' + id, false);
-        $('#modal-cadastro-contato').modal('hide');
+    function FinalizarEnvioEmail()
+    {
+        $('#txtMail').val('');
+        $('#txtAssunto').val('');
 
-        ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
-
-        $('#ContatName').val('');
-        $('#ContatRoleName').val('');
-        $('#Contact_Phone_Modal').val('');
-        $('#Contact_Mobile_Modal').val('');
-        $('#Email').val('');
+        ShowMessage('E-mail enviado com Sucesso!', true);
     }
 
-    function ValidarInclusaoContatoModal() {
+    function IniciarEnvioEmail()
+    {
+        $('#modal-email-proposta').modal('hide');
+    }
+
+    //function FinalizarInclusaoContato(id) {
+        
+    //    ShowMessage('' + id, false);
+    //    $('#modal-cadastro-contato').modal('hide');
+
+    //    ObterListaContatoPorCliente($('#Order_CustomerID').val(), id);
+
+    //    $('#ContatName').val('');
+    //    $('#ContatRoleName').val('');
+    //    $('#Contact_Phone_Modal').val('');
+    //    $('#Contact_Mobile_Modal').val('');
+    //    $('#Email').val('');
+    //}
+
+    //function ValidarInclusaoContatoModal() {
 
         
-        var idCliente = $('#Order_CustomerID option:selected').val();
+    //    var idCliente = $('#Order_CustomerID option:selected').val();
 
-        if (idCliente == 0) {
-            ShowMessage('Selecione o Cliente para cadastrar o Contato!', false);
-            return false;
-        }
-    }
+    //    if (idCliente == 0) {
+    //        ShowMessage('Selecione o Cliente para cadastrar o Contato!', false);
+    //        return false;
+    //    }
+    //}
     
 </script>

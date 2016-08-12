@@ -680,11 +680,12 @@ namespace Control.UI.Controllers
 
         }
 
-        //public ActionResult EnviarEmailAttached(SendMailViewModel model, int OrderID)
-        public ActionResult EnviarEmailAttached(SendMailViewModel model)
+        public ActionResult EnviarEmailAttached(SendMailViewModel model, int OrderID)
         {
             try
             {
+                model.Order.Id = OrderID;
+
                 string saudacao = "Bom dia.";
 
                 if (DateTime.Now.Hour >= 12)
@@ -692,13 +693,12 @@ namespace Control.UI.Controllers
 
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id.ToString());
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://ncccontrol.cloudapp.net/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id.ToString());
 
                 //if (model.Order.Id > 0)
                 //{
                 //    doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id);
                 //}
-
 
                 ViewBag.ToPDF = "0";
 
@@ -714,8 +714,6 @@ namespace Control.UI.Controllers
             }
             catch (Exception ex)
             {
-
-
                 return Content("Não foi possível enviar o email. " + ex.Message);
             }
             return Content("Email Enviado com sucesso.");

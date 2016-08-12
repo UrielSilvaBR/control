@@ -181,7 +181,7 @@
                             <input type="button" id="btnImprimir"       value="Imprimir"        onclick="return ImprimirPedido();" class="btn btn-primary" style="font-size: 0.8em;"  />
                             @*<input type="button" id="btnPDF"            value="Gerar Arquivo"   onclick="return ExportarPDF($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
     <input type="button" id="btnPDF" value="Gerar Arquivo" onclick="location.href='@Url.Action("ExportarPDF", "Pedido", new { OrderID = Model.Order.Id })'" class="btn btn-primary" style="font-size: 0.8em;" />*@
-                            <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#Order_Id').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
+                            <input type="button" id="btnEmail"          value="Enviar Email"    onclick="return AbrirModalEmail($('#hdOrderId').val());" class="btn btn-primary" style="font-size: 0.8em;"  />
                             
                             @if (String.IsNullOrEmpty(Model.Order.CustomerControlCode))
                             {
