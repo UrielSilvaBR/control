@@ -693,7 +693,7 @@ namespace Control.UI.Controllers
 
                 HtmlToPdf converter = new HtmlToPdf();
                 ViewBag.ToPDF = "1";
-                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://ncccontrol.cloudapp.net/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id.ToString());
+                SelectPdf.PdfDocument doc = converter.ConvertUrl("http://control.gtwave.com.br/Invoice/InvoiceFile?InvoiceID=" + model.Order.Id.ToString());
 
                 //if (model.Order.Id > 0)
                 //{
