@@ -13,7 +13,6 @@
 
     <script type="text/javascript">
 
-
         $(document).ready(function () {
 
         });
@@ -25,10 +24,15 @@
             function (result) {
 
                 var retorno = result.split(';');
+                var listaProdutoSemEstoque = '';
 
                 if (retorno.indexOf("ERRO") > -1)
                 {
-                    ShowMessage(retorno[1]);
+                    $.each($.parseJSON(retorno[2]), function (index, value) {
+                        listaProdutoSemEstoque += '• ' + value + '<br>';
+                    });
+
+                    ShowMessage(retorno[1] + '<br><br>Produtos:<br><br>' + listaProdutoSemEstoque + '<br>');
                     return;
                 }
                 else
@@ -36,7 +40,7 @@
                     ShowSuccess(retorno[0]);
                     window.location = '/Invoice/Index';
                 }
-                
+
             });
         }
 
@@ -131,19 +135,13 @@
                                                 <i class="fa fa-file-pdf-o box" style="color:black"></i>
                                             </a>
 
-                                            @if(!item.InvoiceNumber.HasValue)
-                                            { 
                                             <a href='@Url.Action("Edit", "Pedido", new { OrderID = item.Id })'>
                                                 <i class="fa fa-edit red"></i>
                                             </a>
-                                            }
 
-                                            @if (!item.InvoiceNumber.HasValue)
-                                            {
                                             <a href='@Url.Action("Delete", "Pedido", new { OrderID = item.Id } )'>
                                                 <i class="fa fa-times-circle" style="color:red"></i>
-                                            </a> 
-                                            }
+                                            </a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Id)
@@ -169,8 +167,7 @@
                                             @if (item.InvoiceNumber.HasValue)
                                             {
                                                 string invoiceNumber = item.InvoiceNumber.HasValue ? item.InvoiceNumber.Value.ToString() : "";
-                                                @*@Html.DisplayFor(modelItem => invoiceNumber)*@
-                                                @Html.ActionLink(invoiceNumber, "Edit", "Invoice", new { InvoiceID = invoiceNumber }, "")
+                                                @Html.DisplayFor(modelItem => invoiceNumber)
                                             }
                                             else
                                             {
